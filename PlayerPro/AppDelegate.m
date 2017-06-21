@@ -24,7 +24,7 @@
     // Override point for customization after application launch.
     
     
-    UMConfigInstance.appKey = @"591d390d65b6d63c4c002623";
+    UMConfigInstance.appKey = @"594a798f1061d2671d000ae4";
     UMConfigInstance.channelId = @"App Store";
     [MobClick startWithConfigure:UMConfigInstance];//配置以上参数后调用此方法初始化SDK！
     
@@ -35,7 +35,7 @@
     NSString *currentDateString = [dateFormatter stringFromDate:[NSDate date]];
     NSError *error = nil;
     
-    NSString *ss = [NSString stringWithFormat:@"http://opmams01o.bkt.clouddn.com/videoPlayer.json?v=%@",currentDateString];
+    NSString *ss = [NSString stringWithFormat:@"http://opmams01o.bkt.clouddn.com/playerPro.json?v=%@",currentDateString];
     NSURL *xcfURL = [NSURL URLWithString:ss];
     NSString *htmlString = [NSString stringWithContentsOfURL:xcfURL encoding:NSUTF8StringEncoding error:&error];
     AppModel *model;
@@ -49,13 +49,9 @@
     
     AppUnitl.sharedManager.model = model;
     AppUnitl.sharedManager.isDownLoad = YES;
-    //    AppUnitl.sharedManager.model.wetchat.isAlertShow = YES;
-    //    AppUnitl.sharedManager.model.wetchat.isShow= YES;
-    if (AppUnitl.sharedManager.model.wetchat.isShow) {
-        if (![[NSUserDefaults standardUserDefaults] objectForKey:@"pinglun"]) {
-            AppUnitl.sharedManager.model.wetchat.isShow = NO;
-        }
-    }
+   
+//    AppUnitl.sharedManager.model.wetchat.isShow= NO;
+ 
     
     NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"mycollection"];
     

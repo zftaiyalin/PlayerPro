@@ -39,10 +39,6 @@
     self.title = @"带路党";
     self.view.backgroundColor = [UIColor colorWithHexString:@"#efeff5"];
     
-    UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithTitle:@"获取积分" style:UIBarButtonItemStylePlain target:self action:@selector(huoqujifen)];
-    
-    self.navigationItem.rightBarButtonItem = item;
-
     _wechatBtu = [UIButton buttonWithType:UIButtonTypeCustom];
     _wechatBtu.backgroundColor = [UIColor whiteColor];
     [_wechatBtu addTarget:self action:@selector(copyWechat) forControlEvents:UIControlEventTouchUpInside];
@@ -50,17 +46,18 @@
     
     [_wechatBtu mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.equalTo(self.view);
-        make.top.equalTo(self.view).offset(64+65);
+        make.top.equalTo(self.view).offset(64+13);
         make.height.mas_equalTo(44);
     }];
     
     
+    
+    
+    
     UILabel *label = [[UILabel alloc]init];
-    if ([AppUnitl sharedManager].model.wetchat.isWetchat) {
-        label.text = [AppUnitl sharedManager].model.wetchat.wechatnick;
-    }else{
-        label.text = @"老司机带路群，加群，你懂得😉";
-    }
+
+    label.text = [AppUnitl sharedManager].model.wetchat.wechatnick;
+
     
     label.textColor = [UIColor colorWithHexString:@"#FF6A6A"];
     [_wechatBtu addSubview:label];
@@ -70,6 +67,21 @@
     }];
     
     
+    UILabel *txlabel = [[UILabel alloc]init];
+    txlabel.textColor = [UIColor colorWithHexString:@"#888888"];
+    txlabel.font = [UIFont systemFontOfSize:14];
+    txlabel.numberOfLines = 0;
+    [self.view addSubview:txlabel];
+    
+    [txlabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view).offset(13);
+        make.top.equalTo(_wechatBtu.mas_bottom).offset(7);
+        make.size.mas_equalTo(CGSizeMake(self.view.width -13, 50));
+    }];
+    
+    txlabel.text = @"不会上车？点击上方微信号添加微信好友，老司机带你上路!";
+    
+    
 }
 
 
@@ -77,16 +89,14 @@
 
 -(void)copyWechat{
     
-    if ([AppUnitl sharedManager].model.wetchat.isWetchat) {
+ 
         UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
         pasteboard.string = [AppUnitl sharedManager].model.wetchat.wechatnick;
         
         UIAlertView *infoAlert = [[UIAlertView alloc] initWithTitle:@"提示"message:@"已复制老司机微信号，是否前往寻找老司机？" delegate:self   cancelButtonTitle:@"待会儿" otherButtonTitles:@"前往",nil];
         [infoAlert show];
   
-    }else{
-    [self joinGroup:[AppUnitl sharedManager].model.wetchat.groupUin key:[AppUnitl sharedManager].model.wetchat.key];
-    }
+
     
 
 }
@@ -95,20 +105,14 @@
     [MobClick event:@"添加qq群"];
     NSString *urlStr = [NSString stringWithFormat:@"mqqapi://card/show_pslcard?src_type=internal&version=1&uin=%@&key=%@&card_type=group&source=external", @"643483053",@"3633e772ddb30b8b125efc2d1368fc8de0aec864e100b7a352b337c547bb7877"];
     NSURL *url = [NSURL URLWithString:urlStr];
-//    if([[UIApplication sharedApplication] canOpenURL:url]){
-        [[UIApplication sharedApplication] openURL:url];
-        return YES;
-//    }
-//    else return NO;
+    [[UIApplication sharedApplication] openURL:url];
+    return YES;
 }
 
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 1) {
-        
-        
         NSString *str = @"weixin:/";
-        
         [[UIApplication sharedApplication]openURL:[NSURL URLWithString:str]];
     }
 }

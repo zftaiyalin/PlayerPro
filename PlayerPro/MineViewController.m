@@ -43,7 +43,7 @@
         make.top.equalTo(self.view.mas_top);
     }];
     
-    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"pinglun"] && [AppUnitl sharedManager].model.wetchat.isAlertShow) {
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"pinglun"] && [AppUnitl sharedManager].model.wetchat.isShow) {
         UIAlertView *infoAlert = [[UIAlertView alloc] initWithTitle:[AppUnitl sharedManager].model.wetchat.alertTitle message:[AppUnitl sharedManager].model.wetchat.alertText delegate:self   cancelButtonTitle:@"取消" otherButtonTitles:@"去评论",nil];
         [infoAlert show];
     }
@@ -83,7 +83,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"pinglun"] ? 2:1;
     
     //收藏 清楚缓存 赏个好评 下载
 }
@@ -107,47 +107,63 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
     
-
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"pinglun"]) {
         if (indexPath.section == 0) {
             
+            
+            cell.textLabel.text = @"联系老司机";
+            
+            UIView *line = [[UIView alloc]init];
+            line.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9"];
+            [cell addSubview:line];
+            
+            [line mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.and.right.and.top.equalTo(cell);
+                make.height.mas_equalTo(0.25);
+            }];
+            
+        }else{
+            
+            cell.textLabel.text = @"赏个好评";
+            UIView *line = [[UIView alloc]init];
+            line.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9"];
+            [cell addSubview:line];
+            
+            [line mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.and.right.and.top.equalTo(cell);
+                make.height.mas_equalTo(0.25);
+            }];
+            
+        }
+    }else{
+        cell.textLabel.text = @"赏个好评";
+        UIView *line = [[UIView alloc]init];
+        line.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9"];
+        [cell addSubview:line];
         
-                cell.textLabel.text = @"联系老司机";
-            
-                UIView *line = [[UIView alloc]init];
-                line.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9"];
-                [cell addSubview:line];
-            
-                [line mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.left.and.right.and.top.equalTo(cell);
-                    make.height.mas_equalTo(0.25);
-                }];
-           
-            }else{
+        [line mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.and.right.and.top.equalTo(cell);
+            make.height.mas_equalTo(0.25);
+        }];
 
-                    cell.textLabel.text = @"赏个好评";
-                    UIView *line = [[UIView alloc]init];
-                    line.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9"];
-                    [cell addSubview:line];
-                    
-                    [line mas_makeConstraints:^(MASConstraintMaker *make) {
-                        make.left.and.right.and.top.equalTo(cell);
-                        make.height.mas_equalTo(0.25);
-                    }];
-                
-            }
+    }
+    
 
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"pinglun"]) {
         if (indexPath.section == 0) {
             DaiLuViewController *lu = [[DaiLuViewController alloc]init];
             [self.navigationController pushViewController:lu animated:YES];
         }else{
             [self pushPinglun];
         }
+    }else{
+        [self pushPinglun];
+    }
   
 }
 

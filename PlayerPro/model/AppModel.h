@@ -13,6 +13,6 @@
 
 @interface AppModel : NSObject
 @property(nonatomic,strong) WechatModel *wetchat;
-@property(nonatomic,strong) VideoUrlModel *video;
-@property(nonatomic,strong) AdmobModel *admob;
+//@property(nonatomic,strong) VideoUrlModel *video;
+//@property(nonatomic,strong) AdmobModel *admob;
 @end

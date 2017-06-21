@@ -124,7 +124,7 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
         [self.bottomImageView addSubview:self.totalTimeLabel];
         
         [self.topImageView addSubview:self.downLoadBtn];
-        [self.topImageView addSubview:self.collectBtn];
+//        [self.topImageView addSubview:self.collectBtn];
         [self addSubview:self.lockBtn];
         [self.topImageView addSubview:self.backBtn];
         [self addSubview:self.activity];
@@ -409,7 +409,7 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
 //        [self.delegate zf_controlView:self collectAction:sender];
 //    }
     
-    if ([[AppUnitl sharedManager] getWatchQuanxian:[AppUnitl sharedManager].model.video.collectintegral]) {
+//    if ([[AppUnitl sharedManager] getWatchQuanxian:[AppUnitl sharedManager].model.video.collectintegral]) {
         NSData *data = [[NSUserDefaults standardUserDefaults]objectForKey:@"mycollection"];
         NSArray *array = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         NSMutableArray *arr = [NSMutableArray arrayWithArray:array];
@@ -433,18 +433,18 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
         [[NSUserDefaults standardUserDefaults]setObject:tempArchive forKey:@"mycollection"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         [MobClick event:@"收藏视频"];
-        [self showSuccessText:[NSString stringWithFormat:@"收藏成功,扣除%d积分",[AppUnitl sharedManager].model.video.collectintegral]];
+//        [self showSuccessText:[NSString stringWithFormat:@"收藏成功,扣除%d积分",[AppUnitl sharedManager].model.video.collectintegral]];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self dismissLoading];
         });
-    }else{
-        
-        [self showErrorText:[NSString stringWithFormat:@"收藏失败,需要%d积分",[AppUnitl sharedManager].model.video.collectintegral]];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self dismissLoading];
-        });
-    
-    }
+//    }else{
+//        
+//        [self showErrorText:[NSString stringWithFormat:@"收藏失败,需要%d积分",[AppUnitl sharedManager].model.video.collectintegral]];
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            [self dismissLoading];
+//        });
+//    
+//    }
     
     
 }
