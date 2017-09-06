@@ -1316,9 +1316,9 @@
 				DEVELOPMENT_TEAM = WD9BF79VSR;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/PlayerPro/PrefixHeader.pch";
 				INFOPLIST_FILE = PlayerPro/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.anfeng.videoPlayer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.anfeng.yeai;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1331,9 +1331,9 @@
 				DEVELOPMENT_TEAM = WD9BF79VSR;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/PlayerPro/PrefixHeader.pch";
 				INFOPLIST_FILE = PlayerPro/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.anfeng.videoPlayer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.anfeng.yeai;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
