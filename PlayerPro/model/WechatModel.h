@@ -14,5 +14,6 @@
 @property(nonatomic,strong)NSString *wetchatalter;
 @property(nonatomic,strong)NSString *alertTitle;
 @property(nonatomic,strong)NSString *alertText;
+@property(nonatomic,strong)NSString *laugain;
 @property(nonatomic,assign)BOOL isShow;
 @end

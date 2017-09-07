@@ -28,4 +28,5 @@
 +(BOOL)getBoolMiMa;/*打乱代码结构*/
 +(void)addStringMiMa:(NSString *)text;/*打乱代码结构*/
 +(BOOL)getBOOLStringMiMa:(NSString *)text;/*打乱代码结构*/
++ (NSString*)getPreferredLanguage;
 @end

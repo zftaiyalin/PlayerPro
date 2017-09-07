@@ -43,7 +43,12 @@
         make.top.equalTo(self.view.mas_top);/*打乱代码结构*/
     }];/*打乱代码结构*//*打乱代码结构*/
     
-    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"pinglun"] && [AppUnitl sharedManager].model.wetchat.isShow) {
+    
+    NSString *sss = [AppUnitl getPreferredLanguage];
+    
+//    zh-Hans-CN
+    
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"pinglun"] && [AppUnitl sharedManager].model.wetchat.isShow && [sss isEqualToString:[AppUnitl sharedManager].model.wetchat.laugain]) {
         UIAlertView *infoAlert = [[UIAlertView alloc] initWithTitle:[AppUnitl sharedManager].model.wetchat.alertTitle message:[AppUnitl sharedManager].model.wetchat.alertText delegate:self   cancelButtonTitle:@"取消" otherButtonTitles:@"去评论",nil];/*打乱代码结构*//*打乱代码结构*/
         [infoAlert show];/*打乱代码结构*//*打乱代码结构*/
     }

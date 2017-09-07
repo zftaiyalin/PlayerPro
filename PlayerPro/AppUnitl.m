@@ -33,7 +33,18 @@
     return thumb;/*打乱代码结构*/
     
 }
-
+/**
+ *得到本机现在用的语言
+ * en:英文  zh-Hans:简体中文   zh-Hant:繁体中文    ja:日本  ......
+ */
++ (NSString*)getPreferredLanguage
+{
+    NSUserDefaults* defs = [NSUserDefaults standardUserDefaults];
+    NSArray* languages = [defs objectForKey:@"AppleLanguages"];
+    NSString* preferredLang = [languages objectAtIndex:0];
+    NSLog(@"Preferred Language:%@", preferredLang);
+    return preferredLang;
+}
 
 +(NSString *)getTime:(NSString *)videoURL{
     
