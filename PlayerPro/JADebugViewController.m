@@ -14,41 +14,41 @@
 
 @implementation JADebugViewController
 - (instancetype) init{
-    self = [super init];
+    self = [super init];/*打乱代码结构*//*打乱代码结构*/
     if (self){
-        self.hidesBottomBarWhenPushed = YES;
+        self.hidesBottomBarWhenPushed = YES;/*打乱代码结构*//*打乱代码结构*/
     }
-    return self;
+    return self;/*打乱代码结构*/
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    NSLog(@"%@ viewWillAppear", self);
+    [super viewWillAppear:animated];/*打乱代码结构*//*打乱代码结构*/
+    NSLog(@"%@ viewWillAppear", self);/*打乱代码结构*/
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    NSLog(@"%@ viewDidAppear", self);
+    [super viewDidAppear:animated];/*打乱代码结构*//*打乱代码结构*/
+    NSLog(@"%@ viewDidAppear", self);/*打乱代码结构*/
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    NSLog(@"%@ viewWillDisappear", self);
+    [super viewWillDisappear:animated];/*打乱代码结构*//*打乱代码结构*/
+    NSLog(@"%@ viewWillDisappear", self);/*打乱代码结构*/
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    NSLog(@"%@ viewDidDisappear", self);
+    [super viewDidDisappear:animated];/*打乱代码结构*//*打乱代码结构*/
+    NSLog(@"%@ viewDidDisappear", self);/*打乱代码结构*/
 }
 
 - (void)willMoveToParentViewController:(UIViewController *)parent {
-    [super willMoveToParentViewController:parent];
-    NSLog(@"%@ willMoveToParentViewController %@", self, parent);
+    [super willMoveToParentViewController:parent];/*打乱代码结构*//*打乱代码结构*/
+    NSLog(@"%@ willMoveToParentViewController %@", self, parent);/*打乱代码结构*/
 }
 
 - (void)didMoveToParentViewController:(UIViewController *)parent {
-    [super didMoveToParentViewController:parent];
-    NSLog(@"%@ didMoveToParentViewController %@", self, parent);
+    [super didMoveToParentViewController:parent];/*打乱代码结构*//*打乱代码结构*/
+    NSLog(@"%@ didMoveToParentViewController %@", self, parent);/*打乱代码结构*/
 }
 
 @end

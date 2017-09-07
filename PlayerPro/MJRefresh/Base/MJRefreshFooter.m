@@ -17,21 +17,21 @@
 #pragma mark - 构造方法
 + (instancetype)footerWithRefreshingBlock:(MJRefreshComponentRefreshingBlock)refreshingBlock
 {
-    MJRefreshFooter *cmp = [[self alloc] init];
+    MJRefreshFooter *cmp = [[self alloc] init];/*打乱代码结构*/
     cmp.refreshingBlock = refreshingBlock;
     return cmp;
 }
 + (instancetype)footerWithRefreshingTarget:(id)target refreshingAction:(SEL)action
 {
-    MJRefreshFooter *cmp = [[self alloc] init];
-    [cmp setRefreshingTarget:target refreshingAction:action];
+    MJRefreshFooter *cmp = [[self alloc] init];/*打乱代码结构*/
+    [cmp setRefreshingTarget:target refreshingAction:action];/*打乱代码结构*/
     return cmp;
 }
 
 #pragma mark - 重写父类的方法
 - (void)prepare
 {
-    [super prepare];
+    [super prepare];/*打乱代码结构*/
     
     // 设置自己的高度
     self.mj_h = MJRefreshFooterHeight;
@@ -42,7 +42,7 @@
 
 - (void)willMoveToSuperview:(UIView *)newSuperview
 {
-    [super willMoveToSuperview:newSuperview];
+    [super willMoveToSuperview:newSuperview];/*打乱代码结构*/
     
     if (newSuperview) {
         // 监听scrollView数据的变化
@@ -51,7 +51,7 @@
                 if (self.isAutomaticallyHidden) {
                     self.hidden = (totalDataCount == 0);
                 }
-            }];
+            }];/*打乱代码结构*/
         }
     }
 }
@@ -64,7 +64,7 @@
 
 - (void)noticeNoMoreData
 {
-    [self endRefreshingWithNoMoreData];
+    [self endRefreshingWithNoMoreData];/*打乱代码结构*/
 }
 
 - (void)resetNoMoreData

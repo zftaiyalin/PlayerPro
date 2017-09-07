@@ -549,7 +549,7 @@ enum GCDAsyncSocketConfig
 		maxLength = m;
 		timeout = t;
 		readLength = l;
-		term = [e copy];
+		term = [e copy];/*打乱代码结构*/
 		tag = i;
 		
 		if (d)
@@ -557,14 +557,14 @@ enum GCDAsyncSocketConfig
 			buffer = d;
 			startOffset = s;
 			bufferOwner = NO;
-			originalBufferLength = [d length];
+			originalBufferLength = [d length];/*打乱代码结构*/
 		}
 		else
 		{
 			if (readLength > 0)
-				buffer = [[NSMutableData alloc] initWithLength:readLength];
+				buffer = [[NSMutableData alloc] initWithLength:readLength];/*打乱代码结构*/
 			else
-				buffer = [[NSMutableData alloc] initWithLength:0];
+				buffer = [[NSMutableData alloc] initWithLength:0];/*打乱代码结构*/
 			
 			startOffset = 0;
 			bufferOwner = YES;
@@ -579,7 +579,7 @@ enum GCDAsyncSocketConfig
 **/
 - (void)ensureCapacityForAdditionalDataOfLength:(NSUInteger)bytesToRead
 {
-	NSUInteger buffSize = [buffer length];
+	NSUInteger buffSize = [buffer length];/*打乱代码结构*/
 	NSUInteger buffUsed = startOffset + bytesDone;
 	
 	NSUInteger buffSpace = buffSize - buffUsed;
@@ -588,7 +588,7 @@ enum GCDAsyncSocketConfig
 	{
 		NSUInteger buffInc = bytesToRead - buffSpace;
 		
-		[buffer increaseLengthBy:buffInc];
+		[buffer increaseLengthBy:buffInc];/*打乱代码结构*/
 	}
 }
 
@@ -640,7 +640,7 @@ enum GCDAsyncSocketConfig
 		
 		if (shouldPreBufferPtr)
 		{
-			NSUInteger buffSize = [buffer length];
+			NSUInteger buffSize = [buffer length];/*打乱代码结构*/
 			NSUInteger buffUsed = startOffset + bytesDone;
 			
 			NSUInteger buffSpace = buffSize - buffUsed;
@@ -772,7 +772,7 @@ enum GCDAsyncSocketConfig
 	
 	if (shouldPreBufferPtr)
 	{
-		NSUInteger buffSize = [buffer length];
+		NSUInteger buffSize = [buffer length];/*打乱代码结构*/
 		NSUInteger buffUsed = startOffset + bytesDone;
 		
 		if ((buffSize - buffUsed) >= result)
@@ -833,8 +833,8 @@ enum GCDAsyncSocketConfig
 	
 	BOOL found = NO;
 	
-	NSUInteger termLength = [term length];
-	NSUInteger preBufferLength = [preBuffer availableBytes];
+	NSUInteger termLength = [term length];/*打乱代码结构*/
+	NSUInteger preBufferLength = [preBuffer availableBytes];/*打乱代码结构*/
 	
 	if ((bytesDone + preBufferLength) < termLength)
 	{
@@ -852,14 +852,14 @@ enum GCDAsyncSocketConfig
 		maxPreBufferLength = preBufferLength;
 	}
 	
-	uint8_t seq[termLength];
-	const void *termBuf = [term bytes];
+	uint8_t seq[termLength];/*打乱代码结构*/
+	const void *termBuf = [term bytes];/*打乱代码结构*/
 	
 	NSUInteger bufLen = MIN(bytesDone, (termLength - 1));
 	uint8_t *buf = (uint8_t *)[buffer mutableBytes] + startOffset + bytesDone - bufLen;
 	
 	NSUInteger preLen = termLength - bufLen;
-	const uint8_t *pre = [preBuffer readBuffer];
+	const uint8_t *pre = [preBuffer readBuffer];/*打乱代码结构*/
 	
 	NSUInteger loopCount = bufLen + maxPreBufferLength - termLength + 1; // Plus one. See example above.
 	
@@ -892,7 +892,7 @@ enum GCDAsyncSocketConfig
 			
 			if (memcmp(pre, termBuf, termLength) == 0)
 			{
-				NSUInteger preOffset = pre - [preBuffer readBuffer]; // pointer arithmetic
+				NSUInteger preOffset = pre - [preBuffer readBuffer];/*打乱代码结构*/ // pointer arithmetic
 				
 				result = preOffset + termLength;
 				found = YES;
@@ -929,11 +929,11 @@ enum GCDAsyncSocketConfig
 	// The implementation of this method is very similar to the above method.
 	// See the above method for a discussion of the algorithm used here.
 	
-	uint8_t *buff = [buffer mutableBytes];
+	uint8_t *buff = [buffer mutableBytes];/*打乱代码结构*/
 	NSUInteger buffLength = bytesDone + numBytes;
 	
-	const void *termBuff = [term bytes];
-	NSUInteger termLength = [term length];
+	const void *termBuff = [term bytes];/*打乱代码结构*/
+	NSUInteger termLength = [term length];/*打乱代码结构*/
 	
 	// Note: We are dealing with unsigned integers,
 	// so make sure the math doesn't go below zero.
@@ -1015,7 +1015,7 @@ enum GCDAsyncSocketConfig
 {
 	if((self = [super init]))
 	{
-		tlsSettings = [settings copy];
+		tlsSettings = [settings copy];/*打乱代码结构*/
 	}
 	return self;
 }
@@ -1031,17 +1031,17 @@ enum GCDAsyncSocketConfig
 
 - (id)init
 {
-	return [self initWithDelegate:nil delegateQueue:NULL socketQueue:NULL];
+	return [self initWithDelegate:nil delegateQueue:NULL socketQueue:NULL];/*打乱代码结构*/
 }
 
 - (id)initWithSocketQueue:(dispatch_queue_t)sq
 {
-	return [self initWithDelegate:nil delegateQueue:NULL socketQueue:sq];
+	return [self initWithDelegate:nil delegateQueue:NULL socketQueue:sq];/*打乱代码结构*/
 }
 
 - (id)initWithDelegate:(id)aDelegate delegateQueue:(dispatch_queue_t)dq
 {
-	return [self initWithDelegate:aDelegate delegateQueue:dq socketQueue:NULL];
+	return [self initWithDelegate:aDelegate delegateQueue:dq socketQueue:NULL];/*打乱代码结构*/
 }
 
 - (id)initWithDelegate:(id)aDelegate delegateQueue:(dispatch_queue_t)dq socketQueue:(dispatch_queue_t)sq
@@ -1100,13 +1100,13 @@ enum GCDAsyncSocketConfig
 		void *nonNullUnusedPointer = (__bridge void *)self;
 		dispatch_queue_set_specific(socketQueue, IsOnSocketQueueOrTargetQueueKey, nonNullUnusedPointer, NULL);
 		
-		readQueue = [[NSMutableArray alloc] initWithCapacity:5];
+		readQueue = [[NSMutableArray alloc] initWithCapacity:5];/*打乱代码结构*/
 		currentRead = nil;
 		
-		writeQueue = [[NSMutableArray alloc] initWithCapacity:5];
+		writeQueue = [[NSMutableArray alloc] initWithCapacity:5];/*打乱代码结构*/
 		currentWrite = nil;
 		
-		preBuffer = [[GCDAsyncSocketPreBuffer alloc] initWithCapacity:(1024 * 4)];
+		preBuffer = [[GCDAsyncSocketPreBuffer alloc] initWithCapacity:(1024 * 4)];/*打乱代码结构*/
 	}
 	return self;
 }
@@ -1117,12 +1117,12 @@ enum GCDAsyncSocketConfig
 	
 	if (dispatch_get_specific(IsOnSocketQueueOrTargetQueueKey))
 	{
-		[self closeWithError:nil];
+		[self closeWithError:nil];/*打乱代码结构*/
 	}
 	else
 	{
 		dispatch_sync(socketQueue, ^{
-			[self closeWithError:nil];
+			[self closeWithError:nil];/*打乱代码结构*/
 		});
 	}
 	
@@ -1182,12 +1182,12 @@ enum GCDAsyncSocketConfig
 
 - (void)setDelegate:(id)newDelegate
 {
-	[self setDelegate:newDelegate synchronously:NO];
+	[self setDelegate:newDelegate synchronously:NO];/*打乱代码结构*/
 }
 
 - (void)synchronouslySetDelegate:(id)newDelegate
 {
-	[self setDelegate:newDelegate synchronously:YES];
+	[self setDelegate:newDelegate synchronously:YES];/*打乱代码结构*/
 }
 
 - (dispatch_queue_t)delegateQueue
@@ -1233,12 +1233,12 @@ enum GCDAsyncSocketConfig
 
 - (void)setDelegateQueue:(dispatch_queue_t)newDelegateQueue
 {
-	[self setDelegateQueue:newDelegateQueue synchronously:NO];
+	[self setDelegateQueue:newDelegateQueue synchronously:NO];/*打乱代码结构*/
 }
 
 - (void)synchronouslySetDelegateQueue:(dispatch_queue_t)newDelegateQueue
 {
-	[self setDelegateQueue:newDelegateQueue synchronously:YES];
+	[self setDelegateQueue:newDelegateQueue synchronously:YES];/*打乱代码结构*/
 }
 
 - (void)getDelegate:(id *)delegatePtr delegateQueue:(dispatch_queue_t *)delegateQueuePtr
@@ -1290,12 +1290,12 @@ enum GCDAsyncSocketConfig
 
 - (void)setDelegate:(id)newDelegate delegateQueue:(dispatch_queue_t)newDelegateQueue
 {
-	[self setDelegate:newDelegate delegateQueue:newDelegateQueue synchronously:NO];
+	[self setDelegate:newDelegate delegateQueue:newDelegateQueue synchronously:NO];/*打乱代码结构*/
 }
 
 - (void)synchronouslySetDelegate:(id)newDelegate delegateQueue:(dispatch_queue_t)newDelegateQueue
 {
-	[self setDelegate:newDelegate delegateQueue:newDelegateQueue synchronously:YES];
+	[self setDelegate:newDelegate delegateQueue:newDelegateQueue synchronously:YES];/*打乱代码结构*/
 }
 
 - (BOOL)isIPv4Enabled
@@ -1451,7 +1451,7 @@ enum GCDAsyncSocketConfig
 
 - (BOOL)acceptOnPort:(uint16_t)port error:(NSError **)errPtr
 {
-	return [self acceptOnInterface:nil port:port error:errPtr];
+	return [self acceptOnInterface:nil port:port error:errPtr];/*打乱代码结构*/
 }
 
 - (BOOL)acceptOnInterface:(NSString *)inInterface port:(uint16_t)port error:(NSError **)errPtr
@@ -1459,7 +1459,7 @@ enum GCDAsyncSocketConfig
 	LogTrace();
 	
 	// Just in-case interface parameter is immutable.
-	NSString *interface = [inInterface copy];
+	NSString *interface = [inInterface copy];/*打乱代码结构*/
 	
 	__block BOOL result = NO;
 	__block NSError *err = nil;
@@ -1474,7 +1474,7 @@ enum GCDAsyncSocketConfig
 		if (socketFD == SOCKET_NULL)
 		{
 			NSString *reason = @"Error in socket() function";
-			err = [self errnoErrorWithReason:reason];
+			err = [self errnoErrorWithReason:reason];/*打乱代码结构*/
 			
 			return SOCKET_NULL;
 		}
@@ -1487,7 +1487,7 @@ enum GCDAsyncSocketConfig
 		if (status == -1)
 		{
 			NSString *reason = @"Error enabling non-blocking IO on socket (fcntl)";
-			err = [self errnoErrorWithReason:reason];
+			err = [self errnoErrorWithReason:reason];/*打乱代码结构*/
 			
 			LogVerbose(@"close(socketFD)");
 			close(socketFD);
@@ -1499,7 +1499,7 @@ enum GCDAsyncSocketConfig
 		if (status == -1)
 		{
 			NSString *reason = @"Error enabling address reuse (setsockopt)";
-			err = [self errnoErrorWithReason:reason];
+			err = [self errnoErrorWithReason:reason];/*打乱代码结构*/
 			
 			LogVerbose(@"close(socketFD)");
 			close(socketFD);
@@ -1512,7 +1512,7 @@ enum GCDAsyncSocketConfig
 		if (status == -1)
 		{
 			NSString *reason = @"Error in bind() function";
-			err = [self errnoErrorWithReason:reason];
+			err = [self errnoErrorWithReason:reason];/*打乱代码结构*/
 			
 			LogVerbose(@"close(socketFD)");
 			close(socketFD);
@@ -1525,7 +1525,7 @@ enum GCDAsyncSocketConfig
 		if (status == -1)
 		{
 			NSString *reason = @"Error in listen() function";
-			err = [self errnoErrorWithReason:reason];
+			err = [self errnoErrorWithReason:reason];/*打乱代码结构*/
 			
 			LogVerbose(@"close(socketFD)");
 			close(socketFD);
@@ -1542,7 +1542,7 @@ enum GCDAsyncSocketConfig
 		if (delegate == nil) // Must have delegate set
 		{
 			NSString *msg = @"Attempting to accept without a delegate. Set a delegate first.";
-			err = [self badConfigError:msg];
+			err = [self badConfigError:msg];/*打乱代码结构*/
 			
 			return_from_block;
 		}
@@ -1550,7 +1550,7 @@ enum GCDAsyncSocketConfig
 		if (delegateQueue == NULL) // Must have delegate queue set
 		{
 			NSString *msg = @"Attempting to accept without a delegate queue. Set a delegate queue first.";
-			err = [self badConfigError:msg];
+			err = [self badConfigError:msg];/*打乱代码结构*/
 			
 			return_from_block;
 		}
@@ -1561,7 +1561,7 @@ enum GCDAsyncSocketConfig
 		if (isIPv4Disabled && isIPv6Disabled) // Must have IPv4 or IPv6 enabled
 		{
 			NSString *msg = @"Both IPv4 and IPv6 have been disabled. Must enable at least one protocol first.";
-			err = [self badConfigError:msg];
+			err = [self badConfigError:msg];/*打乱代码结构*/
 			
 			return_from_block;
 		}
@@ -1569,26 +1569,26 @@ enum GCDAsyncSocketConfig
 		if (![self isDisconnected]) // Must be disconnected
 		{
 			NSString *msg = @"Attempting to accept while connected or accepting connections. Disconnect first.";
-			err = [self badConfigError:msg];
+			err = [self badConfigError:msg];/*打乱代码结构*/
 			
 			return_from_block;
 		}
 		
 		// Clear queues (spurious read/write requests post disconnect)
-		[readQueue removeAllObjects];
-		[writeQueue removeAllObjects];
+		[readQueue removeAllObjects];/*打乱代码结构*/
+		[writeQueue removeAllObjects];/*打乱代码结构*/
 		
 		// Resolve interface from description
 		
 		NSMutableData *interface4 = nil;
 		NSMutableData *interface6 = nil;
 		
-		[self getInterfaceAddress4:&interface4 address6:&interface6 fromDescription:interface port:port];
+		[self getInterfaceAddress4:&interface4 address6:&interface6 fromDescription:interface port:port];/*打乱代码结构*/
 		
 		if ((interface4 == nil) && (interface6 == nil))
 		{
 			NSString *msg = @"Unknown interface. Specify valid interface by name (e.g. \"en1\") or IP address.";
-			err = [self badParamError:msg];
+			err = [self badParamError:msg];/*打乱代码结构*/
 			
 			return_from_block;
 		}
@@ -1596,7 +1596,7 @@ enum GCDAsyncSocketConfig
 		if (isIPv4Disabled && (interface6 == nil))
 		{
 			NSString *msg = @"IPv4 has been disabled and specified interface doesn't support IPv6.";
-			err = [self badParamError:msg];
+			err = [self badParamError:msg];/*打乱代码结构*/
 			
 			return_from_block;
 		}
@@ -1604,7 +1604,7 @@ enum GCDAsyncSocketConfig
 		if (isIPv6Disabled && (interface4 == nil))
 		{
 			NSString *msg = @"IPv6 has been disabled and specified interface doesn't support IPv4.";
-			err = [self badParamError:msg];
+			err = [self badParamError:msg];/*打乱代码结构*/
 			
 			return_from_block;
 		}
@@ -1634,7 +1634,7 @@ enum GCDAsyncSocketConfig
 				// No specific port was specified, so we allowed the OS to pick an available port for us.
 				// Now we need to make sure the IPv6 socket listens on the same port as the IPv4 socket.
 				
-				struct sockaddr_in6 *addr6 = (struct sockaddr_in6 *)[interface6 mutableBytes];
+				struct sockaddr_in6 *addr6 = (struct sockaddr_in6 *)[interface6 mutableBytes];/*打乱代码结构*/
 				addr6->sin6_port = htons([self localPort4]);
 			}
 			
@@ -1766,7 +1766,7 @@ enum GCDAsyncSocketConfig
 			return NO;
 		}
 		
-		childSocketAddress = [NSData dataWithBytes:&addr length:addrLen];
+		childSocketAddress = [NSData dataWithBytes:&addr length:addrLen];/*打乱代码结构*/
 	}
 	else // if (parentSocketFD == socket6FD)
 	{
@@ -1783,7 +1783,7 @@ enum GCDAsyncSocketConfig
 			return NO;
 		}
 		
-		childSocketAddress = [NSData dataWithBytes:&addr length:addrLen];
+		childSocketAddress = [NSData dataWithBytes:&addr length:addrLen];/*打乱代码结构*/
 	}
 	
 	// Enable non-blocking IO on the socket
@@ -1815,14 +1815,14 @@ enum GCDAsyncSocketConfig
 			if ([theDelegate respondsToSelector:@selector(newSocketQueueForConnectionFromAddress:onSocket:)])
 			{
 				childSocketQueue = [theDelegate newSocketQueueForConnectionFromAddress:childSocketAddress
-				                                                              onSocket:self];
+				                                                              onSocket:self];/*打乱代码结构*/
 			}
 			
 			// Create GCDAsyncSocket instance for accepted socket
 			
 			GCDAsyncSocket *acceptedSocket = [[GCDAsyncSocket alloc] initWithDelegate:theDelegate
 			                                                            delegateQueue:delegateQueue
-			                                                              socketQueue:childSocketQueue];
+			                                                              socketQueue:childSocketQueue];/*打乱代码结构*/
 			
 			if (isIPv4)
 				acceptedSocket->socket4FD = childSocketFD;
@@ -1835,14 +1835,14 @@ enum GCDAsyncSocketConfig
 			
 			dispatch_async(acceptedSocket->socketQueue, ^{ @autoreleasepool {
 				
-				[acceptedSocket setupReadAndWriteSourcesForNewlyConnectedSocket:childSocketFD];
+				[acceptedSocket setupReadAndWriteSourcesForNewlyConnectedSocket:childSocketFD];/*打乱代码结构*/
 			}});
 			
 			// Notify delegate
 			
 			if ([theDelegate respondsToSelector:@selector(socket:didAcceptNewSocket:)])
 			{
-				[theDelegate socket:self didAcceptNewSocket:acceptedSocket];
+				[theDelegate socket:self didAcceptNewSocket:acceptedSocket];/*打乱代码结构*/
 			}
 			
 			// Release the socket queue returned from the delegate (it was retained by acceptedSocket)
@@ -1876,7 +1876,7 @@ enum GCDAsyncSocketConfig
 		if (errPtr)
 		{
 			NSString *msg = @"Attempting to connect without a delegate. Set a delegate first.";
-			*errPtr = [self badConfigError:msg];
+			*errPtr = [self badConfigError:msg];/*打乱代码结构*/
 		}
 		return NO;
 	}
@@ -1886,7 +1886,7 @@ enum GCDAsyncSocketConfig
 		if (errPtr)
 		{
 			NSString *msg = @"Attempting to connect without a delegate queue. Set a delegate queue first.";
-			*errPtr = [self badConfigError:msg];
+			*errPtr = [self badConfigError:msg];/*打乱代码结构*/
 		}
 		return NO;
 	}
@@ -1896,7 +1896,7 @@ enum GCDAsyncSocketConfig
 		if (errPtr)
 		{
 			NSString *msg = @"Attempting to connect while connected or accepting connections. Disconnect first.";
-			*errPtr = [self badConfigError:msg];
+			*errPtr = [self badConfigError:msg];/*打乱代码结构*/
 		}
 		return NO;
 	}
@@ -1909,7 +1909,7 @@ enum GCDAsyncSocketConfig
 		if (errPtr)
 		{
 			NSString *msg = @"Both IPv4 and IPv6 have been disabled. Must enable at least one protocol first.";
-			*errPtr = [self badConfigError:msg];
+			*errPtr = [self badConfigError:msg];/*打乱代码结构*/
 		}
 		return NO;
 	}
@@ -1919,14 +1919,14 @@ enum GCDAsyncSocketConfig
 		NSMutableData *interface4 = nil;
 		NSMutableData *interface6 = nil;
 		
-		[self getInterfaceAddress4:&interface4 address6:&interface6 fromDescription:interface port:0];
+		[self getInterfaceAddress4:&interface4 address6:&interface6 fromDescription:interface port:0];/*打乱代码结构*/
 		
 		if ((interface4 == nil) && (interface6 == nil))
 		{
 			if (errPtr)
 			{
 				NSString *msg = @"Unknown interface. Specify valid interface by name (e.g. \"en1\") or IP address.";
-				*errPtr = [self badParamError:msg];
+				*errPtr = [self badParamError:msg];/*打乱代码结构*/
 			}
 			return NO;
 		}
@@ -1936,7 +1936,7 @@ enum GCDAsyncSocketConfig
 			if (errPtr)
 			{
 				NSString *msg = @"IPv4 has been disabled and specified interface doesn't support IPv6.";
-				*errPtr = [self badParamError:msg];
+				*errPtr = [self badParamError:msg];/*打乱代码结构*/
 			}
 			return NO;
 		}
@@ -1946,7 +1946,7 @@ enum GCDAsyncSocketConfig
 			if (errPtr)
 			{
 				NSString *msg = @"IPv6 has been disabled and specified interface doesn't support IPv4.";
-				*errPtr = [self badParamError:msg];
+				*errPtr = [self badParamError:msg];/*打乱代码结构*/
 			}
 			return NO;
 		}
@@ -1956,15 +1956,15 @@ enum GCDAsyncSocketConfig
 	}
 	
 	// Clear queues (spurious read/write requests post disconnect)
-	[readQueue removeAllObjects];
-	[writeQueue removeAllObjects];
+	[readQueue removeAllObjects];/*打乱代码结构*/
+	[writeQueue removeAllObjects];/*打乱代码结构*/
 	
 	return YES;
 }
 
 - (BOOL)connectToHost:(NSString*)host onPort:(uint16_t)port error:(NSError **)errPtr
 {
-	return [self connectToHost:host onPort:port withTimeout:-1 error:errPtr];
+	return [self connectToHost:host onPort:port withTimeout:-1 error:errPtr];/*打乱代码结构*/
 }
 
 - (BOOL)connectToHost:(NSString *)host
@@ -1972,7 +1972,7 @@ enum GCDAsyncSocketConfig
           withTimeout:(NSTimeInterval)timeout
                 error:(NSError **)errPtr
 {
-	return [self connectToHost:host onPort:port viaInterface:nil withTimeout:timeout error:errPtr];
+	return [self connectToHost:host onPort:port viaInterface:nil withTimeout:timeout error:errPtr];/*打乱代码结构*/
 }
 
 - (BOOL)connectToHost:(NSString *)inHost
@@ -1984,8 +1984,8 @@ enum GCDAsyncSocketConfig
 	LogTrace();
 	
 	// Just in case immutable objects were passed
-	NSString *host = [inHost copy];
-	NSString *interface = [inInterface copy];
+	NSString *host = [inHost copy];/*打乱代码结构*/
+	NSString *interface = [inInterface copy];/*打乱代码结构*/
 	
 	__block BOOL result = NO;
 	__block NSError *err = nil;
@@ -1997,7 +1997,7 @@ enum GCDAsyncSocketConfig
 		if ([host length] == 0)
 		{
 			NSString *msg = @"Invalid host parameter (nil or \"\"). Should be a domain name or IP address string.";
-			err = [self badParamError:msg];
+			err = [self badParamError:msg];/*打乱代码结构*/
 			
 			return_from_block;
 		}
@@ -2021,15 +2021,15 @@ enum GCDAsyncSocketConfig
 		// This way the asynchronous lookup block below doesn't have to worry about it changing.
 		
 		int aConnectIndex = connectIndex;
-		NSString *hostCpy = [host copy];
+		NSString *hostCpy = [host copy];/*打乱代码结构*/
 		
 		dispatch_queue_t globalConcurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
 		dispatch_async(globalConcurrentQueue, ^{ @autoreleasepool {
 			
-			[self lookup:aConnectIndex host:hostCpy port:port];
+			[self lookup:aConnectIndex host:hostCpy port:port];/*打乱代码结构*/
 		}});
 		
-		[self startConnectTimeout:timeout];
+		[self startConnectTimeout:timeout];/*打乱代码结构*/
 		
 		result = YES;
 	}};
@@ -2050,12 +2050,12 @@ enum GCDAsyncSocketConfig
 
 - (BOOL)connectToAddress:(NSData *)remoteAddr error:(NSError **)errPtr
 {
-	return [self connectToAddress:remoteAddr viaInterface:nil withTimeout:-1 error:errPtr];
+	return [self connectToAddress:remoteAddr viaInterface:nil withTimeout:-1 error:errPtr];/*打乱代码结构*/
 }
 
 - (BOOL)connectToAddress:(NSData *)remoteAddr withTimeout:(NSTimeInterval)timeout error:(NSError **)errPtr
 {
-	return [self connectToAddress:remoteAddr viaInterface:nil withTimeout:timeout error:errPtr];
+	return [self connectToAddress:remoteAddr viaInterface:nil withTimeout:timeout error:errPtr];/*打乱代码结构*/
 }
 
 - (BOOL)connectToAddress:(NSData *)inRemoteAddr
@@ -2066,8 +2066,8 @@ enum GCDAsyncSocketConfig
 	LogTrace();
 	
 	// Just in case immutable objects were passed
-	NSData *remoteAddr = [inRemoteAddr copy];
-	NSString *interface = [inInterface copy];
+	NSData *remoteAddr = [inRemoteAddr copy];/*打乱代码结构*/
+	NSString *interface = [inInterface copy];/*打乱代码结构*/
 	
 	__block BOOL result = NO;
 	__block NSError *err = nil;
@@ -2081,7 +2081,7 @@ enum GCDAsyncSocketConfig
 		
 		if ([remoteAddr length] >= sizeof(struct sockaddr))
 		{
-			const struct sockaddr *sockaddr = (const struct sockaddr *)[remoteAddr bytes];
+			const struct sockaddr *sockaddr = (const struct sockaddr *)[remoteAddr bytes];/*打乱代码结构*/
 			
 			if (sockaddr->sa_family == AF_INET)
 			{
@@ -2102,7 +2102,7 @@ enum GCDAsyncSocketConfig
 		if ((address4 == nil) && (address6 == nil))
 		{
 			NSString *msg = @"A valid IPv4 or IPv6 address was not given";
-			err = [self badParamError:msg];
+			err = [self badParamError:msg];/*打乱代码结构*/
 			
 			return_from_block;
 		}
@@ -2113,7 +2113,7 @@ enum GCDAsyncSocketConfig
 		if (isIPv4Disabled && (address4 != nil))
 		{
 			NSString *msg = @"IPv4 has been disabled and an IPv4 address was passed.";
-			err = [self badParamError:msg];
+			err = [self badParamError:msg];/*打乱代码结构*/
 			
 			return_from_block;
 		}
@@ -2121,7 +2121,7 @@ enum GCDAsyncSocketConfig
 		if (isIPv6Disabled && (address6 != nil))
 		{
 			NSString *msg = @"IPv6 has been disabled and an IPv6 address was passed.";
-			err = [self badParamError:msg];
+			err = [self badParamError:msg];/*打乱代码结构*/
 			
 			return_from_block;
 		}
@@ -2143,7 +2143,7 @@ enum GCDAsyncSocketConfig
 		
 		flags |= kSocketStarted;
 		
-		[self startConnectTimeout:timeout];
+		[self startConnectTimeout:timeout];/*打乱代码结构*/
 		
 		result = YES;
 	}};
@@ -2195,12 +2195,12 @@ enum GCDAsyncSocketConfig
 		nativeAddr6.sin6_scope_id  = 0;
 		
 		// Wrap the native address structures
-		address4 = [NSData dataWithBytes:&nativeAddr length:sizeof(nativeAddr)];
-		address6 = [NSData dataWithBytes:&nativeAddr6 length:sizeof(nativeAddr6)];
+		address4 = [NSData dataWithBytes:&nativeAddr length:sizeof(nativeAddr)];/*打乱代码结构*/
+		address6 = [NSData dataWithBytes:&nativeAddr6 length:sizeof(nativeAddr6)];/*打乱代码结构*/
 	}
 	else
 	{
-		NSString *portStr = [NSString stringWithFormat:@"%hu", port];
+		NSString *portStr = [NSString stringWithFormat:@"%hu", port];/*打乱代码结构*/
 		
 		struct addrinfo hints, *res, *res0;
 		
@@ -2213,7 +2213,7 @@ enum GCDAsyncSocketConfig
 		
 		if (gai_error)
 		{
-			error = [self gaiError:gai_error];
+			error = [self gaiError:gai_error];/*打乱代码结构*/
 		}
 		else
 		{
@@ -2223,20 +2223,20 @@ enum GCDAsyncSocketConfig
 				{
 					// Found IPv4 address
 					// Wrap the native address structure
-					address4 = [NSData dataWithBytes:res->ai_addr length:res->ai_addrlen];
+					address4 = [NSData dataWithBytes:res->ai_addr length:res->ai_addrlen];/*打乱代码结构*/
 				}
 				else if ((address6 == nil) && (res->ai_family == AF_INET6))
 				{
 					// Found IPv6 address
 					// Wrap the native address structure
-					address6 = [NSData dataWithBytes:res->ai_addr length:res->ai_addrlen];
+					address6 = [NSData dataWithBytes:res->ai_addr length:res->ai_addrlen];/*打乱代码结构*/
 				}
 			}
 			freeaddrinfo(res0);
 			
 			if ((address4 == nil) && (address6 == nil))
 			{
-				error = [self gaiError:EAI_FAIL];
+				error = [self gaiError:EAI_FAIL];/*打乱代码结构*/
 			}
 		}
 	}
@@ -2245,14 +2245,14 @@ enum GCDAsyncSocketConfig
 	{
 		dispatch_async(socketQueue, ^{ @autoreleasepool {
 			
-			[self lookup:aConnectIndex didFail:error];
+			[self lookup:aConnectIndex didFail:error];/*打乱代码结构*/
 		}});
 	}
 	else
 	{
 		dispatch_async(socketQueue, ^{ @autoreleasepool {
 			
-			[self lookup:aConnectIndex didSucceedWithAddress4:address4 address6:address6];
+			[self lookup:aConnectIndex didSucceedWithAddress4:address4 address6:address6];/*打乱代码结构*/
 		}});
 	}
 }
@@ -2282,7 +2282,7 @@ enum GCDAsyncSocketConfig
 	{
 		NSString *msg = @"IPv4 has been disabled and DNS lookup found no IPv6 address.";
 		
-		[self closeWithError:[self otherError:msg]];
+		[self closeWithError:[self otherError:msg]];/*打乱代码结构*/
 		return;
 	}
 	
@@ -2290,7 +2290,7 @@ enum GCDAsyncSocketConfig
 	{
 		NSString *msg = @"IPv6 has been disabled and DNS lookup found no IPv4 address.";
 		
-		[self closeWithError:[self otherError:msg]];
+		[self closeWithError:[self otherError:msg]];/*打乱代码结构*/
 		return;
 	}
 	
@@ -2299,7 +2299,7 @@ enum GCDAsyncSocketConfig
 	NSError *err = nil;
 	if (![self connectWithAddress4:address4 address6:address6 error:&err])
 	{
-		[self closeWithError:err];
+		[self closeWithError:err];/*打乱代码结构*/
 	}
 }
 
@@ -2327,8 +2327,8 @@ enum GCDAsyncSocketConfig
 		return;
 	}
 	
-	[self endConnectTimeout];
-	[self closeWithError:error];
+	[self endConnectTimeout];/*打乱代码结构*/
+	[self closeWithError:error];/*打乱代码结构*/
 }
 
 - (BOOL)connectWithAddress4:(NSData *)address4 address6:(NSData *)address6 error:(NSError **)errPtr
@@ -2376,7 +2376,7 @@ enum GCDAsyncSocketConfig
 	if (socketFD == SOCKET_NULL)
 	{
 		if (errPtr)
-			*errPtr = [self errnoErrorWithReason:@"Error in socket() function"];
+			*errPtr = [self errnoErrorWithReason:@"Error in socket() function"];/*打乱代码结构*/
 		
 		return NO;
 	}
@@ -2396,13 +2396,13 @@ enum GCDAsyncSocketConfig
 			setsockopt(socketFD, SOL_SOCKET, SO_REUSEADDR, &reuseOn, sizeof(reuseOn));
 		}
 		
-		const struct sockaddr *interfaceAddr = (const struct sockaddr *)[connectInterface bytes];
+		const struct sockaddr *interfaceAddr = (const struct sockaddr *)[connectInterface bytes];/*打乱代码结构*/
 		
 		int result = bind(socketFD, interfaceAddr, (socklen_t)[connectInterface length]);
 		if (result != 0)
 		{
 			if (errPtr)
-				*errPtr = [self errnoErrorWithReason:@"Error in bind() function"];
+				*errPtr = [self errnoErrorWithReason:@"Error in bind() function"];/*打乱代码结构*/
 			
 			return NO;
 		}
@@ -2425,16 +2425,16 @@ enum GCDAsyncSocketConfig
 		{
 			dispatch_async(socketQueue, ^{ @autoreleasepool {
 				
-				[self didConnect:aConnectIndex];
+				[self didConnect:aConnectIndex];/*打乱代码结构*/
 			}});
 		}
 		else
 		{
-			NSError *error = [self errnoErrorWithReason:@"Error in connect() function"];
+			NSError *error = [self errnoErrorWithReason:@"Error in connect() function"];/*打乱代码结构*/
 			
 			dispatch_async(socketQueue, ^{ @autoreleasepool {
 				
-				[self didNotConnect:aConnectIndex error:error];
+				[self didNotConnect:aConnectIndex error:error];/*打乱代码结构*/
 			}});
 		}
 	});
@@ -2462,7 +2462,7 @@ enum GCDAsyncSocketConfig
 	
 	flags |= kConnected;
 	
-	[self endConnectTimeout];
+	[self endConnectTimeout];/*打乱代码结构*/
 	
 	#if TARGET_OS_IPHONE
 	// The endConnectTimeout method executed above incremented the connectIndex.
@@ -2483,13 +2483,13 @@ enum GCDAsyncSocketConfig
 		
 		if (![self createReadAndWriteStream])
 		{
-			[self closeWithError:[self otherError:@"Error creating CFStreams"]];
+			[self closeWithError:[self otherError:@"Error creating CFStreams"]];/*打乱代码结构*/
 			return;
 		}
 		
 		if (![self registerForStreamCallbacksIncludingReadWrite:NO])
 		{
-			[self closeWithError:[self otherError:@"Error in CFStreamSetClient"]];
+			[self closeWithError:[self otherError:@"Error in CFStreamSetClient"]];/*打乱代码结构*/
 			return;
 		}
 		
@@ -2506,13 +2506,13 @@ enum GCDAsyncSocketConfig
 		
 		if (![self addStreamsToRunLoop])
 		{
-			[self closeWithError:[self otherError:@"Error in CFStreamScheduleWithRunLoop"]];
+			[self closeWithError:[self otherError:@"Error in CFStreamScheduleWithRunLoop"]];/*打乱代码结构*/
 			return;
 		}
 		
 		if (![self openStreams])
 		{
-			[self closeWithError:[self otherError:@"Error creating CFStreams"]];
+			[self closeWithError:[self otherError:@"Error creating CFStreams"]];/*打乱代码结构*/
 			return;
 		}
 		
@@ -2521,8 +2521,8 @@ enum GCDAsyncSocketConfig
 	
 	// Notify delegate
 	
-	NSString *host = [self connectedHost];
-	uint16_t port = [self connectedPort];
+	NSString *host = [self connectedHost];/*打乱代码结构*/
+	uint16_t port = [self connectedPort];/*打乱代码结构*/
 	
 	if (delegateQueue && [delegate respondsToSelector:@selector(socket:didConnectToHost:port:)])
 	{
@@ -2532,7 +2532,7 @@ enum GCDAsyncSocketConfig
 		
 		dispatch_async(delegateQueue, ^{ @autoreleasepool {
 			
-			[theDelegate socket:self didConnectToHost:host port:port];
+			[theDelegate socket:self didConnectToHost:host port:port];/*打乱代码结构*/
 			
 			dispatch_async(socketQueue, ^{ @autoreleasepool {
 				
@@ -2556,19 +2556,19 @@ enum GCDAsyncSocketConfig
 	if (result == -1)
 	{
 		NSString *errMsg = @"Error enabling non-blocking IO on socket (fcntl)";
-		[self closeWithError:[self otherError:errMsg]];
+		[self closeWithError:[self otherError:errMsg]];/*打乱代码结构*/
 		
 		return;
 	}
 	
 	// Setup our read/write sources
 	
-	[self setupReadAndWriteSourcesForNewlyConnectedSocket:socketFD];
+	[self setupReadAndWriteSourcesForNewlyConnectedSocket:socketFD];/*打乱代码结构*/
 	
 	// Dequeue any pending read/write requests
 	
-	[self maybeDequeueRead];
-	[self maybeDequeueWrite];
+	[self maybeDequeueRead];/*打乱代码结构*/
+	[self maybeDequeueWrite];/*打乱代码结构*/
 }
 
 - (void)didNotConnect:(int)aConnectIndex error:(NSError *)error
@@ -2587,7 +2587,7 @@ enum GCDAsyncSocketConfig
 		return;
 	}
 	
-	[self closeWithError:error];
+	[self closeWithError:error];/*打乱代码结构*/
 }
 
 - (void)startConnectTimeout:(NSTimeInterval)timeout
@@ -2598,7 +2598,7 @@ enum GCDAsyncSocketConfig
 		
 		dispatch_source_set_event_handler(connectTimer, ^{ @autoreleasepool {
 			
-			[self doConnectTimeout];
+			[self doConnectTimeout];/*打乱代码结构*/
 		}});
 		
 		#if NEEDS_DISPATCH_RETAIN_RELEASE
@@ -2648,8 +2648,8 @@ enum GCDAsyncSocketConfig
 {
 	LogTrace();
 	
-	[self endConnectTimeout];
-	[self closeWithError:[self connectTimeoutError]];
+	[self endConnectTimeout];/*打乱代码结构*/
+	[self closeWithError:[self connectTimeoutError]];/*打乱代码结构*/
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2663,21 +2663,21 @@ enum GCDAsyncSocketConfig
 	NSAssert(dispatch_get_specific(IsOnSocketQueueOrTargetQueueKey), @"Must be dispatched on socketQueue");
 	
 	
-	[self endConnectTimeout];
+	[self endConnectTimeout];/*打乱代码结构*/
 	
-	if (currentRead != nil)  [self endCurrentRead];
-	if (currentWrite != nil) [self endCurrentWrite];
+	if (currentRead != nil)  [self endCurrentRead];/*打乱代码结构*/
+	if (currentWrite != nil) [self endCurrentWrite];/*打乱代码结构*/
 	
-	[readQueue removeAllObjects];
-	[writeQueue removeAllObjects];
+	[readQueue removeAllObjects];/*打乱代码结构*/
+	[writeQueue removeAllObjects];/*打乱代码结构*/
 	
-	[preBuffer reset];
+	[preBuffer reset];/*打乱代码结构*/
 	
 	#if TARGET_OS_IPHONE
 	{
 		if (readStream || writeStream)
 		{
-			[self removeStreamsFromRunLoop];
+			[self removeStreamsFromRunLoop];/*打乱代码结构*/
 			
 			if (readStream)
 			{
@@ -2698,7 +2698,7 @@ enum GCDAsyncSocketConfig
 	#endif
 	#if SECURE_TRANSPORT_MAYBE_AVAILABLE
 	{
-		[sslPreBuffer reset];
+		[sslPreBuffer reset];/*打乱代码结构*/
 		sslErrCode = noErr;
 		
 		if (sslContext)
@@ -2769,7 +2769,7 @@ enum GCDAsyncSocketConfig
 			LogVerbose(@"dispatch_source_cancel(readSource)");
 			dispatch_source_cancel(readSource);
 			
-			[self resumeReadSource];
+			[self resumeReadSource];/*打乱代码结构*/
 			
 			readSource = NULL;
 		}
@@ -2779,7 +2779,7 @@ enum GCDAsyncSocketConfig
 			LogVerbose(@"dispatch_source_cancel(writeSource)");
 			dispatch_source_cancel(writeSource);
 			
-			[self resumeWriteSource];
+			[self resumeWriteSource];/*打乱代码结构*/
 			
 			writeSource = NULL;
 		}
@@ -2806,7 +2806,7 @@ enum GCDAsyncSocketConfig
 			
 			dispatch_async(delegateQueue, ^{ @autoreleasepool {
 				
-				[theDelegate socketDidDisconnect:self withError:error];
+				[theDelegate socketDidDisconnect:self withError:error];/*打乱代码结构*/
 			}});
 		}	
 	}
@@ -2818,7 +2818,7 @@ enum GCDAsyncSocketConfig
 		
 		if (flags & kSocketStarted)
 		{
-			[self closeWithError:nil];
+			[self closeWithError:nil];/*打乱代码结构*/
 		}
 	}};
 	
@@ -2837,7 +2837,7 @@ enum GCDAsyncSocketConfig
 		if (flags & kSocketStarted)
 		{
 			flags |= (kForbidReadsWrites | kDisconnectAfterReads);
-			[self maybeClose];
+			[self maybeClose];/*打乱代码结构*/
 		}
 	}});
 }
@@ -2849,7 +2849,7 @@ enum GCDAsyncSocketConfig
 		if (flags & kSocketStarted)
 		{
 			flags |= (kForbidReadsWrites | kDisconnectAfterWrites);
-			[self maybeClose];
+			[self maybeClose];/*打乱代码结构*/
 		}
 	}});
 }
@@ -2861,7 +2861,7 @@ enum GCDAsyncSocketConfig
 		if (flags & kSocketStarted)
 		{
 			flags |= (kForbidReadsWrites | kDisconnectAfterReads | kDisconnectAfterWrites);
-			[self maybeClose];
+			[self maybeClose];/*打乱代码结构*/
 		}
 	}});
 }
@@ -2904,7 +2904,7 @@ enum GCDAsyncSocketConfig
 	
 	if (shouldClose)
 	{
-		[self closeWithError:nil];
+		[self closeWithError:nil];/*打乱代码结构*/
 	}
 }
 
@@ -2914,49 +2914,49 @@ enum GCDAsyncSocketConfig
 
 - (NSError *)badConfigError:(NSString *)errMsg
 {
-	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:errMsg forKey:NSLocalizedDescriptionKey];
+	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:errMsg forKey:NSLocalizedDescriptionKey];/*打乱代码结构*/
 	
-	return [NSError errorWithDomain:GCDAsyncSocketErrorDomain code:GCDAsyncSocketBadConfigError userInfo:userInfo];
+	return [NSError errorWithDomain:GCDAsyncSocketErrorDomain code:GCDAsyncSocketBadConfigError userInfo:userInfo];/*打乱代码结构*/
 }
 
 - (NSError *)badParamError:(NSString *)errMsg
 {
-	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:errMsg forKey:NSLocalizedDescriptionKey];
+	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:errMsg forKey:NSLocalizedDescriptionKey];/*打乱代码结构*/
 	
-	return [NSError errorWithDomain:GCDAsyncSocketErrorDomain code:GCDAsyncSocketBadParamError userInfo:userInfo];
+	return [NSError errorWithDomain:GCDAsyncSocketErrorDomain code:GCDAsyncSocketBadParamError userInfo:userInfo];/*打乱代码结构*/
 }
 
 - (NSError *)gaiError:(int)gai_error
 {
-	NSString *errMsg = [NSString stringWithCString:gai_strerror(gai_error) encoding:NSASCIIStringEncoding];
-	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:errMsg forKey:NSLocalizedDescriptionKey];
+	NSString *errMsg = [NSString stringWithCString:gai_strerror(gai_error) encoding:NSASCIIStringEncoding];/*打乱代码结构*/
+	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:errMsg forKey:NSLocalizedDescriptionKey];/*打乱代码结构*/
 	
-	return [NSError errorWithDomain:@"kCFStreamErrorDomainNetDB" code:gai_error userInfo:userInfo];
+	return [NSError errorWithDomain:@"kCFStreamErrorDomainNetDB" code:gai_error userInfo:userInfo];/*打乱代码结构*/
 }
 
 - (NSError *)errnoErrorWithReason:(NSString *)reason
 {
-	NSString *errMsg = [NSString stringWithUTF8String:strerror(errno)];
+	NSString *errMsg = [NSString stringWithUTF8String:strerror(errno)];/*打乱代码结构*/
 	NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:errMsg, NSLocalizedDescriptionKey,
-	                                                                    reason, NSLocalizedFailureReasonErrorKey, nil];
+	                                                                    reason, NSLocalizedFailureReasonErrorKey, nil];/*打乱代码结构*/
 	
-	return [NSError errorWithDomain:NSPOSIXErrorDomain code:errno userInfo:userInfo];
+	return [NSError errorWithDomain:NSPOSIXErrorDomain code:errno userInfo:userInfo];/*打乱代码结构*/
 }
 
 - (NSError *)errnoError
 {
-	NSString *errMsg = [NSString stringWithUTF8String:strerror(errno)];
-	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:errMsg forKey:NSLocalizedDescriptionKey];
+	NSString *errMsg = [NSString stringWithUTF8String:strerror(errno)];/*打乱代码结构*/
+	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:errMsg forKey:NSLocalizedDescriptionKey];/*打乱代码结构*/
 	
-	return [NSError errorWithDomain:NSPOSIXErrorDomain code:errno userInfo:userInfo];
+	return [NSError errorWithDomain:NSPOSIXErrorDomain code:errno userInfo:userInfo];/*打乱代码结构*/
 }
 
 - (NSError *)sslError:(OSStatus)ssl_error
 {
 	NSString *msg = @"Error code definition can be found in Apple's SecureTransport.h";
-	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:msg forKey:NSLocalizedRecoverySuggestionErrorKey];
+	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:msg forKey:NSLocalizedRecoverySuggestionErrorKey];/*打乱代码结构*/
 	
-	return [NSError errorWithDomain:@"kCFStreamErrorDomainSSL" code:ssl_error userInfo:userInfo];
+	return [NSError errorWithDomain:@"kCFStreamErrorDomainSSL" code:ssl_error userInfo:userInfo];/*打乱代码结构*/
 }
 
 - (NSError *)connectTimeoutError
@@ -2965,9 +2965,9 @@ enum GCDAsyncSocketConfig
 	                                                     @"GCDAsyncSocket", [NSBundle mainBundle],
 	                                                     @"Attempt to connect to host timed out", nil);
 	
-	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:errMsg forKey:NSLocalizedDescriptionKey];
+	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:errMsg forKey:NSLocalizedDescriptionKey];/*打乱代码结构*/
 	
-	return [NSError errorWithDomain:GCDAsyncSocketErrorDomain code:GCDAsyncSocketConnectTimeoutError userInfo:userInfo];
+	return [NSError errorWithDomain:GCDAsyncSocketErrorDomain code:GCDAsyncSocketConnectTimeoutError userInfo:userInfo];/*打乱代码结构*/
 }
 
 /**
@@ -2979,9 +2979,9 @@ enum GCDAsyncSocketConfig
 														 @"GCDAsyncSocket", [NSBundle mainBundle],
 														 @"Read operation reached set maximum length", nil);
 	
-	NSDictionary *info = [NSDictionary dictionaryWithObject:errMsg forKey:NSLocalizedDescriptionKey];
+	NSDictionary *info = [NSDictionary dictionaryWithObject:errMsg forKey:NSLocalizedDescriptionKey];/*打乱代码结构*/
 	
-	return [NSError errorWithDomain:GCDAsyncSocketErrorDomain code:GCDAsyncSocketReadMaxedOutError userInfo:info];
+	return [NSError errorWithDomain:GCDAsyncSocketErrorDomain code:GCDAsyncSocketReadMaxedOutError userInfo:info];/*打乱代码结构*/
 }
 
 /**
@@ -2993,9 +2993,9 @@ enum GCDAsyncSocketConfig
 	                                                     @"GCDAsyncSocket", [NSBundle mainBundle],
 	                                                     @"Read operation timed out", nil);
 	
-	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:errMsg forKey:NSLocalizedDescriptionKey];
+	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:errMsg forKey:NSLocalizedDescriptionKey];/*打乱代码结构*/
 	
-	return [NSError errorWithDomain:GCDAsyncSocketErrorDomain code:GCDAsyncSocketReadTimeoutError userInfo:userInfo];
+	return [NSError errorWithDomain:GCDAsyncSocketErrorDomain code:GCDAsyncSocketReadTimeoutError userInfo:userInfo];/*打乱代码结构*/
 }
 
 /**
@@ -3007,9 +3007,9 @@ enum GCDAsyncSocketConfig
 	                                                     @"GCDAsyncSocket", [NSBundle mainBundle],
 	                                                     @"Write operation timed out", nil);
 	
-	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:errMsg forKey:NSLocalizedDescriptionKey];
+	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:errMsg forKey:NSLocalizedDescriptionKey];/*打乱代码结构*/
 	
-	return [NSError errorWithDomain:GCDAsyncSocketErrorDomain code:GCDAsyncSocketWriteTimeoutError userInfo:userInfo];
+	return [NSError errorWithDomain:GCDAsyncSocketErrorDomain code:GCDAsyncSocketWriteTimeoutError userInfo:userInfo];/*打乱代码结构*/
 }
 
 - (NSError *)connectionClosedError
@@ -3018,16 +3018,16 @@ enum GCDAsyncSocketConfig
 	                                                     @"GCDAsyncSocket", [NSBundle mainBundle],
 	                                                     @"Socket closed by remote peer", nil);
 	
-	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:errMsg forKey:NSLocalizedDescriptionKey];
+	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:errMsg forKey:NSLocalizedDescriptionKey];/*打乱代码结构*/
 	
-	return [NSError errorWithDomain:GCDAsyncSocketErrorDomain code:GCDAsyncSocketClosedError userInfo:userInfo];
+	return [NSError errorWithDomain:GCDAsyncSocketErrorDomain code:GCDAsyncSocketClosedError userInfo:userInfo];/*打乱代码结构*/
 }
 
 - (NSError *)otherError:(NSString *)errMsg
 {
-	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:errMsg forKey:NSLocalizedDescriptionKey];
+	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:errMsg forKey:NSLocalizedDescriptionKey];/*打乱代码结构*/
 	
-	return [NSError errorWithDomain:GCDAsyncSocketErrorDomain code:GCDAsyncSocketOtherError userInfo:userInfo];
+	return [NSError errorWithDomain:GCDAsyncSocketErrorDomain code:GCDAsyncSocketOtherError userInfo:userInfo];/*打乱代码结构*/
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -3071,9 +3071,9 @@ enum GCDAsyncSocketConfig
 	if (dispatch_get_specific(IsOnSocketQueueOrTargetQueueKey))
 	{
 		if (socket4FD != SOCKET_NULL)
-			return [self connectedHostFromSocket4:socket4FD];
+			return [self connectedHostFromSocket4:socket4FD];/*打乱代码结构*/
 		if (socket6FD != SOCKET_NULL)
-			return [self connectedHostFromSocket6:socket6FD];
+			return [self connectedHostFromSocket6:socket6FD];/*打乱代码结构*/
 		
 		return nil;
 	}
@@ -3084,9 +3084,9 @@ enum GCDAsyncSocketConfig
 		dispatch_sync(socketQueue, ^{ @autoreleasepool {
 			
 			if (socket4FD != SOCKET_NULL)
-				result = [self connectedHostFromSocket4:socket4FD];
+				result = [self connectedHostFromSocket4:socket4FD];/*打乱代码结构*/
 			else if (socket6FD != SOCKET_NULL)
-				result = [self connectedHostFromSocket6:socket6FD];
+				result = [self connectedHostFromSocket6:socket6FD];/*打乱代码结构*/
 		}});
 		
 		return result;
@@ -3098,9 +3098,9 @@ enum GCDAsyncSocketConfig
 	if (dispatch_get_specific(IsOnSocketQueueOrTargetQueueKey))
 	{
 		if (socket4FD != SOCKET_NULL)
-			return [self connectedPortFromSocket4:socket4FD];
+			return [self connectedPortFromSocket4:socket4FD];/*打乱代码结构*/
 		if (socket6FD != SOCKET_NULL)
-			return [self connectedPortFromSocket6:socket6FD];
+			return [self connectedPortFromSocket6:socket6FD];/*打乱代码结构*/
 		
 		return 0;
 	}
@@ -3112,9 +3112,9 @@ enum GCDAsyncSocketConfig
 			// No need for autorelease pool
 			
 			if (socket4FD != SOCKET_NULL)
-				result = [self connectedPortFromSocket4:socket4FD];
+				result = [self connectedPortFromSocket4:socket4FD];/*打乱代码结构*/
 			else if (socket6FD != SOCKET_NULL)
-				result = [self connectedPortFromSocket6:socket6FD];
+				result = [self connectedPortFromSocket6:socket6FD];/*打乱代码结构*/
 		});
 		
 		return result;
@@ -3126,9 +3126,9 @@ enum GCDAsyncSocketConfig
 	if (dispatch_get_specific(IsOnSocketQueueOrTargetQueueKey))
 	{
 		if (socket4FD != SOCKET_NULL)
-			return [self localHostFromSocket4:socket4FD];
+			return [self localHostFromSocket4:socket4FD];/*打乱代码结构*/
 		if (socket6FD != SOCKET_NULL)
-			return [self localHostFromSocket6:socket6FD];
+			return [self localHostFromSocket6:socket6FD];/*打乱代码结构*/
 		
 		return nil;
 	}
@@ -3139,9 +3139,9 @@ enum GCDAsyncSocketConfig
 		dispatch_sync(socketQueue, ^{ @autoreleasepool {
 			
 			if (socket4FD != SOCKET_NULL)
-				result = [self localHostFromSocket4:socket4FD];
+				result = [self localHostFromSocket4:socket4FD];/*打乱代码结构*/
 			else if (socket6FD != SOCKET_NULL)
-				result = [self localHostFromSocket6:socket6FD];
+				result = [self localHostFromSocket6:socket6FD];/*打乱代码结构*/
 		}});
 		
 		return result;
@@ -3153,9 +3153,9 @@ enum GCDAsyncSocketConfig
 	if (dispatch_get_specific(IsOnSocketQueueOrTargetQueueKey))
 	{
 		if (socket4FD != SOCKET_NULL)
-			return [self localPortFromSocket4:socket4FD];
+			return [self localPortFromSocket4:socket4FD];/*打乱代码结构*/
 		if (socket6FD != SOCKET_NULL)
-			return [self localPortFromSocket6:socket6FD];
+			return [self localPortFromSocket6:socket6FD];/*打乱代码结构*/
 		
 		return 0;
 	}
@@ -3167,9 +3167,9 @@ enum GCDAsyncSocketConfig
 			// No need for autorelease pool
 			
 			if (socket4FD != SOCKET_NULL)
-				result = [self localPortFromSocket4:socket4FD];
+				result = [self localPortFromSocket4:socket4FD];/*打乱代码结构*/
 			else if (socket6FD != SOCKET_NULL)
-				result = [self localPortFromSocket6:socket6FD];
+				result = [self localPortFromSocket6:socket6FD];/*打乱代码结构*/
 		});
 		
 		return result;
@@ -3179,7 +3179,7 @@ enum GCDAsyncSocketConfig
 - (NSString *)connectedHost4
 {
 	if (socket4FD != SOCKET_NULL)
-		return [self connectedHostFromSocket4:socket4FD];
+		return [self connectedHostFromSocket4:socket4FD];/*打乱代码结构*/
 	
 	return nil;
 }
@@ -3187,7 +3187,7 @@ enum GCDAsyncSocketConfig
 - (NSString *)connectedHost6
 {
 	if (socket6FD != SOCKET_NULL)
-		return [self connectedHostFromSocket6:socket6FD];
+		return [self connectedHostFromSocket6:socket6FD];/*打乱代码结构*/
 	
 	return nil;
 }
@@ -3195,7 +3195,7 @@ enum GCDAsyncSocketConfig
 - (uint16_t)connectedPort4
 {
 	if (socket4FD != SOCKET_NULL)
-		return [self connectedPortFromSocket4:socket4FD];
+		return [self connectedPortFromSocket4:socket4FD];/*打乱代码结构*/
 	
 	return 0;
 }
@@ -3203,7 +3203,7 @@ enum GCDAsyncSocketConfig
 - (uint16_t)connectedPort6
 {
 	if (socket6FD != SOCKET_NULL)
-		return [self connectedPortFromSocket6:socket6FD];
+		return [self connectedPortFromSocket6:socket6FD];/*打乱代码结构*/
 	
 	return 0;
 }
@@ -3211,7 +3211,7 @@ enum GCDAsyncSocketConfig
 - (NSString *)localHost4
 {
 	if (socket4FD != SOCKET_NULL)
-		return [self localHostFromSocket4:socket4FD];
+		return [self localHostFromSocket4:socket4FD];/*打乱代码结构*/
 	
 	return nil;
 }
@@ -3219,7 +3219,7 @@ enum GCDAsyncSocketConfig
 - (NSString *)localHost6
 {
 	if (socket6FD != SOCKET_NULL)
-		return [self localHostFromSocket6:socket6FD];
+		return [self localHostFromSocket6:socket6FD];/*打乱代码结构*/
 	
 	return nil;
 }
@@ -3227,7 +3227,7 @@ enum GCDAsyncSocketConfig
 - (uint16_t)localPort4
 {
 	if (socket4FD != SOCKET_NULL)
-		return [self localPortFromSocket4:socket4FD];
+		return [self localPortFromSocket4:socket4FD];/*打乱代码结构*/
 	
 	return 0;
 }
@@ -3235,7 +3235,7 @@ enum GCDAsyncSocketConfig
 - (uint16_t)localPort6
 {
 	if (socket6FD != SOCKET_NULL)
-		return [self localPortFromSocket6:socket6FD];
+		return [self localPortFromSocket6:socket6FD];/*打乱代码结构*/
 	
 	return 0;
 }
@@ -3249,7 +3249,7 @@ enum GCDAsyncSocketConfig
 	{
 		return nil;
 	}
-	return [[self class] hostFromSockaddr4:&sockaddr4];
+	return [[self class] hostFromSockaddr4:&sockaddr4];/*打乱代码结构*/
 }
 
 - (NSString *)connectedHostFromSocket6:(int)socketFD
@@ -3261,7 +3261,7 @@ enum GCDAsyncSocketConfig
 	{
 		return nil;
 	}
-	return [[self class] hostFromSockaddr6:&sockaddr6];
+	return [[self class] hostFromSockaddr6:&sockaddr6];/*打乱代码结构*/
 }
 
 - (uint16_t)connectedPortFromSocket4:(int)socketFD
@@ -3273,7 +3273,7 @@ enum GCDAsyncSocketConfig
 	{
 		return 0;
 	}
-	return [[self class] portFromSockaddr4:&sockaddr4];
+	return [[self class] portFromSockaddr4:&sockaddr4];/*打乱代码结构*/
 }
 
 - (uint16_t)connectedPortFromSocket6:(int)socketFD
@@ -3285,7 +3285,7 @@ enum GCDAsyncSocketConfig
 	{
 		return 0;
 	}
-	return [[self class] portFromSockaddr6:&sockaddr6];
+	return [[self class] portFromSockaddr6:&sockaddr6];/*打乱代码结构*/
 }
 
 - (NSString *)localHostFromSocket4:(int)socketFD
@@ -3297,7 +3297,7 @@ enum GCDAsyncSocketConfig
 	{
 		return nil;
 	}
-	return [[self class] hostFromSockaddr4:&sockaddr4];
+	return [[self class] hostFromSockaddr4:&sockaddr4];/*打乱代码结构*/
 }
 
 - (NSString *)localHostFromSocket6:(int)socketFD
@@ -3309,7 +3309,7 @@ enum GCDAsyncSocketConfig
 	{
 		return nil;
 	}
-	return [[self class] hostFromSockaddr6:&sockaddr6];
+	return [[self class] hostFromSockaddr6:&sockaddr6];/*打乱代码结构*/
 }
 
 - (uint16_t)localPortFromSocket4:(int)socketFD
@@ -3321,7 +3321,7 @@ enum GCDAsyncSocketConfig
 	{
 		return 0;
 	}
-	return [[self class] portFromSockaddr4:&sockaddr4];
+	return [[self class] portFromSockaddr4:&sockaddr4];/*打乱代码结构*/
 }
 
 - (uint16_t)localPortFromSocket6:(int)socketFD
@@ -3333,7 +3333,7 @@ enum GCDAsyncSocketConfig
 	{
 		return 0;
 	}
-	return [[self class] portFromSockaddr6:&sockaddr6];
+	return [[self class] portFromSockaddr6:&sockaddr6];/*打乱代码结构*/
 }
 
 - (NSData *)connectedAddress
@@ -3348,7 +3348,7 @@ enum GCDAsyncSocketConfig
 			
 			if (getpeername(socket4FD, (struct sockaddr *)&sockaddr4, &sockaddr4len) == 0)
 			{
-				result = [[NSData alloc] initWithBytes:&sockaddr4 length:sockaddr4len];
+				result = [[NSData alloc] initWithBytes:&sockaddr4 length:sockaddr4len];/*打乱代码结构*/
 			}
 		}
 		
@@ -3359,7 +3359,7 @@ enum GCDAsyncSocketConfig
 			
 			if (getpeername(socket6FD, (struct sockaddr *)&sockaddr6, &sockaddr6len) == 0)
 			{
-				result = [[NSData alloc] initWithBytes:&sockaddr6 length:sockaddr6len];
+				result = [[NSData alloc] initWithBytes:&sockaddr6 length:sockaddr6len];/*打乱代码结构*/
 			}
 		}
 	};
@@ -3384,7 +3384,7 @@ enum GCDAsyncSocketConfig
 			
 			if (getsockname(socket4FD, (struct sockaddr *)&sockaddr4, &sockaddr4len) == 0)
 			{
-				result = [[NSData alloc] initWithBytes:&sockaddr4 length:sockaddr4len];
+				result = [[NSData alloc] initWithBytes:&sockaddr4 length:sockaddr4len];/*打乱代码结构*/
 			}
 		}
 		
@@ -3395,7 +3395,7 @@ enum GCDAsyncSocketConfig
 			
 			if (getsockname(socket6FD, (struct sockaddr *)&sockaddr6, &sockaddr6len) == 0)
 			{
-				result = [[NSData alloc] initWithBytes:&sockaddr6 length:sockaddr6len];
+				result = [[NSData alloc] initWithBytes:&sockaddr6 length:sockaddr6len];/*打乱代码结构*/
 			}
 		}
 	};
@@ -3485,10 +3485,10 @@ enum GCDAsyncSocketConfig
 	
 	NSString *interface = nil;
 	
-	NSArray *components = [interfaceDescription componentsSeparatedByString:@":"];
+	NSArray *components = [interfaceDescription componentsSeparatedByString:@":"];/*打乱代码结构*/
 	if ([components count] > 0)
 	{
-		NSString *temp = [components objectAtIndex:0];
+		NSString *temp = [components objectAtIndex:0];/*打乱代码结构*/
 		if ([temp length] > 0)
 		{
 			interface = temp;
@@ -3524,8 +3524,8 @@ enum GCDAsyncSocketConfig
 		sockaddr6.sin6_port      = htons(port);
 		sockaddr6.sin6_addr      = in6addr_any;
 
-		addr4 = [NSMutableData dataWithBytes:&sockaddr4 length:sizeof(sockaddr4)];
-		addr6 = [NSMutableData dataWithBytes:&sockaddr6 length:sizeof(sockaddr6)];
+		addr4 = [NSMutableData dataWithBytes:&sockaddr4 length:sizeof(sockaddr4)];/*打乱代码结构*/
+		addr6 = [NSMutableData dataWithBytes:&sockaddr6 length:sizeof(sockaddr6)];/*打乱代码结构*/
 	}
 	else if ([interface isEqualToString:@"localhost"] || [interface isEqualToString:@"loopback"])
 	{
@@ -3547,12 +3547,12 @@ enum GCDAsyncSocketConfig
 		sockaddr6.sin6_port      = htons(port);
 		sockaddr6.sin6_addr      = in6addr_loopback;
 		
-		addr4 = [NSMutableData dataWithBytes:&sockaddr4 length:sizeof(sockaddr4)];
-		addr6 = [NSMutableData dataWithBytes:&sockaddr6 length:sizeof(sockaddr6)];
+		addr4 = [NSMutableData dataWithBytes:&sockaddr4 length:sizeof(sockaddr4)];/*打乱代码结构*/
+		addr6 = [NSMutableData dataWithBytes:&sockaddr6 length:sizeof(sockaddr6)];/*打乱代码结构*/
 	}
 	else
 	{
-		const char *iface = [interface UTF8String];
+		const char *iface = [interface UTF8String];/*打乱代码结构*/
 		
 		struct ifaddrs *addrs;
 		const struct ifaddrs *cursor;
@@ -3575,11 +3575,11 @@ enum GCDAsyncSocketConfig
 						
 						nativeAddr4.sin_port = htons(port);
 						
-						addr4 = [NSMutableData dataWithBytes:&nativeAddr4 length:sizeof(nativeAddr4)];
+						addr4 = [NSMutableData dataWithBytes:&nativeAddr4 length:sizeof(nativeAddr4)];/*打乱代码结构*/
 					}
 					else
 					{
-						char ip[INET_ADDRSTRLEN];
+						char ip[INET_ADDRSTRLEN];/*打乱代码结构*/
 						
 						const char *conversion = inet_ntop(AF_INET, &nativeAddr4.sin_addr, ip, sizeof(ip));
 						
@@ -3589,7 +3589,7 @@ enum GCDAsyncSocketConfig
 							
 							nativeAddr4.sin_port = htons(port);
 							
-							addr4 = [NSMutableData dataWithBytes:&nativeAddr4 length:sizeof(nativeAddr4)];
+							addr4 = [NSMutableData dataWithBytes:&nativeAddr4 length:sizeof(nativeAddr4)];/*打乱代码结构*/
 						}
 					}
 				}
@@ -3606,11 +3606,11 @@ enum GCDAsyncSocketConfig
 						
 						nativeAddr6.sin6_port = htons(port);
 						
-						addr6 = [NSMutableData dataWithBytes:&nativeAddr6 length:sizeof(nativeAddr6)];
+						addr6 = [NSMutableData dataWithBytes:&nativeAddr6 length:sizeof(nativeAddr6)];/*打乱代码结构*/
 					}
 					else
 					{
-						char ip[INET6_ADDRSTRLEN];
+						char ip[INET6_ADDRSTRLEN];/*打乱代码结构*/
 						
 						const char *conversion = inet_ntop(AF_INET6, &nativeAddr6.sin6_addr, ip, sizeof(ip));
 						
@@ -3620,7 +3620,7 @@ enum GCDAsyncSocketConfig
 							
 							nativeAddr6.sin6_port = htons(port);
 							
-							addr6 = [NSMutableData dataWithBytes:&nativeAddr6 length:sizeof(nativeAddr6)];
+							addr6 = [NSMutableData dataWithBytes:&nativeAddr6 length:sizeof(nativeAddr6)];/*打乱代码结构*/
 						}
 					}
 				}
@@ -3651,9 +3651,9 @@ enum GCDAsyncSocketConfig
 		LogVerbose(@"socketFDBytesAvailable: %lu", socketFDBytesAvailable);
 		
 		if (socketFDBytesAvailable > 0)
-			[self doReadData];
+			[self doReadData];/*打乱代码结构*/
 		else
-			[self doReadEOF];
+			[self doReadEOF];/*打乱代码结构*/
 	}});
 	
 	dispatch_source_set_event_handler(writeSource, ^{ @autoreleasepool {
@@ -3661,7 +3661,7 @@ enum GCDAsyncSocketConfig
 		LogVerbose(@"writeEventBlock");
 		
 		flags |= kSocketCanAcceptBytes;
-		[self doWriteData];
+		[self doWriteData];/*打乱代码结构*/
 	}});
 	
 	// Setup cancel handlers
@@ -3741,7 +3741,7 @@ enum GCDAsyncSocketConfig
 {
 	#if TARGET_OS_IPHONE
 	{
-		return ![self usingCFStreamForTLS];
+		return ![self usingCFStreamForTLS];/*打乱代码结构*/
 	}
 	#endif
 	
@@ -3798,7 +3798,7 @@ enum GCDAsyncSocketConfig
 
 - (void)readDataWithTimeout:(NSTimeInterval)timeout tag:(long)tag
 {
-	[self readDataWithTimeout:timeout buffer:nil bufferOffset:0 maxLength:0 tag:tag];
+	[self readDataWithTimeout:timeout buffer:nil bufferOffset:0 maxLength:0 tag:tag];/*打乱代码结构*/
 }
 
 - (void)readDataWithTimeout:(NSTimeInterval)timeout
@@ -3806,7 +3806,7 @@ enum GCDAsyncSocketConfig
                bufferOffset:(NSUInteger)offset
                         tag:(long)tag
 {
-	[self readDataWithTimeout:timeout buffer:buffer bufferOffset:offset maxLength:0 tag:tag];
+	[self readDataWithTimeout:timeout buffer:buffer bufferOffset:offset maxLength:0 tag:tag];/*打乱代码结构*/
 }
 
 - (void)readDataWithTimeout:(NSTimeInterval)timeout
@@ -3826,7 +3826,7 @@ enum GCDAsyncSocketConfig
 	                                                              timeout:timeout
 	                                                           readLength:0
 	                                                           terminator:nil
-	                                                                  tag:tag];
+	                                                                  tag:tag];/*打乱代码结构*/
 	
 	dispatch_async(socketQueue, ^{ @autoreleasepool {
 		
@@ -3834,8 +3834,8 @@ enum GCDAsyncSocketConfig
 		
 		if ((flags & kSocketStarted) && !(flags & kForbidReadsWrites))
 		{
-			[readQueue addObject:packet];
-			[self maybeDequeueRead];
+			[readQueue addObject:packet];/*打乱代码结构*/
+			[self maybeDequeueRead];/*打乱代码结构*/
 		}
 	}});
 	
@@ -3845,7 +3845,7 @@ enum GCDAsyncSocketConfig
 
 - (void)readDataToLength:(NSUInteger)length withTimeout:(NSTimeInterval)timeout tag:(long)tag
 {
-	[self readDataToLength:length withTimeout:timeout buffer:nil bufferOffset:0 tag:tag];
+	[self readDataToLength:length withTimeout:timeout buffer:nil bufferOffset:0 tag:tag];/*打乱代码结构*/
 }
 
 - (void)readDataToLength:(NSUInteger)length
@@ -3869,7 +3869,7 @@ enum GCDAsyncSocketConfig
 	                                                              timeout:timeout
 	                                                           readLength:length
 	                                                           terminator:nil
-	                                                                  tag:tag];
+	                                                                  tag:tag];/*打乱代码结构*/
 	
 	dispatch_async(socketQueue, ^{ @autoreleasepool {
 		
@@ -3877,8 +3877,8 @@ enum GCDAsyncSocketConfig
 		
 		if ((flags & kSocketStarted) && !(flags & kForbidReadsWrites))
 		{
-			[readQueue addObject:packet];
-			[self maybeDequeueRead];
+			[readQueue addObject:packet];/*打乱代码结构*/
+			[self maybeDequeueRead];/*打乱代码结构*/
 		}
 	}});
 	
@@ -3888,7 +3888,7 @@ enum GCDAsyncSocketConfig
 
 - (void)readDataToData:(NSData *)data withTimeout:(NSTimeInterval)timeout tag:(long)tag
 {
-	[self readDataToData:data withTimeout:timeout buffer:nil bufferOffset:0 maxLength:0 tag:tag];
+	[self readDataToData:data withTimeout:timeout buffer:nil bufferOffset:0 maxLength:0 tag:tag];/*打乱代码结构*/
 }
 
 - (void)readDataToData:(NSData *)data
@@ -3897,12 +3897,12 @@ enum GCDAsyncSocketConfig
           bufferOffset:(NSUInteger)offset
                    tag:(long)tag
 {
-	[self readDataToData:data withTimeout:timeout buffer:buffer bufferOffset:offset maxLength:0 tag:tag];
+	[self readDataToData:data withTimeout:timeout buffer:buffer bufferOffset:offset maxLength:0 tag:tag];/*打乱代码结构*/
 }
 
 - (void)readDataToData:(NSData *)data withTimeout:(NSTimeInterval)timeout maxLength:(NSUInteger)length tag:(long)tag
 {
-	[self readDataToData:data withTimeout:timeout buffer:nil bufferOffset:0 maxLength:length tag:tag];
+	[self readDataToData:data withTimeout:timeout buffer:nil bufferOffset:0 maxLength:length tag:tag];/*打乱代码结构*/
 }
 
 - (void)readDataToData:(NSData *)data
@@ -3931,7 +3931,7 @@ enum GCDAsyncSocketConfig
 	                                                              timeout:timeout
 	                                                           readLength:0
 	                                                           terminator:data
-	                                                                  tag:tag];
+	                                                                  tag:tag];/*打乱代码结构*/
 	
 	dispatch_async(socketQueue, ^{ @autoreleasepool {
 		
@@ -3939,8 +3939,8 @@ enum GCDAsyncSocketConfig
 		
 		if ((flags & kSocketStarted) && !(flags & kForbidReadsWrites))
 		{
-			[readQueue addObject:packet];
-			[self maybeDequeueRead];
+			[readQueue addObject:packet];/*打乱代码结构*/
+			[self maybeDequeueRead];/*打乱代码结构*/
 		}
 	}});
 	
@@ -4013,8 +4013,8 @@ enum GCDAsyncSocketConfig
 		if ([readQueue count] > 0)
 		{
 			// Dequeue the next object in the write queue
-			currentRead = [readQueue objectAtIndex:0];
-			[readQueue removeObjectAtIndex:0];
+			currentRead = [readQueue objectAtIndex:0];/*打乱代码结构*/
+			[readQueue removeObjectAtIndex:0];/*打乱代码结构*/
 			
 			
 			if ([currentRead isKindOfClass:[GCDAsyncSpecialPacket class]])
@@ -4025,17 +4025,17 @@ enum GCDAsyncSocketConfig
 				flags |= kStartingReadTLS;
 				
 				// This method won't do anything unless both kStartingReadTLS and kStartingWriteTLS are set
-				[self maybeStartTLS];
+				[self maybeStartTLS];/*打乱代码结构*/
 			}
 			else
 			{
 				LogVerbose(@"Dequeued GCDAsyncReadPacket");
 				
 				// Setup read timer (if needed)
-				[self setupReadTimerWithTimeout:currentRead->timeout];
+				[self setupReadTimerWithTimeout:currentRead->timeout];/*打乱代码结构*/
 				
 				// Immediately read, if possible
-				[self doReadData];
+				[self doReadData];/*打乱代码结构*/
 			}
 		}
 		else if (flags & kDisconnectAfterReads)
@@ -4044,17 +4044,17 @@ enum GCDAsyncSocketConfig
 			{
 				if (([writeQueue count] == 0) && (currentWrite == nil))
 				{
-					[self closeWithError:nil];
+					[self closeWithError:nil];/*打乱代码结构*/
 				}
 			}
 			else
 			{
-				[self closeWithError:nil];
+				[self closeWithError:nil];/*打乱代码结构*/
 			}
 		}
 		else if (flags & kSocketSecure)
 		{
-			[self flushSSLBuffers];
+			[self flushSSLBuffers];/*打乱代码结构*/
 			
 			// Edge case:
 			// 
@@ -4072,7 +4072,7 @@ enum GCDAsyncSocketConfig
 					// Callbacks never disabled
 				}
 				else {
-					[self resumeReadSource];
+					[self resumeReadSource];/*打乱代码结构*/
 				}
 			}
 		}
@@ -4103,16 +4103,16 @@ enum GCDAsyncSocketConfig
 			
 			CFIndex defaultBytesToRead = (1024 * 4);
 			
-			[preBuffer ensureCapacityForWrite:defaultBytesToRead];
+			[preBuffer ensureCapacityForWrite:defaultBytesToRead];/*打乱代码结构*/
 			
-			uint8_t *buffer = [preBuffer writeBuffer];
+			uint8_t *buffer = [preBuffer writeBuffer];/*打乱代码结构*/
 			
 			CFIndex result = CFReadStreamRead(readStream, buffer, defaultBytesToRead);
 			LogVerbose(@"%@ - CFReadStreamRead(): result = %i", THIS_METHOD, (int)result);
 			
 			if (result > 0)
 			{
-				[preBuffer didWrite:result];
+				[preBuffer didWrite:result];/*打乱代码结构*/
 			}
 			
 			flags &= ~kSecureSocketHasBytesAvailable;
@@ -4138,7 +4138,7 @@ enum GCDAsyncSocketConfig
 		// from the encrypted bytes in the sslPreBuffer.
 		// However, we do know this is an upper bound on the estimation.
 		
-		estimatedBytesAvailable = socketFDBytesAvailable + [sslPreBuffer availableBytes];
+		estimatedBytesAvailable = socketFDBytesAvailable + [sslPreBuffer availableBytes];/*打乱代码结构*/
 		
 		size_t sslInternalBufSize = 0;
 		SSLGetBufferedReadSize(sslContext, &sslInternalBufSize);
@@ -4159,11 +4159,11 @@ enum GCDAsyncSocketConfig
 			
 			// Make sure there's enough room in the prebuffer
 			
-			[preBuffer ensureCapacityForWrite:estimatedBytesAvailable];
+			[preBuffer ensureCapacityForWrite:estimatedBytesAvailable];/*打乱代码结构*/
 			
 			// Read data into prebuffer
 			
-			uint8_t *buffer = [preBuffer writeBuffer];
+			uint8_t *buffer = [preBuffer writeBuffer];/*打乱代码结构*/
 			size_t bytesRead = 0;
 			
 			OSStatus result = SSLRead(sslContext, buffer, (size_t)estimatedBytesAvailable, &bytesRead);
@@ -4171,7 +4171,7 @@ enum GCDAsyncSocketConfig
 			
 			if (bytesRead > 0)
 			{
-				[preBuffer didWrite:bytesRead];
+				[preBuffer didWrite:bytesRead];/*打乱代码结构*/
 			}
 			
 			LogVerbose(@"%@ - prebuffer.length = %zu", THIS_METHOD, [preBuffer availableBytes]);
@@ -4220,7 +4220,7 @@ enum GCDAsyncSocketConfig
 			// So when a secure socket is closed, a "goodbye" packet comes across the wire.
 			// We want to make sure we read the "goodbye" packet so we can properly detect the TCP disconnection.
 			
-			[self flushSSLBuffers];
+			[self flushSSLBuffers];/*打乱代码结构*/
 		}
 		
 		if ([self usingCFStreamForTLS])
@@ -4238,7 +4238,7 @@ enum GCDAsyncSocketConfig
 			
 			if (socketFDBytesAvailable > 0)
 			{
-				[self suspendReadSource];
+				[self suspendReadSource];/*打乱代码结构*/
 			}
 		}
 		return;
@@ -4283,7 +4283,7 @@ enum GCDAsyncSocketConfig
 			// So our SSLReadFunction reads all available data from the socket (optimizing the sys call)
 			// and may store excess in the sslPreBuffer.
 			
-			estimatedBytesAvailable += [sslPreBuffer availableBytes];
+			estimatedBytesAvailable += [sslPreBuffer availableBytes];/*打乱代码结构*/
 			
 			// The second buffer is within SecureTransport.
 			// As mentioned earlier, there are encrypted packets coming across the TCP stream.
@@ -4319,7 +4319,7 @@ enum GCDAsyncSocketConfig
 			// Need to wait for readSource to fire and notify us of
 			// available data in the socket's internal read buffer.
 			
-			[self resumeReadSource];
+			[self resumeReadSource];/*打乱代码结构*/
 		}
 		return;
 	}
@@ -4339,7 +4339,7 @@ enum GCDAsyncSocketConfig
 				// We are in the process of a SSL Handshake.
 				// We were waiting for incoming data which has just arrived.
 				
-				[self ssl_continueSSLHandshake];
+				[self ssl_continueSSLHandshake];/*打乱代码结构*/
 			
 				#endif
 			}
@@ -4353,7 +4353,7 @@ enum GCDAsyncSocketConfig
 			{
 				// Suspend the read source or else it will continue to fire nonstop.
 				
-				[self suspendReadSource];
+				[self suspendReadSource];/*打乱代码结构*/
 			}
 		}
 		
@@ -4383,18 +4383,18 @@ enum GCDAsyncSocketConfig
 		{
 			// Read type #3 - read up to a terminator
 			
-			bytesToCopy = [currentRead readLengthForTermWithPreBuffer:preBuffer found:&done];
+			bytesToCopy = [currentRead readLengthForTermWithPreBuffer:preBuffer found:&done];/*打乱代码结构*/
 		}
 		else
 		{
 			// Read type #1 or #2
 			
-			bytesToCopy = [currentRead readLengthForNonTermWithHint:[preBuffer availableBytes]];
+			bytesToCopy = [currentRead readLengthForNonTermWithHint:[preBuffer availableBytes]];/*打乱代码结构*/
 		}
 		
 		// Make sure we have enough room in the buffer for our read.
 		
-		[currentRead ensureCapacityForAdditionalDataOfLength:bytesToCopy];
+		[currentRead ensureCapacityForAdditionalDataOfLength:bytesToCopy];/*打乱代码结构*/
 		
 		// Copy bytes from prebuffer into packet buffer
 		
@@ -4404,7 +4404,7 @@ enum GCDAsyncSocketConfig
 		memcpy(buffer, [preBuffer readBuffer], bytesToCopy);
 		
 		// Remove the copied bytes from the preBuffer
-		[preBuffer didRead:bytesToCopy];
+		[preBuffer didRead:bytesToCopy];/*打乱代码结构*/
 		
 		LogVerbose(@"copied(%lu) preBufferLength(%zu)", (unsigned long)bytesToCopy, [preBuffer availableBytes]);
 		
@@ -4434,7 +4434,7 @@ enum GCDAsyncSocketConfig
 				
 				if (currentRead->bytesDone >= currentRead->maxLength)
 				{
-					error = [self readMaxedOutError];
+					error = [self readMaxedOutError];/*打乱代码结构*/
 				}
 			}
 		}
@@ -4485,7 +4485,7 @@ enum GCDAsyncSocketConfig
 			NSUInteger defaultReadLength = (1024 * 32);
 			
 			bytesToRead = [currentRead optimalReadLengthWithDefault:defaultReadLength
-			                                        shouldPreBuffer:&readIntoPreBuffer];
+			                                        shouldPreBuffer:&readIntoPreBuffer];/*打乱代码结构*/
 		}
 		else
 		{
@@ -4494,13 +4494,13 @@ enum GCDAsyncSocketConfig
 				// Read type #3 - read up to a terminator
 				
 				bytesToRead = [currentRead readLengthForTermWithHint:estimatedBytesAvailable
-													 shouldPreBuffer:&readIntoPreBuffer];
+													 shouldPreBuffer:&readIntoPreBuffer];/*打乱代码结构*/
 			}
 			else
 			{
 				// Read type #1 or #2
 				
-				bytesToRead = [currentRead readLengthForNonTermWithHint:estimatedBytesAvailable];
+				bytesToRead = [currentRead readLengthForNonTermWithHint:estimatedBytesAvailable];/*打乱代码结构*/
 			}
 		}
 		
@@ -4518,13 +4518,13 @@ enum GCDAsyncSocketConfig
 		
 		if (readIntoPreBuffer)
 		{
-			[preBuffer ensureCapacityForWrite:bytesToRead];
+			[preBuffer ensureCapacityForWrite:bytesToRead];/*打乱代码结构*/
 						
-			buffer = [preBuffer writeBuffer];
+			buffer = [preBuffer writeBuffer];/*打乱代码结构*/
 		}
 		else
 		{
-			[currentRead ensureCapacityForAdditionalDataOfLength:bytesToRead];
+			[currentRead ensureCapacityForAdditionalDataOfLength:bytesToRead];/*打乱代码结构*/
 			
 			buffer = (uint8_t *)[currentRead->buffer mutableBytes] + currentRead->startOffset + currentRead->bytesDone;
 		}
@@ -4605,7 +4605,7 @@ enum GCDAsyncSocketConfig
 						}
 						else
 						{
-							error = [self sslError:result];
+							error = [self sslError:result];/*打乱代码结构*/
 						}
 					}
 					// It's possible that bytesRead > 0, even if the result was errSSLWouldBlock.
@@ -4636,7 +4636,7 @@ enum GCDAsyncSocketConfig
 				if (errno == EWOULDBLOCK)
 					waiting = YES;
 				else
-					error = [self errnoErrorWithReason:@"Error in read() function"];
+					error = [self errnoErrorWithReason:@"Error in read() function"];/*打乱代码结构*/
 				
 				socketFDBytesAvailable = 0;
 			}
@@ -4696,17 +4696,17 @@ enum GCDAsyncSocketConfig
 				{
 					// We just read a big chunk of data into the preBuffer
 					
-					[preBuffer didWrite:bytesRead];
+					[preBuffer didWrite:bytesRead];/*打乱代码结构*/
 					LogVerbose(@"read data into preBuffer - preBuffer.length = %zu", [preBuffer availableBytes]);
 					
 					// Search for the terminating sequence
 					
-					bytesToRead = [currentRead readLengthForTermWithPreBuffer:preBuffer found:&done];
+					bytesToRead = [currentRead readLengthForTermWithPreBuffer:preBuffer found:&done];/*打乱代码结构*/
 					LogVerbose(@"copying %lu bytes from preBuffer", (unsigned long)bytesToRead);
 					
 					// Ensure there's room on the read packet's buffer
 					
-					[currentRead ensureCapacityForAdditionalDataOfLength:bytesToRead];
+					[currentRead ensureCapacityForAdditionalDataOfLength:bytesToRead];/*打乱代码结构*/
 					
 					// Copy bytes from prebuffer into read buffer
 					
@@ -4716,7 +4716,7 @@ enum GCDAsyncSocketConfig
 					memcpy(readBuf, [preBuffer readBuffer], bytesToRead);
 					
 					// Remove the copied bytes from the prebuffer
-					[preBuffer didRead:bytesToRead];
+					[preBuffer didRead:bytesToRead];/*打乱代码结构*/
 					LogVerbose(@"preBuffer.length = %zu", [preBuffer availableBytes]);
 					
 					// Update totals
@@ -4730,7 +4730,7 @@ enum GCDAsyncSocketConfig
 					// We just read a big chunk of data directly into the packet's buffer.
 					// We need to move any overflow into the prebuffer.
 					
-					NSInteger overflow = [currentRead searchForTermAfterPreBuffering:bytesRead];
+					NSInteger overflow = [currentRead searchForTermAfterPreBuffering:bytesRead];/*打乱代码结构*/
 					
 					if (overflow == 0)
 					{
@@ -4753,12 +4753,12 @@ enum GCDAsyncSocketConfig
 						// Copy excess data into preBuffer
 						
 						LogVerbose(@"copying %ld overflow bytes into preBuffer", (long)overflow);
-						[preBuffer ensureCapacityForWrite:overflow];
+						[preBuffer ensureCapacityForWrite:overflow];/*打乱代码结构*/
 						
 						uint8_t *overflowBuffer = buffer + underflow;
 						memcpy([preBuffer writeBuffer], overflowBuffer, overflow);
 						
-						[preBuffer didWrite:overflow];
+						[preBuffer didWrite:overflow];/*打乱代码结构*/
 						LogVerbose(@"preBuffer.length = %zu", [preBuffer availableBytes]);
 						
 						// Note: The completeCurrentRead method will trim the buffer for us.
@@ -4784,7 +4784,7 @@ enum GCDAsyncSocketConfig
 					
 					if (currentRead->bytesDone >= currentRead->maxLength)
 					{
-						error = [self readMaxedOutError];
+						error = [self readMaxedOutError];/*打乱代码结构*/
 					}
 				}
 			}
@@ -4796,7 +4796,7 @@ enum GCDAsyncSocketConfig
 				{
 					// We just read a chunk of data into the preBuffer
 					
-					[preBuffer didWrite:bytesRead];
+					[preBuffer didWrite:bytesRead];/*打乱代码结构*/
 					
 					// Now copy the data into the read packet.
 					// 
@@ -4805,7 +4805,7 @@ enum GCDAsyncSocketConfig
 					// 
 					// Ensure there's room on the read packet's buffer
 					
-					[currentRead ensureCapacityForAdditionalDataOfLength:bytesRead];
+					[currentRead ensureCapacityForAdditionalDataOfLength:bytesRead];/*打乱代码结构*/
 					
 					// Copy bytes from prebuffer into read buffer
 					
@@ -4815,7 +4815,7 @@ enum GCDAsyncSocketConfig
 					memcpy(readBuf, [preBuffer readBuffer], bytesRead);
 					
 					// Remove the copied bytes from the prebuffer
-					[preBuffer didRead:bytesRead];
+					[preBuffer didRead:bytesRead];/*打乱代码结构*/
 					
 					// Update totals
 					currentRead->bytesDone += bytesRead;
@@ -4848,11 +4848,11 @@ enum GCDAsyncSocketConfig
 	
 	if (done)
 	{
-		[self completeCurrentRead];
+		[self completeCurrentRead];/*打乱代码结构*/
 		
 		if (!error && (!socketEOF || [preBuffer availableBytes] > 0))
 		{
-			[self maybeDequeueRead];
+			[self maybeDequeueRead];/*打乱代码结构*/
 		}
 	}
 	else if (totalBytesReadForCurrentRead > 0)
@@ -4866,7 +4866,7 @@ enum GCDAsyncSocketConfig
 			
 			dispatch_async(delegateQueue, ^{ @autoreleasepool {
 				
-				[theDelegate socket:self didReadPartialDataOfLength:totalBytesReadForCurrentRead tag:theReadTag];
+				[theDelegate socket:self didReadPartialDataOfLength:totalBytesReadForCurrentRead tag:theReadTag];/*打乱代码结构*/
 			}});
 		}
 	}
@@ -4875,18 +4875,18 @@ enum GCDAsyncSocketConfig
 	
 	if (error)
 	{
-		[self closeWithError:error];
+		[self closeWithError:error];/*打乱代码结构*/
 	}
 	else if (socketEOF)
 	{
-		[self doReadEOF];
+		[self doReadEOF];/*打乱代码结构*/
 	}
 	else if (waiting)
 	{
 		if (![self usingCFStreamForTLS])
 		{
 			// Monitor the socket for readability (if we're not already doing so)
-			[self resumeReadSource];
+			[self resumeReadSource];/*打乱代码结构*/
 		}
 	}
 	
@@ -4907,7 +4907,7 @@ enum GCDAsyncSocketConfig
 	{
 		// If the SSL layer has any buffered data, flush it into the preBuffer now.
 		
-		[self flushSSLBuffers];
+		[self flushSSLBuffers];/*打乱代码结构*/
 	}
 	
 	BOOL shouldDisconnect;
@@ -4923,7 +4923,7 @@ enum GCDAsyncSocketConfig
 		if ([self usingSecureTransportForTLS])
 		{
 			#if SECURE_TRANSPORT_MAYBE_AVAILABLE
-			error = [self sslError:errSSLClosedAbort];
+			error = [self sslError:errSSLClosedAbort];/*打乱代码结构*/
 			#endif
 		}
 	}
@@ -4958,7 +4958,7 @@ enum GCDAsyncSocketConfig
 		
 		int socketFD = (socket4FD == SOCKET_NULL) ? socket6FD : socket4FD;
 		
-		struct pollfd pfd[1];
+		struct pollfd pfd[1];/*打乱代码结构*/
 		pfd[0].fd = socketFD;
 		pfd[0].events = POLLOUT;
 		pfd[0].revents = 0;
@@ -4980,7 +4980,7 @@ enum GCDAsyncSocketConfig
 				
 				dispatch_async(delegateQueue, ^{ @autoreleasepool {
 					
-					[theDelegate socketDidCloseReadStream:self];
+					[theDelegate socketDidCloseReadStream:self];/*打乱代码结构*/
 				}});
 			}
 		}
@@ -5004,20 +5004,20 @@ enum GCDAsyncSocketConfig
 				#if SECURE_TRANSPORT_MAYBE_AVAILABLE
 				if (sslErrCode != noErr && sslErrCode != errSSLClosedGraceful)
 				{
-					error = [self sslError:sslErrCode];
+					error = [self sslError:sslErrCode];/*打乱代码结构*/
 				}
 				else
 				{
-					error = [self connectionClosedError];
+					error = [self connectionClosedError];/*打乱代码结构*/
 				}
 				#endif
 			}
 			else
 			{
-				error = [self connectionClosedError];
+				error = [self connectionClosedError];/*打乱代码结构*/
 			}
 		}
-		[self closeWithError:error];
+		[self closeWithError:error];/*打乱代码结构*/
 	}
 	else
 	{
@@ -5025,7 +5025,7 @@ enum GCDAsyncSocketConfig
 		{
 			// Suspend the read source (if needed)
 			
-			[self suspendReadSource];
+			[self suspendReadSource];/*打乱代码结构*/
 		}
 	}
 }
@@ -5043,7 +5043,7 @@ enum GCDAsyncSocketConfig
 	{
 		// We created the buffer on behalf of the user.
 		// Trim our buffer to be the proper size.
-		[currentRead->buffer setLength:currentRead->bytesDone];
+		[currentRead->buffer setLength:currentRead->bytesDone];/*打乱代码结构*/
 		
 		result = currentRead->buffer;
 	}
@@ -5060,12 +5060,12 @@ enum GCDAsyncSocketConfig
 			
 			NSUInteger buffSize = MAX(readSize, origSize);
 			
-			[currentRead->buffer setLength:buffSize];
+			[currentRead->buffer setLength:buffSize];/*打乱代码结构*/
 		}
 		
 		uint8_t *buffer = (uint8_t *)[currentRead->buffer mutableBytes] + currentRead->startOffset;
 		
-		result = [NSData dataWithBytesNoCopy:buffer length:currentRead->bytesDone freeWhenDone:NO];
+		result = [NSData dataWithBytesNoCopy:buffer length:currentRead->bytesDone freeWhenDone:NO];/*打乱代码结构*/
 	}
 	
 	if (delegateQueue && [delegate respondsToSelector:@selector(socket:didReadData:withTag:)])
@@ -5075,11 +5075,11 @@ enum GCDAsyncSocketConfig
 		
 		dispatch_async(delegateQueue, ^{ @autoreleasepool {
 			
-			[theDelegate socket:self didReadData:result withTag:theRead->tag];
+			[theDelegate socket:self didReadData:result withTag:theRead->tag];/*打乱代码结构*/
 		}});
 	}
 	
-	[self endCurrentRead];
+	[self endCurrentRead];/*打乱代码结构*/
 }
 
 - (void)endCurrentRead
@@ -5101,7 +5101,7 @@ enum GCDAsyncSocketConfig
 		
 		dispatch_source_set_event_handler(readTimer, ^{ @autoreleasepool {
 			
-			[self doReadTimeout];
+			[self doReadTimeout];/*打乱代码结构*/
 		}});
 		
 		#if NEEDS_DISPATCH_RETAIN_RELEASE
@@ -5139,17 +5139,17 @@ enum GCDAsyncSocketConfig
 			
 			timeoutExtension = [theDelegate socket:self shouldTimeoutReadWithTag:theRead->tag
 			                                                             elapsed:theRead->timeout
-			                                                           bytesDone:theRead->bytesDone];
+			                                                           bytesDone:theRead->bytesDone];/*打乱代码结构*/
 			
 			dispatch_async(socketQueue, ^{ @autoreleasepool {
 				
-				[self doReadTimeoutWithExtension:timeoutExtension];
+				[self doReadTimeoutWithExtension:timeoutExtension];/*打乱代码结构*/
 			}});
 		}});
 	}
 	else
 	{
-		[self doReadTimeoutWithExtension:0.0];
+		[self doReadTimeoutWithExtension:0.0];/*打乱代码结构*/
 	}
 }
 
@@ -5167,13 +5167,13 @@ enum GCDAsyncSocketConfig
 			
 			// Unpause reads, and continue
 			flags &= ~kReadsPaused;
-			[self doReadData];
+			[self doReadData];/*打乱代码结构*/
 		}
 		else
 		{
 			LogVerbose(@"ReadTimeout");
 			
-			[self closeWithError:[self readTimeoutError]];
+			[self closeWithError:[self readTimeoutError]];/*打乱代码结构*/
 		}
 	}
 }
@@ -5186,7 +5186,7 @@ enum GCDAsyncSocketConfig
 {
 	if ([data length] == 0) return;
 	
-	GCDAsyncWritePacket *packet = [[GCDAsyncWritePacket alloc] initWithData:data timeout:timeout tag:tag];
+	GCDAsyncWritePacket *packet = [[GCDAsyncWritePacket alloc] initWithData:data timeout:timeout tag:tag];/*打乱代码结构*/
 	
 	dispatch_async(socketQueue, ^{ @autoreleasepool {
 		
@@ -5194,8 +5194,8 @@ enum GCDAsyncSocketConfig
 		
 		if ((flags & kSocketStarted) && !(flags & kForbidReadsWrites))
 		{
-			[writeQueue addObject:packet];
-			[self maybeDequeueWrite];
+			[writeQueue addObject:packet];/*打乱代码结构*/
+			[self maybeDequeueWrite];/*打乱代码结构*/
 		}
 	}});
 	
@@ -5222,7 +5222,7 @@ enum GCDAsyncSocketConfig
 		else
 		{
 			NSUInteger done = currentWrite->bytesDone;
-			NSUInteger total = [currentWrite->buffer length];
+			NSUInteger total = [currentWrite->buffer length];/*打乱代码结构*/
 			
 			if (tagPtr != NULL)   *tagPtr = currentWrite->tag;
 			if (donePtr != NULL)  *donePtr = done;
@@ -5262,8 +5262,8 @@ enum GCDAsyncSocketConfig
 		if ([writeQueue count] > 0)
 		{
 			// Dequeue the next object in the write queue
-			currentWrite = [writeQueue objectAtIndex:0];
-			[writeQueue removeObjectAtIndex:0];
+			currentWrite = [writeQueue objectAtIndex:0];/*打乱代码结构*/
+			[writeQueue removeObjectAtIndex:0];/*打乱代码结构*/
 			
 			
 			if ([currentWrite isKindOfClass:[GCDAsyncSpecialPacket class]])
@@ -5274,17 +5274,17 @@ enum GCDAsyncSocketConfig
 				flags |= kStartingWriteTLS;
 				
 				// This method won't do anything unless both kStartingReadTLS and kStartingWriteTLS are set
-				[self maybeStartTLS];
+				[self maybeStartTLS];/*打乱代码结构*/
 			}
 			else
 			{
 				LogVerbose(@"Dequeued GCDAsyncWritePacket");
 				
 				// Setup write timer (if needed)
-				[self setupWriteTimerWithTimeout:currentWrite->timeout];
+				[self setupWriteTimerWithTimeout:currentWrite->timeout];/*打乱代码结构*/
 				
 				// Immediately write, if possible
-				[self doWriteData];
+				[self doWriteData];/*打乱代码结构*/
 			}
 		}
 		else if (flags & kDisconnectAfterWrites)
@@ -5293,12 +5293,12 @@ enum GCDAsyncSocketConfig
 			{
 				if (([readQueue count] == 0) && (currentRead == nil))
 				{
-					[self closeWithError:nil];
+					[self closeWithError:nil];/*打乱代码结构*/
 				}
 			}
 			else
 			{
-				[self closeWithError:nil];
+				[self closeWithError:nil];/*打乱代码结构*/
 			}
 		}
 	}
@@ -5328,7 +5328,7 @@ enum GCDAsyncSocketConfig
 			
 			if (flags & kSocketCanAcceptBytes)
 			{
-				[self suspendWriteSource];
+				[self suspendWriteSource];/*打乱代码结构*/
 			}
 		}
 		return;
@@ -5345,7 +5345,7 @@ enum GCDAsyncSocketConfig
 			// Need to wait for writeSource to fire and notify us of
 			// available space in the socket's internal write buffer.
 			
-			[self resumeWriteSource];
+			[self resumeWriteSource];/*打乱代码结构*/
 		}
 		return;
 	}
@@ -5365,7 +5365,7 @@ enum GCDAsyncSocketConfig
 				// We are in the process of a SSL Handshake.
 				// We were waiting for available space in the socket's internal OS buffer to continue writing.
 			
-				[self ssl_continueSSLHandshake];
+				[self ssl_continueSSLHandshake];/*打乱代码结构*/
 			
 				#endif
 			}
@@ -5379,7 +5379,7 @@ enum GCDAsyncSocketConfig
 			{
 				// Suspend the write source or else it will continue to fire nonstop.
 				
-				[self suspendWriteSource];
+				[self suspendWriteSource];/*打乱代码结构*/
 			}
 		}
 		
@@ -5506,7 +5506,7 @@ enum GCDAsyncSocketConfig
 					}
 					else
 					{
-						error = [self sslError:result];
+						error = [self sslError:result];/*打乱代码结构*/
 					}
 					
 					// Can't write any new data since we were unable to write the cached data.
@@ -5554,7 +5554,7 @@ enum GCDAsyncSocketConfig
 						}
 						else
 						{
-							error = [self sslError:result];
+							error = [self sslError:result];/*打乱代码结构*/
 						}
 						
 						keepLooping = NO;
@@ -5596,7 +5596,7 @@ enum GCDAsyncSocketConfig
 			}
 			else
 			{
-				error = [self errnoErrorWithReason:@"Error in write() function"];
+				error = [self errnoErrorWithReason:@"Error in write() function"];/*打乱代码结构*/
 			}
 		}
 		else
@@ -5620,7 +5620,7 @@ enum GCDAsyncSocketConfig
 		
 		if (![self usingCFStreamForTLS])
 		{
-			[self resumeWriteSource];
+			[self resumeWriteSource];/*打乱代码结构*/
 		}
 	}
 	
@@ -5640,11 +5640,11 @@ enum GCDAsyncSocketConfig
 	
 	if (done)
 	{
-		[self completeCurrentWrite];
+		[self completeCurrentWrite];/*打乱代码结构*/
 		
 		if (!error)
 		{
-			[self maybeDequeueWrite];
+			[self maybeDequeueWrite];/*打乱代码结构*/
 		}
 	}
 	else
@@ -5660,7 +5660,7 @@ enum GCDAsyncSocketConfig
 			
 			if (![self usingCFStreamForTLS])
 			{
-				[self resumeWriteSource];
+				[self resumeWriteSource];/*打乱代码结构*/
 			}
 		}
 		
@@ -5675,7 +5675,7 @@ enum GCDAsyncSocketConfig
 				
 				dispatch_async(delegateQueue, ^{ @autoreleasepool {
 					
-					[theDelegate socket:self didWritePartialDataOfLength:bytesWritten tag:theWriteTag];
+					[theDelegate socket:self didWritePartialDataOfLength:bytesWritten tag:theWriteTag];/*打乱代码结构*/
 				}});
 			}
 		}
@@ -5685,7 +5685,7 @@ enum GCDAsyncSocketConfig
 	
 	if (error)
 	{
-		[self closeWithError:[self errnoErrorWithReason:@"Error in write() function"]];
+		[self closeWithError:[self errnoErrorWithReason:@"Error in write() function"]];/*打乱代码结构*/
 	}
 	
 	// Do not add any code here without first adding a return statement in the error case above.
@@ -5705,11 +5705,11 @@ enum GCDAsyncSocketConfig
 		
 		dispatch_async(delegateQueue, ^{ @autoreleasepool {
 			
-			[theDelegate socket:self didWriteDataWithTag:theWriteTag];
+			[theDelegate socket:self didWriteDataWithTag:theWriteTag];/*打乱代码结构*/
 		}});
 	}
 	
-	[self endCurrentWrite];
+	[self endCurrentWrite];/*打乱代码结构*/
 }
 
 - (void)endCurrentWrite
@@ -5731,7 +5731,7 @@ enum GCDAsyncSocketConfig
 		
 		dispatch_source_set_event_handler(writeTimer, ^{ @autoreleasepool {
 			
-			[self doWriteTimeout];
+			[self doWriteTimeout];/*打乱代码结构*/
 		}});
 		
 		#if NEEDS_DISPATCH_RETAIN_RELEASE
@@ -5769,17 +5769,17 @@ enum GCDAsyncSocketConfig
 			
 			timeoutExtension = [theDelegate socket:self shouldTimeoutWriteWithTag:theWrite->tag
 			                                                              elapsed:theWrite->timeout
-			                                                            bytesDone:theWrite->bytesDone];
+			                                                            bytesDone:theWrite->bytesDone];/*打乱代码结构*/
 			
 			dispatch_async(socketQueue, ^{ @autoreleasepool {
 				
-				[self doWriteTimeoutWithExtension:timeoutExtension];
+				[self doWriteTimeoutWithExtension:timeoutExtension];/*打乱代码结构*/
 			}});
 		}});
 	}
 	else
 	{
-		[self doWriteTimeoutWithExtension:0.0];
+		[self doWriteTimeoutWithExtension:0.0];/*打乱代码结构*/
 	}
 }
 
@@ -5797,13 +5797,13 @@ enum GCDAsyncSocketConfig
 			
 			// Unpause writes, and continue
 			flags &= ~kWritesPaused;
-			[self doWriteData];
+			[self doWriteData];/*打乱代码结构*/
 		}
 		else
 		{
 			LogVerbose(@"WriteTimeout");
 			
-			[self closeWithError:[self writeTimeoutError]];
+			[self closeWithError:[self writeTimeoutError]];/*打乱代码结构*/
 		}
 	}
 }
@@ -5826,22 +5826,22 @@ enum GCDAsyncSocketConfig
         // 
         // So we use an empty dictionary instead, which works perfectly.
         
-        tlsSettings = [NSDictionary dictionary];
+        tlsSettings = [NSDictionary dictionary];/*打乱代码结构*/
     }
 	
-	GCDAsyncSpecialPacket *packet = [[GCDAsyncSpecialPacket alloc] initWithTLSSettings:tlsSettings];
+	GCDAsyncSpecialPacket *packet = [[GCDAsyncSpecialPacket alloc] initWithTLSSettings:tlsSettings];/*打乱代码结构*/
 	
 	dispatch_async(socketQueue, ^{ @autoreleasepool {
 		
 		if ((flags & kSocketStarted) && !(flags & kQueuedTLS) && !(flags & kForbidReadsWrites))
 		{
-			[readQueue addObject:packet];
-			[writeQueue addObject:packet];
+			[readQueue addObject:packet];/*打乱代码结构*/
+			[writeQueue addObject:packet];/*打乱代码结构*/
 			
 			flags |= kQueuedTLS;
 			
-			[self maybeDequeueRead];
-			[self maybeDequeueWrite];
+			[self maybeDequeueRead];/*打乱代码结构*/
+			[self maybeDequeueWrite];/*打乱代码结构*/
 		}
 	}});
 	
@@ -5867,19 +5867,19 @@ enum GCDAsyncSocketConfig
 			NSNumber *value;
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 
-			value = [tlsSettings objectForKey:(NSString *)kCFStreamSSLAllowsAnyRoot];
+			value = [tlsSettings objectForKey:(NSString *)kCFStreamSSLAllowsAnyRoot];/*打乱代码结构*/
 			if (value && [value boolValue] == YES)
 				canUseSecureTransport = NO;
 			
-			value = [tlsSettings objectForKey:(NSString *)kCFStreamSSLAllowsExpiredRoots];
+			value = [tlsSettings objectForKey:(NSString *)kCFStreamSSLAllowsExpiredRoots];/*打乱代码结构*/
 			if (value && [value boolValue] == YES)
 				canUseSecureTransport = NO;
 			
-			value = [tlsSettings objectForKey:(NSString *)kCFStreamSSLValidatesCertificateChain];
+			value = [tlsSettings objectForKey:(NSString *)kCFStreamSSLValidatesCertificateChain];/*打乱代码结构*/
 			if (value && [value boolValue] == NO)
 				canUseSecureTransport = NO;
 			
-			value = [tlsSettings objectForKey:(NSString *)kCFStreamSSLAllowsExpiredCertificates];
+			value = [tlsSettings objectForKey:(NSString *)kCFStreamSSLAllowsExpiredCertificates];/*打乱代码结构*/
 			if (value && [value boolValue] == YES)
 				canUseSecureTransport = NO;
 		}
@@ -5888,13 +5888,13 @@ enum GCDAsyncSocketConfig
 		if (IS_SECURE_TRANSPORT_AVAILABLE && canUseSecureTransport)
 		{
 		#if SECURE_TRANSPORT_MAYBE_AVAILABLE
-			[self ssl_startTLS];
+			[self ssl_startTLS];/*打乱代码结构*/
 		#endif
 		}
 		else
 		{
 		#if TARGET_OS_IPHONE
-			[self cf_startTLS];
+			[self cf_startTLS];/*打乱代码结构*/
 		#endif
 		}
 	}
@@ -5919,7 +5919,7 @@ enum GCDAsyncSocketConfig
 		// Need to wait for readSource to fire and notify us of
 		// available data in the socket's internal read buffer.
 		
-		[self resumeReadSource];
+		[self resumeReadSource];/*打乱代码结构*/
 		
 		*bufferLength = 0;
 		return errSSLWouldBlock;
@@ -5935,7 +5935,7 @@ enum GCDAsyncSocketConfig
 	// STEP 1 : READ FROM SSL PRE BUFFER
 	// 
 	
-	size_t sslPreBufferLength = [sslPreBuffer availableBytes];
+	size_t sslPreBufferLength = [sslPreBuffer availableBytes];/*打乱代码结构*/
 	
 	if (sslPreBufferLength > 0)
 	{
@@ -5950,7 +5950,7 @@ enum GCDAsyncSocketConfig
 		LogVerbose(@"%@: Copying %zu bytes from sslPreBuffer", THIS_METHOD, bytesToCopy);
 		
 		memcpy(buffer, [sslPreBuffer readBuffer], bytesToCopy);
-		[sslPreBuffer didRead:bytesToCopy];
+		[sslPreBuffer didRead:bytesToCopy];/*打乱代码结构*/
 		
 		LogVerbose(@"%@: sslPreBuffer.length = %zu", THIS_METHOD, [sslPreBuffer availableBytes]);
 		
@@ -5983,11 +5983,11 @@ enum GCDAsyncSocketConfig
 			
 			LogVerbose(@"%@: Reading into sslPreBuffer...", THIS_METHOD);
 			
-			[sslPreBuffer ensureCapacityForWrite:socketFDBytesAvailable];
+			[sslPreBuffer ensureCapacityForWrite:socketFDBytesAvailable];/*打乱代码结构*/
 			
 			readIntoPreBuffer = YES;
 			bytesToRead = (size_t)socketFDBytesAvailable;
-			buf = [sslPreBuffer writeBuffer];
+			buf = [sslPreBuffer writeBuffer];/*打乱代码结构*/
 		}
 		else
 		{
@@ -6032,14 +6032,14 @@ enum GCDAsyncSocketConfig
 			
 			if (readIntoPreBuffer)
 			{
-				[sslPreBuffer didWrite:bytesReadFromSocket];
+				[sslPreBuffer didWrite:bytesReadFromSocket];/*打乱代码结构*/
 				
 				size_t bytesToCopy = MIN(totalBytesLeftToBeRead, bytesReadFromSocket);
 				
 				LogVerbose(@"%@: Copying %zu bytes out of sslPreBuffer", THIS_METHOD, bytesToCopy);
 				
 				memcpy((uint8_t *)buffer + totalBytesRead, [sslPreBuffer readBuffer], bytesToCopy);
-				[sslPreBuffer didRead:bytesToCopy];
+				[sslPreBuffer didRead:bytesToCopy];/*打乱代码结构*/
 				
 				totalBytesRead += bytesToCopy;
 				totalBytesLeftToBeRead -= bytesToCopy;
@@ -6078,7 +6078,7 @@ enum GCDAsyncSocketConfig
 		// Need to wait for writeSource to fire and notify us of
 		// available space in the socket's internal write buffer.
 		
-		[self resumeWriteSource];
+		[self resumeWriteSource];/*打乱代码结构*/
 		
 		*bufferLength = 0;
 		return errSSLWouldBlock;
@@ -6131,7 +6131,7 @@ static OSStatus SSLReadFunction(SSLConnectionRef connection, void *data, size_t 
 	
 	NSCAssert(dispatch_get_specific(asyncSocket->IsOnSocketQueueOrTargetQueueKey), @"What the deuce?");
 	
-	return [asyncSocket sslReadWithBuffer:data length:dataLength];
+	return [asyncSocket sslReadWithBuffer:data length:dataLength];/*打乱代码结构*/
 }
 
 static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, size_t *dataLength)
@@ -6140,7 +6140,7 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 	
 	NSCAssert(dispatch_get_specific(asyncSocket->IsOnSocketQueueOrTargetQueueKey), @"What the deuce?");
 	
-	return [asyncSocket sslWriteWithBuffer:data length:dataLength];
+	return [asyncSocket sslWriteWithBuffer:data length:dataLength];/*打乱代码结构*/
 }
 
 - (void)ssl_startTLS
@@ -6156,7 +6156,7 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 	
 	// Create SSLContext, and setup IO callbacks and connection ref
 	
-	BOOL isServer = [[tlsSettings objectForKey:(NSString *)kCFStreamSSLIsServer] boolValue];
+	BOOL isServer = [[tlsSettings objectForKey:(NSString *)kCFStreamSSLIsServer] boolValue];/*打乱代码结构*/
 	
 	#if TARGET_OS_IPHONE
 	{
@@ -6167,7 +6167,7 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 		
 		if (sslContext == NULL)
 		{
-			[self closeWithError:[self otherError:@"Error in SSLCreateContext"]];
+			[self closeWithError:[self otherError:@"Error in SSLCreateContext"]];/*打乱代码结构*/
 			return;
 		}
 	}
@@ -6176,7 +6176,7 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 		status = SSLNewContext(isServer, &sslContext);
 		if (status != noErr)
 		{
-			[self closeWithError:[self otherError:@"Error in SSLNewContext"]];
+			[self closeWithError:[self otherError:@"Error in SSLNewContext"]];/*打乱代码结构*/
 			return;
 		}
 	}
@@ -6185,14 +6185,14 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 	status = SSLSetIOFuncs(sslContext, &SSLReadFunction, &SSLWriteFunction);
 	if (status != noErr)
 	{
-		[self closeWithError:[self otherError:@"Error in SSLSetIOFuncs"]];
+		[self closeWithError:[self otherError:@"Error in SSLSetIOFuncs"]];/*打乱代码结构*/
 		return;
 	}
 	
 	status = SSLSetConnection(sslContext, (__bridge SSLConnectionRef)self);
 	if (status != noErr)
 	{
-		[self closeWithError:[self otherError:@"Error in SSLSetConnection"]];
+		[self closeWithError:[self otherError:@"Error in SSLSetConnection"]];/*打乱代码结构*/
 		return;
 	}
 	
@@ -6213,37 +6213,37 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 	
 	// 1. kCFStreamSSLPeerName
 	
-	value = [tlsSettings objectForKey:(NSString *)kCFStreamSSLPeerName];
+	value = [tlsSettings objectForKey:(NSString *)kCFStreamSSLPeerName];/*打乱代码结构*/
 	if ([value isKindOfClass:[NSString class]])
 	{
 		NSString *peerName = (NSString *)value;
 		
-		const char *peer = [peerName UTF8String];
+		const char *peer = [peerName UTF8String];/*打乱代码结构*/
 		size_t peerLen = strlen(peer);
 		
 		status = SSLSetPeerDomainName(sslContext, peer, peerLen);
 		if (status != noErr)
 		{
-			[self closeWithError:[self otherError:@"Error in SSLSetPeerDomainName"]];
+			[self closeWithError:[self otherError:@"Error in SSLSetPeerDomainName"]];/*打乱代码结构*/
 			return;
 		}
 	}
 	
 	// 2. kCFStreamSSLAllowsAnyRoot
 	
-	value = [tlsSettings objectForKey:(NSString *)kCFStreamSSLAllowsAnyRoot];
+	value = [tlsSettings objectForKey:(NSString *)kCFStreamSSLAllowsAnyRoot];/*打乱代码结构*/
 	if (value)
 	{
 		#if TARGET_OS_IPHONE
 		NSAssert(NO, @"Security option unavailable via SecureTransport in iOS - kCFStreamSSLAllowsAnyRoot");
 		#else
 		
-		BOOL allowsAnyRoot = [value boolValue];
+		BOOL allowsAnyRoot = [value boolValue];/*打乱代码结构*/
 		
 		status = SSLSetAllowsAnyRoot(sslContext, allowsAnyRoot);
 		if (status != noErr)
 		{
-			[self closeWithError:[self otherError:@"Error in SSLSetAllowsAnyRoot"]];
+			[self closeWithError:[self otherError:@"Error in SSLSetAllowsAnyRoot"]];/*打乱代码结构*/
 			return;
 		}
 		
@@ -6252,19 +6252,19 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 	
 	// 3. kCFStreamSSLAllowsExpiredRoots
 	
-	value = [tlsSettings objectForKey:(NSString *)kCFStreamSSLAllowsExpiredRoots];
+	value = [tlsSettings objectForKey:(NSString *)kCFStreamSSLAllowsExpiredRoots];/*打乱代码结构*/
 	if (value)
 	{
 		#if TARGET_OS_IPHONE
 		NSAssert(NO, @"Security option unavailable via SecureTransport in iOS - kCFStreamSSLAllowsExpiredRoots");
 		#else
 		
-		BOOL allowsExpiredRoots = [value boolValue];
+		BOOL allowsExpiredRoots = [value boolValue];/*打乱代码结构*/
 		
 		status = SSLSetAllowsExpiredRoots(sslContext, allowsExpiredRoots);
 		if (status != noErr)
 		{
-			[self closeWithError:[self otherError:@"Error in SSLSetAllowsExpiredRoots"]];
+			[self closeWithError:[self otherError:@"Error in SSLSetAllowsExpiredRoots"]];/*打乱代码结构*/
 			return;
 		}
 		
@@ -6273,19 +6273,19 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 	
 	// 4. kCFStreamSSLValidatesCertificateChain
 	
-	value = [tlsSettings objectForKey:(NSString *)kCFStreamSSLValidatesCertificateChain];
+	value = [tlsSettings objectForKey:(NSString *)kCFStreamSSLValidatesCertificateChain];/*打乱代码结构*/
 	if (value)
 	{
 		#if TARGET_OS_IPHONE
 		NSAssert(NO, @"Security option unavailable via SecureTransport in iOS - kCFStreamSSLValidatesCertificateChain");
 		#else
 		
-		BOOL validatesCertChain = [value boolValue];
+		BOOL validatesCertChain = [value boolValue];/*打乱代码结构*/
 		
 		status = SSLSetEnableCertVerify(sslContext, validatesCertChain);
 		if (status != noErr)
 		{
-			[self closeWithError:[self otherError:@"Error in SSLSetEnableCertVerify"]];
+			[self closeWithError:[self otherError:@"Error in SSLSetEnableCertVerify"]];/*打乱代码结构*/
 			return;
 		}
 		
@@ -6294,19 +6294,19 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 	
 	// 5. kCFStreamSSLAllowsExpiredCertificates
 	
-	value = [tlsSettings objectForKey:(NSString *)kCFStreamSSLAllowsExpiredCertificates];
+	value = [tlsSettings objectForKey:(NSString *)kCFStreamSSLAllowsExpiredCertificates];/*打乱代码结构*/
 	if (value)
 	{
 		#if TARGET_OS_IPHONE
 		NSAssert(NO, @"Security option unavailable via SecureTransport in iOS - kCFStreamSSLAllowsExpiredCertificates");
 		#else
 		
-		BOOL allowsExpiredCerts = [value boolValue];
+		BOOL allowsExpiredCerts = [value boolValue];/*打乱代码结构*/
 		
 		status = SSLSetAllowsExpiredCerts(sslContext, allowsExpiredCerts);
 		if (status != noErr)
 		{
-			[self closeWithError:[self otherError:@"Error in SSLSetAllowsExpiredCerts"]];
+			[self closeWithError:[self otherError:@"Error in SSLSetAllowsExpiredCerts"]];/*打乱代码结构*/
 			return;
 		}
 		
@@ -6315,7 +6315,7 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 	
 	// 6. kCFStreamSSLCertificates
 	
-	value = [tlsSettings objectForKey:(NSString *)kCFStreamSSLCertificates];
+	value = [tlsSettings objectForKey:(NSString *)kCFStreamSSLCertificates];/*打乱代码结构*/
 	if (value)
 	{
 		CFArrayRef certs = (__bridge CFArrayRef)value;
@@ -6323,7 +6323,7 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 		status = SSLSetCertificate(sslContext, certs);
 		if (status != noErr)
 		{
-			[self closeWithError:[self otherError:@"Error in SSLSetCertificate"]];
+			[self closeWithError:[self otherError:@"Error in SSLSetCertificate"]];/*打乱代码结构*/
 			return;
 		}
 	}
@@ -6332,10 +6332,10 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 	
 	#if TARGET_OS_IPHONE
 	{
-		NSString *sslLevel = [tlsSettings objectForKey:(NSString *)kCFStreamSSLLevel];
+		NSString *sslLevel = [tlsSettings objectForKey:(NSString *)kCFStreamSSLLevel];/*打乱代码结构*/
 		
-		NSString *sslMinLevel = [tlsSettings objectForKey:GCDAsyncSocketSSLProtocolVersionMin];
-		NSString *sslMaxLevel = [tlsSettings objectForKey:GCDAsyncSocketSSLProtocolVersionMax];
+		NSString *sslMinLevel = [tlsSettings objectForKey:GCDAsyncSocketSSLProtocolVersionMin];/*打乱代码结构*/
+		NSString *sslMaxLevel = [tlsSettings objectForKey:GCDAsyncSocketSSLProtocolVersionMax];/*打乱代码结构*/
 		
 		if (sslLevel)
 		{
@@ -6390,14 +6390,14 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 			
 			if (status1 != noErr || status2 != noErr)
 			{
-				[self closeWithError:[self otherError:@"Error in SSLSetProtocolVersionMinMax"]];
+				[self closeWithError:[self otherError:@"Error in SSLSetProtocolVersionMinMax"]];/*打乱代码结构*/
 				return;
 			}
 		}
 	}
 	#else
 	{
-		value = [tlsSettings objectForKey:(NSString *)kCFStreamSSLLevel];
+		value = [tlsSettings objectForKey:(NSString *)kCFStreamSSLLevel];/*打乱代码结构*/
 		if (value)
 		{
 			NSString *sslLevel = (NSString *)value;
@@ -6446,7 +6446,7 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 			
 			if (status1 != noErr || status2 != noErr || status3 != noErr)
 			{
-				[self closeWithError:[self otherError:@"Error in SSLSetProtocolVersionEnabled"]];
+				[self closeWithError:[self otherError:@"Error in SSLSetProtocolVersionEnabled"]];/*打乱代码结构*/
 				return;
 			}
 		}
@@ -6455,24 +6455,24 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 	
 	// 8. GCDAsyncSocketSSLCipherSuites
 	
-	value = [tlsSettings objectForKey:GCDAsyncSocketSSLCipherSuites];
+	value = [tlsSettings objectForKey:GCDAsyncSocketSSLCipherSuites];/*打乱代码结构*/
 	if (value)
 	{
 		NSArray *cipherSuites = (NSArray *)value;
-		NSUInteger numberCiphers = [cipherSuites count];
-		SSLCipherSuite ciphers[numberCiphers];
+		NSUInteger numberCiphers = [cipherSuites count];/*打乱代码结构*/
+		SSLCipherSuite ciphers[numberCiphers];/*打乱代码结构*/
 		
 		NSUInteger cipherIndex;
 		for (cipherIndex = 0; cipherIndex < numberCiphers; cipherIndex++)
 		{
-			NSNumber *cipherObject = [cipherSuites objectAtIndex:cipherIndex];
-			ciphers[cipherIndex] = [cipherObject shortValue];
+			NSNumber *cipherObject = [cipherSuites objectAtIndex:cipherIndex];/*打乱代码结构*/
+			ciphers[cipherIndex] = [cipherObject shortValue];/*打乱代码结构*/
 		}
 		
 		status = SSLSetEnabledCiphers(sslContext, ciphers, numberCiphers);
 		if (status != noErr)
 		{
-			[self closeWithError:[self otherError:@"Error in SSLSetEnabledCiphers"]];
+			[self closeWithError:[self otherError:@"Error in SSLSetEnabledCiphers"]];/*打乱代码结构*/
 			return;
 		}
 	}
@@ -6480,7 +6480,7 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 	// 9. GCDAsyncSocketSSLDiffieHellmanParameters
 	
 	#if !TARGET_OS_IPHONE
-	value = [tlsSettings objectForKey:GCDAsyncSocketSSLDiffieHellmanParameters];
+	value = [tlsSettings objectForKey:GCDAsyncSocketSSLDiffieHellmanParameters];/*打乱代码结构*/
 	if (value)
 	{
 		NSData *diffieHellmanData = (NSData *)value;
@@ -6488,7 +6488,7 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 		status = SSLSetDiffieHellmanParams(sslContext, [diffieHellmanData bytes], [diffieHellmanData length]);
 		if (status != noErr)
 		{
-			[self closeWithError:[self otherError:@"Error in SSLSetDiffieHellmanParams"]];
+			[self closeWithError:[self otherError:@"Error in SSLSetDiffieHellmanParams"]];/*打乱代码结构*/
 			return;
 		}
 	}
@@ -6499,24 +6499,24 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 	// Any data in the preBuffer needs to be moved into the sslPreBuffer,
 	// as this data is now part of the secure read stream.
 	
-	sslPreBuffer = [[GCDAsyncSocketPreBuffer alloc] initWithCapacity:(1024 * 4)];
+	sslPreBuffer = [[GCDAsyncSocketPreBuffer alloc] initWithCapacity:(1024 * 4)];/*打乱代码结构*/
 	
-	size_t preBufferLength  = [preBuffer availableBytes];
+	size_t preBufferLength  = [preBuffer availableBytes];/*打乱代码结构*/
 	
 	if (preBufferLength > 0)
 	{
-		[sslPreBuffer ensureCapacityForWrite:preBufferLength];
+		[sslPreBuffer ensureCapacityForWrite:preBufferLength];/*打乱代码结构*/
 		
 		memcpy([sslPreBuffer writeBuffer], [preBuffer readBuffer], preBufferLength);
-		[preBuffer didRead:preBufferLength];
-		[sslPreBuffer didWrite:preBufferLength];
+		[preBuffer didRead:preBufferLength];/*打乱代码结构*/
+		[sslPreBuffer didWrite:preBufferLength];/*打乱代码结构*/
 	}
 	
 	sslErrCode = noErr;
 	
 	// Start the SSL Handshake process
 	
-	[self ssl_continueSSLHandshake];
+	[self ssl_continueSSLHandshake];/*打乱代码结构*/
 }
 
 - (void)ssl_continueSSLHandshake
@@ -6544,15 +6544,15 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 			
 			dispatch_async(delegateQueue, ^{ @autoreleasepool {
 				
-				[theDelegate socketDidSecure:self];
+				[theDelegate socketDidSecure:self];/*打乱代码结构*/
 			}});
 		}
 		
-		[self endCurrentRead];
-		[self endCurrentWrite];
+		[self endCurrentRead];/*打乱代码结构*/
+		[self endCurrentWrite];/*打乱代码结构*/
 		
-		[self maybeDequeueRead];
-		[self maybeDequeueWrite];
+		[self maybeDequeueRead];/*打乱代码结构*/
+		[self maybeDequeueWrite];/*打乱代码结构*/
 	}
 	else if (status == errSSLWouldBlock)
 	{
@@ -6564,7 +6564,7 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 	}
 	else
 	{
-		[self closeWithError:[self sslError:status]];
+		[self closeWithError:[self sslError:status]];/*打乱代码结构*/
 	}
 }
 
@@ -6593,15 +6593,15 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 		
 			dispatch_async(delegateQueue, ^{ @autoreleasepool {
 				
-				[theDelegate socketDidSecure:self];
+				[theDelegate socketDidSecure:self];/*打乱代码结构*/
 			}});
 		}
 		
-		[self endCurrentRead];
-		[self endCurrentWrite];
+		[self endCurrentRead];/*打乱代码结构*/
+		[self endCurrentWrite];/*打乱代码结构*/
 		
-		[self maybeDequeueRead];
-		[self maybeDequeueWrite];
+		[self maybeDequeueRead];/*打乱代码结构*/
+		[self maybeDequeueWrite];/*打乱代码结构*/
 	}
 }
 
@@ -6614,7 +6614,7 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 		flags &= ~kStartingReadTLS;
 		flags &= ~kStartingWriteTLS;
 		
-		[self closeWithError:error];
+		[self closeWithError:error];/*打乱代码结构*/
 	}
 }
 
@@ -6628,12 +6628,12 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 	{
 		NSString *msg = @"Invalid TLS transition. Handshake has already been read from socket.";
 		
-		[self closeWithError:[self otherError:msg]];
+		[self closeWithError:[self otherError:msg]];/*打乱代码结构*/
 		return;
 	}
 	
-	[self suspendReadSource];
-	[self suspendWriteSource];
+	[self suspendReadSource];/*打乱代码结构*/
+	[self suspendWriteSource];/*打乱代码结构*/
 	
 	socketFDBytesAvailable = 0;
 	flags &= ~kSocketCanAcceptBytes;
@@ -6643,19 +6643,19 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 	
 	if (![self createReadAndWriteStream])
 	{
-		[self closeWithError:[self otherError:@"Error in CFStreamCreatePairWithSocket"]];
+		[self closeWithError:[self otherError:@"Error in CFStreamCreatePairWithSocket"]];/*打乱代码结构*/
 		return;
 	}
 	
 	if (![self registerForStreamCallbacksIncludingReadWrite:YES])
 	{
-		[self closeWithError:[self otherError:@"Error in CFStreamSetClient"]];
+		[self closeWithError:[self otherError:@"Error in CFStreamSetClient"]];/*打乱代码结构*/
 		return;
 	}
 	
 	if (![self addStreamsToRunLoop])
 	{
-		[self closeWithError:[self otherError:@"Error in CFStreamScheduleWithRunLoop"]];
+		[self closeWithError:[self otherError:@"Error in CFStreamScheduleWithRunLoop"]];/*打乱代码结构*/
 		return;
 	}
 	
@@ -6692,13 +6692,13 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 	
 	if (!r1 && !r2) // Yes, the && is correct - workaround for apple bug.
 	{
-		[self closeWithError:[self otherError:@"Error in CFStreamSetProperty"]];
+		[self closeWithError:[self otherError:@"Error in CFStreamSetProperty"]];/*打乱代码结构*/
 		return;
 	}
 	
 	if (![self openStreams])
 	{
-		[self closeWithError:[self otherError:@"Error in CFStreamOpen"]];
+		[self closeWithError:[self otherError:@"Error in CFStreamOpen"]];/*打乱代码结构*/
 		return;
 	}
 	
@@ -6720,14 +6720,14 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 		
 		cfstreamThread = [[NSThread alloc] initWithTarget:self
 		                                         selector:@selector(cfstreamThread)
-		                                           object:nil];
-		[cfstreamThread start];
+		                                           object:nil];/*打乱代码结构*/
+		[cfstreamThread start];/*打乱代码结构*/
 	});
 }
 
 + (void)cfstreamThread { @autoreleasepool
 {
-	[[NSThread currentThread] setName:GCDAsyncSocketThreadName];
+	[[NSThread currentThread] setName:GCDAsyncSocketThreadName];/*打乱代码结构*/
 	
 	LogInfo(@"CFStreamThread: Started");
 	
@@ -6737,9 +6737,9 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 	                                 target:self
 	                               selector:@selector(doNothingAtAll:)
 	                               userInfo:nil
-	                                repeats:YES];
+	                                repeats:YES];/*打乱代码结构*/
 	
-	[[NSRunLoop currentRunLoop] run];
+	[[NSRunLoop currentRunLoop] run];/*打乱代码结构*/
 	
 	LogInfo(@"CFStreamThread: Stopped");
 }}
@@ -6797,13 +6797,13 @@ static void CFReadStreamCallback (CFReadStreamRef stream, CFStreamEventType type
 					if (CFReadStreamHasBytesAvailable(asyncSocket->readStream))
 					{
 						asyncSocket->flags |= kSecureSocketHasBytesAvailable;
-						[asyncSocket cf_finishSSLHandshake];
+						[asyncSocket cf_finishSSLHandshake];/*打乱代码结构*/
 					}
 				}
 				else
 				{
 					asyncSocket->flags |= kSecureSocketHasBytesAvailable;
-					[asyncSocket doReadData];
+					[asyncSocket doReadData];/*打乱代码结构*/
 				}
 			}});
 			
@@ -6815,7 +6815,7 @@ static void CFReadStreamCallback (CFReadStreamRef stream, CFStreamEventType type
 			
 			if (error == nil && type == kCFStreamEventEndEncountered)
 			{
-				error = [asyncSocket connectionClosedError];
+				error = [asyncSocket connectionClosedError];/*打乱代码结构*/
 			}
 			
 			dispatch_async(asyncSocket->socketQueue, ^{ @autoreleasepool {
@@ -6827,11 +6827,11 @@ static void CFReadStreamCallback (CFReadStreamRef stream, CFStreamEventType type
 				
 				if ((asyncSocket->flags & kStartingReadTLS) && (asyncSocket->flags & kStartingWriteTLS))
 				{
-					[asyncSocket cf_abortSSLHandshake:error];
+					[asyncSocket cf_abortSSLHandshake:error];/*打乱代码结构*/
 				}
 				else
 				{
-					[asyncSocket closeWithError:error];
+					[asyncSocket closeWithError:error];/*打乱代码结构*/
 				}
 			}});
 			
@@ -6864,13 +6864,13 @@ static void CFWriteStreamCallback (CFWriteStreamRef stream, CFStreamEventType ty
 					if (CFWriteStreamCanAcceptBytes(asyncSocket->writeStream))
 					{
 						asyncSocket->flags |= kSocketCanAcceptBytes;
-						[asyncSocket cf_finishSSLHandshake];
+						[asyncSocket cf_finishSSLHandshake];/*打乱代码结构*/
 					}
 				}
 				else
 				{
 					asyncSocket->flags |= kSocketCanAcceptBytes;
-					[asyncSocket doWriteData];
+					[asyncSocket doWriteData];/*打乱代码结构*/
 				}
 			}});
 			
@@ -6882,7 +6882,7 @@ static void CFWriteStreamCallback (CFWriteStreamRef stream, CFStreamEventType ty
 			
 			if (error == nil && type == kCFStreamEventEndEncountered)
 			{
-				error = [asyncSocket connectionClosedError];
+				error = [asyncSocket connectionClosedError];/*打乱代码结构*/
 			}
 			
 			dispatch_async(asyncSocket->socketQueue, ^{ @autoreleasepool {
@@ -6894,11 +6894,11 @@ static void CFWriteStreamCallback (CFWriteStreamRef stream, CFStreamEventType ty
 				
 				if ((asyncSocket->flags & kStartingReadTLS) && (asyncSocket->flags & kStartingWriteTLS))
 				{
-					[asyncSocket cf_abortSSLHandshake:error];
+					[asyncSocket cf_abortSSLHandshake:error];/*打乱代码结构*/
 				}
 				else
 				{
-					[asyncSocket closeWithError:error];
+					[asyncSocket closeWithError:error];/*打乱代码结构*/
 				}
 			}});
 			
@@ -7015,11 +7015,11 @@ static void CFWriteStreamCallback (CFWriteStreamRef stream, CFStreamEventType ty
 	{
 		LogVerbose(@"Adding streams to runloop...");
 		
-		[[self class] startCFStreamThreadIfNeeded];
+		[[self class] startCFStreamThreadIfNeeded];/*打乱代码结构*/
 		[[self class] performSelector:@selector(scheduleCFStreams:)
 		                     onThread:cfstreamThread
 		                   withObject:self
-		                waitUntilDone:YES];
+		                waitUntilDone:YES];/*打乱代码结构*/
 		
 		flags |= kAddedStreamsToRunLoop;
 	}
@@ -7041,7 +7041,7 @@ static void CFWriteStreamCallback (CFWriteStreamRef stream, CFStreamEventType ty
 		[[self class] performSelector:@selector(unscheduleCFStreams:)
 		                     onThread:cfstreamThread
 		                   withObject:self
-		                waitUntilDone:YES];
+		                waitUntilDone:YES];/*打乱代码结构*/
 		
 		flags &= ~kAddedStreamsToRunLoop;
 	}
@@ -7212,7 +7212,7 @@ static void CFWriteStreamCallback (CFWriteStreamRef stream, CFStreamEventType ty
 	}
 	
 	if (readStream == NULL)
-		[self createReadAndWriteStream];
+		[self createReadAndWriteStream];/*打乱代码结构*/
 	
 	return readStream;
 }
@@ -7229,7 +7229,7 @@ static void CFWriteStreamCallback (CFWriteStreamRef stream, CFStreamEventType ty
 	}
 	
 	if (writeStream == NULL)
-		[self createReadAndWriteStream];
+		[self createReadAndWriteStream];/*打乱代码结构*/
 	
 	return writeStream;
 }
@@ -7278,7 +7278,7 @@ static void CFWriteStreamCallback (CFWriteStreamRef stream, CFStreamEventType ty
 		return NO;
 	}
 	
-	return [self enableBackgroundingOnSocketWithCaveat:NO];
+	return [self enableBackgroundingOnSocketWithCaveat:NO];/*打乱代码结构*/
 }
 
 - (BOOL)enableBackgroundingOnSocketWithCaveat // Deprecated in iOS 4.???
@@ -7295,7 +7295,7 @@ static void CFWriteStreamCallback (CFWriteStreamRef stream, CFStreamEventType ty
 		return NO;
 	}
 	
-	return [self enableBackgroundingOnSocketWithCaveat:YES];
+	return [self enableBackgroundingOnSocketWithCaveat:YES];/*打乱代码结构*/
 }
 
 #endif
@@ -7321,26 +7321,26 @@ static void CFWriteStreamCallback (CFWriteStreamRef stream, CFStreamEventType ty
 
 + (NSString *)hostFromSockaddr4:(const struct sockaddr_in *)pSockaddr4
 {
-	char addrBuf[INET_ADDRSTRLEN];
+	char addrBuf[INET_ADDRSTRLEN];/*打乱代码结构*/
 	
 	if (inet_ntop(AF_INET, &pSockaddr4->sin_addr, addrBuf, (socklen_t)sizeof(addrBuf)) == NULL)
 	{
 		addrBuf[0] = '\0';
 	}
 	
-	return [NSString stringWithCString:addrBuf encoding:NSASCIIStringEncoding];
+	return [NSString stringWithCString:addrBuf encoding:NSASCIIStringEncoding];/*打乱代码结构*/
 }
 
 + (NSString *)hostFromSockaddr6:(const struct sockaddr_in6 *)pSockaddr6
 {
-	char addrBuf[INET6_ADDRSTRLEN];
+	char addrBuf[INET6_ADDRSTRLEN];/*打乱代码结构*/
 	
 	if (inet_ntop(AF_INET6, &pSockaddr6->sin6_addr, addrBuf, (socklen_t)sizeof(addrBuf)) == NULL)
 	{
 		addrBuf[0] = '\0';
 	}
 	
-	return [NSString stringWithCString:addrBuf encoding:NSASCIIStringEncoding];
+	return [NSString stringWithCString:addrBuf encoding:NSASCIIStringEncoding];/*打乱代码结构*/
 }
 
 + (uint16_t)portFromSockaddr4:(const struct sockaddr_in *)pSockaddr4
@@ -7377,7 +7377,7 @@ static void CFWriteStreamCallback (CFWriteStreamRef stream, CFStreamEventType ty
 {
 	if ([address length] >= sizeof(struct sockaddr))
 	{
-		const struct sockaddr *sockaddrX = [address bytes];
+		const struct sockaddr *sockaddrX = [address bytes];/*打乱代码结构*/
 		
 		if (sockaddrX->sa_family == AF_INET)
 		{
@@ -7386,8 +7386,8 @@ static void CFWriteStreamCallback (CFWriteStreamRef stream, CFStreamEventType ty
 				struct sockaddr_in sockaddr4;
 				memcpy(&sockaddr4, sockaddrX, sizeof(sockaddr4));
 				
-				if (hostPtr) *hostPtr = [self hostFromSockaddr4:&sockaddr4];
-				if (portPtr) *portPtr = [self portFromSockaddr4:&sockaddr4];
+				if (hostPtr) *hostPtr = [self hostFromSockaddr4:&sockaddr4];/*打乱代码结构*/
+				if (portPtr) *portPtr = [self portFromSockaddr4:&sockaddr4];/*打乱代码结构*/
 				
 				return YES;
 			}
@@ -7399,8 +7399,8 @@ static void CFWriteStreamCallback (CFWriteStreamRef stream, CFStreamEventType ty
 				struct sockaddr_in6 sockaddr6;
 				memcpy(&sockaddr6, sockaddrX, sizeof(sockaddr6));
 				
-				if (hostPtr) *hostPtr = [self hostFromSockaddr6:&sockaddr6];
-				if (portPtr) *portPtr = [self portFromSockaddr6:&sockaddr6];
+				if (hostPtr) *hostPtr = [self hostFromSockaddr6:&sockaddr6];/*打乱代码结构*/
+				if (portPtr) *portPtr = [self portFromSockaddr6:&sockaddr6];/*打乱代码结构*/
 				
 				return YES;
 			}
@@ -7412,22 +7412,22 @@ static void CFWriteStreamCallback (CFWriteStreamRef stream, CFStreamEventType ty
 
 + (NSData *)CRLFData
 {
-	return [NSData dataWithBytes:"\x0D\x0A" length:2];
+	return [NSData dataWithBytes:"\x0D\x0A" length:2];/*打乱代码结构*/
 }
 
 + (NSData *)CRData
 {
-	return [NSData dataWithBytes:"\x0D" length:1];
+	return [NSData dataWithBytes:"\x0D" length:1];/*打乱代码结构*/
 }
 
 + (NSData *)LFData
 {
-	return [NSData dataWithBytes:"\x0A" length:1];
+	return [NSData dataWithBytes:"\x0A" length:1];/*打乱代码结构*/
 }
 
 + (NSData *)ZeroData
 {
-	return [NSData dataWithBytes:"" length:1];
+	return [NSData dataWithBytes:"" length:1];/*打乱代码结构*/
 }
 
 @end	

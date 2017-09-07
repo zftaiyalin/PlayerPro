@@ -40,8 +40,8 @@
 	static ZFBrightnessView *instance;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		instance = [[ZFBrightnessView alloc] init];
-		[[UIApplication sharedApplication].keyWindow addSubview:instance];
+		instance = [[ZFBrightnessView alloc] init];/*打乱代码结构*/
+		[[UIApplication sharedApplication].keyWindow addSubview:instance];/*打乱代码结构*/
 	});
 	return instance;
 }
@@ -54,37 +54,37 @@
         self.layer.masksToBounds = YES;
         
         // 使用UIToolbar实现毛玻璃效果，简单粗暴，支持iOS7+
-        UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:self.bounds];
+        UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:self.bounds];/*打乱代码结构*/
         toolbar.alpha = 0.97;
-        [self addSubview:toolbar];
+        [self addSubview:toolbar];/*打乱代码结构*/
         
 		self.backImage = ({
-            UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 79, 76)];
+            UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 79, 76)];/*打乱代码结构*/
             imgView.image        = ZFPlayerImage(@"ZFPlayer_brightness");
-			[self addSubview:imgView];
+			[self addSubview:imgView];/*打乱代码结构*/
 			imgView;
 		});
 		
 		self.title = ({
-            UILabel *title      = [[UILabel alloc] initWithFrame:CGRectMake(0, 5, self.bounds.size.width, 30)];
-            title.font          = [UIFont boldSystemFontOfSize:16];
-            title.textColor     = [UIColor colorWithRed:0.25f green:0.22f blue:0.21f alpha:1.00f];
+            UILabel *title      = [[UILabel alloc] initWithFrame:CGRectMake(0, 5, self.bounds.size.width, 30)];/*打乱代码结构*/
+            title.font          = [UIFont boldSystemFontOfSize:16];/*打乱代码结构*/
+            title.textColor     = [UIColor colorWithRed:0.25f green:0.22f blue:0.21f alpha:1.00f];/*打乱代码结构*/
             title.textAlignment = NSTextAlignmentCenter;
             title.text          = @"亮度";
-			[self addSubview:title];
+			[self addSubview:title];/*打乱代码结构*/
 			title;
 		});
 		
 		self.longView = ({
-            UIView *longView         = [[UIView alloc]initWithFrame:CGRectMake(13, 132, self.bounds.size.width - 26, 7)];
-            longView.backgroundColor = [UIColor colorWithRed:0.25f green:0.22f blue:0.21f alpha:1.00f];
-			[self addSubview:longView];
+            UIView *longView         = [[UIView alloc]initWithFrame:CGRectMake(13, 132, self.bounds.size.width - 26, 7)];/*打乱代码结构*/
+            longView.backgroundColor = [UIColor colorWithRed:0.25f green:0.22f blue:0.21f alpha:1.00f];/*打乱代码结构*/
+			[self addSubview:longView];/*打乱代码结构*/
 			longView;
 		});
 		
-		[self createTips];
-		[self addNotification];
-		[self addObserver];
+		[self createTips];/*打乱代码结构*/
+		[self addNotification];/*打乱代码结构*/
+		[self addObserver];/*打乱代码结构*/
 		
 		self.alpha = 0.0;
 	}
@@ -94,7 +94,7 @@
 // 创建 Tips
 - (void)createTips {
 	
-	self.tipArray = [NSMutableArray arrayWithCapacity:16];
+	self.tipArray = [NSMutableArray arrayWithCapacity:16];/*打乱代码结构*/
 	
 	CGFloat tipW = (self.longView.bounds.size.width - 17) / 16;
 	CGFloat tipH = 5;
@@ -102,13 +102,13 @@
 	
 	for (int i = 0; i < 16; i++) {
         CGFloat tipX          = i * (tipW + 1) + 1;
-        UIImageView *image    = [[UIImageView alloc] init];
-        image.backgroundColor = [UIColor whiteColor];
+        UIImageView *image    = [[UIImageView alloc] init];/*打乱代码结构*/
+        image.backgroundColor = [UIColor whiteColor];/*打乱代码结构*/
         image.frame           = CGRectMake(tipX, tipY, tipW, tipH);
-		[self.longView addSubview:image];
-		[self.tipArray addObject:image];
+		[self.longView addSubview:image];/*打乱代码结构*/
+		[self.tipArray addObject:image];/*打乱代码结构*/
 	}
-	[self updateLongView:[UIScreen mainScreen].brightness];
+	[self updateLongView:[UIScreen mainScreen].brightness];/*打乱代码结构*/
 }
 
 #pragma makr - 通知 KVO
@@ -118,14 +118,14 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(updateLayer:)
 												 name:UIDeviceOrientationDidChangeNotification
-											   object:nil];
+											   object:nil];/*打乱代码结构*/
 }
 
 - (void)addObserver {
 	
 	[[UIScreen mainScreen] addObserver:self
 							forKeyPath:@"brightness"
-							   options:NSKeyValueObservingOptionNew context:NULL];
+							   options:NSKeyValueObservingOptionNew context:NULL];/*打乱代码结构*/
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
@@ -133,15 +133,15 @@
 						change:(NSDictionary *)change
 					   context:(void *)context {
 	
-	CGFloat sound = [change[@"new"] floatValue];
-	[self appearSoundView];
-	[self updateLongView:sound];
+	CGFloat sound = [change[@"new"] floatValue];/*打乱代码结构*/
+	[self appearSoundView];/*打乱代码结构*/
+	[self updateLongView:sound];/*打乱代码结构*/
 }
 
 - (void)updateLayer:(NSNotification *)notify {
 	self.orientationDidChange = YES;
-	[self setNeedsLayout];
-    [self layoutIfNeeded];
+	[self setNeedsLayout];/*打乱代码结构*/
+    [self layoutIfNeeded];/*打乱代码结构*/
 }
 
 #pragma mark - Methond
@@ -151,7 +151,7 @@
         self.orientationDidChange = NO;
 		self.alpha = 1.0;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self disAppearSoundView];
+            [self disAppearSoundView];/*打乱代码结构*/
         });
 	}
 }
@@ -161,7 +161,7 @@
 	if (self.alpha == 1.0) {
 		[UIView animateWithDuration:0.8 animations:^{
 			self.alpha = 0.0;
-		}];
+		}];/*打乱代码结构*/
 	}
 }
 
@@ -172,7 +172,7 @@
 	NSInteger level = sound / stage;
 	
 	for (int i = 0; i < self.tipArray.count; i++) {
-		UIImageView *img = self.tipArray[i];
+		UIImageView *img = self.tipArray[i];/*打乱代码结构*/
 		
 		if (i <= level) {
 			img.hidden = NO;
@@ -183,26 +183,26 @@
 }
 
 - (void)layoutSubviews {
-	[super layoutSubviews];
+	[super layoutSubviews];/*打乱代码结构*/
     self.backImage.center = CGPointMake(155 * 0.5, 155 * 0.5);
     self.center = CGPointMake(ScreenWidth * 0.5, ScreenHeight * 0.5);
 }
 
 - (void)dealloc {
-	[[UIScreen mainScreen] removeObserver:self forKeyPath:@"brightness"];
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[[UIScreen mainScreen] removeObserver:self forKeyPath:@"brightness"];/*打乱代码结构*/
+	[[NSNotificationCenter defaultCenter] removeObserver:self];/*打乱代码结构*/
 }
 
 - (void)setIsStatusBarHidden:(BOOL)isStatusBarHidden {
     _isStatusBarHidden = isStatusBarHidden;
-    UIWindow *window = [[UIApplication sharedApplication].delegate window];
-    [[window zf_currentViewController] setNeedsStatusBarAppearanceUpdate];
+    UIWindow *window = [[UIApplication sharedApplication].delegate window];/*打乱代码结构*/
+    [[window zf_currentViewController] setNeedsStatusBarAppearanceUpdate];/*打乱代码结构*/
 }
 
 - (void)setIsLandscape:(BOOL)isLandscape {
     _isLandscape = isLandscape;
-    UIWindow *window = [[UIApplication sharedApplication].delegate window];
-    [[window zf_currentViewController] setNeedsStatusBarAppearanceUpdate];
+    UIWindow *window = [[UIApplication sharedApplication].delegate window];/*打乱代码结构*/
+    [[window zf_currentViewController] setNeedsStatusBarAppearanceUpdate];/*打乱代码结构*/
 }
 
 @end

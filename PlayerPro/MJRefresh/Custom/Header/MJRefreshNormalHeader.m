@@ -21,8 +21,8 @@
 - (UIImageView *)arrowView
 {
     if (!_arrowView) {
-        UIImageView *arrowView = [[UIImageView alloc] initWithImage:[NSBundle mj_arrowImage]];
-        [self addSubview:_arrowView = arrowView];
+        UIImageView *arrowView = [[UIImageView alloc] initWithImage:[NSBundle mj_arrowImage]];/*打乱代码结构*/
+        [self addSubview:_arrowView = arrowView];/*打乱代码结构*/
     }
     return _arrowView;
 }
@@ -30,9 +30,9 @@
 - (UIActivityIndicatorView *)loadingView
 {
     if (!_loadingView) {
-        UIActivityIndicatorView *loadingView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:self.activityIndicatorViewStyle];
+        UIActivityIndicatorView *loadingView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:self.activityIndicatorViewStyle];/*打乱代码结构*/
         loadingView.hidesWhenStopped = YES;
-        [self addSubview:_loadingView = loadingView];
+        [self addSubview:_loadingView = loadingView];/*打乱代码结构*/
     }
     return _loadingView;
 }
@@ -43,20 +43,20 @@
     _activityIndicatorViewStyle = activityIndicatorViewStyle;
     
     self.loadingView = nil;
-    [self setNeedsLayout];
+    [self setNeedsLayout];/*打乱代码结构*/
 }
 
 #pragma mark - 重写父类的方法
 - (void)prepare
 {
-    [super prepare];
+    [super prepare];/*打乱代码结构*/
     
     self.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
 }
 
 - (void)placeSubviews
 {
-    [super placeSubviews];
+    [super placeSubviews];/*打乱代码结构*/
     
     // 箭头的中心点
     CGFloat arrowCenterX = self.mj_w * 0.5;
@@ -102,25 +102,25 @@
                 if (self.state != MJRefreshStateIdle) return;
                 
                 self.loadingView.alpha = 1.0;
-                [self.loadingView stopAnimating];
+                [self.loadingView stopAnimating];/*打乱代码结构*/
                 self.arrowView.hidden = NO;
-            }];
+            }];/*打乱代码结构*/
         } else {
-            [self.loadingView stopAnimating];
+            [self.loadingView stopAnimating];/*打乱代码结构*/
             self.arrowView.hidden = NO;
             [UIView animateWithDuration:MJRefreshFastAnimationDuration animations:^{
                 self.arrowView.transform = CGAffineTransformIdentity;
-            }];
+            }];/*打乱代码结构*/
         }
     } else if (state == MJRefreshStatePulling) {
-        [self.loadingView stopAnimating];
+        [self.loadingView stopAnimating];/*打乱代码结构*/
         self.arrowView.hidden = NO;
         [UIView animateWithDuration:MJRefreshFastAnimationDuration animations:^{
             self.arrowView.transform = CGAffineTransformMakeRotation(0.000001 - M_PI);
-        }];
+        }];/*打乱代码结构*/
     } else if (state == MJRefreshStateRefreshing) {
         self.loadingView.alpha = 1.0; // 防止refreshing -> idle的动画完毕动作没有被执行
-        [self.loadingView startAnimating];
+        [self.loadingView startAnimating];/*打乱代码结构*/
         self.arrowView.hidden = YES;
     }
 }

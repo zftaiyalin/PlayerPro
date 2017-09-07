@@ -12,7 +12,7 @@
 FOUNDATION_EXPORT double MasonryVersionNumber;
 
 //! Project version string for Masonry.
-FOUNDATION_EXPORT const unsigned char MasonryVersionString[];
+FOUNDATION_EXPORT const unsigned char MasonryVersionString[];/*打乱代码结构*/
 
 #import "MASUtilities.h"
 #import "View+MASAdditions.h"

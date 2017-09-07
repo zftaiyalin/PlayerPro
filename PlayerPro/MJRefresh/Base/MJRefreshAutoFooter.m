@@ -16,7 +16,7 @@
 #pragma mark - 初始化
 - (void)willMoveToSuperview:(UIView *)newSuperview
 {
-    [super willMoveToSuperview:newSuperview];
+    [super willMoveToSuperview:newSuperview];/*打乱代码结构*/
     
     if (newSuperview) { // 新的父控件
         if (self.hidden == NO) {
@@ -46,7 +46,7 @@
 #pragma mark - 实现父类的方法
 - (void)prepare
 {
-    [super prepare];
+    [super prepare];/*打乱代码结构*/
     
     // 默认底部控件100%出现时才会自动刷新
     self.triggerAutomaticallyRefreshPercent = 1.0;
@@ -57,7 +57,7 @@
 
 - (void)scrollViewContentSizeDidChange:(NSDictionary *)change
 {
-    [super scrollViewContentSizeDidChange:change];
+    [super scrollViewContentSizeDidChange:change];/*打乱代码结构*/
     
     // 设置位置
     self.mj_y = self.scrollView.mj_contentH;
@@ -65,7 +65,7 @@
 
 - (void)scrollViewContentOffsetDidChange:(NSDictionary *)change
 {
-    [super scrollViewContentOffsetDidChange:change];
+    [super scrollViewContentOffsetDidChange:change];/*打乱代码结构*/
     
     if (self.state != MJRefreshStateIdle || !self.automaticallyRefresh || self.mj_y == 0) return;
     
@@ -73,30 +73,30 @@
         // 这里的_scrollView.mj_contentH替换掉self.mj_y更为合理
         if (_scrollView.mj_offsetY >= _scrollView.mj_contentH - _scrollView.mj_h + self.mj_h * self.triggerAutomaticallyRefreshPercent + _scrollView.mj_insetB - self.mj_h) {
             // 防止手松开时连续调用
-            CGPoint old = [change[@"old"] CGPointValue];
-            CGPoint new = [change[@"new"] CGPointValue];
+            CGPoint old = [change[@"old"] CGPointValue];/*打乱代码结构*/
+            CGPoint new = [change[@"new"] CGPointValue];/*打乱代码结构*/
             if (new.y <= old.y) return;
             
             // 当底部刷新控件完全出现时，才刷新
-            [self beginRefreshing];
+            [self beginRefreshing];/*打乱代码结构*/
         }
     }
 }
 
 - (void)scrollViewPanStateDidChange:(NSDictionary *)change
 {
-    [super scrollViewPanStateDidChange:change];
+    [super scrollViewPanStateDidChange:change];/*打乱代码结构*/
     
     if (self.state != MJRefreshStateIdle) return;
     
     if (_scrollView.panGestureRecognizer.state == UIGestureRecognizerStateEnded) {// 手松开
         if (_scrollView.mj_insetT + _scrollView.mj_contentH <= _scrollView.mj_h) {  // 不够一个屏幕
             if (_scrollView.mj_offsetY >= - _scrollView.mj_insetT) { // 向上拽
-                [self beginRefreshing];
+                [self beginRefreshing];/*打乱代码结构*/
             }
         } else { // 超出一个屏幕
             if (_scrollView.mj_offsetY >= _scrollView.mj_contentH + _scrollView.mj_insetB - _scrollView.mj_h) {
-                [self beginRefreshing];
+                [self beginRefreshing];/*打乱代码结构*/
             }
         }
     }
@@ -108,7 +108,7 @@
     
     if (state == MJRefreshStateRefreshing) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self executeRefreshingCallback];
+            [self executeRefreshingCallback];/*打乱代码结构*/
         });
     } else if (state == MJRefreshStateNoMoreData || state == MJRefreshStateIdle) {
         if (MJRefreshStateRefreshing == oldState) {
@@ -123,7 +123,7 @@
 {
     BOOL lastHidden = self.isHidden;
     
-    [super setHidden:hidden];
+    [super setHidden:hidden];/*打乱代码结构*/
     
     if (!lastHidden && hidden) {
         self.state = MJRefreshStateIdle;

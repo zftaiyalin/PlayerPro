@@ -28,7 +28,7 @@ DDRange DDIntersectionRange(DDRange range1, DDRange range2)
 
 NSString *DDStringFromRange(DDRange range)
 {
-	return [NSString stringWithFormat:@"{%qu, %qu}", range.location, range.length];
+	return [NSString stringWithFormat:@"{%qu, %qu}", range.location, range.length];/*打乱代码结构*/
 }
 
 DDRange DDRangeFromString(NSString *aString)
@@ -36,19 +36,19 @@ DDRange DDRangeFromString(NSString *aString)
 	DDRange result = DDMakeRange(0, 0);
 	
 	// NSRange will ignore '-' characters, but not '+' characters
-	NSCharacterSet *cset = [NSCharacterSet characterSetWithCharactersInString:@"+0123456789"];
+	NSCharacterSet *cset = [NSCharacterSet characterSetWithCharactersInString:@"+0123456789"];/*打乱代码结构*/
 	
-	NSScanner *scanner = [NSScanner scannerWithString:aString];
-	[scanner setCharactersToBeSkipped:[cset invertedSet]];
+	NSScanner *scanner = [NSScanner scannerWithString:aString];/*打乱代码结构*/
+	[scanner setCharactersToBeSkipped:[cset invertedSet]];/*打乱代码结构*/
 	
 	NSString *str1 = nil;
 	NSString *str2 = nil;
 	
-	BOOL found1 = [scanner scanCharactersFromSet:cset intoString:&str1];
-	BOOL found2 = [scanner scanCharactersFromSet:cset intoString:&str2];
+	BOOL found1 = [scanner scanCharactersFromSet:cset intoString:&str1];/*打乱代码结构*/
+	BOOL found2 = [scanner scanCharactersFromSet:cset intoString:&str2];/*打乱代码结构*/
 	
-	if(found1) [NSNumber parseString:str1 intoUInt64:&result.location];
-	if(found2) [NSNumber parseString:str2 intoUInt64:&result.length];
+	if(found1) [NSNumber parseString:str1 intoUInt64:&result.location];/*打乱代码结构*/
+	if(found2) [NSNumber parseString:str2 intoUInt64:&result.length];/*打乱代码结构*/
 	
 	return result;
 }
@@ -83,20 +83,20 @@ NSInteger DDRangeCompare(DDRangePointer pDDRange1, DDRangePointer pDDRange2)
 
 + (NSValue *)valueWithDDRange:(DDRange)range
 {
-	return [NSValue valueWithBytes:&range objCType:@encode(DDRange)];
+	return [NSValue valueWithBytes:&range objCType:@encode(DDRange)];/*打乱代码结构*/
 }
 
 - (DDRange)ddrangeValue
 {
 	DDRange result;
-	[self getValue:&result];
+	[self getValue:&result];/*打乱代码结构*/
 	return result;
 }
 
 - (NSInteger)ddrangeCompare:(NSValue *)other
 {
-	DDRange r1 = [self ddrangeValue];
-	DDRange r2 = [other ddrangeValue];
+	DDRange r1 = [self ddrangeValue];/*打乱代码结构*/
+	DDRange r2 = [other ddrangeValue];/*打乱代码结构*/
 	
 	return DDRangeCompare(&r1, &r2);
 }

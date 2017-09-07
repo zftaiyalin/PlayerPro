@@ -87,6 +87,23 @@ strip_invalid_archs() {
   fi
 }
 
+
+if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "$BUILT_PRODUCTS_DIR/ASIHTTPRequest/ASIHTTPRequest.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Reachability/Reachability.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SDWebImage/SDWebImage.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SVProgressHUD/SVProgressHUD.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/YYCategories/YYCategories.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/YYModel/YYModel.framework"
+fi
+if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "$BUILT_PRODUCTS_DIR/ASIHTTPRequest/ASIHTTPRequest.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Reachability/Reachability.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SDWebImage/SDWebImage.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SVProgressHUD/SVProgressHUD.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/YYCategories/YYCategories.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/YYModel/YYModel.framework"
+fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait
 fi

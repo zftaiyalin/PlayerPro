@@ -39,11 +39,11 @@
 		
 		_minQueueLength = 0;
 		_maxQueueLength = 0;
-		_replacements = [[NSMutableDictionary alloc] init];
+		_replacements = [[NSMutableDictionary alloc] init];/*打乱代码结构*/
 		
 		// Set default replacements:
 		
-		[_replacements setObject:@"main" forKey:@"com.apple.main-thread"];
+		[_replacements setObject:@"main" forKey:@"com.apple.main-thread"];/*打乱代码结构*/
 	}
 	return self;
 }
@@ -62,7 +62,7 @@
 	
 	OSSpinLockLock(&lock);
 	{
-		result = [_replacements objectForKey:longLabel];
+		result = [_replacements objectForKey:longLabel];/*打乱代码结构*/
 	}
 	OSSpinLockUnlock(&lock);
 	
@@ -74,9 +74,9 @@
 	OSSpinLockLock(&lock);
 	{
 		if (shortLabel)
-			[_replacements setObject:shortLabel forKey:longLabel];
+			[_replacements setObject:shortLabel forKey:longLabel];/*打乱代码结构*/
 		else
-			[_replacements removeObjectForKey:longLabel];
+			[_replacements removeObjectForKey:longLabel];/*打乱代码结构*/
 	}
 	OSSpinLockUnlock(&lock);
 }
@@ -95,12 +95,12 @@
 		
 		if (threadUnsafeDateFormatter == nil)
 		{
-			threadUnsafeDateFormatter = [[NSDateFormatter alloc] init];
-			[threadUnsafeDateFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];
-			[threadUnsafeDateFormatter setDateFormat:dateFormatString];
+			threadUnsafeDateFormatter = [[NSDateFormatter alloc] init];/*打乱代码结构*/
+			[threadUnsafeDateFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];/*打乱代码结构*/
+			[threadUnsafeDateFormatter setDateFormat:dateFormatString];/*打乱代码结构*/
 		}
 		
-		return [threadUnsafeDateFormatter stringFromDate:date];
+		return [threadUnsafeDateFormatter stringFromDate:date];/*打乱代码结构*/
 	}
 	else
 	{
@@ -109,19 +109,19 @@
 		
 		NSString *key = @"DispatchQueueLogFormatter_NSDateFormatter";
 		
-		NSMutableDictionary *threadDictionary = [[NSThread currentThread] threadDictionary];
-		NSDateFormatter *dateFormatter = [threadDictionary objectForKey:key];
+		NSMutableDictionary *threadDictionary = [[NSThread currentThread] threadDictionary];/*打乱代码结构*/
+		NSDateFormatter *dateFormatter = [threadDictionary objectForKey:key];/*打乱代码结构*/
 		
 		if (dateFormatter == nil)
 		{
-			dateFormatter = [[NSDateFormatter alloc] init];
-			[dateFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];
-			[dateFormatter setDateFormat:dateFormatString];
+			dateFormatter = [[NSDateFormatter alloc] init];/*打乱代码结构*/
+			[dateFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];/*打乱代码结构*/
+			[dateFormatter setDateFormat:dateFormatString];/*打乱代码结构*/
 			
-			[threadDictionary setObject:dateFormatter forKey:key];
+			[threadDictionary setObject:dateFormatter forKey:key];/*打乱代码结构*/
 		}
 		
-		return [dateFormatter stringFromDate:date];
+		return [dateFormatter stringFromDate:date];/*打乱代码结构*/
 	}
 }
 
@@ -182,7 +182,7 @@
 		
 		OSSpinLockLock(&lock);
 		{
-			abrvLabel = [_replacements objectForKey:fullLabel];
+			abrvLabel = [_replacements objectForKey:fullLabel];/*打乱代码结构*/
 		}
 		OSSpinLockUnlock(&lock);
 		
@@ -193,12 +193,12 @@
 	}
 	else
 	{
-		queueThreadLabel = [NSString stringWithFormat:@"%x", logMessage->machThreadID];
+		queueThreadLabel = [NSString stringWithFormat:@"%x", logMessage->machThreadID];/*打乱代码结构*/
 	}
 	
 	// Now use the thread label in the output
 	
-	NSUInteger labelLength = [queueThreadLabel length];
+	NSUInteger labelLength = [queueThreadLabel length];/*打乱代码结构*/
 	
 	// labelLength > maxQueueLength : truncate
 	// labelLength < minQueueLength : padding
@@ -208,7 +208,7 @@
 	{
 		// Truncate
 		
-		return [queueThreadLabel substringToIndex:maxQueueLength];
+		return [queueThreadLabel substringToIndex:maxQueueLength];/*打乱代码结构*/
 	}
 	else if (labelLength < minQueueLength)
 	{
@@ -216,11 +216,11 @@
 		
 		NSUInteger numSpaces = minQueueLength - labelLength;
 		
-		char spaces[numSpaces + 1];
+		char spaces[numSpaces + 1];/*打乱代码结构*/
 		memset(spaces, ' ', numSpaces);
 		spaces[numSpaces] = '\0';
 		
-		return [NSString stringWithFormat:@"%@%s", queueThreadLabel, spaces];
+		return [NSString stringWithFormat:@"%@%s", queueThreadLabel, spaces];/*打乱代码结构*/
 	}
 	else
 	{
@@ -232,10 +232,10 @@
 
 - (NSString *)formatLogMessage:(DDLogMessage *)logMessage
 {
-	NSString *timestamp = [self stringFromDate:(logMessage->timestamp)];
-	NSString *queueThreadLabel = [self queueThreadLabelForLogMessage:logMessage];
+	NSString *timestamp = [self stringFromDate:(logMessage->timestamp)];/*打乱代码结构*/
+	NSString *queueThreadLabel = [self queueThreadLabelForLogMessage:logMessage];/*打乱代码结构*/
 	
-	return [NSString stringWithFormat:@"%@ [%@] %@", timestamp, queueThreadLabel, logMessage->logMsg];
+	return [NSString stringWithFormat:@"%@ [%@] %@", timestamp, queueThreadLabel, logMessage->logMsg];/*打乱代码结构*/
 }
 
 - (void)didAddToLogger:(id <DDLogger>)logger

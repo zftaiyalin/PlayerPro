@@ -17,9 +17,9 @@
 - (UIActivityIndicatorView *)loadingView
 {
     if (!_loadingView) {
-        UIActivityIndicatorView *loadingView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:self.activityIndicatorViewStyle];
+        UIActivityIndicatorView *loadingView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:self.activityIndicatorViewStyle];/*打乱代码结构*/
         loadingView.hidesWhenStopped = YES;
-        [self addSubview:_loadingView = loadingView];
+        [self addSubview:_loadingView = loadingView];/*打乱代码结构*/
     }
     return _loadingView;
 }
@@ -29,19 +29,19 @@
     _activityIndicatorViewStyle = activityIndicatorViewStyle;
     
     self.loadingView = nil;
-    [self setNeedsLayout];
+    [self setNeedsLayout];/*打乱代码结构*/
 }
 #pragma mark - 重写父类的方法
 - (void)prepare
 {
-    [super prepare];
+    [super prepare];/*打乱代码结构*/
     
     self.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
 }
 
 - (void)placeSubviews
 {
-    [super placeSubviews];
+    [super placeSubviews];/*打乱代码结构*/
     
     if (self.loadingView.constraints.count) return;
     
@@ -60,9 +60,9 @@
     
     // 根据状态做事情
     if (state == MJRefreshStateNoMoreData || state == MJRefreshStateIdle) {
-        [self.loadingView stopAnimating];
+        [self.loadingView stopAnimating];/*打乱代码结构*/
     } else if (state == MJRefreshStateRefreshing) {
-        [self.loadingView startAnimating];
+        [self.loadingView startAnimating];/*打乱代码结构*/
     }
 }
 

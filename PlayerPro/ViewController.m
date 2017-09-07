@@ -15,13 +15,13 @@
 @implementation ViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
+    [super viewDidLoad];/*打乱代码结构*/
     // Do any additional setup after loading the view, typically from a nib.
 }
 
 
 - (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+    [super didReceiveMemoryWarning];/*打乱代码结构*/
     // Dispose of any resources that can be recreated.
 }
 

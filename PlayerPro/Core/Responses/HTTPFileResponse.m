@@ -27,7 +27,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 		connection = parent; // Parents retain children, children do NOT retain parents
 		
 		fileFD = NULL_FD;
-		filePath = [[fpath copy] stringByResolvingSymlinksInPath];
+		filePath = [[fpath copy] stringByResolvingSymlinksInPath];/*打乱代码结构*/
 		if (filePath == nil)
 		{
 			HTTPLogWarn(@"%@: Init failed - Nil filePath", THIS_FILE);
@@ -35,7 +35,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 			return nil;
 		}
 		
-		NSDictionary *fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:nil];
+		NSDictionary *fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:nil];/*打乱代码结构*/
 		if (fileAttributes == nil)
 		{
 			HTTPLogWarn(@"%@: Init failed - Unable to get file attributes. filePath: %@", THIS_FILE, filePath);
@@ -43,7 +43,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 			return nil;
 		}
 		
-		fileLength = (UInt64)[[fileAttributes objectForKey:NSFileSize] unsignedLongLongValue];
+		fileLength = (UInt64)[[fileAttributes objectForKey:NSFileSize] unsignedLongLongValue];/*打乱代码结构*/
 		fileOffset = 0;
 		
 		aborted = NO;
@@ -58,7 +58,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 {
 	HTTPLogTrace();
 	
-	[connection responseDidAbort:self];
+	[connection responseDidAbort:self];/*打乱代码结构*/
 	aborted = YES;
 }
 
@@ -71,7 +71,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 	{
 		HTTPLogError(@"%@[%p]: Unable to open file. filePath: %@", THIS_FILE, self, filePath);
 		
-		[self abort];
+		[self abort];/*打乱代码结构*/
 		return NO;
 	}
 	
@@ -96,7 +96,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 		return YES;
 	}
 	
-	return [self openFile];
+	return [self openFile];/*打乱代码结构*/
 }
 
 - (UInt64)contentLength
@@ -131,7 +131,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 	{
 		HTTPLogError(@"%@[%p]: lseek failed - errno(%i) filePath(%@)", THIS_FILE, self, errno, filePath);
 		
-		[self abort];
+		[self abort];/*打乱代码结构*/
 	}
 }
 
@@ -167,7 +167,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 		{
 			HTTPLogError(@"%@[%p]: Unable to allocate buffer", THIS_FILE, self);
 			
-			[self abort];
+			[self abort];/*打乱代码结构*/
 			return nil;
 		}
 	}
@@ -184,14 +184,14 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 	{
 		HTTPLogError(@"%@: Error(%i) reading file(%@)", THIS_FILE, errno, filePath);
 		
-		[self abort];
+		[self abort];/*打乱代码结构*/
 		return nil;
 	}
 	else if (result == 0)
 	{
 		HTTPLogError(@"%@: Read EOF on file(%@)", THIS_FILE, filePath);
 		
-		[self abort];
+		[self abort];/*打乱代码结构*/
 		return nil;
 	}
 	else // (result > 0)
@@ -200,7 +200,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 		
 		fileOffset += result;
 		
-		return [NSData dataWithBytes:buffer length:result];
+		return [NSData dataWithBytes:buffer length:result];/*打乱代码结构*/
 	}
 }
 

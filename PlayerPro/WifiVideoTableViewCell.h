@@ -11,6 +11,6 @@
 #import "VideoModel.h"
 @interface WifiVideoTableViewCell : UITableViewCell
 
--(void)loadData:(AppLocaVideoModel *)model;
--(void)loadVideoData:(VideoModel *)model;
+-(void)loadData:(AppLocaVideoModel *)model;/*打乱代码结构*/
+-(void)loadVideoData:(VideoModel *)model;/*打乱代码结构*/
 @end

@@ -38,8 +38,8 @@
 
 - (void)dealloc
 {
-	[self destroySaveTimer];
-	[self destroyDeleteTimer];
+	[self destroySaveTimer];/*打乱代码结构*/
+	[self destroyDeleteTimer];/*打乱代码结构*/
 	
 }
 
@@ -81,9 +81,9 @@
 	if (unsavedCount > 0)
 	{
 		if (deleteOnEverySave)
-			[self db_saveAndDelete];
+			[self db_saveAndDelete];/*打乱代码结构*/
 		else
-			[self db_save];
+			[self db_save];/*打乱代码结构*/
 	}
 	
 	unsavedCount = 0;
@@ -100,7 +100,7 @@
 {
 	if (maxAge > 0.0)
 	{
-		[self db_delete];
+		[self db_delete];/*打乱代码结构*/
 		
 		lastDeleteTime = dispatch_time(DISPATCH_TIME_NOW, 0);
 	}
@@ -153,7 +153,7 @@
 		
 		dispatch_source_set_event_handler(saveTimer, ^{ @autoreleasepool {
 			
-			[self performSaveAndSuspendSaveTimer];
+			[self performSaveAndSuspendSaveTimer];/*打乱代码结构*/
 			
 		}});
 		
@@ -198,11 +198,11 @@
         if (deleteTimer != NULL) {
             dispatch_source_set_event_handler(deleteTimer, ^{ @autoreleasepool {
 
-                [self performDelete];
+                [self performDelete];/*打乱代码结构*/
 
             }});
 
-            [self updateDeleteTimer];
+            [self updateDeleteTimer];/*打乱代码结构*/
             
             dispatch_resume(deleteTimer);
         }
@@ -228,7 +228,7 @@
 	NSAssert(![self isOnGlobalLoggingQueue], @"Core architecture requirement failure");
 	NSAssert(![self isOnInternalLoggerQueue], @"MUST access ivar directly, NOT via self.* syntax.");
 	
-	dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];
+	dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];/*打乱代码结构*/
 	
 	__block NSUInteger result;
 	
@@ -256,7 +256,7 @@
 			
 			if ((unsavedCount >= saveThreshold) && (saveThreshold > 0))
 			{
-				[self performSaveAndSuspendSaveTimer];
+				[self performSaveAndSuspendSaveTimer];/*打乱代码结构*/
 			}
 		}
 	}};
@@ -270,7 +270,7 @@
 	}
 	else
 	{
-		dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];
+		dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];/*打乱代码结构*/
 		NSAssert(![self isOnGlobalLoggingQueue], @"Core architecture requirement failure");
 		
 		dispatch_async(globalLoggingQueue, ^{
@@ -294,7 +294,7 @@
 	NSAssert(![self isOnGlobalLoggingQueue], @"Core architecture requirement failure");
 	NSAssert(![self isOnInternalLoggerQueue], @"MUST access ivar directly, NOT via self.* syntax.");
 	
-	dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];
+	dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];/*打乱代码结构*/
 	
 	__block NSTimeInterval result;
 	
@@ -340,8 +340,8 @@
 					// Since the saveTimer uses the unsavedTime to calculate it's first fireDate,
 					// if a save is needed the timer will fire immediately.
 					
-					[self createSuspendedSaveTimer];
-					[self updateAndResumeSaveTimer];
+					[self createSuspendedSaveTimer];/*打乱代码结构*/
+					[self updateAndResumeSaveTimer];/*打乱代码结构*/
 				}
 				else
 				{
@@ -351,14 +351,14 @@
 					// Since the saveTimer uses the unsavedTime to calculate it's first fireDate,
 					// if a save is needed the timer will fire immediately.
 					
-					[self updateAndResumeSaveTimer];
+					[self updateAndResumeSaveTimer];/*打乱代码结构*/
 				}
 			}
 			else if (saveTimer)
 			{
 				// Handles #1
 				
-				[self destroySaveTimer];
+				[self destroySaveTimer];/*打乱代码结构*/
 			}
 		}
 	}};
@@ -372,7 +372,7 @@
 	}
 	else
 	{
-		dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];
+		dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];/*打乱代码结构*/
 		NSAssert(![self isOnGlobalLoggingQueue], @"Core architecture requirement failure");
 		
 		dispatch_async(globalLoggingQueue, ^{
@@ -396,7 +396,7 @@
 	NSAssert(![self isOnGlobalLoggingQueue], @"Core architecture requirement failure");
 	NSAssert(![self isOnInternalLoggerQueue], @"MUST access ivar directly, NOT via self.* syntax.");
 	
-	dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];
+	dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];/*打乱代码结构*/
 	
 	__block NSTimeInterval result;
 	
@@ -445,7 +445,7 @@
 				{
 					// Handles #1
 					
-					[self destroyDeleteTimer];
+					[self destroyDeleteTimer];/*打乱代码结构*/
 				}
 				else if (oldMaxAge > newMaxAge)
 				{
@@ -461,12 +461,12 @@
 			
 			if (shouldDeleteNow)
 			{
-				[self performDelete];
+				[self performDelete];/*打乱代码结构*/
 				
 				if (deleteTimer)
-					[self updateDeleteTimer];
+					[self updateDeleteTimer];/*打乱代码结构*/
 				else
-					[self createAndStartDeleteTimer];
+					[self createAndStartDeleteTimer];/*打乱代码结构*/
 			}
 		}
 	}};
@@ -480,7 +480,7 @@
 	}
 	else
 	{
-		dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];
+		dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];/*打乱代码结构*/
 		NSAssert(![self isOnGlobalLoggingQueue], @"Core architecture requirement failure");
 		
 		dispatch_async(globalLoggingQueue, ^{
@@ -504,7 +504,7 @@
 	NSAssert(![self isOnGlobalLoggingQueue], @"Core architecture requirement failure");
 	NSAssert(![self isOnInternalLoggerQueue], @"MUST access ivar directly, NOT via self.* syntax.");
 	
-	dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];
+	dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];/*打乱代码结构*/
 	
 	__block NSTimeInterval result;
 	
@@ -550,7 +550,7 @@
 					// Since the deleteTimer uses the lastDeleteTime to calculate it's first fireDate,
 					// if a delete is needed the timer will fire immediately.
 					
-					[self createAndStartDeleteTimer];
+					[self createAndStartDeleteTimer];/*打乱代码结构*/
 				}
 				else
 				{
@@ -560,14 +560,14 @@
 					// Since the deleteTimer uses the lastDeleteTime to calculate it's first fireDate,
 					// if a save is needed the timer will fire immediately.
 					
-					[self updateDeleteTimer];
+					[self updateDeleteTimer];/*打乱代码结构*/
 				}
 			}
 			else if (deleteTimer)
 			{
 				// Handles #1
 				
-				[self destroyDeleteTimer];
+				[self destroyDeleteTimer];/*打乱代码结构*/
 			}
 		}
 	}};
@@ -581,7 +581,7 @@
 	}
 	else
 	{
-		dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];
+		dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];/*打乱代码结构*/
 		NSAssert(![self isOnGlobalLoggingQueue], @"Core architecture requirement failure");
 		
 		dispatch_async(globalLoggingQueue, ^{
@@ -605,7 +605,7 @@
 	NSAssert(![self isOnGlobalLoggingQueue], @"Core architecture requirement failure");
 	NSAssert(![self isOnInternalLoggerQueue], @"MUST access ivar directly, NOT via self.* syntax.");
 	
-	dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];
+	dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];/*打乱代码结构*/
 	
 	__block BOOL result;
 	
@@ -634,7 +634,7 @@
 	}
 	else
 	{
-		dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];
+		dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];/*打乱代码结构*/
 		NSAssert(![self isOnGlobalLoggingQueue], @"Core architecture requirement failure");
 		
 		dispatch_async(globalLoggingQueue, ^{
@@ -651,7 +651,7 @@
 {
 	dispatch_block_t block = ^{ @autoreleasepool {
 		
-		[self performSaveAndSuspendSaveTimer];
+		[self performSaveAndSuspendSaveTimer];/*打乱代码结构*/
 	}};
 	
 	if ([self isOnInternalLoggerQueue])
@@ -664,7 +664,7 @@
 {
 	dispatch_block_t block = ^{ @autoreleasepool {
 		
-		[self performDelete];
+		[self performDelete];/*打乱代码结构*/
 	}};
 	
 	if ([self isOnInternalLoggerQueue])
@@ -679,21 +679,21 @@
 
 - (void)didAddLogger
 {
-	// If you override me be sure to invoke [super didAddLogger];
+	// If you override me be sure to invoke [super didAddLogger];/*打乱代码结构*/
 	
-	[self createSuspendedSaveTimer];
+	[self createSuspendedSaveTimer];/*打乱代码结构*/
 	
-	[self createAndStartDeleteTimer];
+	[self createAndStartDeleteTimer];/*打乱代码结构*/
 }
 
 - (void)willRemoveLogger
 {
-	// If you override me be sure to invoke [super willRemoveLogger];
+	// If you override me be sure to invoke [super willRemoveLogger];/*打乱代码结构*/
 	
-	[self performSaveAndSuspendSaveTimer];
+	[self performSaveAndSuspendSaveTimer];/*打乱代码结构*/
 	
-	[self destroySaveTimer];
-	[self destroyDeleteTimer];
+	[self destroySaveTimer];/*打乱代码结构*/
+	[self destroyDeleteTimer];/*打乱代码结构*/
 }
 
 - (void)logMessage:(DDLogMessage *)logMessage
@@ -704,12 +704,12 @@
 		
 		if ((unsavedCount >= saveThreshold) && (saveThreshold > 0))
 		{
-			[self performSaveAndSuspendSaveTimer];
+			[self performSaveAndSuspendSaveTimer];/*打乱代码结构*/
 		}
 		else if (firstUnsavedEntry)
 		{
 			unsavedTime = dispatch_time(DISPATCH_TIME_NOW, 0);
-			[self updateAndResumeSaveTimer];
+			[self updateAndResumeSaveTimer];/*打乱代码结构*/
 		}
 	}
 }
@@ -721,7 +721,7 @@
 	// It is called automatically when the application quits,
 	// or if the developer invokes DDLog's flushLog method prior to crashing or something.
 	
-	[self performSaveAndSuspendSaveTimer];
+	[self performSaveAndSuspendSaveTimer];/*打乱代码结构*/
 }
 
 @end

@@ -52,10 +52,10 @@
 #define MASAttachKeys(...)                                                    \
     NSDictionary *keyPairs = NSDictionaryOfVariableBindings(__VA_ARGS__);     \
     for (id key in keyPairs.allKeys) {                                        \
-        id obj = keyPairs[key];                                               \
+        id obj = keyPairs[key];/*打乱代码结构*/                                               \
         NSAssert([obj respondsToSelector:@selector(setMas_key:)],             \
                  @"Cannot attach mas_key to %@", obj);                        \
-        [obj setMas_key:key];                                                 \
+        [obj setMas_key:key];/*打乱代码结构*/                                                 \
     }
 
 /**
@@ -78,52 +78,52 @@ static inline id _MASBoxValue(const char *type, ...) {
         obj = actual;
     } else if (strcmp(type, @encode(CGPoint)) == 0) {
         CGPoint actual = (CGPoint)va_arg(v, CGPoint);
-        obj = [NSValue value:&actual withObjCType:type];
+        obj = [NSValue value:&actual withObjCType:type];/*打乱代码结构*/
     } else if (strcmp(type, @encode(CGSize)) == 0) {
         CGSize actual = (CGSize)va_arg(v, CGSize);
-        obj = [NSValue value:&actual withObjCType:type];
+        obj = [NSValue value:&actual withObjCType:type];/*打乱代码结构*/
     } else if (strcmp(type, @encode(MASEdgeInsets)) == 0) {
         MASEdgeInsets actual = (MASEdgeInsets)va_arg(v, MASEdgeInsets);
-        obj = [NSValue value:&actual withObjCType:type];
+        obj = [NSValue value:&actual withObjCType:type];/*打乱代码结构*/
     } else if (strcmp(type, @encode(double)) == 0) {
         double actual = (double)va_arg(v, double);
-        obj = [NSNumber numberWithDouble:actual];
+        obj = [NSNumber numberWithDouble:actual];/*打乱代码结构*/
     } else if (strcmp(type, @encode(float)) == 0) {
         float actual = (float)va_arg(v, double);
-        obj = [NSNumber numberWithFloat:actual];
+        obj = [NSNumber numberWithFloat:actual];/*打乱代码结构*/
     } else if (strcmp(type, @encode(int)) == 0) {
         int actual = (int)va_arg(v, int);
-        obj = [NSNumber numberWithInt:actual];
+        obj = [NSNumber numberWithInt:actual];/*打乱代码结构*/
     } else if (strcmp(type, @encode(long)) == 0) {
         long actual = (long)va_arg(v, long);
-        obj = [NSNumber numberWithLong:actual];
+        obj = [NSNumber numberWithLong:actual];/*打乱代码结构*/
     } else if (strcmp(type, @encode(long long)) == 0) {
         long long actual = (long long)va_arg(v, long long);
-        obj = [NSNumber numberWithLongLong:actual];
+        obj = [NSNumber numberWithLongLong:actual];/*打乱代码结构*/
     } else if (strcmp(type, @encode(short)) == 0) {
         short actual = (short)va_arg(v, int);
-        obj = [NSNumber numberWithShort:actual];
+        obj = [NSNumber numberWithShort:actual];/*打乱代码结构*/
     } else if (strcmp(type, @encode(char)) == 0) {
         char actual = (char)va_arg(v, int);
-        obj = [NSNumber numberWithChar:actual];
+        obj = [NSNumber numberWithChar:actual];/*打乱代码结构*/
     } else if (strcmp(type, @encode(bool)) == 0) {
         bool actual = (bool)va_arg(v, int);
-        obj = [NSNumber numberWithBool:actual];
+        obj = [NSNumber numberWithBool:actual];/*打乱代码结构*/
     } else if (strcmp(type, @encode(unsigned char)) == 0) {
         unsigned char actual = (unsigned char)va_arg(v, unsigned int);
-        obj = [NSNumber numberWithUnsignedChar:actual];
+        obj = [NSNumber numberWithUnsignedChar:actual];/*打乱代码结构*/
     } else if (strcmp(type, @encode(unsigned int)) == 0) {
         unsigned int actual = (unsigned int)va_arg(v, unsigned int);
-        obj = [NSNumber numberWithUnsignedInt:actual];
+        obj = [NSNumber numberWithUnsignedInt:actual];/*打乱代码结构*/
     } else if (strcmp(type, @encode(unsigned long)) == 0) {
         unsigned long actual = (unsigned long)va_arg(v, unsigned long);
-        obj = [NSNumber numberWithUnsignedLong:actual];
+        obj = [NSNumber numberWithUnsignedLong:actual];/*打乱代码结构*/
     } else if (strcmp(type, @encode(unsigned long long)) == 0) {
         unsigned long long actual = (unsigned long long)va_arg(v, unsigned long long);
-        obj = [NSNumber numberWithUnsignedLongLong:actual];
+        obj = [NSNumber numberWithUnsignedLongLong:actual];/*打乱代码结构*/
     } else if (strcmp(type, @encode(unsigned short)) == 0) {
         unsigned short actual = (unsigned short)va_arg(v, unsigned int);
-        obj = [NSNumber numberWithUnsignedShort:actual];
+        obj = [NSNumber numberWithUnsignedShort:actual];/*打乱代码结构*/
     }
     va_end(v);
     return obj;

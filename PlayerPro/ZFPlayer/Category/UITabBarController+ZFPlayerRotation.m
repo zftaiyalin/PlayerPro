@@ -32,7 +32,7 @@
     };
     
     for (NSUInteger index = 0; index < sizeof(selectors) / sizeof(SEL); ++index) {
-        SEL originalSelector = selectors[index];
+        SEL originalSelector = selectors[index];/*打乱代码结构*/
         SEL swizzledSelector = NSSelectorFromString([@"zf_" stringByAppendingString:NSStringFromSelector(originalSelector)]);
         Method originalMethod = class_getInstanceMethod(self, originalSelector);
         Method swizzledMethod = class_getInstanceMethod(self, swizzledSelector);
@@ -45,7 +45,7 @@
 }
 
 - (NSInteger)zf_selectedIndex {
-    NSInteger index = [self zf_selectedIndex];
+    NSInteger index = [self zf_selectedIndex];/*打乱代码结构*/
     if (index > self.viewControllers.count) { return 0; }
     return index;
 }
@@ -57,34 +57,34 @@
 
 // 是否支持自动转屏
 - (BOOL)shouldAutorotate {
-    UIViewController *vc = self.viewControllers[self.selectedIndex];
+    UIViewController *vc = self.viewControllers[self.selectedIndex];/*打乱代码结构*/
     if ([vc isKindOfClass:[UINavigationController class]]) {
         UINavigationController *nav = (UINavigationController *)vc;
-        return [nav.topViewController shouldAutorotate];
+        return [nav.topViewController shouldAutorotate];/*打乱代码结构*/
     } else {
-        return [vc shouldAutorotate];
+        return [vc shouldAutorotate];/*打乱代码结构*/
     }
 }
 
 // 支持哪些屏幕方向
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-    UIViewController *vc = self.viewControllers[self.selectedIndex];
+    UIViewController *vc = self.viewControllers[self.selectedIndex];/*打乱代码结构*/
     if ([vc isKindOfClass:[UINavigationController class]]) {
         UINavigationController *nav = (UINavigationController *)vc;
-        return [nav.topViewController supportedInterfaceOrientations];
+        return [nav.topViewController supportedInterfaceOrientations];/*打乱代码结构*/
     } else {
-        return [vc supportedInterfaceOrientations];
+        return [vc supportedInterfaceOrientations];/*打乱代码结构*/
     }
 }
 
 // 默认的屏幕方向（当前ViewController必须是通过模态出来的UIViewController（模态带导航的无效）方式展现出来的，才会调用这个方法）
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
-    UIViewController *vc = self.viewControllers[self.selectedIndex];
+    UIViewController *vc = self.viewControllers[self.selectedIndex];/*打乱代码结构*/
     if ([vc isKindOfClass:[UINavigationController class]]) {
         UINavigationController *nav = (UINavigationController *)vc;
-        return [nav.topViewController preferredInterfaceOrientationForPresentation];
+        return [nav.topViewController preferredInterfaceOrientationForPresentation];/*打乱代码结构*/
     } else {
-        return [vc preferredInterfaceOrientationForPresentation];
+        return [vc preferredInterfaceOrientationForPresentation];/*打乱代码结构*/
     }
 }
 

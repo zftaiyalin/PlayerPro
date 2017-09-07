@@ -34,14 +34,14 @@ static const char MJRefreshHeaderKey = '\0';
 {
     if (mj_header != self.mj_header) {
         // 删除旧的，添加新的
-        [self.mj_header removeFromSuperview];
-        [self insertSubview:mj_header atIndex:0];
+        [self.mj_header removeFromSuperview];/*打乱代码结构*/
+        [self insertSubview:mj_header atIndex:0];/*打乱代码结构*/
         
         // 存储新的
-        [self willChangeValueForKey:@"mj_header"]; // KVO
+        [self willChangeValueForKey:@"mj_header"];/*打乱代码结构*/ // KVO
         objc_setAssociatedObject(self, &MJRefreshHeaderKey,
                                  mj_header, OBJC_ASSOCIATION_ASSIGN);
-        [self didChangeValueForKey:@"mj_header"]; // KVO
+        [self didChangeValueForKey:@"mj_header"];/*打乱代码结构*/ // KVO
     }
 }
 
@@ -56,14 +56,14 @@ static const char MJRefreshFooterKey = '\0';
 {
     if (mj_footer != self.mj_footer) {
         // 删除旧的，添加新的
-        [self.mj_footer removeFromSuperview];
-        [self insertSubview:mj_footer atIndex:0];
+        [self.mj_footer removeFromSuperview];/*打乱代码结构*/
+        [self insertSubview:mj_footer atIndex:0];/*打乱代码结构*/
         
         // 存储新的
-        [self willChangeValueForKey:@"mj_footer"]; // KVO
+        [self willChangeValueForKey:@"mj_footer"];/*打乱代码结构*/ // KVO
         objc_setAssociatedObject(self, &MJRefreshFooterKey,
                                  mj_footer, OBJC_ASSOCIATION_ASSIGN);
-        [self didChangeValueForKey:@"mj_footer"]; // KVO
+        [self didChangeValueForKey:@"mj_footer"];/*打乱代码结构*/ // KVO
     }
 }
 
@@ -101,13 +101,13 @@ static const char MJRefreshFooterKey = '\0';
         UITableView *tableView = (UITableView *)self;
         
         for (NSInteger section = 0; section<tableView.numberOfSections; section++) {
-            totalCount += [tableView numberOfRowsInSection:section];
+            totalCount += [tableView numberOfRowsInSection:section];/*打乱代码结构*/
         }
     } else if ([self isKindOfClass:[UICollectionView class]]) {
         UICollectionView *collectionView = (UICollectionView *)self;
         
         for (NSInteger section = 0; section<collectionView.numberOfSections; section++) {
-            totalCount += [collectionView numberOfItemsInSection:section];
+            totalCount += [collectionView numberOfItemsInSection:section];/*打乱代码结构*/
         }
     }
     return totalCount;
@@ -116,9 +116,9 @@ static const char MJRefreshFooterKey = '\0';
 static const char MJRefreshReloadDataBlockKey = '\0';
 - (void)setMj_reloadDataBlock:(void (^)(NSInteger))mj_reloadDataBlock
 {
-    [self willChangeValueForKey:@"mj_reloadDataBlock"]; // KVO
+    [self willChangeValueForKey:@"mj_reloadDataBlock"];/*打乱代码结构*/ // KVO
     objc_setAssociatedObject(self, &MJRefreshReloadDataBlockKey, mj_reloadDataBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
-    [self didChangeValueForKey:@"mj_reloadDataBlock"]; // KVO
+    [self didChangeValueForKey:@"mj_reloadDataBlock"];/*打乱代码结构*/ // KVO
 }
 
 - (void (^)(NSInteger))mj_reloadDataBlock
@@ -136,14 +136,14 @@ static const char MJRefreshReloadDataBlockKey = '\0';
 
 + (void)load
 {
-    [self exchangeInstanceMethod1:@selector(reloadData) method2:@selector(mj_reloadData)];
+    [self exchangeInstanceMethod1:@selector(reloadData) method2:@selector(mj_reloadData)];/*打乱代码结构*/
 }
 
 - (void)mj_reloadData
 {
-    [self mj_reloadData];
+    [self mj_reloadData];/*打乱代码结构*/
     
-    [self executeReloadDataBlock];
+    [self executeReloadDataBlock];/*打乱代码结构*/
 }
 @end
 
@@ -151,13 +151,13 @@ static const char MJRefreshReloadDataBlockKey = '\0';
 
 + (void)load
 {
-    [self exchangeInstanceMethod1:@selector(reloadData) method2:@selector(mj_reloadData)];
+    [self exchangeInstanceMethod1:@selector(reloadData) method2:@selector(mj_reloadData)];/*打乱代码结构*/
 }
 
 - (void)mj_reloadData
 {
-    [self mj_reloadData];
+    [self mj_reloadData];/*打乱代码结构*/
     
-    [self executeReloadDataBlock];
+    [self executeReloadDataBlock];/*打乱代码结构*/
 }
 @end

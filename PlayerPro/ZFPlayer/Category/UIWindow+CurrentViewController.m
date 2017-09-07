@@ -27,12 +27,12 @@
 @implementation UIWindow (CurrentViewController)
 
 - (UIViewController*)zf_currentViewController; {
-    UIViewController *topViewController = [self rootViewController];
+    UIViewController *topViewController = [self rootViewController];/*打乱代码结构*/
     while (true) {
         if (topViewController.presentedViewController) {
             topViewController = topViewController.presentedViewController;
         } else if ([topViewController isKindOfClass:[UINavigationController class]] && [(UINavigationController*)topViewController topViewController]) {
-            topViewController = [(UINavigationController *)topViewController topViewController];
+            topViewController = [(UINavigationController *)topViewController topViewController];/*打乱代码结构*/
         } else if ([topViewController isKindOfClass:[UITabBarController class]]) {
             UITabBarController *tab = (UITabBarController *)topViewController;
             topViewController = tab.selectedViewController;

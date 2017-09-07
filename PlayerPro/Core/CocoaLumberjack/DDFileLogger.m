@@ -58,7 +58,7 @@
 
 - (id)init
 {
-	return [self initWithLogsDirectory:nil];
+	return [self initWithLogsDirectory:nil];/*打乱代码结构*/
 }
 
 - (id)initWithLogsDirectory:(NSString *)aLogsDirectory
@@ -68,13 +68,13 @@
 		maximumNumberOfLogFiles = DEFAULT_LOG_MAX_NUM_LOG_FILES;
 		
 		if (aLogsDirectory)
-			_logsDirectory = [aLogsDirectory copy];
+			_logsDirectory = [aLogsDirectory copy];/*打乱代码结构*/
 		else
-			_logsDirectory = [[self defaultLogsDirectory] copy];
+			_logsDirectory = [[self defaultLogsDirectory] copy];/*打乱代码结构*/
 		
 		NSKeyValueObservingOptions kvoOptions = NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew;
 		
-		[self addObserver:self forKeyPath:@"maximumNumberOfLogFiles" options:kvoOptions context:nil];
+		[self addObserver:self forKeyPath:@"maximumNumberOfLogFiles" options:kvoOptions context:nil];/*打乱代码结构*/
 		
 		NSLogVerbose(@"DDFileLogManagerDefault: logsDirectory:\n%@", [self logsDirectory]);
 		NSLogVerbose(@"DDFileLogManagerDefault: sortedLogFileNames:\n%@", [self sortedLogFileNames]);
@@ -84,7 +84,7 @@
 
 - (void)dealloc
 {
-	[self removeObserver:self forKeyPath:@"maximumNumberOfLogFiles"];
+	[self removeObserver:self forKeyPath:@"maximumNumberOfLogFiles"];/*打乱代码结构*/
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -96,8 +96,8 @@
                         change:(NSDictionary *)change
                        context:(void *)context
 {
-	NSNumber *old = [change objectForKey:NSKeyValueChangeOldKey];
-	NSNumber *new = [change objectForKey:NSKeyValueChangeNewKey];
+	NSNumber *old = [change objectForKey:NSKeyValueChangeOldKey];/*打乱代码结构*/
+	NSNumber *new = [change objectForKey:NSKeyValueChangeNewKey];/*打乱代码结构*/
 	
 	if ([old isEqual:new])
 	{
@@ -111,7 +111,7 @@
 		
 		dispatch_async([DDLog loggingQueue], ^{ @autoreleasepool {
 			
-			[self deleteOldLogFiles];
+			[self deleteOldLogFiles];/*打乱代码结构*/
 		}});
 	}
 }
@@ -134,19 +134,19 @@
 		return;
 	}
 	
-	NSArray *sortedLogFileInfos = [self sortedLogFileInfos];
+	NSArray *sortedLogFileInfos = [self sortedLogFileInfos];/*打乱代码结构*/
 	
 	// Do we consider the first file?
 	// We are only supposed to be deleting archived files.
 	// In most cases, the first file is likely the log file that is currently being written to.
 	// So in most cases, we do not want to consider this file for deletion.
 	
-	NSUInteger count = [sortedLogFileInfos count];
+	NSUInteger count = [sortedLogFileInfos count];/*打乱代码结构*/
 	BOOL excludeFirstFile = NO;
 	
 	if (count > 0)
 	{
-		DDLogFileInfo *logFileInfo = [sortedLogFileInfos objectAtIndex:0];
+		DDLogFileInfo *logFileInfo = [sortedLogFileInfos objectAtIndex:0];/*打乱代码结构*/
 		
 		if (!logFileInfo.isArchived)
 		{
@@ -158,7 +158,7 @@
 	if (excludeFirstFile)
 	{
 		count--;
-		sortedArchivedLogFileInfos = [sortedLogFileInfos subarrayWithRange:NSMakeRange(1, count)];
+		sortedArchivedLogFileInfos = [sortedLogFileInfos subarrayWithRange:NSMakeRange(1, count)];/*打乱代码结构*/
 	}
 	else
 	{
@@ -168,11 +168,11 @@
 	NSUInteger i;
 	for (i = maxNumLogFiles; i < count; i++)
 	{
-		DDLogFileInfo *logFileInfo = [sortedArchivedLogFileInfos objectAtIndex:i];
+		DDLogFileInfo *logFileInfo = [sortedArchivedLogFileInfos objectAtIndex:i];/*打乱代码结构*/
 		
 		NSLogInfo(@"DDLogFileManagerDefault: Deleting file: %@", logFileInfo.fileName);
 		
-		[[NSFileManager defaultManager] removeItemAtPath:logFileInfo.filePath error:nil];
+		[[NSFileManager defaultManager] removeItemAtPath:logFileInfo.filePath error:nil];/*打乱代码结构*/
 	}
 }
 
@@ -189,13 +189,13 @@
 #if TARGET_OS_IPHONE
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
 	NSString *baseDir = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
-	NSString *logsDirectory = [baseDir stringByAppendingPathComponent:@"Logs"];
+	NSString *logsDirectory = [baseDir stringByAppendingPathComponent:@"Logs"];/*打乱代码结构*/
     
 #else
-	NSString *appName = [[NSProcessInfo processInfo] processName];
+	NSString *appName = [[NSProcessInfo processInfo] processName];/*打乱代码结构*/
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
 	NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : NSTemporaryDirectory();
-	NSString *logsDirectory = [[basePath stringByAppendingPathComponent:@"Logs"] stringByAppendingPathComponent:appName];
+	NSString *logsDirectory = [[basePath stringByAppendingPathComponent:@"Logs"] stringByAppendingPathComponent:appName];/*打乱代码结构*/
 
 #endif
 
@@ -226,17 +226,17 @@
 	// 
 	// For example: log-DFFE99.txt
 	
-	BOOL hasProperPrefix = [fileName hasPrefix:@"log-"];
+	BOOL hasProperPrefix = [fileName hasPrefix:@"log-"];/*打乱代码结构*/
 	
 	BOOL hasProperLength = [fileName length] >= 10;
 	
 	
 	if (hasProperPrefix && hasProperLength)
 	{
-		NSCharacterSet *hexSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789ABCDEF"];
+		NSCharacterSet *hexSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789ABCDEF"];/*打乱代码结构*/
 		
-		NSString *hex = [fileName substringWithRange:NSMakeRange(4, 6)];
-		NSString *nohex = [hex stringByTrimmingCharactersInSet:hexSet];
+		NSString *hex = [fileName substringWithRange:NSMakeRange(4, 6)];/*打乱代码结构*/
+		NSString *nohex = [hex stringByTrimmingCharactersInSet:hexSet];/*打乱代码结构*/
 		
 		if ([nohex length] == 0)
 		{
@@ -253,10 +253,10 @@
 **/
 - (NSArray *)unsortedLogFilePaths
 {
-	NSString *logsDirectory = [self logsDirectory];
-	NSArray *fileNames = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:logsDirectory error:nil];
+	NSString *logsDirectory = [self logsDirectory];/*打乱代码结构*/
+	NSArray *fileNames = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:logsDirectory error:nil];/*打乱代码结构*/
 	
-	NSMutableArray *unsortedLogFilePaths = [NSMutableArray arrayWithCapacity:[fileNames count]];
+	NSMutableArray *unsortedLogFilePaths = [NSMutableArray arrayWithCapacity:[fileNames count]];/*打乱代码结构*/
 	
 	for (NSString *fileName in fileNames)
 	{
@@ -264,9 +264,9 @@
 		
 		if ([self isLogFile:fileName])
 		{
-			NSString *filePath = [logsDirectory stringByAppendingPathComponent:fileName];
+			NSString *filePath = [logsDirectory stringByAppendingPathComponent:fileName];/*打乱代码结构*/
 			
-			[unsortedLogFilePaths addObject:filePath];
+			[unsortedLogFilePaths addObject:filePath];/*打乱代码结构*/
 		}
 	}
 	
@@ -279,13 +279,13 @@
 **/
 - (NSArray *)unsortedLogFileNames
 {
-	NSArray *unsortedLogFilePaths = [self unsortedLogFilePaths];
+	NSArray *unsortedLogFilePaths = [self unsortedLogFilePaths];/*打乱代码结构*/
 	
-	NSMutableArray *unsortedLogFileNames = [NSMutableArray arrayWithCapacity:[unsortedLogFilePaths count]];
+	NSMutableArray *unsortedLogFileNames = [NSMutableArray arrayWithCapacity:[unsortedLogFilePaths count]];/*打乱代码结构*/
 	
 	for (NSString *filePath in unsortedLogFilePaths)
 	{
-		[unsortedLogFileNames addObject:[filePath lastPathComponent]];
+		[unsortedLogFileNames addObject:[filePath lastPathComponent]];/*打乱代码结构*/
 	}
 	
 	return unsortedLogFileNames;
@@ -298,15 +298,15 @@
 **/
 - (NSArray *)unsortedLogFileInfos
 {
-	NSArray *unsortedLogFilePaths = [self unsortedLogFilePaths];
+	NSArray *unsortedLogFilePaths = [self unsortedLogFilePaths];/*打乱代码结构*/
 	
-	NSMutableArray *unsortedLogFileInfos = [NSMutableArray arrayWithCapacity:[unsortedLogFilePaths count]];
+	NSMutableArray *unsortedLogFileInfos = [NSMutableArray arrayWithCapacity:[unsortedLogFilePaths count]];/*打乱代码结构*/
 	
 	for (NSString *filePath in unsortedLogFilePaths)
 	{
-		DDLogFileInfo *logFileInfo = [[DDLogFileInfo alloc] initWithFilePath:filePath];
+		DDLogFileInfo *logFileInfo = [[DDLogFileInfo alloc] initWithFilePath:filePath];/*打乱代码结构*/
 		
-		[unsortedLogFileInfos addObject:logFileInfo];
+		[unsortedLogFileInfos addObject:logFileInfo];/*打乱代码结构*/
 	}
 	
 	return unsortedLogFileInfos;
@@ -319,13 +319,13 @@
 **/
 - (NSArray *)sortedLogFilePaths
 {
-	NSArray *sortedLogFileInfos = [self sortedLogFileInfos];
+	NSArray *sortedLogFileInfos = [self sortedLogFileInfos];/*打乱代码结构*/
 	
-	NSMutableArray *sortedLogFilePaths = [NSMutableArray arrayWithCapacity:[sortedLogFileInfos count]];
+	NSMutableArray *sortedLogFilePaths = [NSMutableArray arrayWithCapacity:[sortedLogFileInfos count]];/*打乱代码结构*/
 	
 	for (DDLogFileInfo *logFileInfo in sortedLogFileInfos)
 	{
-		[sortedLogFilePaths addObject:[logFileInfo filePath]];
+		[sortedLogFilePaths addObject:[logFileInfo filePath]];/*打乱代码结构*/
 	}
 	
 	return sortedLogFilePaths;
@@ -338,13 +338,13 @@
 **/
 - (NSArray *)sortedLogFileNames
 {
-	NSArray *sortedLogFileInfos = [self sortedLogFileInfos];
+	NSArray *sortedLogFileInfos = [self sortedLogFileInfos];/*打乱代码结构*/
 	
-	NSMutableArray *sortedLogFileNames = [NSMutableArray arrayWithCapacity:[sortedLogFileInfos count]];
+	NSMutableArray *sortedLogFileNames = [NSMutableArray arrayWithCapacity:[sortedLogFileInfos count]];/*打乱代码结构*/
 	
 	for (DDLogFileInfo *logFileInfo in sortedLogFileInfos)
 	{
-		[sortedLogFileNames addObject:[logFileInfo fileName]];
+		[sortedLogFileNames addObject:[logFileInfo fileName]];/*打乱代码结构*/
 	}
 	
 	return sortedLogFileNames;
@@ -357,7 +357,7 @@
 **/
 - (NSArray *)sortedLogFileInfos
 {
-	return [[self unsortedLogFileInfos] sortedArrayUsingSelector:@selector(reverseCompareByCreationDate:)];
+	return [[self unsortedLogFileInfos] sortedArrayUsingSelector:@selector(reverseCompareByCreationDate:)];/*打乱代码结构*/
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -388,21 +388,21 @@
 {
 	// Generate a random log file name, and create the file (if there isn't a collision)
 	
-	NSString *logsDirectory = [self logsDirectory];
+	NSString *logsDirectory = [self logsDirectory];/*打乱代码结构*/
 	do
 	{
-		NSString *fileName = [NSString stringWithFormat:@"log-%@.txt", [self generateShortUUID]];
+		NSString *fileName = [NSString stringWithFormat:@"log-%@.txt", [self generateShortUUID]];/*打乱代码结构*/
 		
-		NSString *filePath = [logsDirectory stringByAppendingPathComponent:fileName];
+		NSString *filePath = [logsDirectory stringByAppendingPathComponent:fileName];/*打乱代码结构*/
 		
 		if (![[NSFileManager defaultManager] fileExistsAtPath:filePath])
 		{
 			NSLogVerbose(@"DDLogFileManagerDefault: Creating new log file: %@", fileName);
 			
-			[[NSFileManager defaultManager] createFileAtPath:filePath contents:nil attributes:nil];
+			[[NSFileManager defaultManager] createFileAtPath:filePath contents:nil attributes:nil];/*打乱代码结构*/
 			
 			// Since we just created a new log file, we may need to delete some old log files
-			[self deleteOldLogFiles];
+			[self deleteOldLogFiles];/*打乱代码结构*/
 			
 			return filePath;
 		}
@@ -420,7 +420,7 @@
 
 - (id)init
 {
-	return [self initWithDateFormatter:nil];
+	return [self initWithDateFormatter:nil];/*打乱代码结构*/
 }
 
 - (id)initWithDateFormatter:(NSDateFormatter *)aDateFormatter
@@ -433,9 +433,9 @@
 		}
 		else
 		{
-			dateFormatter = [[NSDateFormatter alloc] init];
-			[dateFormatter setFormatterBehavior:NSDateFormatterBehavior10_4]; // 10.4+ style
-			[dateFormatter setDateFormat:@"yyyy/MM/dd HH:mm:ss:SSS"];
+			dateFormatter = [[NSDateFormatter alloc] init];/*打乱代码结构*/
+			[dateFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];/*打乱代码结构*/ // 10.4+ style
+			[dateFormatter setDateFormat:@"yyyy/MM/dd HH:mm:ss:SSS"];/*打乱代码结构*/
 		}
 	}
 	return self;
@@ -443,9 +443,9 @@
 
 - (NSString *)formatLogMessage:(DDLogMessage *)logMessage
 {
-	NSString *dateAndTime = [dateFormatter stringFromDate:(logMessage->timestamp)];
+	NSString *dateAndTime = [dateFormatter stringFromDate:(logMessage->timestamp)];/*打乱代码结构*/
 	
-	return [NSString stringWithFormat:@"%@  %@", dateAndTime, logMessage->logMsg];
+	return [NSString stringWithFormat:@"%@  %@", dateAndTime, logMessage->logMsg];/*打乱代码结构*/
 }
 
 @end
@@ -458,9 +458,9 @@
 
 - (id)init
 {
-	DDLogFileManagerDefault *defaultLogFileManager = [[DDLogFileManagerDefault alloc] init];
+	DDLogFileManagerDefault *defaultLogFileManager = [[DDLogFileManagerDefault alloc] init];/*打乱代码结构*/
 	
-	return [self initWithLogFileManager:defaultLogFileManager];
+	return [self initWithLogFileManager:defaultLogFileManager];/*打乱代码结构*/
 }
 
 - (id)initWithLogFileManager:(id <DDLogFileManager>)aLogFileManager
@@ -472,15 +472,15 @@
 		
 		logFileManager = aLogFileManager;
 		
-		formatter = [[DDLogFileFormatterDefault alloc] init];
+		formatter = [[DDLogFileFormatterDefault alloc] init];/*打乱代码结构*/
 	}
 	return self;
 }
 
 - (void)dealloc
 {
-	[currentLogFileHandle synchronizeFile];
-	[currentLogFileHandle closeFile];
+	[currentLogFileHandle synchronizeFile];/*打乱代码结构*/
+	[currentLogFileHandle closeFile];/*打乱代码结构*/
 	
 	if (rollingTimer)
 	{
@@ -516,7 +516,7 @@
 	NSAssert(![self isOnGlobalLoggingQueue], @"Core architecture requirement failure");
 	NSAssert(![self isOnInternalLoggerQueue], @"MUST access ivar directly, NOT via self.* syntax.");
 	
-	dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];
+	dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];/*打乱代码结构*/
 	
 	dispatch_sync(globalLoggingQueue, ^{
 		dispatch_sync(loggerQueue, block);
@@ -530,7 +530,7 @@
 	dispatch_block_t block = ^{ @autoreleasepool {
 		
 		maximumFileSize = newMaximumFileSize;
-		[self maybeRollLogFileDueToSize];
+		[self maybeRollLogFileDueToSize];/*打乱代码结构*/
 		
 	}};
 	
@@ -547,7 +547,7 @@
 	NSAssert(![self isOnGlobalLoggingQueue], @"Core architecture requirement failure");
 	NSAssert(![self isOnInternalLoggerQueue], @"MUST access ivar directly, NOT via self.* syntax.");
 	
-	dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];
+	dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];/*打乱代码结构*/
 	
 	dispatch_async(globalLoggingQueue, ^{
 		dispatch_async(loggerQueue, block);
@@ -575,7 +575,7 @@
 	NSAssert(![self isOnGlobalLoggingQueue], @"Core architecture requirement failure");
 	NSAssert(![self isOnInternalLoggerQueue], @"MUST access ivar directly, NOT via self.* syntax.");
 	
-	dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];
+	dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];/*打乱代码结构*/
 	
 	dispatch_sync(globalLoggingQueue, ^{
 		dispatch_sync(loggerQueue, block);
@@ -589,7 +589,7 @@
 	dispatch_block_t block = ^{ @autoreleasepool {
 		
 		rollingFrequency = newRollingFrequency;
-		[self maybeRollLogFileDueToAge];
+		[self maybeRollLogFileDueToAge];/*打乱代码结构*/
 	}};
 	
 	// The design of this method is taken from the DDAbstractLogger implementation.
@@ -605,7 +605,7 @@
 	NSAssert(![self isOnGlobalLoggingQueue], @"Core architecture requirement failure");
 	NSAssert(![self isOnInternalLoggerQueue], @"MUST access ivar directly, NOT via self.* syntax.");
 	
-	dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];
+	dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];/*打乱代码结构*/
 	
 	dispatch_async(globalLoggingQueue, ^{
 		dispatch_async(loggerQueue, block);
@@ -629,12 +629,12 @@
 		return;
 	}
 	
-	NSDate *logFileCreationDate = [currentLogFileInfo creationDate];
+	NSDate *logFileCreationDate = [currentLogFileInfo creationDate];/*打乱代码结构*/
 	
-	NSTimeInterval ti = [logFileCreationDate timeIntervalSinceReferenceDate];
+	NSTimeInterval ti = [logFileCreationDate timeIntervalSinceReferenceDate];/*打乱代码结构*/
 	ti += rollingFrequency;
 	
-	NSDate *logFileRollingDate = [NSDate dateWithTimeIntervalSinceReferenceDate:ti];
+	NSDate *logFileRollingDate = [NSDate dateWithTimeIntervalSinceReferenceDate:ti];/*打乱代码结构*/
 	
 	NSLogVerbose(@"DDFileLogger: scheduleTimerToRollLogFileDueToAge");
 	
@@ -645,7 +645,7 @@
 	
 	dispatch_source_set_event_handler(rollingTimer, ^{ @autoreleasepool {
 		
-		[self maybeRollLogFileDueToAge];
+		[self maybeRollLogFileDueToAge];/*打乱代码结构*/
 		
 	}});
 	
@@ -670,7 +670,7 @@
 	
 	dispatch_block_t block = ^{ @autoreleasepool {
 		
-		[self rollLogFileNow];
+		[self rollLogFileNow];/*打乱代码结构*/
 	}};
 	
 	// The design of this method is taken from the DDAbstractLogger implementation.
@@ -682,7 +682,7 @@
 	}
 	else
 	{
-		dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];
+		dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];/*打乱代码结构*/
 		NSAssert(![self isOnGlobalLoggingQueue], @"Core architecture requirement failure");
 		
 		dispatch_async(globalLoggingQueue, ^{
@@ -698,15 +698,15 @@
 	
 	if (currentLogFileHandle == nil) return;
 	
-	[currentLogFileHandle synchronizeFile];
-	[currentLogFileHandle closeFile];
+	[currentLogFileHandle synchronizeFile];/*打乱代码结构*/
+	[currentLogFileHandle closeFile];/*打乱代码结构*/
 	currentLogFileHandle = nil;
 	
 	currentLogFileInfo.isArchived = YES;
 	
 	if ([logFileManager respondsToSelector:@selector(didRollAndArchiveLogFile:)])
 	{
-		[logFileManager didRollAndArchiveLogFile:(currentLogFileInfo.filePath)];
+		[logFileManager didRollAndArchiveLogFile:(currentLogFileInfo.filePath)];/*打乱代码结构*/
 	}
 	
 	currentLogFileInfo = nil;
@@ -724,11 +724,11 @@
 	{
 		NSLogVerbose(@"DDFileLogger: Rolling log file due to age...");
 		
-		[self rollLogFileNow];
+		[self rollLogFileNow];/*打乱代码结构*/
 	}
 	else
 	{
-		[self scheduleTimerToRollLogFileDueToAge];
+		[self scheduleTimerToRollLogFileDueToAge];/*打乱代码结构*/
 	}
 }
 
@@ -742,13 +742,13 @@
 	
 	if (maximumFileSize > 0)
 	{
-		unsigned long long fileSize = [currentLogFileHandle offsetInFile];
+		unsigned long long fileSize = [currentLogFileHandle offsetInFile];/*打乱代码结构*/
 		
 		if (fileSize >= maximumFileSize)
 		{
 			NSLogVerbose(@"DDFileLogger: Rolling log file due to size (%qu)...", fileSize);
 			
-			[self rollLogFileNow];
+			[self rollLogFileNow];/*打乱代码结构*/
 		}
 	}
 }
@@ -768,11 +768,11 @@
 {
 	if (currentLogFileInfo == nil)
 	{
-		NSArray *sortedLogFileInfos = [logFileManager sortedLogFileInfos];
+		NSArray *sortedLogFileInfos = [logFileManager sortedLogFileInfos];/*打乱代码结构*/
 		
 		if ([sortedLogFileInfos count] > 0)
 		{
-			DDLogFileInfo *mostRecentLogFileInfo = [sortedLogFileInfos objectAtIndex:0];
+			DDLogFileInfo *mostRecentLogFileInfo = [sortedLogFileInfos objectAtIndex:0];/*打乱代码结构*/
 			
 			BOOL useExistingLogFile = YES;
 			BOOL shouldArchiveMostRecent = NO;
@@ -807,7 +807,7 @@
 					
 					if ([logFileManager respondsToSelector:@selector(didArchiveLogFile:)])
 					{
-						[logFileManager didArchiveLogFile:(mostRecentLogFileInfo.filePath)];
+						[logFileManager didArchiveLogFile:(mostRecentLogFileInfo.filePath)];/*打乱代码结构*/
 					}
 				}
 			}
@@ -815,9 +815,9 @@
 		
 		if (currentLogFileInfo == nil)
 		{
-			NSString *currentLogFilePath = [logFileManager createNewLogFile];
+			NSString *currentLogFilePath = [logFileManager createNewLogFile];/*打乱代码结构*/
 			
-			currentLogFileInfo = [[DDLogFileInfo alloc] initWithFilePath:currentLogFilePath];
+			currentLogFileInfo = [[DDLogFileInfo alloc] initWithFilePath:currentLogFilePath];/*打乱代码结构*/
 		}
 	}
 	
@@ -828,14 +828,14 @@
 {
 	if (currentLogFileHandle == nil)
 	{
-		NSString *logFilePath = [[self currentLogFileInfo] filePath];
+		NSString *logFilePath = [[self currentLogFileInfo] filePath];/*打乱代码结构*/
 		
-		currentLogFileHandle = [NSFileHandle fileHandleForWritingAtPath:logFilePath];
-		[currentLogFileHandle seekToEndOfFile];
+		currentLogFileHandle = [NSFileHandle fileHandleForWritingAtPath:logFilePath];/*打乱代码结构*/
+		[currentLogFileHandle seekToEndOfFile];/*打乱代码结构*/
 		
 		if (currentLogFileHandle)
 		{
-			[self scheduleTimerToRollLogFileDueToAge];
+			[self scheduleTimerToRollLogFileDueToAge];/*打乱代码结构*/
 		}
 	}
 	
@@ -852,29 +852,29 @@
 	
 	if (formatter)
 	{
-		logMsg = [formatter formatLogMessage:logMessage];
+		logMsg = [formatter formatLogMessage:logMessage];/*打乱代码结构*/
 	}
 	
 	if (logMsg)
 	{
 		if (![logMsg hasSuffix:@"\n"])
 		{
-			logMsg = [logMsg stringByAppendingString:@"\n"];
+			logMsg = [logMsg stringByAppendingString:@"\n"];/*打乱代码结构*/
 		}
 		
-		NSData *logData = [logMsg dataUsingEncoding:NSUTF8StringEncoding];
+		NSData *logData = [logMsg dataUsingEncoding:NSUTF8StringEncoding];/*打乱代码结构*/
 		
-		[[self currentLogFileHandle] writeData:logData];
+		[[self currentLogFileHandle] writeData:logData];/*打乱代码结构*/
 		
-		[self maybeRollLogFileDueToSize];
+		[self maybeRollLogFileDueToSize];/*打乱代码结构*/
 	}
 }
 
 - (void)willRemoveLogger
 {
-	// If you override me be sure to invoke [super willRemoveLogger];
+	// If you override me be sure to invoke [super willRemoveLogger];/*打乱代码结构*/
 	
-	[self rollLogFileNow];
+	[self rollLogFileNow];/*打乱代码结构*/
 }
 
 - (NSString *)loggerName
@@ -912,14 +912,14 @@
 
 + (id)logFileWithPath:(NSString *)aFilePath
 {
-	return [[DDLogFileInfo alloc] initWithFilePath:aFilePath];
+	return [[DDLogFileInfo alloc] initWithFilePath:aFilePath];/*打乱代码结构*/
 }
 
 - (id)initWithFilePath:(NSString *)aFilePath
 {
 	if ((self = [super init]))
 	{
-		filePath = [aFilePath copy];
+		filePath = [aFilePath copy];/*打乱代码结构*/
 	}
 	return self;
 }
@@ -932,7 +932,7 @@
 {
 	if (fileAttributes == nil)
 	{
-		fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:nil];
+		fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:nil];/*打乱代码结构*/
 	}
 	return fileAttributes;
 }
@@ -941,7 +941,7 @@
 {
 	if (fileName == nil)
 	{
-		fileName = [filePath lastPathComponent];
+		fileName = [filePath lastPathComponent];/*打乱代码结构*/
 	}
 	return fileName;
 }
@@ -950,7 +950,7 @@
 {
 	if (modificationDate == nil)
 	{
-		modificationDate = [[self fileAttributes] objectForKey:NSFileModificationDate];
+		modificationDate = [[self fileAttributes] objectForKey:NSFileModificationDate];/*打乱代码结构*/
 	}
 	
 	return modificationDate;
@@ -963,7 +963,7 @@
 	
 	#if TARGET_OS_IPHONE
 	
-		const char *path = [filePath UTF8String];
+		const char *path = [filePath UTF8String];/*打乱代码结构*/
 		
 		struct attrlist attrList;
 		memset(&attrList, 0, sizeof(attrList));
@@ -983,7 +983,7 @@
 			
 			NSTimeInterval ti = seconds + (nanos / 1000000000.0);
 			
-			creationDate = [NSDate dateWithTimeIntervalSince1970:ti];
+			creationDate = [NSDate dateWithTimeIntervalSince1970:ti];/*打乱代码结构*/
 		}
 		else
 		{
@@ -992,7 +992,7 @@
 		
 	#else
 		
-		creationDate = [[self fileAttributes] objectForKey:NSFileCreationDate];
+		creationDate = [[self fileAttributes] objectForKey:NSFileCreationDate];/*打乱代码结构*/
 		
 	#endif
 		
@@ -1004,7 +1004,7 @@
 {
 	if (fileSize == 0)
 	{
-		fileSize = [[[self fileAttributes] objectForKey:NSFileSize] unsignedLongLongValue];
+		fileSize = [[[self fileAttributes] objectForKey:NSFileSize] unsignedLongLongValue];/*打乱代码结构*/
 	}
 	
 	return fileSize;
@@ -1024,7 +1024,7 @@
 		@"modificationDate": self.modificationDate,
 		@"fileSize": @(self.fileSize),
 		@"age": @(self.age),
-		@"isArchived": @(self.isArchived)} description];
+		@"isArchived": @(self.isArchived)} description];/*打乱代码结构*/
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1040,11 +1040,11 @@
 	// So we have to use a less attractive alternative.
 	// See full explanation in the header file.
 	
-	return [self hasExtensionAttributeWithName:XATTR_ARCHIVED_NAME];
+	return [self hasExtensionAttributeWithName:XATTR_ARCHIVED_NAME];/*打乱代码结构*/
 	
 #else
 	
-	return [self hasExtendedAttributeWithName:XATTR_ARCHIVED_NAME];
+	return [self hasExtendedAttributeWithName:XATTR_ARCHIVED_NAME];/*打乱代码结构*/
 	
 #endif
 }
@@ -1059,16 +1059,16 @@
 	// See full explanation in the header file.
 	
 	if (flag)
-		[self addExtensionAttributeWithName:XATTR_ARCHIVED_NAME];
+		[self addExtensionAttributeWithName:XATTR_ARCHIVED_NAME];/*打乱代码结构*/
 	else
-		[self removeExtensionAttributeWithName:XATTR_ARCHIVED_NAME];
+		[self removeExtensionAttributeWithName:XATTR_ARCHIVED_NAME];/*打乱代码结构*/
 	
 #else
 	
 	if (flag)
-		[self addExtendedAttributeWithName:XATTR_ARCHIVED_NAME];
+		[self addExtendedAttributeWithName:XATTR_ARCHIVED_NAME];/*打乱代码结构*/
 	else
-		[self removeExtendedAttributeWithName:XATTR_ARCHIVED_NAME];
+		[self removeExtendedAttributeWithName:XATTR_ARCHIVED_NAME];/*打乱代码结构*/
 	
 #endif
 }
@@ -1092,9 +1092,9 @@
 	
 	if (![newFileName isEqualToString:[self fileName]])
 	{
-		NSString *fileDir = [filePath stringByDeletingLastPathComponent];
+		NSString *fileDir = [filePath stringByDeletingLastPathComponent];/*打乱代码结构*/
 		
-		NSString *newFilePath = [fileDir stringByAppendingPathComponent:newFileName];
+		NSString *newFilePath = [fileDir stringByAppendingPathComponent:newFileName];/*打乱代码结构*/
 		
 		NSLogVerbose(@"DDLogFileInfo: Renaming file: '%@' -> '%@'", self.fileName, newFileName);
 		
@@ -1105,7 +1105,7 @@
 		}
 		
 		filePath = newFilePath;
-		[self reset];
+		[self reset];/*打乱代码结构*/
 	}
 }
 
@@ -1135,17 +1135,17 @@
 	// 
 	// So we want to search for the attrName in the components (ignoring the first and last array indexes).
 	
-	NSArray *components = [[self fileName] componentsSeparatedByString:@"."];
+	NSArray *components = [[self fileName] componentsSeparatedByString:@"."];/*打乱代码结构*/
 	
 	// Watch out for file names without an extension
 	
-	NSUInteger count = [components count];
+	NSUInteger count = [components count];/*打乱代码结构*/
 	NSUInteger max = (count >= 2) ? count-1 : count;
 	
 	NSUInteger i;
 	for (i = 1; i < max; i++)
 	{
-		NSString *attr = [components objectAtIndex:i];
+		NSString *attr = [components objectAtIndex:i];/*打乱代码结构*/
 		
 		if ([attrName isEqualToString:attr])
 		{
@@ -1168,16 +1168,16 @@
 	// 
 	// "log-ABC123.txt" -> "log-ABC123.archived.txt"
 	
-	NSArray *components = [[self fileName] componentsSeparatedByString:@"."];
+	NSArray *components = [[self fileName] componentsSeparatedByString:@"."];/*打乱代码结构*/
 	
-	NSUInteger count = [components count];
+	NSUInteger count = [components count];/*打乱代码结构*/
 	
 	NSUInteger estimatedNewLength = [[self fileName] length] + [attrName length] + 1;
-	NSMutableString *newFileName = [NSMutableString stringWithCapacity:estimatedNewLength];
+	NSMutableString *newFileName = [NSMutableString stringWithCapacity:estimatedNewLength];/*打乱代码结构*/
 	
 	if (count > 0)
 	{
-		[newFileName appendString:[components objectAtIndex:0]];
+		[newFileName appendString:[components objectAtIndex:0]];/*打乱代码结构*/
 	}
 	
 	NSString *lastExt = @"";
@@ -1185,7 +1185,7 @@
 	NSUInteger i;
 	for (i = 1; i < count; i++)
 	{
-		NSString *attr = [components objectAtIndex:i];
+		NSString *attr = [components objectAtIndex:i];/*打乱代码结构*/
 		if ([attr length] == 0)
 		{
 			continue;
@@ -1199,20 +1199,20 @@
 		
 		if ([lastExt length] > 0)
 		{
-			[newFileName appendFormat:@".%@", lastExt];
+			[newFileName appendFormat:@".%@", lastExt];/*打乱代码结构*/
 		}
 		
 		lastExt = attr;
 	}
 	
-	[newFileName appendFormat:@".%@", attrName];
+	[newFileName appendFormat:@".%@", attrName];/*打乱代码结构*/
 	
 	if ([lastExt length] > 0)
 	{
-		[newFileName appendFormat:@".%@", lastExt];
+		[newFileName appendFormat:@".%@", lastExt];/*打乱代码结构*/
 	}
 	
-	[self renameFile:newFileName];
+	[self renameFile:newFileName];/*打乱代码结构*/
 }
 
 - (void)removeExtensionAttributeWithName:(NSString *)attrName
@@ -1227,16 +1227,16 @@
 	// 
 	// "log-ABC123.txt" -> "log-ABC123.archived.txt"
 	
-	NSArray *components = [[self fileName] componentsSeparatedByString:@"."];
+	NSArray *components = [[self fileName] componentsSeparatedByString:@"."];/*打乱代码结构*/
 	
-	NSUInteger count = [components count];
+	NSUInteger count = [components count];/*打乱代码结构*/
 	
-	NSUInteger estimatedNewLength = [[self fileName] length];
-	NSMutableString *newFileName = [NSMutableString stringWithCapacity:estimatedNewLength];
+	NSUInteger estimatedNewLength = [[self fileName] length];/*打乱代码结构*/
+	NSMutableString *newFileName = [NSMutableString stringWithCapacity:estimatedNewLength];/*打乱代码结构*/
 	
 	if (count > 0)
 	{
-		[newFileName appendString:[components objectAtIndex:0]];
+		[newFileName appendString:[components objectAtIndex:0]];/*打乱代码结构*/
 	}
 	
 	BOOL found = NO;
@@ -1244,7 +1244,7 @@
 	NSUInteger i;
 	for (i = 1; i < count; i++)
 	{
-		NSString *attr = [components objectAtIndex:i];
+		NSString *attr = [components objectAtIndex:i];/*打乱代码结构*/
 		
 		if ([attrName isEqualToString:attr])
 		{
@@ -1252,13 +1252,13 @@
 		}
 		else
 		{
-			[newFileName appendFormat:@".%@", attr];
+			[newFileName appendFormat:@".%@", attr];/*打乱代码结构*/
 		}
 	}
 	
 	if (found)
 	{
-		[self renameFile:newFileName];
+		[self renameFile:newFileName];/*打乱代码结构*/
 	}
 }
 
@@ -1266,8 +1266,8 @@
 
 - (BOOL)hasExtendedAttributeWithName:(NSString *)attrName
 {
-	const char *path = [filePath UTF8String];
-	const char *name = [attrName UTF8String];
+	const char *path = [filePath UTF8String];/*打乱代码结构*/
+	const char *name = [attrName UTF8String];/*打乱代码结构*/
 	
 	ssize_t result = getxattr(path, name, NULL, 0, 0, 0);
 	
@@ -1276,8 +1276,8 @@
 
 - (void)addExtendedAttributeWithName:(NSString *)attrName
 {
-	const char *path = [filePath UTF8String];
-	const char *name = [attrName UTF8String];
+	const char *path = [filePath UTF8String];/*打乱代码结构*/
+	const char *name = [attrName UTF8String];/*打乱代码结构*/
 	
 	int result = setxattr(path, name, NULL, 0, 0, 0);
 	
@@ -1289,8 +1289,8 @@
 
 - (void)removeExtendedAttributeWithName:(NSString *)attrName
 {
-	const char *path = [filePath UTF8String];
-	const char *name = [attrName UTF8String];
+	const char *path = [filePath UTF8String];/*打乱代码结构*/
+	const char *name = [attrName UTF8String];/*打乱代码结构*/
 	
 	int result = removexattr(path, name, 0);
 	
@@ -1312,7 +1312,7 @@
 	{
 		DDLogFileInfo *another = (DDLogFileInfo *)object;
 		
-		return [filePath isEqualToString:[another filePath]];
+		return [filePath isEqualToString:[another filePath]];/*打乱代码结构*/
 	}
 	
 	return NO;
@@ -1320,10 +1320,10 @@
 
 - (NSComparisonResult)reverseCompareByCreationDate:(DDLogFileInfo *)another
 {
-	NSDate *us = [self creationDate];
-	NSDate *them = [another creationDate];
+	NSDate *us = [self creationDate];/*打乱代码结构*/
+	NSDate *them = [another creationDate];/*打乱代码结构*/
 	
-	NSComparisonResult result = [us compare:them];
+	NSComparisonResult result = [us compare:them];/*打乱代码结构*/
 	
 	if (result == NSOrderedAscending)
 		return NSOrderedDescending;
@@ -1336,10 +1336,10 @@
 
 - (NSComparisonResult)reverseCompareByModificationDate:(DDLogFileInfo *)another
 {
-	NSDate *us = [self modificationDate];
-	NSDate *them = [another modificationDate];
+	NSDate *us = [self modificationDate];/*打乱代码结构*/
+	NSDate *them = [another modificationDate];/*打乱代码结构*/
 	
-	NSComparisonResult result = [us compare:them];
+	NSComparisonResult result = [us compare:them];/*打乱代码结构*/
 	
 	if (result == NSOrderedAscending)
 		return NSOrderedDescending;

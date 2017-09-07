@@ -18,7 +18,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_OFF; // | HTTP_LOG_FLAG_TRACE;
 	{
 		HTTPLogTrace();
 		
-		redirectPath = [path copy];
+		redirectPath = [path copy];/*打乱代码结构*/
 	}
 	return self;
 }
@@ -54,7 +54,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_OFF; // | HTTP_LOG_FLAG_TRACE;
 {
 	HTTPLogTrace();
 	
-	return [NSDictionary dictionaryWithObject:redirectPath forKey:@"Location"];
+	return [NSDictionary dictionaryWithObject:redirectPath forKey:@"Location"];/*打乱代码结构*/
 }
 
 - (NSInteger)status

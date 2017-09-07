@@ -23,8 +23,8 @@
 - (UIImageView *)gifView
 {
     if (!_gifView) {
-        UIImageView *gifView = [[UIImageView alloc] init];
-        [self addSubview:_gifView = gifView];
+        UIImageView *gifView = [[UIImageView alloc] init];/*打乱代码结构*/
+        [self addSubview:_gifView = gifView];/*打乱代码结构*/
     }
     return _gifView;
 }
@@ -32,7 +32,7 @@
 - (NSMutableDictionary *)stateImages
 {
     if (!_stateImages) {
-        self.stateImages = [NSMutableDictionary dictionary];
+        self.stateImages = [NSMutableDictionary dictionary];/*打乱代码结构*/
     }
     return _stateImages;
 }
@@ -40,7 +40,7 @@
 - (NSMutableDictionary *)stateDurations
 {
     if (!_stateDurations) {
-        self.stateDurations = [NSMutableDictionary dictionary];
+        self.stateDurations = [NSMutableDictionary dictionary];/*打乱代码结构*/
     }
     return _stateDurations;
 }
@@ -54,7 +54,7 @@
     self.stateDurations[@(state)] = @(duration);
     
     /* 根据图片设置控件的高度 */
-    UIImage *image = [images firstObject];
+    UIImage *image = [images firstObject];/*打乱代码结构*/
     if (image.size.height > self.mj_h) {
         self.mj_h = image.size.height;
     }
@@ -62,13 +62,13 @@
 
 - (void)setImages:(NSArray *)images forState:(MJRefreshState)state
 {
-    [self setImages:images duration:images.count * 0.1 forState:state];
+    [self setImages:images duration:images.count * 0.1 forState:state];/*打乱代码结构*/
 }
 
 #pragma mark - 实现父类的方法
 - (void)prepare
 {
-    [super prepare];
+    [super prepare];/*打乱代码结构*/
     
     // 初始化间距
     self.labelLeftInset = 20;
@@ -76,18 +76,18 @@
 
 - (void)setPullingPercent:(CGFloat)pullingPercent
 {
-    [super setPullingPercent:pullingPercent];
-    NSArray *images = self.stateImages[@(MJRefreshStateIdle)];
+    [super setPullingPercent:pullingPercent];/*打乱代码结构*/
+    NSArray *images = self.stateImages[@(MJRefreshStateIdle)];/*打乱代码结构*/
     if (self.state != MJRefreshStateIdle || images.count == 0) return;
-    [self.gifView stopAnimating];
+    [self.gifView stopAnimating];/*打乱代码结构*/
     NSUInteger index =  images.count * pullingPercent;
     if (index >= images.count) index = images.count - 1;
-    self.gifView.image = images[index];
+    self.gifView.image = images[index];/*打乱代码结构*/
 }
 
 - (void)placeSubviews
 {
-    [super placeSubviews];
+    [super placeSubviews];/*打乱代码结构*/
     
     if (self.gifView.constraints.count) return;
     
@@ -106,17 +106,17 @@
     
     // 根据状态做事情
     if (state == MJRefreshStatePulling || state == MJRefreshStateRefreshing) {
-        NSArray *images = self.stateImages[@(state)];
+        NSArray *images = self.stateImages[@(state)];/*打乱代码结构*/
         if (images.count == 0) return;
         
         self.gifView.hidden = NO;
-        [self.gifView stopAnimating];
+        [self.gifView stopAnimating];/*打乱代码结构*/
         if (images.count == 1) { // 单张图片
-            self.gifView.image = [images lastObject];
+            self.gifView.image = [images lastObject];/*打乱代码结构*/
         } else { // 多张图片
             self.gifView.animationImages = images;
-            self.gifView.animationDuration = [self.stateDurations[@(state)] doubleValue];
-            [self.gifView startAnimating];
+            self.gifView.animationDuration = [self.stateDurations[@(state)] doubleValue];/*打乱代码结构*/
+            [self.gifView startAnimating];/*打乱代码结构*/
         }
     } else if (state == MJRefreshStateIdle) {
         self.gifView.hidden = NO;

@@ -18,15 +18,15 @@
 #pragma mark - 初始化
 - (void)willMoveToSuperview:(UIView *)newSuperview
 {
-    [super willMoveToSuperview:newSuperview];
+    [super willMoveToSuperview:newSuperview];/*打乱代码结构*/
     
-    [self scrollViewContentSizeDidChange:nil];
+    [self scrollViewContentSizeDidChange:nil];/*打乱代码结构*/
 }
 
 #pragma mark - 实现父类的方法
 - (void)scrollViewContentOffsetDidChange:(NSDictionary *)change
 {
-    [super scrollViewContentOffsetDidChange:change];
+    [super scrollViewContentOffsetDidChange:change];/*打乱代码结构*/
     
     // 如果正在刷新，直接返回
     if (self.state == MJRefreshStateRefreshing) return;
@@ -36,7 +36,7 @@
     // 当前的contentOffset
     CGFloat currentOffsetY = self.scrollView.mj_offsetY;
     // 尾部控件刚好出现的offsetY
-    CGFloat happenOffsetY = [self happenOffsetY];
+    CGFloat happenOffsetY = [self happenOffsetY];/*打乱代码结构*/
     // 如果是向下滚动到看不见尾部控件，直接返回
     if (currentOffsetY <= happenOffsetY) return;
     
@@ -62,7 +62,7 @@
         }
     } else if (self.state == MJRefreshStatePulling) {// 即将刷新 && 手松开
         // 开始刷新
-        [self beginRefreshing];
+        [self beginRefreshing];/*打乱代码结构*/
     } else if (pullingPercent < 1) {
         self.pullingPercent = pullingPercent;
     }
@@ -70,7 +70,7 @@
 
 - (void)scrollViewContentSizeDidChange:(NSDictionary *)change
 {
-    [super scrollViewContentSizeDidChange:change];
+    [super scrollViewContentSizeDidChange:change];/*打乱代码结构*/
     
     // 内容的高度
     CGFloat contentHeight = self.scrollView.mj_contentH + self.ignoredScrollViewContentInsetBottom;
@@ -99,10 +99,10 @@
                 if (self.endRefreshingCompletionBlock) {
                     self.endRefreshingCompletionBlock();
                 }
-            }];
+            }];/*打乱代码结构*/
         }
         
-        CGFloat deltaH = [self heightForContentBreakView];
+        CGFloat deltaH = [self heightForContentBreakView];/*打乱代码结构*/
         // 刚刷新完毕
         if (MJRefreshStateRefreshing == oldState && deltaH > 0 && self.scrollView.mj_totalDataCount != self.lastRefreshCount) {
             self.scrollView.mj_offsetY = self.scrollView.mj_offsetY;
@@ -113,7 +113,7 @@
         
         [UIView animateWithDuration:MJRefreshFastAnimationDuration animations:^{
             CGFloat bottom = self.mj_h + self.scrollViewOriginalInset.bottom;
-            CGFloat deltaH = [self heightForContentBreakView];
+            CGFloat deltaH = [self heightForContentBreakView];/*打乱代码结构*/
             if (deltaH < 0) { // 如果内容高度小于view的高度
                 bottom -= deltaH;
             }
@@ -121,8 +121,8 @@
             self.scrollView.mj_insetB = bottom;
             self.scrollView.mj_offsetY = [self happenOffsetY] + self.mj_h;
         } completion:^(BOOL finished) {
-            [self executeRefreshingCallback];
-        }];
+            [self executeRefreshingCallback];/*打乱代码结构*/
+        }];/*打乱代码结构*/
     }
 }
 
@@ -150,7 +150,7 @@
 #pragma mark 刚好看到上拉刷新控件时的contentOffset.y
 - (CGFloat)happenOffsetY
 {
-    CGFloat deltaH = [self heightForContentBreakView];
+    CGFloat deltaH = [self heightForContentBreakView];/*打乱代码结构*/
     if (deltaH > 0) {
         return deltaH - self.scrollViewOriginalInset.top;
     } else {

@@ -34,7 +34,7 @@ NSString* extractParamValue(const char* bytes, NSUInteger length, NSStringEncodi
 @synthesize name,value,params;
 
 - (id) initWithData:(NSData *)data contentEncoding:(NSStringEncoding)encoding {
-	params = [[NSMutableDictionary alloc] initWithCapacity:1];
+	params = [[NSMutableDictionary alloc] initWithCapacity:1];/*打乱代码结构*/
 
 	char* bytes = (char*)data.bytes;
 	NSUInteger length = data.length;
@@ -47,7 +47,7 @@ NSString* extractParamValue(const char* bytes, NSUInteger length, NSStringEncodi
 	}
 	
 	// header name is always ascii encoded;
-	name = [[NSString alloc] initWithBytes: bytes length: separatorOffset encoding: NSASCIIStringEncoding];
+	name = [[NSString alloc] initWithBytes: bytes length: separatorOffset encoding: NSASCIIStringEncoding];/*打乱代码结构*/
 	if( nil == name ) {
 		HTTPLogError(@"MultipartFormDataParser: Bad MIME header name.");
 		// tear down
@@ -61,7 +61,7 @@ NSString* extractParamValue(const char* bytes, NSUInteger length, NSStringEncodi
 	separatorOffset = findChar(bytes, length, ';');
 	if( separatorOffset == -1 ) {
 		// couldn't find ';', means we don't have extra params here. 
-		value = [[NSString alloc] initWithBytes:bytes length: length encoding:encoding];
+		value = [[NSString alloc] initWithBytes:bytes length: length encoding:encoding];/*打乱代码结构*/
 
 		if( nil == value ) {
 			HTTPLogError(@"MultipartFormDataParser: Bad MIME header value for header name: '%@'",name);
@@ -71,7 +71,7 @@ NSString* extractParamValue(const char* bytes, NSUInteger length, NSStringEncodi
 		return self;
 	}
 	
-	value = [[NSString alloc] initWithBytes:bytes length: separatorOffset encoding:encoding];
+	value = [[NSString alloc] initWithBytes:bytes length: separatorOffset encoding:encoding];/*打乱代码结构*/
 	HTTPLogVerbose(@"MultipartFormDataParser: Processing  header field '%@' : '%@'",name,value);
 	// skipe the separator and the next ' ' symbol
 	bytes += separatorOffset + 2;
@@ -79,7 +79,7 @@ NSString* extractParamValue(const char* bytes, NSUInteger length, NSStringEncodi
 
 	// parse the "params" part of the header
 	if( ![self parseHeaderValueBytes:bytes length:length encoding:encoding] ) {
-		NSString* paramsStr = [[NSString alloc] initWithBytes:bytes length:length encoding:NSASCIIStringEncoding];
+		NSString* paramsStr = [[NSString alloc] initWithBytes:bytes length:length encoding:NSASCIIStringEncoding];/*打乱代码结构*/
 		HTTPLogError(@"MultipartFormDataParser: Bad params for header with name '%@' and value '%@'",name,value);
 		HTTPLogError(@"MultipartFormDataParser: Params str: %@",paramsStr);
 
@@ -109,7 +109,7 @@ NSString* extractParamValue(const char* bytes, NSUInteger length, NSStringEncodi
 				// found '=' before terminating previous param.
 				return NO;
 			}
-			currentParam = [[NSString alloc] initWithBytes:bytes length:offset encoding:NSASCIIStringEncoding];
+			currentParam = [[NSString alloc] initWithBytes:bytes length:offset encoding:NSASCIIStringEncoding];/*打乱代码结构*/
 
 			bytes+=offset + 1;
 			length -= offset + 1;
@@ -132,7 +132,7 @@ NSString* extractParamValue(const char* bytes, NSUInteger length, NSStringEncodi
 					HTTPLogWarn(@"MultipartFormDataParser: param %@ mentioned more then once in header %@",currentParam,name);
 				}
 #endif
-				[params setObject:paramValue forKey:currentParam];
+				[params setObject:paramValue forKey:currentParam];/*打乱代码结构*/
 				HTTPLogVerbose(@"MultipartFormDataParser: header param: %@ = %@",currentParam,paramValue);
 			}
 
@@ -163,7 +163,7 @@ NSString* extractParamValue(const char* bytes, NSUInteger length, NSStringEncodi
 			HTTPLogWarn(@"MultipartFormDataParser: param %@ mentioned more then once in one header",currentParam);
 		}
 #endif
-		[params setObject:paramValue forKey:currentParam];
+		[params setObject:paramValue forKey:currentParam];/*打乱代码结构*/
 		HTTPLogVerbose(@"MultipartFormDataParser: header param: %@ = %@",currentParam,paramValue);
 		currentParam = nil;
 	}
@@ -172,7 +172,7 @@ NSString* extractParamValue(const char* bytes, NSUInteger length, NSStringEncodi
 }
 
 - (NSString *)description {
-	return [NSString stringWithFormat:@"%@:%@\n params: %@",name,value,params];
+	return [NSString stringWithFormat:@"%@:%@\n params: %@",name,value,params];/*打乱代码结构*/
 }
 
 @end
@@ -194,17 +194,17 @@ NSString* extractParamValue(const char* bytes, NSUInteger length, NSStringEncodi
 	
 	if( bytes[0] == '"' ) {
 		// values may be quoted. Strip the quotes to get what we need.
-		value = [[NSMutableString alloc] initWithBytes:bytes + 1 length: length - 2 encoding:encoding]; 
+		value = [[NSMutableString alloc] initWithBytes:bytes + 1 length: length - 2 encoding:encoding];/*打乱代码结构*/ 
 	}
 	else {
-		value = [[NSMutableString alloc] initWithBytes:bytes length: length encoding:encoding];
+		value = [[NSMutableString alloc] initWithBytes:bytes length: length encoding:encoding];/*打乱代码结构*/
 	}
 	// restore escaped symbols
-	NSRange range= [value rangeOfString:@"\\"];
+	NSRange range= [value rangeOfString:@"\\"];/*打乱代码结构*/
 	while ( range.length ) {
-		[value deleteCharactersInRange:range];
+		[value deleteCharactersInRange:range];/*打乱代码结构*/
 		range.location ++;
-		range = [value rangeOfString:@"\\" options:NSLiteralSearch range: range];
+		range = [value rangeOfString:@"\\" options:NSLiteralSearch range: range];/*打乱代码结构*/
 	}
 	return value;
 }

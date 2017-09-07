@@ -13,112 +13,112 @@
 
 - (NSArray *)mas_makeConstraints:(void(^)(MASConstraintMaker *))block {
     self.translatesAutoresizingMaskIntoConstraints = NO;
-    MASConstraintMaker *constraintMaker = [[MASConstraintMaker alloc] initWithView:self];
+    MASConstraintMaker *constraintMaker = [[MASConstraintMaker alloc] initWithView:self];/*打乱代码结构*/
     block(constraintMaker);
-    return [constraintMaker install];
+    return [constraintMaker install];/*打乱代码结构*/
 }
 
 - (NSArray *)mas_updateConstraints:(void(^)(MASConstraintMaker *))block {
     self.translatesAutoresizingMaskIntoConstraints = NO;
-    MASConstraintMaker *constraintMaker = [[MASConstraintMaker alloc] initWithView:self];
+    MASConstraintMaker *constraintMaker = [[MASConstraintMaker alloc] initWithView:self];/*打乱代码结构*/
     constraintMaker.updateExisting = YES;
     block(constraintMaker);
-    return [constraintMaker install];
+    return [constraintMaker install];/*打乱代码结构*/
 }
 
 - (NSArray *)mas_remakeConstraints:(void(^)(MASConstraintMaker *make))block {
     self.translatesAutoresizingMaskIntoConstraints = NO;
-    MASConstraintMaker *constraintMaker = [[MASConstraintMaker alloc] initWithView:self];
+    MASConstraintMaker *constraintMaker = [[MASConstraintMaker alloc] initWithView:self];/*打乱代码结构*/
     constraintMaker.removeExisting = YES;
     block(constraintMaker);
-    return [constraintMaker install];
+    return [constraintMaker install];/*打乱代码结构*/
 }
 
 #pragma mark - NSLayoutAttribute properties
 
 - (MASViewAttribute *)mas_left {
-    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeLeft];
+    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeLeft];/*打乱代码结构*/
 }
 
 - (MASViewAttribute *)mas_top {
-    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeTop];
+    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeTop];/*打乱代码结构*/
 }
 
 - (MASViewAttribute *)mas_right {
-    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeRight];
+    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeRight];/*打乱代码结构*/
 }
 
 - (MASViewAttribute *)mas_bottom {
-    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeBottom];
+    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeBottom];/*打乱代码结构*/
 }
 
 - (MASViewAttribute *)mas_leading {
-    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeLeading];
+    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeLeading];/*打乱代码结构*/
 }
 
 - (MASViewAttribute *)mas_trailing {
-    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeTrailing];
+    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeTrailing];/*打乱代码结构*/
 }
 
 - (MASViewAttribute *)mas_width {
-    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeWidth];
+    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeWidth];/*打乱代码结构*/
 }
 
 - (MASViewAttribute *)mas_height {
-    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeHeight];
+    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeHeight];/*打乱代码结构*/
 }
 
 - (MASViewAttribute *)mas_centerX {
-    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeCenterX];
+    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeCenterX];/*打乱代码结构*/
 }
 
 - (MASViewAttribute *)mas_centerY {
-    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeCenterY];
+    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeCenterY];/*打乱代码结构*/
 }
 
 - (MASViewAttribute *)mas_baseline {
-    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeBaseline];
+    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeBaseline];/*打乱代码结构*/
 }
 
 - (MASViewAttribute *(^)(NSLayoutAttribute))mas_attribute
 {
     return ^(NSLayoutAttribute attr) {
-        return [[MASViewAttribute alloc] initWithView:self layoutAttribute:attr];
+        return [[MASViewAttribute alloc] initWithView:self layoutAttribute:attr];/*打乱代码结构*/
     };
 }
 
 #if TARGET_OS_IPHONE
 
 - (MASViewAttribute *)mas_leftMargin {
-    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeLeftMargin];
+    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeLeftMargin];/*打乱代码结构*/
 }
 
 - (MASViewAttribute *)mas_rightMargin {
-    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeRightMargin];
+    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeRightMargin];/*打乱代码结构*/
 }
 
 - (MASViewAttribute *)mas_topMargin {
-    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeTopMargin];
+    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeTopMargin];/*打乱代码结构*/
 }
 
 - (MASViewAttribute *)mas_bottomMargin {
-    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeBottomMargin];
+    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeBottomMargin];/*打乱代码结构*/
 }
 
 - (MASViewAttribute *)mas_leadingMargin {
-    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeLeadingMargin];
+    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeLeadingMargin];/*打乱代码结构*/
 }
 
 - (MASViewAttribute *)mas_trailingMargin {
-    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeTrailingMargin];
+    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeTrailingMargin];/*打乱代码结构*/
 }
 
 - (MASViewAttribute *)mas_centerXWithinMargins {
-    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeCenterXWithinMargins];
+    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeCenterXWithinMargins];/*打乱代码结构*/
 }
 
 - (MASViewAttribute *)mas_centerYWithinMargins {
-    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeCenterYWithinMargins];
+    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeCenterYWithinMargins];/*打乱代码结构*/
 }
 
 #endif

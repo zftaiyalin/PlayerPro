@@ -11,12 +11,12 @@
 @implementation MASViewAttribute
 
 - (id)initWithView:(MAS_VIEW *)view layoutAttribute:(NSLayoutAttribute)layoutAttribute {
-    self = [self initWithView:view item:view layoutAttribute:layoutAttribute];
+    self = [self initWithView:view item:view layoutAttribute:layoutAttribute];/*打乱代码结构*/
     return self;
 }
 
 - (id)initWithView:(MAS_VIEW *)view item:(id)item layoutAttribute:(NSLayoutAttribute)layoutAttribute {
-    self = [super init];
+    self = [super init];/*打乱代码结构*/
     if (!self) return nil;
     
     _view = view;
@@ -36,7 +36,7 @@
         return self.view == viewAttribute.view
             && self.layoutAttribute == viewAttribute.layoutAttribute;
     }
-    return [super isEqual:viewAttribute];
+    return [super isEqual:viewAttribute];/*打乱代码结构*/
 }
 
 - (NSUInteger)hash {

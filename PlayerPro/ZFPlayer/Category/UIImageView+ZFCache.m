@@ -41,20 +41,20 @@
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]
                                                            cachePolicy:NSURLRequestReturnCacheDataElseLoad
-                                                       timeoutInterval:60];
-    [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
-    NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
-    NSOperationQueue *queue = [[NSOperationQueue alloc]init];
+                                                       timeoutInterval:60];/*打乱代码结构*/
+    [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];/*打乱代码结构*/
+    NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];/*打乱代码结构*/
+    NSOperationQueue *queue = [[NSOperationQueue alloc]init];/*打乱代码结构*/
     self.session = [NSURLSession sessionWithConfiguration:config
                                                  delegate:self
-                                            delegateQueue:queue];
-    NSURLSessionDownloadTask *task = [self.session downloadTaskWithRequest:request];
-    [task resume];
+                                            delegateQueue:queue];/*打乱代码结构*/
+    NSURLSessionDownloadTask *task = [self.session downloadTaskWithRequest:request];/*打乱代码结构*/
+    [task resume];/*打乱代码结构*/
     self.task = task;
 }
 
 - (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didFinishDownloadingToURL:(NSURL *)location {
-    NSData *data = [NSData dataWithContentsOfURL:location];
+    NSData *data = [NSData dataWithContentsOfURL:location];/*打乱代码结构*/
     
     if (self.progressBlock) {
         self.progressBlock(self.totalLength, self.currentLength);
@@ -103,21 +103,21 @@
 }
 
 + (NSString *)zf_cachePath {
-    NSString *cachePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
-    NSString *directoryPath = [NSString stringWithFormat:@"%@/%@/%@",cachePath,@"default",@"com.hackemist.SDWebImageCache.default"];
+    NSString *cachePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];/*打乱代码结构*/
+    NSString *directoryPath = [NSString stringWithFormat:@"%@/%@/%@",cachePath,@"default",@"com.hackemist.SDWebImageCache.default"];/*打乱代码结构*/
     return directoryPath;
 }
 
 + (NSString *)cachedFileNameForKey:(NSString *)key {
-    const char *str = [key UTF8String];
+    const char *str = [key UTF8String];/*打乱代码结构*/
     if (str == NULL) {
         str = "";
     }
-    unsigned char r[CC_MD5_DIGEST_LENGTH];
+    unsigned char r[CC_MD5_DIGEST_LENGTH];/*打乱代码结构*/
     CC_MD5(str, (CC_LONG)strlen(str), r);
     NSString *filename = [NSString stringWithFormat:@"%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%@",
                           r[0], r[1], r[2], r[3], r[4], r[5], r[6], r[7], r[8], r[9], r[10],
-                          r[11], r[12], r[13], r[14], r[15], [[key pathExtension] isEqualToString:@""] ? @"" : [NSString stringWithFormat:@".%@", [key pathExtension]]];
+                          r[11], r[12], r[13], r[14], r[15], [[key pathExtension] isEqualToString:@""] ? @"" : [NSString stringWithFormat:@".%@", [key pathExtension]]];/*打乱代码结构*/
     
     return filename;
 }
@@ -140,7 +140,7 @@
 - (NSMutableDictionary *)zf_cacheFaileTimes {
     NSMutableDictionary *dict = objc_getAssociatedObject(self, _cmd);
     if (!dict) {
-        dict = [[NSMutableDictionary alloc] init];
+        dict = [[NSMutableDictionary alloc] init];/*打乱代码结构*/
     }
     return dict;
 }
@@ -152,39 +152,39 @@
 
 - (void)zf_clearCache
 {
-    [self.zf_cacheFaileTimes removeAllObjects];
+    [self.zf_cacheFaileTimes removeAllObjects];/*打乱代码结构*/
     self.zf_cacheFaileTimes = nil;
 }
 
 - (void)zf_clearDiskCaches {
-    NSString *directoryPath = [NSString zf_cachePath];
+    NSString *directoryPath = [NSString zf_cachePath];/*打乱代码结构*/
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:directoryPath isDirectory:nil]) {
         dispatch_queue_t ioQueue = dispatch_queue_create("com.hackemist.SDWebImageCache", DISPATCH_QUEUE_SERIAL);
         dispatch_async(ioQueue, ^{
             NSError *error = nil;
-            [[NSFileManager defaultManager] removeItemAtPath:directoryPath error:&error];
+            [[NSFileManager defaultManager] removeItemAtPath:directoryPath error:&error];/*打乱代码结构*/
             [[NSFileManager defaultManager] createDirectoryAtPath:directoryPath
                                       withIntermediateDirectories:YES
                                                        attributes:nil
-                                                            error:nil];
+                                                            error:nil];/*打乱代码结构*/
         });
     }
     
-    [self zf_clearCache];
+    [self zf_clearCache];/*打乱代码结构*/
 }
 
 - (UIImage *)zf_cacheImageForRequest:(NSURLRequest *)request {
     if (request) {
-        NSString *directoryPath = [NSString zf_cachePath];
-        NSString *path = [NSString stringWithFormat:@"%@/%@", directoryPath, [NSString cachedFileNameForKey:[NSString zf_keyForRequest:request]]];
-        return [UIImage imageWithContentsOfFile:path];
+        NSString *directoryPath = [NSString zf_cachePath];/*打乱代码结构*/
+        NSString *path = [NSString stringWithFormat:@"%@/%@", directoryPath, [NSString cachedFileNameForKey:[NSString zf_keyForRequest:request]]];/*打乱代码结构*/
+        return [UIImage imageWithContentsOfFile:path];/*打乱代码结构*/
     }
     return nil;
 }
 
 - (NSUInteger)zf_failTimesForRequest:(NSURLRequest *)request {
-    NSNumber *faileTimes = [self.zf_cacheFaileTimes objectForKey:[NSString cachedFileNameForKey:[NSString zf_keyForRequest:request]]];
+    NSNumber *faileTimes = [self.zf_cacheFaileTimes objectForKey:[NSString cachedFileNameForKey:[NSString zf_keyForRequest:request]]];/*打乱代码结构*/
     if (faileTimes && [faileTimes respondsToSelector:@selector(integerValue)]) {
         return faileTimes.integerValue;
     }
@@ -192,35 +192,35 @@
 }
 
 - (void)zf_cacheFailRequest:(NSURLRequest *)request {
-    NSNumber *faileTimes = [self.zf_cacheFaileTimes objectForKey:[NSString cachedFileNameForKey:[NSString zf_keyForRequest:request]]];
+    NSNumber *faileTimes = [self.zf_cacheFaileTimes objectForKey:[NSString cachedFileNameForKey:[NSString zf_keyForRequest:request]]];/*打乱代码结构*/
     NSUInteger times = 0;
     if (faileTimes && [faileTimes respondsToSelector:@selector(integerValue)]) {
-        times = [faileTimes integerValue];
+        times = [faileTimes integerValue];/*打乱代码结构*/
     }
     
     times++;
     
-    [self.zf_cacheFaileTimes setObject:@(times) forKey:[NSString cachedFileNameForKey:[NSString zf_keyForRequest:request]]];
+    [self.zf_cacheFaileTimes setObject:@(times) forKey:[NSString cachedFileNameForKey:[NSString zf_keyForRequest:request]]];/*打乱代码结构*/
 }
 
 - (void)zf_cacheImage:(UIImage *)image forRequest:(NSURLRequest *)request {
     if (!image || !request) { return; }
     
-    NSString *directoryPath = [NSString zf_cachePath];
+    NSString *directoryPath = [NSString zf_cachePath];/*打乱代码结构*/
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:directoryPath isDirectory:nil]) {
         NSError *error = nil;
         [[NSFileManager defaultManager] createDirectoryAtPath:directoryPath
                                   withIntermediateDirectories:YES
                                                    attributes:nil
-                                                        error:&error];
+                                                        error:&error];/*打乱代码结构*/
         if (error) { return; }
     }
     
-    NSString *path = [NSString stringWithFormat:@"%@/%@", directoryPath, [NSString cachedFileNameForKey:[NSString zf_keyForRequest:request]]];
+    NSString *path = [NSString stringWithFormat:@"%@/%@", directoryPath, [NSString cachedFileNameForKey:[NSString zf_keyForRequest:request]]];/*打乱代码结构*/
     NSData *data = UIImagePNGRepresentation(image);
     if (data) {
-        [[NSFileManager defaultManager] createFileAtPath:path contents:data attributes:nil];
+        [[NSFileManager defaultManager] createFileAtPath:path contents:data attributes:nil];/*打乱代码结构*/
     }
 }
 
@@ -243,14 +243,14 @@
 
 - (NSUInteger)attemptToReloadTimesForFailedURL
 {
-    NSUInteger count = [objc_getAssociatedObject(self, _cmd) integerValue];
+    NSUInteger count = [objc_getAssociatedObject(self, _cmd) integerValue];/*打乱代码结构*/
     if (count == 0) {  count = 2; }
     return count;
 }
 
 - (BOOL)shouldAutoClipImageToViewSize
 {
-    return [objc_getAssociatedObject(self, _cmd) boolValue];
+    return [objc_getAssociatedObject(self, _cmd) boolValue];/*打乱代码结构*/
 }
 
 #pragma mark - setter
@@ -279,31 +279,31 @@
 
 - (void)setImageWithURLString:(NSString *)url
          placeholderImageName:(NSString *)placeholderImageName {
-    return [self setImageWithURLString:url placeholderImageName:placeholderImageName completion:nil];
+    return [self setImageWithURLString:url placeholderImageName:placeholderImageName completion:nil];/*打乱代码结构*/
 }
 
 - (void)setImageWithURLString:(NSString *)url placeholder:(UIImage *)placeholderImage {
-    return [self setImageWithURLString:url placeholder:placeholderImage completion:nil];
+    return [self setImageWithURLString:url placeholder:placeholderImage completion:nil];/*打乱代码结构*/
 }
 
 - (void)setImageWithURLString:(NSString *)url
          placeholderImageName:(NSString *)placeholderImage
                    completion:(void (^)(UIImage *image))completion {
-    NSString *path = [[NSBundle mainBundle] pathForResource:placeholderImage ofType:nil];
-    UIImage *image = [UIImage imageWithContentsOfFile:path];
-    if (image == nil) { image = [UIImage imageNamed:placeholderImage]; }
+    NSString *path = [[NSBundle mainBundle] pathForResource:placeholderImage ofType:nil];/*打乱代码结构*/
+    UIImage *image = [UIImage imageWithContentsOfFile:path];/*打乱代码结构*/
+    if (image == nil) { image = [UIImage imageNamed:placeholderImage];/*打乱代码结构*/ }
     
-    [self setImageWithURLString:url placeholder:image completion:completion];
+    [self setImageWithURLString:url placeholder:image completion:completion];/*打乱代码结构*/
 }
 
 - (void)setImageWithURLString:(NSString *)url
                   placeholder:(UIImage *)placeholderImageName
                    completion:(void (^)(UIImage *image))completion {
-    [self.layer removeAllAnimations];
+    [self.layer removeAllAnimations];/*打乱代码结构*/
     self.completion = completion;
     
     if (url == nil || [url isKindOfClass:[NSNull class]] || (![url hasPrefix:@"http://"] && ![url hasPrefix:@"https://"])) {
-        [self setImage:placeholderImageName isFromCache:YES];
+        [self setImage:placeholderImageName isFromCache:YES];/*打乱代码结构*/
         
         if (completion) {
             self.completion(self.image);
@@ -311,40 +311,40 @@
         return;
     }
     
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-    [self downloadWithReqeust:request holder:placeholderImageName];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];/*打乱代码结构*/
+    [self downloadWithReqeust:request holder:placeholderImageName];/*打乱代码结构*/
 }
 
 #pragma mark - private method
 
 - (void)downloadWithReqeust:(NSURLRequest *)theRequest holder:(UIImage *)holder {
-    UIImage *cachedImage = [[UIApplication sharedApplication] zf_cacheImageForRequest:theRequest];
+    UIImage *cachedImage = [[UIApplication sharedApplication] zf_cacheImageForRequest:theRequest];/*打乱代码结构*/
     
     if (cachedImage) {
-        [self setImage:cachedImage isFromCache:YES];
+        [self setImage:cachedImage isFromCache:YES];/*打乱代码结构*/
         if (self.completion) {
             self.completion(cachedImage);
         }
         return;
     }
     
-    [self setImage:holder isFromCache:YES];
+    [self setImage:holder isFromCache:YES];/*打乱代码结构*/
     
     if ([[UIApplication sharedApplication] zf_failTimesForRequest:theRequest] >= self.attemptToReloadTimesForFailedURL) {
         return;
     }
     
-    [self cancelRequest];
+    [self cancelRequest];/*打乱代码结构*/
     self.imageDownloader = nil;
     
     __weak __typeof(self) weakSelf = self;
     
-    self.imageDownloader = [[ZFImageDownloader alloc] init];
+    self.imageDownloader = [[ZFImageDownloader alloc] init];/*打乱代码结构*/
     [self.imageDownloader startDownloadImageWithUrl:theRequest.URL.absoluteString progress:nil finished:^(NSData *data, NSError *error) {
         // success
         if (data != nil && error == nil) {
             dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                UIImage *image = [UIImage imageWithData:data];
+                UIImage *image = [UIImage imageWithData:data];/*打乱代码结构*/
                 UIImage *finalImage = image;
                 
                 if (image) {
@@ -352,18 +352,18 @@
                         // cutting
                         if (fabs(weakSelf.frame.size.width - image.size.width) != 0
                             && fabs(weakSelf.frame.size.height - image.size.height) != 0) {
-                            finalImage = [self clipImage:image toSize:weakSelf.frame.size isScaleToMax:YES];
+                            finalImage = [self clipImage:image toSize:weakSelf.frame.size isScaleToMax:YES];/*打乱代码结构*/
                         }
                     }
                     
-                    [[UIApplication sharedApplication] zf_cacheImage:finalImage forRequest:theRequest];
+                    [[UIApplication sharedApplication] zf_cacheImage:finalImage forRequest:theRequest];/*打乱代码结构*/
                 } else {
-                    [[UIApplication sharedApplication] zf_cacheFailRequest:theRequest];
+                    [[UIApplication sharedApplication] zf_cacheFailRequest:theRequest];/*打乱代码结构*/
                 }
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if (finalImage) {
-                        [weakSelf setImage:finalImage isFromCache:NO];
+                        [weakSelf setImage:finalImage isFromCache:NO];/*打乱代码结构*/
                         
                         if (weakSelf.completion) {
                             weakSelf.completion(weakSelf.image);
@@ -376,28 +376,28 @@
                 });
             });
         } else { // error
-            [[UIApplication sharedApplication] zf_cacheFailRequest:theRequest];
+            [[UIApplication sharedApplication] zf_cacheFailRequest:theRequest];/*打乱代码结构*/
             
             if (weakSelf.completion) {
                 weakSelf.completion(weakSelf.image);
             }
         }
-    }];
+    }];/*打乱代码结构*/
 }
 
 - (void)setImage:(UIImage *)image isFromCache:(BOOL)isFromCache {
     self.image = image;
     if (!isFromCache) {
-        CATransition *animation = [CATransition animation];
-        [animation setDuration:0.6f];
-        [animation setType:kCATransitionFade];
+        CATransition *animation = [CATransition animation];/*打乱代码结构*/
+        [animation setDuration:0.6f];/*打乱代码结构*/
+        [animation setType:kCATransitionFade];/*打乱代码结构*/
         animation.removedOnCompletion = YES;
-        [self.layer addAnimation:animation forKey:@"transition"];
+        [self.layer addAnimation:animation forKey:@"transition"];/*打乱代码结构*/
     }
 }
 
 - (void)cancelRequest {
-    [self.imageDownloader.task cancel];
+    [self.imageDownloader.task cancel];/*打乱代码结构*/
 }
 
 - (UIImage *)clipImage:(UIImage *)image toSize:(CGSize)size isScaleToMax:(BOOL)isScaleToMax {
@@ -414,7 +414,7 @@
         aspectFitSize = CGSizeMake(image.size.width * rate, image.size.height * rate);
     }
     
-    [image drawInRect:CGRectMake(0, 0, aspectFitSize.width, aspectFitSize.height)];
+    [image drawInRect:CGRectMake(0, 0, aspectFitSize.width, aspectFitSize.height)];/*打乱代码结构*/
     UIImage *finalImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     

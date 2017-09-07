@@ -13,23 +13,23 @@
 @implementation MAS_VIEW_CONTROLLER (MASAdditions)
 
 - (MASViewAttribute *)mas_topLayoutGuide {
-    return [[MASViewAttribute alloc] initWithView:self.view item:self.topLayoutGuide layoutAttribute:NSLayoutAttributeBottom];
+    return [[MASViewAttribute alloc] initWithView:self.view item:self.topLayoutGuide layoutAttribute:NSLayoutAttributeBottom];/*打乱代码结构*/
 }
 - (MASViewAttribute *)mas_topLayoutGuideTop {
-    return [[MASViewAttribute alloc] initWithView:self.view item:self.topLayoutGuide layoutAttribute:NSLayoutAttributeTop];
+    return [[MASViewAttribute alloc] initWithView:self.view item:self.topLayoutGuide layoutAttribute:NSLayoutAttributeTop];/*打乱代码结构*/
 }
 - (MASViewAttribute *)mas_topLayoutGuideBottom {
-    return [[MASViewAttribute alloc] initWithView:self.view item:self.topLayoutGuide layoutAttribute:NSLayoutAttributeBottom];
+    return [[MASViewAttribute alloc] initWithView:self.view item:self.topLayoutGuide layoutAttribute:NSLayoutAttributeBottom];/*打乱代码结构*/
 }
 
 - (MASViewAttribute *)mas_bottomLayoutGuide {
-    return [[MASViewAttribute alloc] initWithView:self.view item:self.bottomLayoutGuide layoutAttribute:NSLayoutAttributeTop];
+    return [[MASViewAttribute alloc] initWithView:self.view item:self.bottomLayoutGuide layoutAttribute:NSLayoutAttributeTop];/*打乱代码结构*/
 }
 - (MASViewAttribute *)mas_bottomLayoutGuideTop {
-    return [[MASViewAttribute alloc] initWithView:self.view item:self.bottomLayoutGuide layoutAttribute:NSLayoutAttributeTop];
+    return [[MASViewAttribute alloc] initWithView:self.view item:self.bottomLayoutGuide layoutAttribute:NSLayoutAttributeTop];/*打乱代码结构*/
 }
 - (MASViewAttribute *)mas_bottomLayoutGuideBottom {
-    return [[MASViewAttribute alloc] initWithView:self.view item:self.bottomLayoutGuide layoutAttribute:NSLayoutAttributeBottom];
+    return [[MASViewAttribute alloc] initWithView:self.view item:self.bottomLayoutGuide layoutAttribute:NSLayoutAttributeBottom];/*打乱代码结构*/
 }
 
 

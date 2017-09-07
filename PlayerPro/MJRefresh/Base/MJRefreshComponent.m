@@ -20,7 +20,7 @@
 {
     if (self = [super initWithFrame:frame]) {
         // 准备工作
-        [self prepare];
+        [self prepare];/*打乱代码结构*/
         
         // 默认是普通状态
         self.state = MJRefreshStateIdle;
@@ -32,27 +32,27 @@
 {
     // 基本属性
     self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    self.backgroundColor = [UIColor clearColor];
+    self.backgroundColor = [UIColor clearColor];/*打乱代码结构*/
 }
 
 - (void)layoutSubviews
 {
-    [self placeSubviews];
+    [self placeSubviews];/*打乱代码结构*/
     
-    [super layoutSubviews];
+    [super layoutSubviews];/*打乱代码结构*/
 }
 
 - (void)placeSubviews{}
 
 - (void)willMoveToSuperview:(UIView *)newSuperview
 {
-    [super willMoveToSuperview:newSuperview];
+    [super willMoveToSuperview:newSuperview];/*打乱代码结构*/
     
     // 如果不是UIScrollView，不做任何事情
     if (newSuperview && ![newSuperview isKindOfClass:[UIScrollView class]]) return;
     
     // 旧的父控件移除监听
-    [self removeObservers];
+    [self removeObservers];/*打乱代码结构*/
     
     if (newSuperview) { // 新的父控件
         // 设置宽度
@@ -68,13 +68,13 @@
         _scrollViewOriginalInset = _scrollView.contentInset;
         
         // 添加监听
-        [self addObservers];
+        [self addObservers];/*打乱代码结构*/
     }
 }
 
 - (void)drawRect:(CGRect)rect
 {
-    [super drawRect:rect];
+    [super drawRect:rect];/*打乱代码结构*/
     
     if (self.state == MJRefreshStateWillRefresh) {
         // 预防view还没显示出来就调用了beginRefreshing
@@ -86,17 +86,17 @@
 - (void)addObservers
 {
     NSKeyValueObservingOptions options = NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld;
-    [self.scrollView addObserver:self forKeyPath:MJRefreshKeyPathContentOffset options:options context:nil];
-    [self.scrollView addObserver:self forKeyPath:MJRefreshKeyPathContentSize options:options context:nil];
+    [self.scrollView addObserver:self forKeyPath:MJRefreshKeyPathContentOffset options:options context:nil];/*打乱代码结构*/
+    [self.scrollView addObserver:self forKeyPath:MJRefreshKeyPathContentSize options:options context:nil];/*打乱代码结构*/
     self.pan = self.scrollView.panGestureRecognizer;
-    [self.pan addObserver:self forKeyPath:MJRefreshKeyPathPanState options:options context:nil];
+    [self.pan addObserver:self forKeyPath:MJRefreshKeyPathPanState options:options context:nil];/*打乱代码结构*/
 }
 
 - (void)removeObservers
 {
-    [self.superview removeObserver:self forKeyPath:MJRefreshKeyPathContentOffset];
-    [self.superview removeObserver:self forKeyPath:MJRefreshKeyPathContentSize];;
-    [self.pan removeObserver:self forKeyPath:MJRefreshKeyPathPanState];
+    [self.superview removeObserver:self forKeyPath:MJRefreshKeyPathContentOffset];/*打乱代码结构*/
+    [self.superview removeObserver:self forKeyPath:MJRefreshKeyPathContentSize];/*打乱代码结构*/;
+    [self.pan removeObserver:self forKeyPath:MJRefreshKeyPathPanState];/*打乱代码结构*/
     self.pan = nil;
 }
 
@@ -107,15 +107,15 @@
     
     // 这个就算看不见也需要处理
     if ([keyPath isEqualToString:MJRefreshKeyPathContentSize]) {
-        [self scrollViewContentSizeDidChange:change];
+        [self scrollViewContentSizeDidChange:change];/*打乱代码结构*/
     }
     
     // 看不见
     if (self.hidden) return;
     if ([keyPath isEqualToString:MJRefreshKeyPathContentOffset]) {
-        [self scrollViewContentOffsetDidChange:change];
+        [self scrollViewContentOffsetDidChange:change];/*打乱代码结构*/
     } else if ([keyPath isEqualToString:MJRefreshKeyPathPanState]) {
-        [self scrollViewPanStateDidChange:change];
+        [self scrollViewPanStateDidChange:change];/*打乱代码结构*/
     }
 }
 
@@ -137,7 +137,7 @@
     
     // 加入主队列的目的是等setState:方法调用完毕、设置完文字后再去布局子控件
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self setNeedsLayout];
+        [self setNeedsLayout];/*打乱代码结构*/
     });
 }
 
@@ -146,7 +146,7 @@
 {
     [UIView animateWithDuration:MJRefreshFastAnimationDuration animations:^{
         self.alpha = 1.0;
-    }];
+    }];/*打乱代码结构*/
     self.pullingPercent = 1.0;
     // 只要正在刷新，就完全显示
     if (self.window) {
@@ -156,7 +156,7 @@
         if (self.state != MJRefreshStateRefreshing) {
             self.state = MJRefreshStateWillRefresh;
             // 刷新(预防从另一个控制器回到这个控制器的情况，回来要重新刷新一下)
-            [self setNeedsDisplay];
+            [self setNeedsDisplay];/*打乱代码结构*/
         }
     }
 }
@@ -165,7 +165,7 @@
 {
     self.beginRefreshingCompletionBlock = completionBlock;
     
-    [self beginRefreshing];
+    [self beginRefreshing];/*打乱代码结构*/
 }
 
 #pragma mark 结束刷新状态
@@ -178,7 +178,7 @@
 {
     self.endRefreshingCompletionBlock = completionBlock;
     
-    [self endRefreshing];
+    [self endRefreshing];/*打乱代码结构*/
 }
 
 #pragma mark 是否正在刷新
@@ -243,12 +243,12 @@
 @implementation UILabel(MJRefresh)
 + (instancetype)mj_label
 {
-    UILabel *label = [[self alloc] init];
+    UILabel *label = [[self alloc] init];/*打乱代码结构*/
     label.font = MJRefreshLabelFont;
     label.textColor = MJRefreshLabelTextColor;
     label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     label.textAlignment = NSTextAlignmentCenter;
-    label.backgroundColor = [UIColor clearColor];
+    label.backgroundColor = [UIColor clearColor];/*打乱代码结构*/
     return label;
 }
 

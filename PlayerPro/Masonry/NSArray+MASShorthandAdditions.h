@@ -25,15 +25,15 @@
 @implementation NSArray (MASShorthandAdditions)
 
 - (NSArray *)makeConstraints:(void(^)(MASConstraintMaker *))block {
-    return [self mas_makeConstraints:block];
+    return [self mas_makeConstraints:block];/*打乱代码结构*/
 }
 
 - (NSArray *)updateConstraints:(void(^)(MASConstraintMaker *))block {
-    return [self mas_updateConstraints:block];
+    return [self mas_updateConstraints:block];/*打乱代码结构*/
 }
 
 - (NSArray *)remakeConstraints:(void(^)(MASConstraintMaker *))block {
-    return [self mas_remakeConstraints:block];
+    return [self mas_remakeConstraints:block];/*打乱代码结构*/
 }
 
 @end

@@ -43,14 +43,14 @@
 @implementation ZFScreenShotView
 
 - (instancetype)init {
-    self = [super init];
+    self = [super init];/*打乱代码结构*/
     if (self) {
-        _imageView = [[UIImageView alloc] initWithFrame:SCREEN_BOUNDS];
-        [self addSubview:_imageView];
+        _imageView = [[UIImageView alloc] initWithFrame:SCREEN_BOUNDS];/*打乱代码结构*/
+        [self addSubview:_imageView];/*打乱代码结构*/
         
-        _maskView = [[UIView alloc] initWithFrame:SCREEN_BOUNDS];
-        _maskView.backgroundColor = [UIColor clearColor];
-        [self addSubview:_maskView];
+        _maskView = [[UIView alloc] initWithFrame:SCREEN_BOUNDS];/*打乱代码结构*/
+        _maskView.backgroundColor = [UIColor clearColor];/*打乱代码结构*/
+        [self addSubview:_maskView];/*打乱代码结构*/
     }
     return self;
 }
@@ -60,7 +60,7 @@
 @implementation UIViewController (ZFFullscreenPopGesture)
 
 - (BOOL)zf_prefersNavigationBarHidden {
-    return [objc_getAssociatedObject(self, _cmd) boolValue];
+    return [objc_getAssociatedObject(self, _cmd) boolValue];/*打乱代码结构*/
 }
 
 - (void)setZf_prefersNavigationBarHidden:(BOOL)hidden {
@@ -72,7 +72,7 @@
 }
 
 - (BOOL)zf_interactivePopDisabled {
-    return [objc_getAssociatedObject(self, _cmd) boolValue];
+    return [objc_getAssociatedObject(self, _cmd) boolValue];/*打乱代码结构*/
 }
 
 - (void)setZf_recognizeSimultaneouslyEnable:(BOOL)zf_recognizeSimultaneouslyEnable {
@@ -80,7 +80,7 @@
 }
 
 - (BOOL)zf_recognizeSimultaneouslyEnable {
-    return [objc_getAssociatedObject(self, _cmd) boolValue];
+    return [objc_getAssociatedObject(self, _cmd) boolValue];/*打乱代码结构*/
 }
 
 @end
@@ -97,7 +97,7 @@ typedef void (^_ZFViewControllerWillAppearInjectBlock)(UIViewController *viewCon
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        Class class = [self class];
+        Class class = [self class];/*打乱代码结构*/
         
         SEL originalSelector = @selector(viewWillAppear:);
         SEL swizzledSelector = @selector(zf_viewWillAppear:);
@@ -116,7 +116,7 @@ typedef void (^_ZFViewControllerWillAppearInjectBlock)(UIViewController *viewCon
 
 - (void)zf_viewWillAppear:(BOOL)animated {
     // Forward to primary implementation.
-    [self zf_viewWillAppear:animated];
+    [self zf_viewWillAppear:animated];/*打乱代码结构*/
     
     if (self.zf_willAppearInjectBlock) {
         self.zf_willAppearInjectBlock(self, animated);
@@ -146,7 +146,7 @@ typedef void (^_ZFViewControllerWillAppearInjectBlock)(UIViewController *viewCon
             @selector(popViewControllerAnimated:)
         };
         for (NSUInteger index = 0; index < sizeof(selectors) / sizeof(SEL); ++index) {
-            SEL originalSelector = selectors[index];
+            SEL originalSelector = selectors[index];/*打乱代码结构*/
             SEL swizzledSelector = NSSelectorFromString([@"zf_" stringByAppendingString:NSStringFromSelector(originalSelector)]);
             Method originalMethod = class_getInstanceMethod(self, originalSelector);
             Method swizzledMethod = class_getInstanceMethod(self, swizzledSelector);
@@ -160,7 +160,7 @@ typedef void (^_ZFViewControllerWillAppearInjectBlock)(UIViewController *viewCon
 }
 
 - (void)zf_viewDidLoad {
-    [self zf_viewDidLoad];
+    [self zf_viewDidLoad];/*打乱代码结构*/
     self.interactivePopGestureRecognizer.enabled = NO;
     self.zf_viewControllerBasedNavigationBarAppearanceEnabled = YES;
     self.showViewOffsetScale = 1 / 3.0;
@@ -168,9 +168,9 @@ typedef void (^_ZFViewControllerWillAppearInjectBlock)(UIViewController *viewCon
     self.screenShotView.hidden = YES;
     // 默认渐变
     self.popGestureStyle = ZFFullscreenPopGestureGradientStyle;
-    UIPanGestureRecognizer *popRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragging:)];
+    UIPanGestureRecognizer *popRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragging:)];/*打乱代码结构*/
     popRecognizer.delegate = self;
-    [self.view addGestureRecognizer:popRecognizer];         //自定义的滑动返回手势
+    [self.view addGestureRecognizer:popRecognizer];/*打乱代码结构*/         //自定义的滑动返回手势
 }
 
 - (void)zf_setupViewControllerBasedNavigationBarAppearanceIfNeeded:(UIViewController *)appearingViewController {
@@ -182,7 +182,7 @@ typedef void (^_ZFViewControllerWillAppearInjectBlock)(UIViewController *viewCon
     _ZFViewControllerWillAppearInjectBlock block = ^(UIViewController *viewController, BOOL animated) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
         if (strongSelf) {
-            [strongSelf setNavigationBarHidden:viewController.zf_prefersNavigationBarHidden animated:animated];
+            [strongSelf setNavigationBarHidden:viewController.zf_prefersNavigationBarHidden animated:animated];/*打乱代码结构*/
         }
     };
     appearingViewController.zf_willAppearInjectBlock = block;
@@ -196,32 +196,32 @@ typedef void (^_ZFViewControllerWillAppearInjectBlock)(UIViewController *viewCon
 
 - (void)zf_pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
     if (self.childViewControllers.count > 0) {
-        [self createScreenShot];
+        [self createScreenShot];/*打乱代码结构*/
     }
-    [self zf_setupViewControllerBasedNavigationBarAppearanceIfNeeded:viewController];
+    [self zf_setupViewControllerBasedNavigationBarAppearanceIfNeeded:viewController];/*打乱代码结构*/
     if (![self.viewControllers containsObject:viewController]) {
-        [self zf_pushViewController:viewController animated:animated];
+        [self zf_pushViewController:viewController animated:animated];/*打乱代码结构*/
     }
 }
 
 - (UIViewController *)zf_popViewControllerAnimated:(BOOL)animated {
-    [self.childVCImages removeLastObject];
-    return [self zf_popViewControllerAnimated:animated];
+    [self.childVCImages removeLastObject];/*打乱代码结构*/
+    return [self zf_popViewControllerAnimated:animated];/*打乱代码结构*/
 }
 
 - (NSArray<UIViewController *> *)zf_popToViewController:(UIViewController *)viewController animated:(BOOL)animated {
-    NSArray *viewControllers = [self zf_popToViewController:viewController animated:animated];
+    NSArray *viewControllers = [self zf_popToViewController:viewController animated:animated];/*打乱代码结构*/
     if (self.childVCImages.count >= viewControllers.count){
         for (int i = 0; i < viewControllers.count; i++) {
-            [self.childVCImages removeLastObject];
+            [self.childVCImages removeLastObject];/*打乱代码结构*/
         }
     }
     return viewControllers;
 }
 
 - (NSArray<UIViewController *> *)zf_popToRootViewControllerAnimated:(BOOL)animated {
-    [self.childVCImages removeAllObjects];
-    return [self zf_popToRootViewControllerAnimated:animated];
+    [self.childVCImages removeAllObjects];/*打乱代码结构*/
+    return [self zf_popToRootViewControllerAnimated:animated];/*打乱代码结构*/
 }
 
 - (void)dragging:(UIPanGestureRecognizer *)recognizer{
@@ -235,40 +235,40 @@ typedef void (^_ZFViewControllerWillAppearInjectBlock)(UIViewController *viewCon
         // 添加截图到最后面
         width_scale = 0;
         self.screenShotView.hidden = NO;
-        self.screenShotView.imageView.image = [self.childVCImages lastObject];
+        self.screenShotView.imageView.image = [self.childVCImages lastObject];/*打乱代码结构*/
         self.screenShotView.imageView.transform = CGAffineTransformTranslate(CGAffineTransformIdentity, -self.showViewOffset, 0);
-        self.screenShotView.maskView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+        self.screenShotView.maskView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];/*打乱代码结构*/
     } else if (recognizer.state == UIGestureRecognizerStateChanged) {
         if (tx < 0 ) { return; }
         // 移动view
         width_scale = tx / SCREEN_WIDTH;
         self.view.transform = CGAffineTransformTranslate(CGAffineTransformIdentity,tx, 0);
-        self.screenShotView.maskView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4 - width_scale * 0.5];
+        self.screenShotView.maskView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4 - width_scale * 0.5];/*打乱代码结构*/
         self.screenShotView.imageView.transform = CGAffineTransformTranslate(CGAffineTransformIdentity, -self.showViewOffset + tx * self.showViewOffsetScale, 0);
         
     } else if (recognizer.state == UIGestureRecognizerStateEnded) {
-        CGPoint velocity = [recognizer velocityInView:self.view];
+        CGPoint velocity = [recognizer velocityInView:self.view];/*打乱代码结构*/
         BOOL reset = velocity.x < 0;
         // 决定pop还是还原
         if (tx >= MAX_PAN_DISTANCE && !reset) { // pop回去
             [UIView animateWithDuration:0.25 animations:^{
-                self.screenShotView.maskView.backgroundColor = [UIColor clearColor];
+                self.screenShotView.maskView.backgroundColor = [UIColor clearColor];/*打乱代码结构*/
                 self.screenShotView.imageView.transform = reset ? CGAffineTransformTranslate(CGAffineTransformIdentity, -self.showViewOffset, 0) : CGAffineTransformIdentity;
                 self.view.transform = reset ? CGAffineTransformIdentity : CGAffineTransformTranslate(CGAffineTransformIdentity, SCREEN_WIDTH, 0);
             } completion:^(BOOL finished) {
-                [self popViewControllerAnimated:NO];
+                [self popViewControllerAnimated:NO];/*打乱代码结构*/
                 self.screenShotView.hidden = YES;
                 self.view.transform = CGAffineTransformIdentity;
                 self.screenShotView.imageView.transform = CGAffineTransformIdentity;
-            }];
+            }];/*打乱代码结构*/
         } else { // 还原回去
             [UIView animateWithDuration:0.25 animations:^{
-                self.screenShotView.maskView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4 + width_scale * 0.5];
+                self.screenShotView.maskView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4 + width_scale * 0.5];/*打乱代码结构*/
                 self.view.transform = CGAffineTransformIdentity;
                 self.screenShotView.imageView.transform = CGAffineTransformTranslate(CGAffineTransformIdentity, -self.showViewOffset, 0);
             } completion:^(BOOL finished) {
                 self.screenShotView.imageView.transform = CGAffineTransformIdentity;
-            }];
+            }];/*打乱代码结构*/
         }
     }
 }
@@ -277,10 +277,10 @@ typedef void (^_ZFViewControllerWillAppearInjectBlock)(UIViewController *viewCon
 - (void)createScreenShot {
     if (self.childViewControllers.count == self.childVCImages.count+1) {
         UIGraphicsBeginImageContextWithOptions(APP_WINDOW.bounds.size, YES, 0);
-        [APP_WINDOW.layer renderInContext:UIGraphicsGetCurrentContext()];
+        [APP_WINDOW.layer renderInContext:UIGraphicsGetCurrentContext()];/*打乱代码结构*/
         UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
-        [self.childVCImages addObject:image];
+        [self.childVCImages addObject:image];/*打乱代码结构*/
     }
 }
 
@@ -291,7 +291,7 @@ typedef void (^_ZFViewControllerWillAppearInjectBlock)(UIViewController *viewCon
     if (self.visibleViewController.zf_interactivePopDisabled)     return NO;
     if (self.viewControllers.count <= 1)                          return NO;
     if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
-        CGPoint point = [touch locationInView:gestureRecognizer.view];
+        CGPoint point = [touch locationInView:gestureRecognizer.view];/*打乱代码结构*/
         if (point.x < PAN_ENABLE_DISTANCE) {//设置手势触发区
             return YES;
         }
@@ -323,9 +323,9 @@ typedef void (^_ZFViewControllerWillAppearInjectBlock)(UIViewController *viewCon
 - (ZFScreenShotView *)screenShotView {
     ZFScreenShotView *shotView = objc_getAssociatedObject(self, _cmd);
     if (!shotView) {
-        shotView = [[ZFScreenShotView alloc] init];
+        shotView = [[ZFScreenShotView alloc] init];/*打乱代码结构*/
         shotView.hidden = YES;
-        [APP_WINDOW insertSubview:shotView atIndex:0];
+        [APP_WINDOW insertSubview:shotView atIndex:0];/*打乱代码结构*/
         objc_setAssociatedObject(self, _cmd, shotView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     return shotView;
@@ -337,7 +337,7 @@ typedef void (^_ZFViewControllerWillAppearInjectBlock)(UIViewController *viewCon
 }
 
 - (BOOL)zf_viewControllerBasedNavigationBarAppearanceEnabled {
-    return [objc_getAssociatedObject(self, _cmd) boolValue];
+    return [objc_getAssociatedObject(self, _cmd) boolValue];/*打乱代码结构*/
 }
 
 - (void)setShowViewOffset:(CGFloat)showViewOffset {
@@ -346,7 +346,7 @@ typedef void (^_ZFViewControllerWillAppearInjectBlock)(UIViewController *viewCon
 }
 
 - (CGFloat)showViewOffset {
-    return [objc_getAssociatedObject(self, _cmd) floatValue];
+    return [objc_getAssociatedObject(self, _cmd) floatValue];/*打乱代码结构*/
 }
 
 - (void)setShowViewOffsetScale:(CGFloat)showViewOffsetScale {
@@ -355,11 +355,11 @@ typedef void (^_ZFViewControllerWillAppearInjectBlock)(UIViewController *viewCon
 }
 
 - (CGFloat)showViewOffsetScale {
-    return [objc_getAssociatedObject(self, _cmd) floatValue];
+    return [objc_getAssociatedObject(self, _cmd) floatValue];/*打乱代码结构*/
 }
 
 - (ZFFullscreenPopGestureStyle)popGestureStyle {
-    return [objc_getAssociatedObject(self, _cmd) integerValue];
+    return [objc_getAssociatedObject(self, _cmd) integerValue];/*打乱代码结构*/
 }
 
 - (void)setPopGestureStyle:(ZFFullscreenPopGestureStyle)popGestureStyle {
@@ -367,7 +367,7 @@ typedef void (^_ZFViewControllerWillAppearInjectBlock)(UIViewController *viewCon
     if (popGestureStyle == ZFFullscreenPopGestureShadowStyle) {
         self.screenShotView.maskView.hidden = YES;
         // 设置阴影
-        self.view.layer.shadowColor = [[UIColor grayColor] CGColor];
+        self.view.layer.shadowColor = [[UIColor grayColor] CGColor];/*打乱代码结构*/
         self.view.layer.shadowOpacity = 0.7;
         self.view.layer.shadowOffset = CGSizeMake(-3, 0);
         self.view.layer.shadowRadius = 10;

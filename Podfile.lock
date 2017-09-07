@@ -25,7 +25,6 @@ PODS:
 
 DEPENDENCIES:
   - ASIHTTPRequest
-  - Reachability
   - SDWebImage
   - SVProgressHUD
   - UMengAnalytics
@@ -41,6 +40,6 @@ SPEC CHECKSUMS:
   YYCategories: 6bcd4314c6661a561410dce4a793379ebd306abd
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: 45bd8a62016be502024cc7515aac3210bd88e6b0
+PODFILE CHECKSUM: c57b26bf6a4cdf026aaf604e6bc9e7e02431ab6f
 
 COCOAPODS: 1.2.0

@@ -24,7 +24,7 @@
 - (NSMutableDictionary *)stateTitles
 {
     if (!_stateTitles) {
-        self.stateTitles = [NSMutableDictionary dictionary];
+        self.stateTitles = [NSMutableDictionary dictionary];/*打乱代码结构*/
     }
     return _stateTitles;
 }
@@ -32,7 +32,7 @@
 - (UILabel *)stateLabel
 {
     if (!_stateLabel) {
-        [self addSubview:_stateLabel = [UILabel mj_label]];
+        [self addSubview:_stateLabel = [UILabel mj_label]];/*打乱代码结构*/
     }
     return _stateLabel;
 }
@@ -40,7 +40,7 @@
 - (UILabel *)lastUpdatedTimeLabel
 {
     if (!_lastUpdatedTimeLabel) {
-        [self addSubview:_lastUpdatedTimeLabel = [UILabel mj_label]];
+        [self addSubview:_lastUpdatedTimeLabel = [UILabel mj_label]];/*打乱代码结构*/
     }
     return _lastUpdatedTimeLabel;
 }
@@ -50,26 +50,26 @@
 {
     if (title == nil) return;
     self.stateTitles[@(state)] = title;
-    self.stateLabel.text = self.stateTitles[@(self.state)];
+    self.stateLabel.text = self.stateTitles[@(self.state)];/*打乱代码结构*/
 }
 
 #pragma mark - 日历获取在9.x之后的系统使用currentCalendar会出异常。在8.0之后使用系统新API。
 - (NSCalendar *)currentCalendar {
     if ([NSCalendar respondsToSelector:@selector(calendarWithIdentifier:)]) {
-        return [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
+        return [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];/*打乱代码结构*/
     }
-    return [NSCalendar currentCalendar];
+    return [NSCalendar currentCalendar];/*打乱代码结构*/
 }
 
 #pragma mark key的处理
 - (void)setLastUpdatedTimeKey:(NSString *)lastUpdatedTimeKey
 {
-    [super setLastUpdatedTimeKey:lastUpdatedTimeKey];
+    [super setLastUpdatedTimeKey:lastUpdatedTimeKey];/*打乱代码结构*/
     
     // 如果label隐藏了，就不用再处理
     if (self.lastUpdatedTimeLabel.hidden) return;
     
-    NSDate *lastUpdatedTime = [[NSUserDefaults standardUserDefaults] objectForKey:lastUpdatedTimeKey];
+    NSDate *lastUpdatedTime = [[NSUserDefaults standardUserDefaults] objectForKey:lastUpdatedTimeKey];/*打乱代码结构*/
     
     // 如果有block
     if (self.lastUpdatedTimeText) {
@@ -79,13 +79,13 @@
     
     if (lastUpdatedTime) {
         // 1.获得年月日
-        NSCalendar *calendar = [self currentCalendar];
+        NSCalendar *calendar = [self currentCalendar];/*打乱代码结构*/
         NSUInteger unitFlags = NSCalendarUnitYear| NSCalendarUnitMonth | NSCalendarUnitDay |NSCalendarUnitHour |NSCalendarUnitMinute;
-        NSDateComponents *cmp1 = [calendar components:unitFlags fromDate:lastUpdatedTime];
-        NSDateComponents *cmp2 = [calendar components:unitFlags fromDate:[NSDate date]];
+        NSDateComponents *cmp1 = [calendar components:unitFlags fromDate:lastUpdatedTime];/*打乱代码结构*/
+        NSDateComponents *cmp2 = [calendar components:unitFlags fromDate:[NSDate date]];/*打乱代码结构*/
         
         // 2.格式化日期
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];/*打乱代码结构*/
         BOOL isToday = NO;
         if ([cmp1 day] == [cmp2 day]) { // 今天
             formatter.dateFormat = @" HH:mm";
@@ -95,37 +95,37 @@
         } else {
             formatter.dateFormat = @"yyyy-MM-dd HH:mm";
         }
-        NSString *time = [formatter stringFromDate:lastUpdatedTime];
+        NSString *time = [formatter stringFromDate:lastUpdatedTime];/*打乱代码结构*/
         
         // 3.显示日期
         self.lastUpdatedTimeLabel.text = [NSString stringWithFormat:@"%@%@%@",
                                           [NSBundle mj_localizedStringForKey:MJRefreshHeaderLastTimeText],
                                           isToday ? [NSBundle mj_localizedStringForKey:MJRefreshHeaderDateTodayText] : @"",
-                                          time];
+                                          time];/*打乱代码结构*/
     } else {
         self.lastUpdatedTimeLabel.text = [NSString stringWithFormat:@"%@%@",
                                           [NSBundle mj_localizedStringForKey:MJRefreshHeaderLastTimeText],
-                                          [NSBundle mj_localizedStringForKey:MJRefreshHeaderNoneLastDateText]];
+                                          [NSBundle mj_localizedStringForKey:MJRefreshHeaderNoneLastDateText]];/*打乱代码结构*/
     }
 }
 
 #pragma mark - 覆盖父类的方法
 - (void)prepare
 {
-    [super prepare];
+    [super prepare];/*打乱代码结构*/
     
     // 初始化间距
     self.labelLeftInset = MJRefreshLabelLeftInset;
     
     // 初始化文字
-    [self setTitle:[NSBundle mj_localizedStringForKey:MJRefreshHeaderIdleText] forState:MJRefreshStateIdle];
-    [self setTitle:[NSBundle mj_localizedStringForKey:MJRefreshHeaderPullingText] forState:MJRefreshStatePulling];
-    [self setTitle:[NSBundle mj_localizedStringForKey:MJRefreshHeaderRefreshingText] forState:MJRefreshStateRefreshing];
+    [self setTitle:[NSBundle mj_localizedStringForKey:MJRefreshHeaderIdleText] forState:MJRefreshStateIdle];/*打乱代码结构*/
+    [self setTitle:[NSBundle mj_localizedStringForKey:MJRefreshHeaderPullingText] forState:MJRefreshStatePulling];/*打乱代码结构*/
+    [self setTitle:[NSBundle mj_localizedStringForKey:MJRefreshHeaderRefreshingText] forState:MJRefreshStateRefreshing];/*打乱代码结构*/
 }
 
 - (void)placeSubviews
 {
-    [super placeSubviews];
+    [super placeSubviews];/*打乱代码结构*/
     
     if (self.stateLabel.hidden) return;
     
@@ -159,7 +159,7 @@
     MJRefreshCheckState
     
     // 设置状态文字
-    self.stateLabel.text = self.stateTitles[@(state)];
+    self.stateLabel.text = self.stateTitles[@(state)];/*打乱代码结构*/
     
     // 重新设置key（重新显示时间）
     self.lastUpdatedTimeKey = self.lastUpdatedTimeKey;

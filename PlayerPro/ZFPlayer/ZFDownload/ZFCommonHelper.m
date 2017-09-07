@@ -29,15 +29,15 @@
 + (NSString *)getFileSizeString:(NSString *)size {
     if([size floatValue]>=1024*1024)//大于1M，则转化成M单位的字符串
     {
-        return [NSString stringWithFormat:@"%1.2fM",[size floatValue]/1024/1024];
+        return [NSString stringWithFormat:@"%1.2fM",[size floatValue]/1024/1024];/*打乱代码结构*/
     }
     else if([size floatValue]>=1024&&[size floatValue]<1024*1024) //不到1M,但是超过了1KB，则转化成KB单位
     {
-        return [NSString stringWithFormat:@"%1.2fK",[size floatValue]/1024];
+        return [NSString stringWithFormat:@"%1.2fK",[size floatValue]/1024];/*打乱代码结构*/
     }
     else//剩下的都是小于1K的，则转化成B单位
     {
-        return [NSString stringWithFormat:@"%1.2fB",[size floatValue]];
+        return [NSString stringWithFormat:@"%1.2fB",[size floatValue]];/*打乱代码结构*/
     }
 }
 
@@ -55,38 +55,38 @@
     }
     else if(indexB<1000)//是B单位的字符串
     {
-        return [[size substringToIndex:indexB] floatValue];
+        return [[size substringToIndex:indexB] floatValue];/*打乱代码结构*/
     }
     else//没有任何单位的数字字符串
     {
-        return [size floatValue];
+        return [size floatValue];/*打乱代码结构*/
     }
 }
 
 + (BOOL)isExistFile:(NSString *)fileName {
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    return [fileManager fileExistsAtPath:fileName];
+    NSFileManager *fileManager = [NSFileManager defaultManager];/*打乱代码结构*/
+    return [fileManager fileExistsAtPath:fileName];/*打乱代码结构*/
 }
 
 + (NSDate *)makeDate:(NSString *)birthday {
-    NSDateFormatter *df = [[NSDateFormatter alloc] init];
-    [df setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSDate *date = [df dateFromString:birthday];
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];/*打乱代码结构*/
+    [df setDateFormat:@"yyyy-MM-dd HH:mm:ss"];/*打乱代码结构*/
+    NSDate *date = [df dateFromString:birthday];/*打乱代码结构*/
     return date;
 }
 
 + (NSString *)dateToString:(NSDate*)date {
-    NSDateFormatter *df = [[NSDateFormatter alloc] init];
-    [df setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSString *datestr = [df stringFromDate:date];
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];/*打乱代码结构*/
+    [df setDateFormat:@"yyyy-MM-dd HH:mm:ss"];/*打乱代码结构*/
+    NSString *datestr = [df stringFromDate:date];/*打乱代码结构*/
     return datestr;
 }
 
 + (NSString *)createFolder:(NSString *)path {
-    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSFileManager *fileManager = [NSFileManager defaultManager];/*打乱代码结构*/
     NSError *error;
     if(![fileManager fileExistsAtPath:path]) {
-        [fileManager createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:&error];
+        [fileManager createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:&error];/*打乱代码结构*/
         if(!error) {
             NSLog(@"%@",[error description]);
         }

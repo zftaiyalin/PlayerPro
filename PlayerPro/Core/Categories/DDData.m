@@ -12,43 +12,43 @@ static char encodingTable[64] = {
 
 - (NSData *)md5Digest
 {
-	unsigned char result[CC_MD5_DIGEST_LENGTH];
+	unsigned char result[CC_MD5_DIGEST_LENGTH];/*打乱代码结构*/
     
     CC_MD5([self bytes], (CC_LONG)[self length], result);
-    return [NSData dataWithBytes:result length:CC_MD5_DIGEST_LENGTH];
+    return [NSData dataWithBytes:result length:CC_MD5_DIGEST_LENGTH];/*打乱代码结构*/
 }
 
 - (NSData *)sha1Digest
 {
-	unsigned char result[CC_SHA1_DIGEST_LENGTH];
+	unsigned char result[CC_SHA1_DIGEST_LENGTH];/*打乱代码结构*/
     
 	CC_SHA1([self bytes], (CC_LONG)[self length], result);
-    return [NSData dataWithBytes:result length:CC_SHA1_DIGEST_LENGTH];
+    return [NSData dataWithBytes:result length:CC_SHA1_DIGEST_LENGTH];/*打乱代码结构*/
 }
 
 - (NSString *)hexStringValue
 {
-	NSMutableString *stringBuffer = [NSMutableString stringWithCapacity:([self length] * 2)];
+	NSMutableString *stringBuffer = [NSMutableString stringWithCapacity:([self length] * 2)];/*打乱代码结构*/
 	
-    const unsigned char *dataBuffer = [self bytes];
+    const unsigned char *dataBuffer = [self bytes];/*打乱代码结构*/
     int i;
     
-    for (i = 0; i < [self length]; ++i)
+    for (i = 0; i < [self length];/*打乱代码结构*/ ++i)
 	{
-        [stringBuffer appendFormat:@"%02x", (unsigned int)dataBuffer[i]];
+        [stringBuffer appendFormat:@"%02x", (unsigned int)dataBuffer[i]];/*打乱代码结构*/
 	}
     
-    return [stringBuffer copy];
+    return [stringBuffer copy];/*打乱代码结构*/
 }
 
 - (NSString *)base64Encoded
 {
-	const unsigned char	*bytes = [self bytes];
-	NSMutableString *result = [NSMutableString stringWithCapacity:[self length]];
+	const unsigned char	*bytes = [self bytes];/*打乱代码结构*/
+	NSMutableString *result = [NSMutableString stringWithCapacity:[self length]];/*打乱代码结构*/
 	unsigned long ixtext = 0;
-	unsigned long lentext = [self length];
+	unsigned long lentext = [self length];/*打乱代码结构*/
 	long ctremaining = 0;
-	unsigned char inbuf[3], outbuf[4];
+	unsigned char inbuf[3], outbuf[4];/*打乱代码结构*/
 	unsigned short i = 0;
 	unsigned short charsonline = 0, ctcopy = 0;
 	unsigned long ix = 0;
@@ -60,7 +60,7 @@ static char encodingTable[64] = {
 		
 		for( i = 0; i < 3; i++ ) {
 			ix = ixtext + i;
-			if( ix < lentext ) inbuf[i] = bytes[ix];
+			if( ix < lentext ) inbuf[i] = bytes[ix];/*打乱代码结构*/
 			else inbuf [i] = 0;
 		}
 		
@@ -81,25 +81,25 @@ static char encodingTable[64] = {
 		}
 		
 		for( i = 0; i < ctcopy; i++ )
-			[result appendFormat:@"%c", encodingTable[outbuf[i]]];
+			[result appendFormat:@"%c", encodingTable[outbuf[i]]];/*打乱代码结构*/
 		
 		for( i = ctcopy; i < 4; i++ )
-			[result appendString:@"="];
+			[result appendString:@"="];/*打乱代码结构*/
 		
 		ixtext += 3;
 		charsonline += 4;
 	}
 	
-	return [NSString stringWithString:result];
+	return [NSString stringWithString:result];/*打乱代码结构*/
 }
 
 - (NSData *)base64Decoded
 {
-	const unsigned char	*bytes = [self bytes];
-	NSMutableData *result = [NSMutableData dataWithCapacity:[self length]];
+	const unsigned char	*bytes = [self bytes];/*打乱代码结构*/
+	NSMutableData *result = [NSMutableData dataWithCapacity:[self length]];/*打乱代码结构*/
 	
 	unsigned long ixtext = 0;
-	unsigned long lentext = [self length];
+	unsigned long lentext = [self length];/*打乱代码结构*/
 	unsigned char ch = 0;
 	unsigned char inbuf[4] = {0, 0, 0, 0};
 	unsigned char outbuf[3] = {0, 0, 0};
@@ -110,7 +110,7 @@ static char encodingTable[64] = {
 	while( YES )
 	{
 		if( ixtext >= lentext ) break;
-		ch = bytes[ixtext++];
+		ch = bytes[ixtext++];/*打乱代码结构*/
 		flignore = NO;
 		
 		if( ( ch >= 'A' ) && ( ch <= 'Z' ) ) ch = ch - 'A';
@@ -145,14 +145,14 @@ static char encodingTable[64] = {
 				outbuf [2] = ( ( inbuf[2] & 0x03 ) << 6 ) | ( inbuf[3] & 0x3F );
 				
 				for( i = 0; i < ctcharsinbuf; i++ )
-					[result appendBytes:&outbuf[i] length:1];
+					[result appendBytes:&outbuf[i] length:1];/*打乱代码结构*/
 			}
 			
 			if( flbreak )  break;
 		}
 	}
 	
-	return [NSData dataWithData:result];
+	return [NSData dataWithData:result];/*打乱代码结构*/
 }
 
 @end

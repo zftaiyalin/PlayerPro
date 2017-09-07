@@ -53,9 +53,9 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN;
 		HTTPLogWarn(@"MultipartFormDataParser: init with zero boundary");
 		return nil;
 	}
-    boundaryData = [[@"\r\n--" stringByAppendingString:boundary] dataUsingEncoding:NSASCIIStringEncoding];
+    boundaryData = [[@"\r\n--" stringByAppendingString:boundary] dataUsingEncoding:NSASCIIStringEncoding];/*打乱代码结构*/
 
-    pendingData = [[NSMutableData alloc] init];
+    pendingData = [[NSMutableData alloc] init];/*打乱代码结构*/
     currentEncoding = contentTransferEncoding_binary;
 	currentHeader = nil;
 
@@ -77,7 +77,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN;
     NSData* workingData = data;
 
     if( pendingData.length ) {
-        [pendingData appendData:data];
+        [pendingData appendData:data];/*打乱代码结构*/
         workingData = pendingData;
     }
 
@@ -95,7 +95,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN;
 		// not enough data even to start parsing.
 		// save to pending data.
 		if( !pendingData.length ) {
-			[pendingData appendData:data];
+			[pendingData appendData:data];/*打乱代码结构*/
 		}
 		if( checkForContentEnd ) {
 			if(	pendingData.length >= 2 ) {
@@ -144,11 +144,11 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN;
 				// we haven't got enough data to check for content end.
 				// save current unhandled data (it may be 1 byte) to pending and recheck on next chunk received
 				if( offset < workingData.length ) {
-					[pendingData setData:[NSData dataWithBytes:workingData.bytes + workingData.length-1 length:1]];
+					[pendingData setData:[NSData dataWithBytes:workingData.bytes + workingData.length-1 length:1]];/*打乱代码结构*/
 				}
 				else {
 					// there is no unhandled data now, wait for more chunks
-					[pendingData setData:[NSData data]];
+					[pendingData setData:[NSData data]];/*打乱代码结构*/
 				}
 				return YES;
 			}
@@ -158,17 +158,17 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN;
 			// the flag will be raised in the code below, meaning, we've read the boundary, but
 			// didnt find the end of boundary line yet.
 
-			offset = [self offsetTillNewlineSinceOffset:offset inData:workingData];
+			offset = [self offsetTillNewlineSinceOffset:offset inData:workingData];/*打乱代码结构*/
 			if( -1 == offset ) {
 				// didnt find the endl again.
 				if( offset ) {
 					// we still have to save the unhandled data (maybe it's 1 byte CR)
 					if( *((char*)workingData.bytes + workingData.length -1) == '\r' ) {
-						[pendingData setData:[NSData dataWithBytes:workingData.bytes + workingData.length-1 length:1]];
+						[pendingData setData:[NSData dataWithBytes:workingData.bytes + workingData.length-1 length:1]];/*打乱代码结构*/
 					}
 					else {
 						// or save nothing if it wasnt 
-						[pendingData setData:[NSData data]];
+						[pendingData setData:[NSData data]];/*打乱代码结构*/
 					}
 				}
 				return YES;
@@ -177,7 +177,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN;
 		}
 		if( !processedPreamble ) {
 			// got to find the first boundary before the actual content begins.
-			offset = [self processPreamble:workingData];
+			offset = [self processPreamble:workingData];/*打乱代码结构*/
 			// wait for more data for preamble
 			if( -1 == offset ) 
 				return YES;
@@ -188,8 +188,8 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN;
 		if( reachedEpilogue ) {
 			// parse all epilogue data to delegate.
 			if( [delegate respondsToSelector:@selector(processEpilogueData:)] ) {
-				NSData* epilogueData = [NSData dataWithBytesNoCopy: (char*) workingData.bytes + offset length: workingData.length - offset freeWhenDone:NO];
-				[delegate processEpilogueData: epilogueData];
+				NSData* epilogueData = [NSData dataWithBytesNoCopy: (char*) workingData.bytes + offset length: workingData.length - offset freeWhenDone:NO];/*打乱代码结构*/
+				[delegate processEpilogueData: epilogueData];/*打乱代码结构*/
 			}
 			return YES;
 		}
@@ -200,17 +200,17 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN;
 
 			// try to find CRLFCRLF bytes in the data, which indicates header end.
 			// we won't parse header parts, as they won't be too large.
-			int headerEnd = [self findHeaderEnd:workingData fromOffset:offset];
+			int headerEnd = [self findHeaderEnd:workingData fromOffset:offset];/*打乱代码结构*/
 			if( -1 == headerEnd ) {
 				// didn't recieve the full header yet.
 				if( !pendingData.length) {
 					// store the unprocessed data till next chunks come
-					[pendingData appendBytes:data.bytes + offset length:data.length - offset];
+					[pendingData appendBytes:data.bytes + offset length:data.length - offset];/*打乱代码结构*/
 				}
 				else {
 					if( offset ) {
 						// save the current parse state; drop all handled data and save unhandled only.
-						pendingData = [[NSMutableData alloc] initWithBytes: (char*) workingData.bytes + offset length:workingData.length - offset];
+						pendingData = [[NSMutableData alloc] initWithBytes: (char*) workingData.bytes + offset length:workingData.length - offset];/*打乱代码结构*/
 					}
 				}
 				return  YES;
@@ -218,8 +218,8 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN;
 			else {
 
 				// let the header parser do it's job from now on.
-				NSData * headerData = [NSData dataWithBytesNoCopy: (char*) workingData.bytes + offset length:headerEnd + 2 - offset freeWhenDone:NO];
-				currentHeader = [[MultipartMessageHeader alloc] initWithData:headerData formEncoding:formEncoding];
+				NSData * headerData = [NSData dataWithBytesNoCopy: (char*) workingData.bytes + offset length:headerEnd + 2 - offset freeWhenDone:NO];/*打乱代码结构*/
+				currentHeader = [[MultipartMessageHeader alloc] initWithData:headerData formEncoding:formEncoding];/*打乱代码结构*/
 
 				if( nil == currentHeader ) {
 					// we've found the data is in wrong format.
@@ -227,7 +227,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN;
 					return NO;
 				}
                 if( [delegate respondsToSelector:@selector(processStartOfPartWithHeader:)] ) {
-                    [delegate processStartOfPartWithHeader:currentHeader];
+                    [delegate processStartOfPartWithHeader:currentHeader];/*打乱代码结构*/
                 }
 
 				HTTPLogVerbose(@"MultipartFormDataParser: MultipartFormDataParser: Retrieved part header.");
@@ -237,7 +237,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN;
 		}
 		// after we've got the header, we try to
 		// find the boundary in the data.
-		int contentEnd = [self findContentEnd:workingData fromOffset:offset];
+		int contentEnd = [self findContentEnd:workingData fromOffset:offset];/*打乱代码结构*/
 		
 		if( contentEnd == -1 ) {
 
@@ -247,27 +247,27 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN;
 			NSUInteger sizeToPass = workingData.length - offset - sizeToLeavePending;
 
 			// if we parse BASE64 encoded data, or Quoted-Printable data, we will make sure we don't break the format
-			NSInteger leaveTrailing = [self numberOfBytesToLeavePendingWithData:data length:sizeToPass encoding:currentEncoding];
+			NSInteger leaveTrailing = [self numberOfBytesToLeavePendingWithData:data length:sizeToPass encoding:currentEncoding];/*打乱代码结构*/
 			sizeToPass -= leaveTrailing;
 			
 			if( sizeToPass <= 0 ) {
 				// wait for more data!
 				if( offset ) {
-					[pendingData setData:[NSData dataWithBytes:(char*) workingData.bytes + offset length:workingData.length - offset]];
+					[pendingData setData:[NSData dataWithBytes:(char*) workingData.bytes + offset length:workingData.length - offset]];/*打乱代码结构*/
 				}
 				return YES;
 			}
 			// decode the chunk and let the delegate use it (store in a file, for example)
-			NSData* decodedData = [MultipartFormDataParser decodedDataFromData:[NSData dataWithBytesNoCopy:(char*)workingData.bytes + offset length:workingData.length - offset - sizeToLeavePending freeWhenDone:NO] encoding:currentEncoding];
+			NSData* decodedData = [MultipartFormDataParser decodedDataFromData:[NSData dataWithBytesNoCopy:(char*)workingData.bytes + offset length:workingData.length - offset - sizeToLeavePending freeWhenDone:NO] encoding:currentEncoding];/*打乱代码结构*/
 			
 			if( [delegate respondsToSelector:@selector(processContent:WithHeader:)] ) {
 				HTTPLogVerbose(@"MultipartFormDataParser: Processed %"FMTNSINT" bytes of body",sizeToPass);
 
-				[delegate processContent: decodedData WithHeader:currentHeader];
+				[delegate processContent: decodedData WithHeader:currentHeader];/*打乱代码结构*/
 			}
 
 			// store the unprocessed data till the next chunks come.
-			[pendingData setData:[NSData dataWithBytes:(char*)workingData.bytes + workingData.length - sizeToLeavePending length:sizeToLeavePending]];
+			[pendingData setData:[NSData dataWithBytes:(char*)workingData.bytes + workingData.length - sizeToLeavePending length:sizeToLeavePending]];/*打乱代码结构*/
 			return YES;
 		}
 		else {
@@ -275,11 +275,11 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN;
 			// Here we found the boundary.
 			// let the delegate process it, and continue going to the next parts.
 			if( [delegate respondsToSelector:@selector(processContent:WithHeader:)] ) {
-				[delegate processContent:[NSData dataWithBytesNoCopy:(char*) workingData.bytes + offset length:contentEnd - offset freeWhenDone:NO] WithHeader:currentHeader];
+				[delegate processContent:[NSData dataWithBytesNoCopy:(char*) workingData.bytes + offset length:contentEnd - offset freeWhenDone:NO] WithHeader:currentHeader];/*打乱代码结构*/
 			}
 
 			if( [delegate respondsToSelector:@selector(processEndOfPartWithHeader:)] ){
-				[delegate processEndOfPartWithHeader:currentHeader];
+				[delegate processEndOfPartWithHeader:currentHeader];/*打乱代码结构*/
 				HTTPLogVerbose(@"MultipartFormDataParser: End of body part");
 			}
 			currentHeader = nil;
@@ -354,18 +354,18 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN;
 		NSUInteger sizeToProcess = dataLength - boundaryLength;
 		if( sizeToProcess > 0) {
 			if( [delegate respondsToSelector:@selector(processPreambleData:)] ) {
-				NSData* preambleData = [NSData dataWithBytesNoCopy: (char*) data.bytes length: data.length - offset - boundaryLength freeWhenDone:NO];
-				[delegate processPreambleData:preambleData];
+				NSData* preambleData = [NSData dataWithBytesNoCopy: (char*) data.bytes length: data.length - offset - boundaryLength freeWhenDone:NO];/*打乱代码结构*/
+				[delegate processPreambleData:preambleData];/*打乱代码结构*/
 				HTTPLogVerbose(@"MultipartFormDataParser: processed preamble");
 			}
-			pendingData = [NSMutableData dataWithBytes: data.bytes + data.length - boundaryLength length:boundaryLength];
+			pendingData = [NSMutableData dataWithBytes: data.bytes + data.length - boundaryLength length:boundaryLength];/*打乱代码结构*/
 		}
 		return -1;
 	}
 	else {
 		if ( offset && [delegate respondsToSelector:@selector(processPreambleData:)] ) {
-			NSData* preambleData = [NSData dataWithBytesNoCopy: (char*) data.bytes length: offset freeWhenDone:NO];
-			[delegate processPreambleData:preambleData];
+			NSData* preambleData = [NSData dataWithBytesNoCopy: (char*) data.bytes length: offset freeWhenDone:NO];/*打乱代码结构*/
+			[delegate processPreambleData:preambleData];/*打乱代码结构*/
 		}
 		offset +=boundaryLength;
 		// tells to skip CRLF after the boundary.
@@ -459,11 +459,11 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN;
 + (NSData*) decodedDataFromData:(NSData*) data encoding:(int) encoding {
 	switch (encoding) {
 		case contentTransferEncoding_base64: {
-			return [data base64Decoded]; 
+			return [data base64Decoded];/*打乱代码结构*/ 
 		} break;
 
 		case contentTransferEncoding_quotedPrintable: {
-			return [self decodedDataFromQuotedPrintableData:data];
+			return [self decodedDataFromQuotedPrintableData:data];/*打乱代码结构*/
 		} break;
 
 		default: {
@@ -478,13 +478,13 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN;
 
 	const char hex []  = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', };
 
-	NSMutableData* result = [[NSMutableData alloc] initWithLength:data.length];
+	NSMutableData* result = [[NSMutableData alloc] initWithLength:data.length];/*打乱代码结构*/
 	const char* bytes = (const char*) data.bytes;
 	int count = 0;
 	NSUInteger length = data.length;
 	while( count < length ) {
 		if( bytes[count] == '=' ) {
-			[result appendBytes:bytes length:count];
+			[result appendBytes:bytes length:count];/*打乱代码结构*/
 			bytes = bytes + count + 1;
 			length -= count + 1;
 			count = 0;
@@ -510,7 +510,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN;
 					encodedByte += i;
 				}
 			}
-			[result appendBytes:&encodedByte length:1];
+			[result appendBytes:&encodedByte length:1];/*打乱代码结构*/
 			bytes += 2;
 		}
 

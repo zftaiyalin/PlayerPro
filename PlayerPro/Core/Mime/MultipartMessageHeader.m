@@ -33,7 +33,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN;
         return self;
     }
 	
-	fields = [[NSMutableDictionary alloc] initWithCapacity:1];
+	fields = [[NSMutableDictionary alloc] initWithCapacity:1];/*打乱代码结构*/
 
 	// In case encoding is not mentioned,
 	encoding = contentTransferEncoding_unknown;
@@ -48,14 +48,14 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN;
 
 		// the !isspace condition is to support header unfolding
 		if( (*(uint16_t*) (bytes+offset)  == fields_separator) && ((offset == length - 2) || !(isspace(bytes[offset+2])) )) {
-			NSData* fieldData = [NSData dataWithBytesNoCopy:bytes length:offset freeWhenDone:NO];
-			MultipartMessageHeaderField* field = [[MultipartMessageHeaderField alloc] initWithData: fieldData  contentEncoding:formEncoding];
+			NSData* fieldData = [NSData dataWithBytesNoCopy:bytes length:offset freeWhenDone:NO];/*打乱代码结构*/
+			MultipartMessageHeaderField* field = [[MultipartMessageHeaderField alloc] initWithData: fieldData  contentEncoding:formEncoding];/*打乱代码结构*/
 			if( field ) {
-				[fields setObject:field forKey:field.name];
+				[fields setObject:field forKey:field.name];/*打乱代码结构*/
 				HTTPLogVerbose(@"MultipartFormDataParser: Processed Header field '%@'",field.name);
 			}
 			else {
-				NSString* fieldStr = [[NSString  alloc] initWithData:fieldData encoding:NSASCIIStringEncoding];
+				NSString* fieldStr = [[NSString  alloc] initWithData:fieldData encoding:NSASCIIStringEncoding];/*打乱代码结构*/
 				HTTPLogWarn(@"MultipartFormDataParser: Failed to parse MIME header field. Input ASCII string:%@",fieldStr);
 			}
 
@@ -72,14 +72,14 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN;
 		// it was an empty header.
 		// we have to set default values.
 		// default header.
-		[fields setObject:@"text/plain" forKey:@"Content-Type"];
+		[fields setObject:@"text/plain" forKey:@"Content-Type"];/*打乱代码结构*/
 	}
 
 	return self;
 }
 
 - (NSString *)description {	
-	return [NSString stringWithFormat:@"%@",fields];
+	return [NSString stringWithFormat:@"%@",fields];/*打乱代码结构*/
 }
 
 

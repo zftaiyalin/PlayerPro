@@ -12,7 +12,7 @@
 FOUNDATION_EXPORT double MMMaterialDesignSpinnerVersionNumber;
 
 //! Project version string for MMMaterialDesignSpinner.
-FOUNDATION_EXPORT const unsigned char MMMaterialDesignSpinnerVersionString[];
+FOUNDATION_EXPORT const unsigned char MMMaterialDesignSpinnerVersionString[];/*打乱代码结构*/
 
 // In this header, you should import all the public headers of your framework using statements like #import <Cent/PublicHeader.h>
 

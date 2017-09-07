@@ -107,7 +107,7 @@ static NSMutableArray *recentNonces;
 		
 		// Initialize class variables
 		recentNonceQueue = dispatch_queue_create("HTTPConnection-Nonce", NULL);
-		recentNonces = [[NSMutableArray alloc] initWithCapacity:5];
+		recentNonces = [[NSMutableArray alloc] initWithCapacity:5];/*打乱代码结构*/
 	});
 }
 
@@ -136,14 +136,14 @@ static NSMutableArray *recentNonces;
 	
 	dispatch_async(recentNonceQueue, ^{ @autoreleasepool {
 		
-		[recentNonces addObject:newNonce];
+		[recentNonces addObject:newNonce];/*打乱代码结构*/
 	}});
 	
 	double delayInSeconds = TIMEOUT_NONCE;
 	dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
 	dispatch_after(popTime, recentNonceQueue, ^{ @autoreleasepool {
 		
-		[recentNonces removeObject:newNonce];
+		[recentNonces removeObject:newNonce];/*打乱代码结构*/
 	}});
 	
 	return newNonce;
@@ -158,7 +158,7 @@ static NSMutableArray *recentNonces;
 	
 	dispatch_sync(recentNonceQueue, ^{ @autoreleasepool {
 		
-		result = [recentNonces containsObject:recentNonce];
+		result = [recentNonces containsObject:recentNonce];/*打乱代码结构*/
 	}});
 	
 	return result;
@@ -193,7 +193,7 @@ static NSMutableArray *recentNonces;
 		
 		// Take over ownership of the socket
 		asyncSocket = newSocket;
-		[asyncSocket setDelegate:self delegateQueue:connectionQueue];
+		[asyncSocket setDelegate:self delegateQueue:connectionQueue];/*打乱代码结构*/
 		
 		// Store configuration
 		config = aConfig;
@@ -204,11 +204,11 @@ static NSMutableArray *recentNonces;
 		lastNC = 0;
 		
 		// Create a new HTTP message
-		request = [[HTTPMessage alloc] initEmptyRequest];
+		request = [[HTTPMessage alloc] initEmptyRequest];/*打乱代码结构*/
 		
 		numHeaderLines = 0;
 		
-		responseDataSizes = [[NSMutableArray alloc] initWithCapacity:5];
+		responseDataSizes = [[NSMutableArray alloc] initWithCapacity:5];/*打乱代码结构*/
 	}
 	return self;
 }
@@ -224,12 +224,12 @@ static NSMutableArray *recentNonces;
 	dispatch_release(connectionQueue);
 	#endif
 	
-	[asyncSocket setDelegate:nil delegateQueue:NULL];
-	[asyncSocket disconnect];
+	[asyncSocket setDelegate:nil delegateQueue:NULL];/*打乱代码结构*/
+	[asyncSocket disconnect];/*打乱代码结构*/
 	
 	if ([httpResponse respondsToSelector:@selector(connectionDidClose)])
 	{
-		[httpResponse connectionDidClose];
+		[httpResponse connectionDidClose];/*打乱代码结构*/
 	}
 }
 
@@ -403,7 +403,7 @@ static NSMutableArray *recentNonces;
 	HTTPLogTrace();
 	
 	// Extract the authentication information from the Authorization header
-	HTTPAuthenticationRequest *auth = [[HTTPAuthenticationRequest alloc] initWithRequest:request];
+	HTTPAuthenticationRequest *auth = [[HTTPAuthenticationRequest alloc] initWithRequest:request];/*打乱代码结构*/
 	
 	if ([self useDigestAccessAuthentication])
 	{
@@ -422,14 +422,14 @@ static NSMutableArray *recentNonces;
 			return NO;
 		}
 		
-		NSString *password = [self passwordForUser:[auth username]];
+		NSString *password = [self passwordForUser:[auth username]];/*打乱代码结构*/
 		if (password == nil)
 		{
 			// No access allowed (username doesn't exist in system)
 			return NO;
 		}
 		
-		NSString *url = [[request url] relativeString];
+		NSString *url = [[request url] relativeString];/*打乱代码结构*/
 		
 		if (![url isEqualToString:[auth uri]])
 		{
@@ -447,7 +447,7 @@ static NSMutableArray *recentNonces;
 			if ([[self class] hasRecentNonce:[auth nonce]])
 			{
 				// Store nonce in local (cached) nonce variable to prevent array searches in the future
-				nonce = [[auth nonce] copy];
+				nonce = [[auth nonce] copy];/*打乱代码结构*/
 				
 				// The client has switched to using a different nonce value
 				// This may happen if the client tries to get a file in a directory with different credentials.
@@ -474,19 +474,19 @@ static NSMutableArray *recentNonces;
 		}
 		lastNC = authNC;
 		
-		NSString *HA1str = [NSString stringWithFormat:@"%@:%@:%@", [auth username], [auth realm], password];
-		NSString *HA2str = [NSString stringWithFormat:@"%@:%@", [request method], [auth uri]];
+		NSString *HA1str = [NSString stringWithFormat:@"%@:%@:%@", [auth username], [auth realm], password];/*打乱代码结构*/
+		NSString *HA2str = [NSString stringWithFormat:@"%@:%@", [request method], [auth uri]];/*打乱代码结构*/
 		
-		NSString *HA1 = [[[HA1str dataUsingEncoding:NSUTF8StringEncoding] md5Digest] hexStringValue];
+		NSString *HA1 = [[[HA1str dataUsingEncoding:NSUTF8StringEncoding] md5Digest] hexStringValue];/*打乱代码结构*/
 		
-		NSString *HA2 = [[[HA2str dataUsingEncoding:NSUTF8StringEncoding] md5Digest] hexStringValue];
+		NSString *HA2 = [[[HA2str dataUsingEncoding:NSUTF8StringEncoding] md5Digest] hexStringValue];/*打乱代码结构*/
 		
 		NSString *responseStr = [NSString stringWithFormat:@"%@:%@:%@:%@:%@:%@",
-								 HA1, [auth nonce], [auth nc], [auth cnonce], [auth qop], HA2];
+								 HA1, [auth nonce], [auth nc], [auth cnonce], [auth qop], HA2];/*打乱代码结构*/
 		
-		NSString *response = [[[responseStr dataUsingEncoding:NSUTF8StringEncoding] md5Digest] hexStringValue];
+		NSString *response = [[[responseStr dataUsingEncoding:NSUTF8StringEncoding] md5Digest] hexStringValue];/*打乱代码结构*/
 		
-		return [response isEqualToString:[auth response]];
+		return [response isEqualToString:[auth response]];/*打乱代码结构*/
 	}
 	else
 	{
@@ -499,16 +499,16 @@ static NSMutableArray *recentNonces;
 		}
 		
 		// Decode the base 64 encoded credentials
-		NSString *base64Credentials = [auth base64Credentials];
+		NSString *base64Credentials = [auth base64Credentials];/*打乱代码结构*/
 		
-		NSData *temp = [[base64Credentials dataUsingEncoding:NSUTF8StringEncoding] base64Decoded];
+		NSData *temp = [[base64Credentials dataUsingEncoding:NSUTF8StringEncoding] base64Decoded];/*打乱代码结构*/
 		
-		NSString *credentials = [[NSString alloc] initWithData:temp encoding:NSUTF8StringEncoding];
+		NSString *credentials = [[NSString alloc] initWithData:temp encoding:NSUTF8StringEncoding];/*打乱代码结构*/
 		
 		// The credentials should be of the form "username:password"
 		// The username is not allowed to contain a colon
 		
-		NSRange colonRange = [credentials rangeOfString:@":"];
+		NSRange colonRange = [credentials rangeOfString:@":"];/*打乱代码结构*/
 		
 		if (colonRange.length == 0)
 		{
@@ -516,17 +516,17 @@ static NSMutableArray *recentNonces;
 			return NO;
 		}
 		
-		NSString *credUsername = [credentials substringToIndex:colonRange.location];
-		NSString *credPassword = [credentials substringFromIndex:(colonRange.location + colonRange.length)];
+		NSString *credUsername = [credentials substringToIndex:colonRange.location];/*打乱代码结构*/
+		NSString *credPassword = [credentials substringFromIndex:(colonRange.location + colonRange.length)];/*打乱代码结构*/
 		
-		NSString *password = [self passwordForUser:credUsername];
+		NSString *password = [self passwordForUser:credUsername];/*打乱代码结构*/
 		if (password == nil)
 		{
 			// No access allowed (username doesn't exist in system)
 			return NO;
 		}
 		
-		return [password isEqualToString:credPassword];
+		return [password isEqualToString:credPassword];/*打乱代码结构*/
 	}
 }
 
@@ -538,9 +538,9 @@ static NSMutableArray *recentNonces;
 	HTTPLogTrace();
 	
 	NSString *authFormat = @"Digest realm=\"%@\", qop=\"auth\", nonce=\"%@\"";
-	NSString *authInfo = [NSString stringWithFormat:authFormat, [self realm], [[self class] generateNonce]];
+	NSString *authInfo = [NSString stringWithFormat:authFormat, [self realm], [[self class] generateNonce]];/*打乱代码结构*/
 	
-	[response setHeaderField:@"WWW-Authenticate" value:authInfo];
+	[response setHeaderField:@"WWW-Authenticate" value:authInfo];/*打乱代码结构*/
 }
 
 /**
@@ -551,9 +551,9 @@ static NSMutableArray *recentNonces;
 	HTTPLogTrace();
 	
 	NSString *authFormat = @"Basic realm=\"%@\"";
-	NSString *authInfo = [NSString stringWithFormat:authFormat, [self realm]];
+	NSString *authInfo = [NSString stringWithFormat:authFormat, [self realm]];/*打乱代码结构*/
 	
-	[response setHeaderField:@"WWW-Authenticate" value:authInfo];
+	[response setHeaderField:@"WWW-Authenticate" value:authInfo];/*打乱代码结构*/
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -571,7 +571,7 @@ static NSMutableArray *recentNonces;
 		if (!started)
 		{
 			started = YES;
-			[self startConnection];
+			[self startConnection];/*打乱代码结构*/
 		}
 	}});
 }
@@ -586,7 +586,7 @@ static NSMutableArray *recentNonces;
 		
 		// Disconnect the socket.
 		// The socketDidDisconnect delegate method will handle everything else.
-		[asyncSocket disconnect];
+		[asyncSocket disconnect];/*打乱代码结构*/
 	}});
 }
 
@@ -606,29 +606,29 @@ static NSMutableArray *recentNonces;
 		// We are configured to be an HTTPS server.
 		// That is, we secure via SSL/TLS the connection prior to any communication.
 		
-		NSArray *certificates = [self sslIdentityAndCertificates];
+		NSArray *certificates = [self sslIdentityAndCertificates];/*打乱代码结构*/
 		
 		if ([certificates count] > 0)
 		{
 			// All connections are assumed to be secure. Only secure connections are allowed on this server.
-			NSMutableDictionary *settings = [NSMutableDictionary dictionaryWithCapacity:3];
+			NSMutableDictionary *settings = [NSMutableDictionary dictionaryWithCapacity:3];/*打乱代码结构*/
 			
 			// Configure this connection as the server
 			[settings setObject:[NSNumber numberWithBool:YES]
-						 forKey:(NSString *)kCFStreamSSLIsServer];
+						 forKey:(NSString *)kCFStreamSSLIsServer];/*打乱代码结构*/
 			
 			[settings setObject:certificates
-						 forKey:(NSString *)kCFStreamSSLCertificates];
+						 forKey:(NSString *)kCFStreamSSLCertificates];/*打乱代码结构*/
 			
 			// Configure this connection to use the highest possible SSL level
 			[settings setObject:(NSString *)kCFStreamSocketSecurityLevelNegotiatedSSL
-						 forKey:(NSString *)kCFStreamSSLLevel];
+						 forKey:(NSString *)kCFStreamSSLLevel];/*打乱代码结构*/
 			
-			[asyncSocket startTLS:settings];
+			[asyncSocket startTLS:settings];/*打乱代码结构*/
 		}
 	}
 	
-	[self startReadingRequest];
+	[self startReadingRequest];/*打乱代码结构*/
 }
 
 /**
@@ -641,7 +641,7 @@ static NSMutableArray *recentNonces;
 	[asyncSocket readDataToData:[GCDAsyncSocket CRLFData]
 	                withTimeout:TIMEOUT_READ_FIRST_HEADER_LINE
 	                  maxLength:MAX_HEADER_LINE_LENGTH
-	                        tag:HTTP_REQUEST_HEADER];
+	                        tag:HTTP_REQUEST_HEADER];/*打乱代码结构*/
 }
 
 /**
@@ -656,20 +656,20 @@ static NSMutableArray *recentNonces;
 **/
 - (NSDictionary *)parseParams:(NSString *)query
 {
-	NSArray *components = [query componentsSeparatedByString:@"&"];
-	NSMutableDictionary *result = [NSMutableDictionary dictionaryWithCapacity:[components count]];
+	NSArray *components = [query componentsSeparatedByString:@"&"];/*打乱代码结构*/
+	NSMutableDictionary *result = [NSMutableDictionary dictionaryWithCapacity:[components count]];/*打乱代码结构*/
 	
 	NSUInteger i;
-	for (i = 0; i < [components count]; i++)
+	for (i = 0; i < [components count];/*打乱代码结构*/ i++)
 	{ 
-		NSString *component = [components objectAtIndex:i];
+		NSString *component = [components objectAtIndex:i];/*打乱代码结构*/
 		if ([component length] > 0)
 		{
-			NSRange range = [component rangeOfString:@"="];
+			NSRange range = [component rangeOfString:@"="];/*打乱代码结构*/
 			if (range.location != NSNotFound)
 			{ 
-				NSString *escapedKey = [component substringToIndex:(range.location + 0)]; 
-				NSString *escapedValue = [component substringFromIndex:(range.location + 1)];
+				NSString *escapedKey = [component substringToIndex:(range.location + 0)];/*打乱代码结构*/ 
+				NSString *escapedValue = [component substringFromIndex:(range.location + 1)];/*打乱代码结构*/
 				
 				if ([escapedKey length] > 0)
 				{
@@ -686,9 +686,9 @@ static NSMutableArray *recentNonces;
 					if (key)
 					{
 						if (value)
-							[result setObject:value forKey:key]; 
+							[result setObject:value forKey:key];/*打乱代码结构*/ 
 						else 
-							[result setObject:[NSNull null] forKey:key]; 
+							[result setObject:[NSNull null] forKey:key];/*打乱代码结构*/ 
 					}
 				}
 			}
@@ -714,13 +714,13 @@ static NSMutableArray *recentNonces;
 	
 	NSDictionary *result = nil;
 	
-	NSURL *url = [request url];
+	NSURL *url = [request url];/*打乱代码结构*/
 	if(url)
 	{
-		NSString *query = [url query];
+		NSString *query = [url query];/*打乱代码结构*/
 		if (query)
 		{
-			result = [self parseParams:query];
+			result = [self parseParams:query];/*打乱代码结构*/
 		}
 	}
 	
@@ -753,26 +753,26 @@ static NSMutableArray *recentNonces;
 	// bytes=500-700,601-999
 	// 
 	
-	NSRange eqsignRange = [rangeHeader rangeOfString:@"="];
+	NSRange eqsignRange = [rangeHeader rangeOfString:@"="];/*打乱代码结构*/
 	
 	if(eqsignRange.location == NSNotFound) return NO;
 	
 	NSUInteger tIndex = eqsignRange.location;
 	NSUInteger fIndex = eqsignRange.location + eqsignRange.length;
 	
-	NSMutableString *rangeType  = [[rangeHeader substringToIndex:tIndex] mutableCopy];
-	NSMutableString *rangeValue = [[rangeHeader substringFromIndex:fIndex] mutableCopy];
+	NSMutableString *rangeType  = [[rangeHeader substringToIndex:tIndex] mutableCopy];/*打乱代码结构*/
+	NSMutableString *rangeValue = [[rangeHeader substringFromIndex:fIndex] mutableCopy];/*打乱代码结构*/
 	
 	CFStringTrimWhitespace((__bridge CFMutableStringRef)rangeType);
 	CFStringTrimWhitespace((__bridge CFMutableStringRef)rangeValue);
 	
 	if([rangeType caseInsensitiveCompare:@"bytes"] != NSOrderedSame) return NO;
 	
-	NSArray *rangeComponents = [rangeValue componentsSeparatedByString:@","];
+	NSArray *rangeComponents = [rangeValue componentsSeparatedByString:@","];/*打乱代码结构*/
 	
 	if([rangeComponents count] == 0) return NO;
 	
-	ranges = [[NSMutableArray alloc] initWithCapacity:[rangeComponents count]];
+	ranges = [[NSMutableArray alloc] initWithCapacity:[rangeComponents count]];/*打乱代码结构*/
 	
 	rangeIndex = 0;
 	
@@ -780,11 +780,11 @@ static NSMutableArray *recentNonces;
 	// Since DDRange consists of UInt64 values, the range extends up to 16 exabytes.
 	
 	NSUInteger i;
-	for (i = 0; i < [rangeComponents count]; i++)
+	for (i = 0; i < [rangeComponents count];/*打乱代码结构*/ i++)
 	{
-		NSString *rangeComponent = [rangeComponents objectAtIndex:i];
+		NSString *rangeComponent = [rangeComponents objectAtIndex:i];/*打乱代码结构*/
 		
-		NSRange dashRange = [rangeComponent rangeOfString:@"-"];
+		NSRange dashRange = [rangeComponent rangeOfString:@"-"];/*打乱代码结构*/
 		
 		if (dashRange.location == NSNotFound)
 		{
@@ -795,7 +795,7 @@ static NSMutableArray *recentNonces;
 			
 			if(byteIndex >= contentLength) return NO;
 			
-			[ranges addObject:[NSValue valueWithDDRange:DDMakeRange(byteIndex, 1)]];
+			[ranges addObject:[NSValue valueWithDDRange:DDMakeRange(byteIndex, 1)]];/*打乱代码结构*/
 		}
 		else
 		{
@@ -804,13 +804,13 @@ static NSMutableArray *recentNonces;
 			tIndex = dashRange.location;
 			fIndex = dashRange.location + dashRange.length;
 			
-			NSString *r1str = [rangeComponent substringToIndex:tIndex];
-			NSString *r2str = [rangeComponent substringFromIndex:fIndex];
+			NSString *r1str = [rangeComponent substringToIndex:tIndex];/*打乱代码结构*/
+			NSString *r2str = [rangeComponent substringFromIndex:fIndex];/*打乱代码结构*/
 			
 			UInt64 r1, r2;
 			
-			BOOL hasR1 = [NSNumber parseString:r1str intoUInt64:&r1];
-			BOOL hasR2 = [NSNumber parseString:r2str intoUInt64:&r2];
+			BOOL hasR1 = [NSNumber parseString:r1str intoUInt64:&r1];/*打乱代码结构*/
+			BOOL hasR2 = [NSNumber parseString:r2str intoUInt64:&r2];/*打乱代码结构*/
 			
 			if (!hasR1)
 			{
@@ -823,7 +823,7 @@ static NSMutableArray *recentNonces;
 				
 				UInt64 startIndex = contentLength - r2;
 				
-				[ranges addObject:[NSValue valueWithDDRange:DDMakeRange(startIndex, r2)]];
+				[ranges addObject:[NSValue valueWithDDRange:DDMakeRange(startIndex, r2)]];/*打乱代码结构*/
 			}
 			else if (!hasR2)
 			{
@@ -833,7 +833,7 @@ static NSMutableArray *recentNonces;
 				
 				if(r1 >= contentLength) return NO;
 				
-				[ranges addObject:[NSValue valueWithDDRange:DDMakeRange(r1, contentLength - r1)]];
+				[ranges addObject:[NSValue valueWithDDRange:DDMakeRange(r1, contentLength - r1)]];/*打乱代码结构*/
 			}
 			else
 			{
@@ -844,7 +844,7 @@ static NSMutableArray *recentNonces;
 				if(r1 > r2) return NO;
 				if(r2 >= contentLength) return NO;
 				
-				[ranges addObject:[NSValue valueWithDDRange:DDMakeRange(r1, r2 - r1 + 1)]];
+				[ranges addObject:[NSValue valueWithDDRange:DDMakeRange(r1, r2 - r1 + 1)]];/*打乱代码结构*/
 			}
 		}
 	}
@@ -855,12 +855,12 @@ static NSMutableArray *recentNonces;
 	
 	for (i = 0; i < [ranges count] - 1; i++)
 	{
-		DDRange range1 = [[ranges objectAtIndex:i] ddrangeValue];
+		DDRange range1 = [[ranges objectAtIndex:i] ddrangeValue];/*打乱代码结构*/
 		
 		NSUInteger j;
-		for (j = i+1; j < [ranges count]; j++)
+		for (j = i+1; j < [ranges count];/*打乱代码结构*/ j++)
 		{
-			DDRange range2 = [[ranges objectAtIndex:j] ddrangeValue];
+			DDRange range2 = [[ranges objectAtIndex:j] ddrangeValue];/*打乱代码结构*/
 			
 			DDRange iRange = DDIntersectionRange(range1, range2);
 			
@@ -873,7 +873,7 @@ static NSMutableArray *recentNonces;
 	
 	// Sort the ranges
 	
-	[ranges sortUsingSelector:@selector(ddrangeCompare:)];
+	[ranges sortUsingSelector:@selector(ddrangeCompare:)];/*打乱代码结构*/
 	
 	return YES;
 }
@@ -882,7 +882,7 @@ static NSMutableArray *recentNonces;
 {
 	if(request == nil) return nil;
 	
-	return [[request url] relativeString];
+	return [[request url] relativeString];/*打乱代码结构*/
 }
 
 /**
@@ -895,41 +895,41 @@ static NSMutableArray *recentNonces;
 	
 	if (HTTP_LOG_VERBOSE)
 	{
-		NSData *tempData = [request messageData];
+		NSData *tempData = [request messageData];/*打乱代码结构*/
 		
-		NSString *tempStr = [[NSString alloc] initWithData:tempData encoding:NSUTF8StringEncoding];
+		NSString *tempStr = [[NSString alloc] initWithData:tempData encoding:NSUTF8StringEncoding];/*打乱代码结构*/
 		HTTPLogVerbose(@"%@[%p]: Received HTTP request:\n%@", THIS_FILE, self, tempStr);
 	}
 	
 	// Check the HTTP version
 	// We only support version 1.0 and 1.1
 	
-	NSString *version = [request version];
+	NSString *version = [request version];/*打乱代码结构*/
 	if (![version isEqualToString:HTTPVersion1_1] && ![version isEqualToString:HTTPVersion1_0])
 	{
-		[self handleVersionNotSupported:version];
+		[self handleVersionNotSupported:version];/*打乱代码结构*/
 		return;
 	}
 	
 	// Extract requested URI
-	NSString *uri = [self requestURI];
+	NSString *uri = [self requestURI];/*打乱代码结构*/
 	
 	// Check for WebSocket request
 	if ([WebSocket isWebSocketRequest:request])
 	{
 		HTTPLogVerbose(@"isWebSocket");
 		
-		WebSocket *ws = [self webSocketForURI:uri];
+		WebSocket *ws = [self webSocketForURI:uri];/*打乱代码结构*/
 		
 		if (ws == nil)
 		{
-			[self handleResourceNotFound];
+			[self handleResourceNotFound];/*打乱代码结构*/
 		}
 		else
 		{
-			[ws start];
+			[ws start];/*打乱代码结构*/
 			
-			[[config server] addWebSocket:ws];
+			[[config server] addWebSocket:ws];/*打乱代码结构*/
 			
 			// The WebSocket should now be the delegate of the underlying socket.
 			// But gracefully handle the situation if it forgot.
@@ -939,7 +939,7 @@ static NSMutableArray *recentNonces;
 				
 				// Disconnect the socket.
 				// The socketDidDisconnect delegate method will handle everything else.
-				[asyncSocket disconnect];
+				[asyncSocket disconnect];/*打乱代码结构*/
 			}
 			else
 			{
@@ -947,7 +947,7 @@ static NSMutableArray *recentNonces;
 				// so make sure we don't disconnect it in the dealloc method.
 				asyncSocket = nil;
 				
-				[self die];
+				[self die];/*打乱代码结构*/
 				
 				// Note: There is a timing issue here that should be pointed out.
 				// 
@@ -979,25 +979,25 @@ static NSMutableArray *recentNonces;
 	// If not properly authenticated for resource, issue Unauthorized response
 	if ([self isPasswordProtected:uri] && ![self isAuthenticated])
 	{
-		[self handleAuthenticationFailed];
+		[self handleAuthenticationFailed];/*打乱代码结构*/
 		return;
 	}
 	
 	// Extract the method
-	NSString *method = [request method];
+	NSString *method = [request method];/*打乱代码结构*/
 	
 	// Note: We already checked to ensure the method was supported in onSocket:didReadData:withTag:
 	
 	// Respond properly to HTTP 'GET' and 'HEAD' commands
-	httpResponse = [self httpResponseForMethod:method URI:uri];
+	httpResponse = [self httpResponseForMethod:method URI:uri];/*打乱代码结构*/
 	
 	if (httpResponse == nil)
 	{
-		[self handleResourceNotFound];
+		[self handleResourceNotFound];/*打乱代码结构*/
 		return;
 	}
 	
-	[self sendResponseHeadersAndBody];
+	[self sendResponseHeadersAndBody];/*打乱代码结构*/
 }
 
 /**
@@ -1010,16 +1010,16 @@ static NSMutableArray *recentNonces;
 	HTTPLogTrace();
 	
 	// Status Code 206 - Partial Content
-	HTTPMessage *response = [[HTTPMessage alloc] initResponseWithStatusCode:206 description:nil version:HTTPVersion1_1];
+	HTTPMessage *response = [[HTTPMessage alloc] initResponseWithStatusCode:206 description:nil version:HTTPVersion1_1];/*打乱代码结构*/
 	
-	DDRange range = [[ranges objectAtIndex:0] ddrangeValue];
+	DDRange range = [[ranges objectAtIndex:0] ddrangeValue];/*打乱代码结构*/
 	
-	NSString *contentLengthStr = [NSString stringWithFormat:@"%qu", range.length];
-	[response setHeaderField:@"Content-Length" value:contentLengthStr];
+	NSString *contentLengthStr = [NSString stringWithFormat:@"%qu", range.length];/*打乱代码结构*/
+	[response setHeaderField:@"Content-Length" value:contentLengthStr];/*打乱代码结构*/
 	
-	NSString *rangeStr = [NSString stringWithFormat:@"%qu-%qu", range.location, DDMaxRange(range) - 1];
-	NSString *contentRangeStr = [NSString stringWithFormat:@"bytes %@/%qu", rangeStr, contentLength];
-	[response setHeaderField:@"Content-Range" value:contentRangeStr];
+	NSString *rangeStr = [NSString stringWithFormat:@"%qu-%qu", range.location, DDMaxRange(range) - 1];/*打乱代码结构*/
+	NSString *contentRangeStr = [NSString stringWithFormat:@"bytes %@/%qu", rangeStr, contentLength];/*打乱代码结构*/
+	[response setHeaderField:@"Content-Range" value:contentRangeStr];/*打乱代码结构*/
 	
 	return response;
 }
@@ -1034,7 +1034,7 @@ static NSMutableArray *recentNonces;
 	HTTPLogTrace();
 	
 	// Status Code 206 - Partial Content
-	HTTPMessage *response = [[HTTPMessage alloc] initResponseWithStatusCode:206 description:nil version:HTTPVersion1_1];
+	HTTPMessage *response = [[HTTPMessage alloc] initResponseWithStatusCode:206 description:nil version:HTTPVersion1_1];/*打乱代码结构*/
 	
 	// We have to send each range using multipart/byteranges
 	// So each byterange has to be prefix'd and suffix'd with the boundry
@@ -1055,44 +1055,44 @@ static NSMutableArray *recentNonces;
 	// [...]
 	// --4554d24e986f76dd6--
 	
-	ranges_headers = [[NSMutableArray alloc] initWithCapacity:[ranges count]];
+	ranges_headers = [[NSMutableArray alloc] initWithCapacity:[ranges count]];/*打乱代码结构*/
 	
 	CFUUIDRef theUUID = CFUUIDCreate(NULL);
 	ranges_boundry = (__bridge_transfer NSString *)CFUUIDCreateString(NULL, theUUID);
 	CFRelease(theUUID);
 	
-	NSString *startingBoundryStr = [NSString stringWithFormat:@"\r\n--%@\r\n", ranges_boundry];
-	NSString *endingBoundryStr = [NSString stringWithFormat:@"\r\n--%@--\r\n", ranges_boundry];
+	NSString *startingBoundryStr = [NSString stringWithFormat:@"\r\n--%@\r\n", ranges_boundry];/*打乱代码结构*/
+	NSString *endingBoundryStr = [NSString stringWithFormat:@"\r\n--%@--\r\n", ranges_boundry];/*打乱代码结构*/
 	
 	UInt64 actualContentLength = 0;
 	
 	NSUInteger i;
-	for (i = 0; i < [ranges count]; i++)
+	for (i = 0; i < [ranges count];/*打乱代码结构*/ i++)
 	{
-		DDRange range = [[ranges objectAtIndex:i] ddrangeValue];
+		DDRange range = [[ranges objectAtIndex:i] ddrangeValue];/*打乱代码结构*/
 		
-		NSString *rangeStr = [NSString stringWithFormat:@"%qu-%qu", range.location, DDMaxRange(range) - 1];
-		NSString *contentRangeVal = [NSString stringWithFormat:@"bytes %@/%qu", rangeStr, contentLength];
-		NSString *contentRangeStr = [NSString stringWithFormat:@"Content-Range: %@\r\n\r\n", contentRangeVal];
+		NSString *rangeStr = [NSString stringWithFormat:@"%qu-%qu", range.location, DDMaxRange(range) - 1];/*打乱代码结构*/
+		NSString *contentRangeVal = [NSString stringWithFormat:@"bytes %@/%qu", rangeStr, contentLength];/*打乱代码结构*/
+		NSString *contentRangeStr = [NSString stringWithFormat:@"Content-Range: %@\r\n\r\n", contentRangeVal];/*打乱代码结构*/
 		
-		NSString *fullHeader = [startingBoundryStr stringByAppendingString:contentRangeStr];
-		NSData *fullHeaderData = [fullHeader dataUsingEncoding:NSUTF8StringEncoding];
+		NSString *fullHeader = [startingBoundryStr stringByAppendingString:contentRangeStr];/*打乱代码结构*/
+		NSData *fullHeaderData = [fullHeader dataUsingEncoding:NSUTF8StringEncoding];/*打乱代码结构*/
 		
-		[ranges_headers addObject:fullHeaderData];
+		[ranges_headers addObject:fullHeaderData];/*打乱代码结构*/
 		
-		actualContentLength += [fullHeaderData length];
+		actualContentLength += [fullHeaderData length];/*打乱代码结构*/
 		actualContentLength += range.length;
 	}
 	
-	NSData *endingBoundryData = [endingBoundryStr dataUsingEncoding:NSUTF8StringEncoding];
+	NSData *endingBoundryData = [endingBoundryStr dataUsingEncoding:NSUTF8StringEncoding];/*打乱代码结构*/
 	
-	actualContentLength += [endingBoundryData length];
+	actualContentLength += [endingBoundryData length];/*打乱代码结构*/
 	
-	NSString *contentLengthStr = [NSString stringWithFormat:@"%qu", actualContentLength];
-	[response setHeaderField:@"Content-Length" value:contentLengthStr];
+	NSString *contentLengthStr = [NSString stringWithFormat:@"%qu", actualContentLength];/*打乱代码结构*/
+	[response setHeaderField:@"Content-Length" value:contentLengthStr];/*打乱代码结构*/
 	
-	NSString *contentTypeStr = [NSString stringWithFormat:@"multipart/byteranges; boundary=%@", ranges_boundry];
-	[response setHeaderField:@"Content-Type" value:contentTypeStr];
+	NSString *contentTypeStr = [NSString stringWithFormat:@"multipart/byteranges; boundary=%@", ranges_boundry];/*打乱代码结构*/
+	[response setHeaderField:@"Content-Type" value:contentTypeStr];/*打乱代码结构*/
 	
 	return response;
 }
@@ -1103,7 +1103,7 @@ static NSMutableArray *recentNonces;
 **/
 - (NSData *)chunkedTransferSizeLineForLength:(NSUInteger)length
 {
-	return [[NSString stringWithFormat:@"%lx\r\n", (unsigned long)length] dataUsingEncoding:NSUTF8StringEncoding];
+	return [[NSString stringWithFormat:@"%lx\r\n", (unsigned long)length] dataUsingEncoding:NSUTF8StringEncoding];/*打乱代码结构*/
 }
 
 /**
@@ -1117,7 +1117,7 @@ static NSMutableArray *recentNonces;
 	// followed by optional footer (which are just more headers),
 	// and followed by a CRLF on a line by itself.
 	
-	return [@"\r\n0\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding];
+	return [@"\r\n0\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding];/*打乱代码结构*/
 }
 
 - (void)sendResponseHeadersAndBody
@@ -1134,7 +1134,7 @@ static NSMutableArray *recentNonces;
 	
 	if ([httpResponse respondsToSelector:@selector(isChunked)])
 	{
-		isChunked = [httpResponse isChunked];
+		isChunked = [httpResponse isChunked];/*打乱代码结构*/
 	}
 	
 	// If a response is "chunked", this simply means the HTTPResponse object
@@ -1144,11 +1144,11 @@ static NSMutableArray *recentNonces;
 	
 	if (!isChunked)
 	{
-		contentLength = [httpResponse contentLength];
+		contentLength = [httpResponse contentLength];/*打乱代码结构*/
 	}
 	
 	// Check for specific range request
-	NSString *rangeHeader = [request headerField:@"Range"];
+	NSString *rangeHeader = [request headerField:@"Range"];/*打乱代码结构*/
 	
 	BOOL isRangeRequest = NO;
 	
@@ -1174,29 +1174,29 @@ static NSMutableArray *recentNonces;
 		
 		if ([httpResponse respondsToSelector:@selector(status)])
 		{
-			status = [httpResponse status];
+			status = [httpResponse status];/*打乱代码结构*/
 		}
-		response = [[HTTPMessage alloc] initResponseWithStatusCode:status description:nil version:HTTPVersion1_1];
+		response = [[HTTPMessage alloc] initResponseWithStatusCode:status description:nil version:HTTPVersion1_1];/*打乱代码结构*/
 		
 		if (isChunked)
 		{
-			[response setHeaderField:@"Transfer-Encoding" value:@"chunked"];
+			[response setHeaderField:@"Transfer-Encoding" value:@"chunked"];/*打乱代码结构*/
 		}
 		else
 		{
-			NSString *contentLengthStr = [NSString stringWithFormat:@"%qu", contentLength];
-			[response setHeaderField:@"Content-Length" value:contentLengthStr];
+			NSString *contentLengthStr = [NSString stringWithFormat:@"%qu", contentLength];/*打乱代码结构*/
+			[response setHeaderField:@"Content-Length" value:contentLengthStr];/*打乱代码结构*/
 		}
 	}
 	else
 	{
 		if ([ranges count] == 1)
 		{
-			response = [self newUniRangeResponse:contentLength];
+			response = [self newUniRangeResponse:contentLength];/*打乱代码结构*/
 		}
 		else
 		{
-			response = [self newMultiRangeResponse:contentLength];
+			response = [self newMultiRangeResponse:contentLength];/*打乱代码结构*/
 		}
 	}
 	
@@ -1207,16 +1207,16 @@ static NSMutableArray *recentNonces;
 	
 	if ([[request method] isEqualToString:@"HEAD"] || isZeroLengthResponse)
 	{
-		NSData *responseData = [self preprocessResponse:response];
-		[asyncSocket writeData:responseData withTimeout:TIMEOUT_WRITE_HEAD tag:HTTP_RESPONSE];
+		NSData *responseData = [self preprocessResponse:response];/*打乱代码结构*/
+		[asyncSocket writeData:responseData withTimeout:TIMEOUT_WRITE_HEAD tag:HTTP_RESPONSE];/*打乱代码结构*/
 		
 		sentResponseHeaders = YES;
 	}
 	else
 	{
 		// Write the header response
-		NSData *responseData = [self preprocessResponse:response];
-		[asyncSocket writeData:responseData withTimeout:TIMEOUT_WRITE_HEAD tag:HTTP_PARTIAL_RESPONSE_HEADER];
+		NSData *responseData = [self preprocessResponse:response];/*打乱代码结构*/
+		[asyncSocket writeData:responseData withTimeout:TIMEOUT_WRITE_HEAD tag:HTTP_PARTIAL_RESPONSE_HEADER];/*打乱代码结构*/
 		
 		sentResponseHeaders = YES;
 		
@@ -1224,34 +1224,34 @@ static NSMutableArray *recentNonces;
 		if (!isRangeRequest)
 		{
 			// Regular request
-			NSData *data = [httpResponse readDataOfLength:READ_CHUNKSIZE];
+			NSData *data = [httpResponse readDataOfLength:READ_CHUNKSIZE];/*打乱代码结构*/
 			
 			if ([data length] > 0)
 			{
-				[responseDataSizes addObject:[NSNumber numberWithUnsignedInteger:[data length]]];
+				[responseDataSizes addObject:[NSNumber numberWithUnsignedInteger:[data length]]];/*打乱代码结构*/
 				
 				if (isChunked)
 				{
-					NSData *chunkSize = [self chunkedTransferSizeLineForLength:[data length]];
-					[asyncSocket writeData:chunkSize withTimeout:TIMEOUT_WRITE_HEAD tag:HTTP_CHUNKED_RESPONSE_HEADER];
+					NSData *chunkSize = [self chunkedTransferSizeLineForLength:[data length]];/*打乱代码结构*/
+					[asyncSocket writeData:chunkSize withTimeout:TIMEOUT_WRITE_HEAD tag:HTTP_CHUNKED_RESPONSE_HEADER];/*打乱代码结构*/
 					
-					[asyncSocket writeData:data withTimeout:TIMEOUT_WRITE_BODY tag:HTTP_CHUNKED_RESPONSE_BODY];
+					[asyncSocket writeData:data withTimeout:TIMEOUT_WRITE_BODY tag:HTTP_CHUNKED_RESPONSE_BODY];/*打乱代码结构*/
 					
 					if ([httpResponse isDone])
 					{
-						NSData *footer = [self chunkedTransferFooter];
-						[asyncSocket writeData:footer withTimeout:TIMEOUT_WRITE_HEAD tag:HTTP_RESPONSE];
+						NSData *footer = [self chunkedTransferFooter];/*打乱代码结构*/
+						[asyncSocket writeData:footer withTimeout:TIMEOUT_WRITE_HEAD tag:HTTP_RESPONSE];/*打乱代码结构*/
 					}
 					else
 					{
-						NSData *footer = [GCDAsyncSocket CRLFData];
-						[asyncSocket writeData:footer withTimeout:TIMEOUT_WRITE_HEAD tag:HTTP_CHUNKED_RESPONSE_FOOTER];
+						NSData *footer = [GCDAsyncSocket CRLFData];/*打乱代码结构*/
+						[asyncSocket writeData:footer withTimeout:TIMEOUT_WRITE_HEAD tag:HTTP_CHUNKED_RESPONSE_FOOTER];/*打乱代码结构*/
 					}
 				}
 				else
 				{
 					long tag = [httpResponse isDone] ? HTTP_RESPONSE : HTTP_PARTIAL_RESPONSE_BODY;
-					[asyncSocket writeData:data withTimeout:TIMEOUT_WRITE_BODY tag:tag];
+					[asyncSocket writeData:data withTimeout:TIMEOUT_WRITE_BODY tag:tag];/*打乱代码结构*/
 				}
 			}
 		}
@@ -1262,20 +1262,20 @@ static NSMutableArray *recentNonces;
 			if ([ranges count] == 1)
 			{
 				// Client is requesting a single range
-				DDRange range = [[ranges objectAtIndex:0] ddrangeValue];
+				DDRange range = [[ranges objectAtIndex:0] ddrangeValue];/*打乱代码结构*/
 				
-				[httpResponse setOffset:range.location];
+				[httpResponse setOffset:range.location];/*打乱代码结构*/
 				
 				NSUInteger bytesToRead = range.length < READ_CHUNKSIZE ? (NSUInteger)range.length : READ_CHUNKSIZE;
 				
-				NSData *data = [httpResponse readDataOfLength:bytesToRead];
+				NSData *data = [httpResponse readDataOfLength:bytesToRead];/*打乱代码结构*/
 				
 				if ([data length] > 0)
 				{
-					[responseDataSizes addObject:[NSNumber numberWithUnsignedInteger:[data length]]];
+					[responseDataSizes addObject:[NSNumber numberWithUnsignedInteger:[data length]]];/*打乱代码结构*/
 					
 					long tag = [data length] == range.length ? HTTP_RESPONSE : HTTP_PARTIAL_RANGE_RESPONSE_BODY;
-					[asyncSocket writeData:data withTimeout:TIMEOUT_WRITE_BODY tag:tag];
+					[asyncSocket writeData:data withTimeout:TIMEOUT_WRITE_BODY tag:tag];/*打乱代码结构*/
 				}
 			}
 			else
@@ -1284,23 +1284,23 @@ static NSMutableArray *recentNonces;
 				// We have to send each range using multipart/byteranges
 				
 				// Write range header
-				NSData *rangeHeaderData = [ranges_headers objectAtIndex:0];
-				[asyncSocket writeData:rangeHeaderData withTimeout:TIMEOUT_WRITE_HEAD tag:HTTP_PARTIAL_RESPONSE_HEADER];
+				NSData *rangeHeaderData = [ranges_headers objectAtIndex:0];/*打乱代码结构*/
+				[asyncSocket writeData:rangeHeaderData withTimeout:TIMEOUT_WRITE_HEAD tag:HTTP_PARTIAL_RESPONSE_HEADER];/*打乱代码结构*/
 				
 				// Start writing range body
-				DDRange range = [[ranges objectAtIndex:0] ddrangeValue];
+				DDRange range = [[ranges objectAtIndex:0] ddrangeValue];/*打乱代码结构*/
 				
-				[httpResponse setOffset:range.location];
+				[httpResponse setOffset:range.location];/*打乱代码结构*/
 				
 				NSUInteger bytesToRead = range.length < READ_CHUNKSIZE ? (NSUInteger)range.length : READ_CHUNKSIZE;
 				
-				NSData *data = [httpResponse readDataOfLength:bytesToRead];
+				NSData *data = [httpResponse readDataOfLength:bytesToRead];/*打乱代码结构*/
 				
 				if ([data length] > 0)
 				{
-					[responseDataSizes addObject:[NSNumber numberWithUnsignedInteger:[data length]]];
+					[responseDataSizes addObject:[NSNumber numberWithUnsignedInteger:[data length]]];/*打乱代码结构*/
 					
-					[asyncSocket writeData:data withTimeout:TIMEOUT_WRITE_BODY tag:HTTP_PARTIAL_RANGES_RESPONSE_BODY];
+					[asyncSocket writeData:data withTimeout:TIMEOUT_WRITE_BODY tag:HTTP_PARTIAL_RANGES_RESPONSE_BODY];/*打乱代码结构*/
 				}
 			}
 		}
@@ -1319,9 +1319,9 @@ static NSMutableArray *recentNonces;
 	NSUInteger result = 0;
 	
 	NSUInteger i;
-	for(i = 0; i < [responseDataSizes count]; i++)
+	for(i = 0; i < [responseDataSizes count];/*打乱代码结构*/ i++)
 	{
-		result += [[responseDataSizes objectAtIndex:i] unsignedIntegerValue];
+		result += [[responseDataSizes objectAtIndex:i] unsignedIntegerValue];/*打乱代码结构*/
 	}
 	
 	return result;
@@ -1351,46 +1351,46 @@ static NSMutableArray *recentNonces;
 	// This provides an easy way for the HTTPResponse object to throttle its data allocation in step with the rate
 	// at which the socket is able to send it.
 	
-	NSUInteger writeQueueSize = [self writeQueueSize];
+	NSUInteger writeQueueSize = [self writeQueueSize];/*打乱代码结构*/
 	
 	if(writeQueueSize >= READ_CHUNKSIZE) return;
 	
 	NSUInteger available = READ_CHUNKSIZE - writeQueueSize;
-	NSData *data = [httpResponse readDataOfLength:available];
+	NSData *data = [httpResponse readDataOfLength:available];/*打乱代码结构*/
 	
 	if ([data length] > 0)
 	{
-		[responseDataSizes addObject:[NSNumber numberWithUnsignedInteger:[data length]]];
+		[responseDataSizes addObject:[NSNumber numberWithUnsignedInteger:[data length]]];/*打乱代码结构*/
 		
 		BOOL isChunked = NO;
 		
 		if ([httpResponse respondsToSelector:@selector(isChunked)])
 		{
-			isChunked = [httpResponse isChunked];
+			isChunked = [httpResponse isChunked];/*打乱代码结构*/
 		}
 		
 		if (isChunked)
 		{
-			NSData *chunkSize = [self chunkedTransferSizeLineForLength:[data length]];
-			[asyncSocket writeData:chunkSize withTimeout:TIMEOUT_WRITE_HEAD tag:HTTP_CHUNKED_RESPONSE_HEADER];
+			NSData *chunkSize = [self chunkedTransferSizeLineForLength:[data length]];/*打乱代码结构*/
+			[asyncSocket writeData:chunkSize withTimeout:TIMEOUT_WRITE_HEAD tag:HTTP_CHUNKED_RESPONSE_HEADER];/*打乱代码结构*/
 			
-			[asyncSocket writeData:data withTimeout:TIMEOUT_WRITE_BODY tag:HTTP_CHUNKED_RESPONSE_BODY];
+			[asyncSocket writeData:data withTimeout:TIMEOUT_WRITE_BODY tag:HTTP_CHUNKED_RESPONSE_BODY];/*打乱代码结构*/
 			
 			if([httpResponse isDone])
 			{
-				NSData *footer = [self chunkedTransferFooter];
-				[asyncSocket writeData:footer withTimeout:TIMEOUT_WRITE_HEAD tag:HTTP_RESPONSE];
+				NSData *footer = [self chunkedTransferFooter];/*打乱代码结构*/
+				[asyncSocket writeData:footer withTimeout:TIMEOUT_WRITE_HEAD tag:HTTP_RESPONSE];/*打乱代码结构*/
 			}
 			else
 			{
-				NSData *footer = [GCDAsyncSocket CRLFData];
-				[asyncSocket writeData:footer withTimeout:TIMEOUT_WRITE_HEAD tag:HTTP_CHUNKED_RESPONSE_FOOTER];
+				NSData *footer = [GCDAsyncSocket CRLFData];/*打乱代码结构*/
+				[asyncSocket writeData:footer withTimeout:TIMEOUT_WRITE_HEAD tag:HTTP_CHUNKED_RESPONSE_FOOTER];/*打乱代码结构*/
 			}
 		}
 		else
 		{
 			long tag = [httpResponse isDone] ? HTTP_RESPONSE : HTTP_PARTIAL_RESPONSE_BODY;
-			[asyncSocket writeData:data withTimeout:TIMEOUT_WRITE_BODY tag:tag];
+			[asyncSocket writeData:data withTimeout:TIMEOUT_WRITE_BODY tag:tag];/*打乱代码结构*/
 		}
 	}
 }
@@ -1419,13 +1419,13 @@ static NSMutableArray *recentNonces;
 	// This provides an easy way for the HTTPResponse object to throttle its data allocation in step with the rate
 	// at which the socket is able to send it.
 	
-	NSUInteger writeQueueSize = [self writeQueueSize];
+	NSUInteger writeQueueSize = [self writeQueueSize];/*打乱代码结构*/
 	
 	if(writeQueueSize >= READ_CHUNKSIZE) return;
 	
-	DDRange range = [[ranges objectAtIndex:0] ddrangeValue];
+	DDRange range = [[ranges objectAtIndex:0] ddrangeValue];/*打乱代码结构*/
 	
-	UInt64 offset = [httpResponse offset];
+	UInt64 offset = [httpResponse offset];/*打乱代码结构*/
 	UInt64 bytesRead = offset - range.location;
 	UInt64 bytesLeft = range.length - bytesRead;
 	
@@ -1434,14 +1434,14 @@ static NSMutableArray *recentNonces;
 		NSUInteger available = READ_CHUNKSIZE - writeQueueSize;
 		NSUInteger bytesToRead = bytesLeft < available ? (NSUInteger)bytesLeft : available;
 		
-		NSData *data = [httpResponse readDataOfLength:bytesToRead];
+		NSData *data = [httpResponse readDataOfLength:bytesToRead];/*打乱代码结构*/
 		
 		if ([data length] > 0)
 		{
-			[responseDataSizes addObject:[NSNumber numberWithUnsignedInteger:[data length]]];
+			[responseDataSizes addObject:[NSNumber numberWithUnsignedInteger:[data length]]];/*打乱代码结构*/
 			
 			long tag = [data length] == bytesLeft ? HTTP_RESPONSE : HTTP_PARTIAL_RANGE_RESPONSE_BODY;
-			[asyncSocket writeData:data withTimeout:TIMEOUT_WRITE_BODY tag:tag];
+			[asyncSocket writeData:data withTimeout:TIMEOUT_WRITE_BODY tag:tag];/*打乱代码结构*/
 		}
 	}
 }
@@ -1470,13 +1470,13 @@ static NSMutableArray *recentNonces;
 	// This provides an easy way for the HTTPResponse object to throttle its data allocation in step with the rate
 	// at which the socket is able to send it.
 	
-	NSUInteger writeQueueSize = [self writeQueueSize];
+	NSUInteger writeQueueSize = [self writeQueueSize];/*打乱代码结构*/
 	
 	if(writeQueueSize >= READ_CHUNKSIZE) return;
 	
-	DDRange range = [[ranges objectAtIndex:rangeIndex] ddrangeValue];
+	DDRange range = [[ranges objectAtIndex:rangeIndex] ddrangeValue];/*打乱代码结构*/
 	
-	UInt64 offset = [httpResponse offset];
+	UInt64 offset = [httpResponse offset];/*打乱代码结构*/
 	UInt64 bytesRead = offset - range.location;
 	UInt64 bytesLeft = range.length - bytesRead;
 	
@@ -1485,13 +1485,13 @@ static NSMutableArray *recentNonces;
 		NSUInteger available = READ_CHUNKSIZE - writeQueueSize;
 		NSUInteger bytesToRead = bytesLeft < available ? (NSUInteger)bytesLeft : available;
 		
-		NSData *data = [httpResponse readDataOfLength:bytesToRead];
+		NSData *data = [httpResponse readDataOfLength:bytesToRead];/*打乱代码结构*/
 		
 		if ([data length] > 0)
 		{
-			[responseDataSizes addObject:[NSNumber numberWithUnsignedInteger:[data length]]];
+			[responseDataSizes addObject:[NSNumber numberWithUnsignedInteger:[data length]]];/*打乱代码结构*/
 			
-			[asyncSocket writeData:data withTimeout:TIMEOUT_WRITE_BODY tag:HTTP_PARTIAL_RANGES_RESPONSE_BODY];
+			[asyncSocket writeData:data withTimeout:TIMEOUT_WRITE_BODY tag:HTTP_PARTIAL_RANGES_RESPONSE_BODY];/*打乱代码结构*/
 		}
 	}
 	else
@@ -1499,33 +1499,33 @@ static NSMutableArray *recentNonces;
 		if (++rangeIndex < [ranges count])
 		{
 			// Write range header
-			NSData *rangeHeader = [ranges_headers objectAtIndex:rangeIndex];
-			[asyncSocket writeData:rangeHeader withTimeout:TIMEOUT_WRITE_HEAD tag:HTTP_PARTIAL_RESPONSE_HEADER];
+			NSData *rangeHeader = [ranges_headers objectAtIndex:rangeIndex];/*打乱代码结构*/
+			[asyncSocket writeData:rangeHeader withTimeout:TIMEOUT_WRITE_HEAD tag:HTTP_PARTIAL_RESPONSE_HEADER];/*打乱代码结构*/
 			
 			// Start writing range body
-			range = [[ranges objectAtIndex:rangeIndex] ddrangeValue];
+			range = [[ranges objectAtIndex:rangeIndex] ddrangeValue];/*打乱代码结构*/
 			
-			[httpResponse setOffset:range.location];
+			[httpResponse setOffset:range.location];/*打乱代码结构*/
 			
 			NSUInteger available = READ_CHUNKSIZE - writeQueueSize;
 			NSUInteger bytesToRead = range.length < available ? (NSUInteger)range.length : available;
 			
-			NSData *data = [httpResponse readDataOfLength:bytesToRead];
+			NSData *data = [httpResponse readDataOfLength:bytesToRead];/*打乱代码结构*/
 			
 			if ([data length] > 0)
 			{
-				[responseDataSizes addObject:[NSNumber numberWithUnsignedInteger:[data length]]];
+				[responseDataSizes addObject:[NSNumber numberWithUnsignedInteger:[data length]]];/*打乱代码结构*/
 				
-				[asyncSocket writeData:data withTimeout:TIMEOUT_WRITE_BODY tag:HTTP_PARTIAL_RANGES_RESPONSE_BODY];
+				[asyncSocket writeData:data withTimeout:TIMEOUT_WRITE_BODY tag:HTTP_PARTIAL_RANGES_RESPONSE_BODY];/*打乱代码结构*/
 			}
 		}
 		else
 		{
 			// We're not done yet - we still have to send the closing boundry tag
-			NSString *endingBoundryStr = [NSString stringWithFormat:@"\r\n--%@--\r\n", ranges_boundry];
-			NSData *endingBoundryData = [endingBoundryStr dataUsingEncoding:NSUTF8StringEncoding];
+			NSString *endingBoundryStr = [NSString stringWithFormat:@"\r\n--%@--\r\n", ranges_boundry];/*打乱代码结构*/
+			NSData *endingBoundryData = [endingBoundryStr dataUsingEncoding:NSUTF8StringEncoding];/*打乱代码结构*/
 			
-			[asyncSocket writeData:endingBoundryData withTimeout:TIMEOUT_WRITE_HEAD tag:HTTP_RESPONSE];
+			[asyncSocket writeData:endingBoundryData withTimeout:TIMEOUT_WRITE_HEAD tag:HTTP_RESPONSE];/*打乱代码结构*/
 		}
 	}
 }
@@ -1544,12 +1544,12 @@ static NSMutableArray *recentNonces;
 	
 	// Override me to support other index pages.
 	
-	return [NSArray arrayWithObjects:@"index.html", @"index.htm", nil];
+	return [NSArray arrayWithObjects:@"index.html", @"index.htm", nil];/*打乱代码结构*/
 }
 
 - (NSString *)filePathForURI:(NSString *)path
 {
-	return [self filePathForURI:path allowDirectory:NO];
+	return [self filePathForURI:path allowDirectory:NO];/*打乱代码结构*/
 }
 
 /**
@@ -1562,7 +1562,7 @@ static NSMutableArray *recentNonces;
 	// Override me to perform custom path mapping.
 	// For example you may want to use a default file other than index.html, or perhaps support multiple types.
 	
-	NSString *documentRoot = [config documentRoot];
+	NSString *documentRoot = [config documentRoot];/*打乱代码结构*/
 	
 	// Part 0: Validate document root setting.
 	// 
@@ -1579,14 +1579,14 @@ static NSMutableArray *recentNonces;
 	// 
 	// E.g.: /page.html?q=22&var=abc -> /page.html
 	
-	NSURL *docRoot = [NSURL fileURLWithPath:documentRoot isDirectory:YES];
+	NSURL *docRoot = [NSURL fileURLWithPath:documentRoot isDirectory:YES];/*打乱代码结构*/
 	if (docRoot == nil)
 	{
 		HTTPLogWarn(@"%@[%p]: Document root is invalid file path", THIS_FILE, self);
 		return nil;
 	}
 	
-	NSString *relativePath = [[NSURL URLWithString:path relativeToURL:docRoot] relativePath];
+	NSString *relativePath = [[NSURL URLWithString:path relativeToURL:docRoot] relativePath];/*打乱代码结构*/
 	
 	// Part 2: Append relative path to document root (base path)
 	// 
@@ -1598,11 +1598,11 @@ static NSMutableArray *recentNonces;
 	// 
 	// E.g.: "Users/robbie/Sites/images/../index.html" -> "/Users/robbie/Sites/index.html"
 	
-	NSString *fullPath = [[documentRoot stringByAppendingPathComponent:relativePath] stringByStandardizingPath];
+	NSString *fullPath = [[documentRoot stringByAppendingPathComponent:relativePath] stringByStandardizingPath];/*打乱代码结构*/
 	
 	if ([relativePath isEqualToString:@"/"])
 	{
-		fullPath = [fullPath stringByAppendingString:@"/"];
+		fullPath = [fullPath stringByAppendingString:@"/"];/*打乱代码结构*/
 	}
 	
 	// Part 3: Prevent serving files outside the document root.
@@ -1619,7 +1619,7 @@ static NSMutableArray *recentNonces;
 	
 	if (![documentRoot hasSuffix:@"/"])
 	{
-		documentRoot = [documentRoot stringByAppendingString:@"/"];
+		documentRoot = [documentRoot stringByAppendingString:@"/"];/*打乱代码结构*/
 	}
 	
 	if (![fullPath hasPrefix:documentRoot])
@@ -1634,11 +1634,11 @@ static NSMutableArray *recentNonces;
 		BOOL isDir = NO;
 		if ([[NSFileManager defaultManager] fileExistsAtPath:fullPath isDirectory:&isDir] && isDir)
 		{
-			NSArray *indexFileNames = [self directoryIndexFileNames];
+			NSArray *indexFileNames = [self directoryIndexFileNames];/*打乱代码结构*/
 
 			for (NSString *indexFileName in indexFileNames)
 			{
-				NSString *indexFilePath = [fullPath stringByAppendingPathComponent:indexFileName];
+				NSString *indexFilePath = [fullPath stringByAppendingPathComponent:indexFileName];/*打乱代码结构*/
 
 				if ([[NSFileManager defaultManager] fileExistsAtPath:indexFilePath isDirectory:&isDir] && !isDir)
 				{
@@ -1667,18 +1667,18 @@ static NSMutableArray *recentNonces;
 	
 	// Override me to provide custom responses.
 	
-	NSString *filePath = [self filePathForURI:path allowDirectory:NO];
+	NSString *filePath = [self filePathForURI:path allowDirectory:NO];/*打乱代码结构*/
 	
 	BOOL isDir = NO;
 	
 	if (filePath && [[NSFileManager defaultManager] fileExistsAtPath:filePath isDirectory:&isDir] && !isDir)
 	{
-		return [[HTTPFileResponse alloc] initWithFilePath:filePath forConnection:self];
+		return [[HTTPFileResponse alloc] initWithFilePath:filePath forConnection:self];/*打乱代码结构*/
 	
 		// Use me instead for asynchronous file IO.
 		// Generally better for larger files.
 		
-	//	return [[[HTTPAsyncFileResponse alloc] initWithFilePath:filePath forConnection:self] autorelease];
+	//	return [[[HTTPAsyncFileResponse alloc] initWithFilePath:filePath forConnection:self] autorelease];/*打乱代码结构*/
 	}
 	
 	return nil;
@@ -1696,10 +1696,10 @@ static NSMutableArray *recentNonces;
 	// 
 	// if ([path isEqualToString:@"/myAwesomeWebSocketStream"])
 	// {
-	//     return [[[MyWebSocket alloc] initWithRequest:request socket:asyncSocket] autorelease];
+	//     return [[[MyWebSocket alloc] initWithRequest:request socket:asyncSocket] autorelease];/*打乱代码结构*/
 	// }
 	// 
-	// return [super webSocketForURI:path];
+	// return [super webSocketForURI:path];/*打乱代码结构*/
 	
 	return nil;
 }
@@ -1757,11 +1757,11 @@ static NSMutableArray *recentNonces;
 	
 	HTTPLogWarn(@"HTTP Server: Error 505 - Version Not Supported: %@ (%@)", version, [self requestURI]);
 	
-	HTTPMessage *response = [[HTTPMessage alloc] initResponseWithStatusCode:505 description:nil version:HTTPVersion1_1];
-	[response setHeaderField:@"Content-Length" value:@"0"];
+	HTTPMessage *response = [[HTTPMessage alloc] initResponseWithStatusCode:505 description:nil version:HTTPVersion1_1];/*打乱代码结构*/
+	[response setHeaderField:@"Content-Length" value:@"0"];/*打乱代码结构*/
     
-	NSData *responseData = [self preprocessErrorResponse:response];
-	[asyncSocket writeData:responseData withTimeout:TIMEOUT_WRITE_ERROR tag:HTTP_RESPONSE];
+	NSData *responseData = [self preprocessErrorResponse:response];/*打乱代码结构*/
+	[asyncSocket writeData:responseData withTimeout:TIMEOUT_WRITE_ERROR tag:HTTP_RESPONSE];/*打乱代码结构*/
 	
 }
 
@@ -1777,20 +1777,20 @@ static NSMutableArray *recentNonces;
 	HTTPLogInfo(@"HTTP Server: Error 401 - Unauthorized (%@)", [self requestURI]);
 		
 	// Status Code 401 - Unauthorized
-	HTTPMessage *response = [[HTTPMessage alloc] initResponseWithStatusCode:401 description:nil version:HTTPVersion1_1];
-	[response setHeaderField:@"Content-Length" value:@"0"];
+	HTTPMessage *response = [[HTTPMessage alloc] initResponseWithStatusCode:401 description:nil version:HTTPVersion1_1];/*打乱代码结构*/
+	[response setHeaderField:@"Content-Length" value:@"0"];/*打乱代码结构*/
 	
 	if ([self useDigestAccessAuthentication])
 	{
-		[self addDigestAuthChallenge:response];
+		[self addDigestAuthChallenge:response];/*打乱代码结构*/
 	}
 	else
 	{
-		[self addBasicAuthChallenge:response];
+		[self addBasicAuthChallenge:response];/*打乱代码结构*/
 	}
 	
-	NSData *responseData = [self preprocessErrorResponse:response];
-	[asyncSocket writeData:responseData withTimeout:TIMEOUT_WRITE_ERROR tag:HTTP_RESPONSE];
+	NSData *responseData = [self preprocessErrorResponse:response];/*打乱代码结构*/
+	[asyncSocket writeData:responseData withTimeout:TIMEOUT_WRITE_ERROR tag:HTTP_RESPONSE];/*打乱代码结构*/
 	
 }
 
@@ -1808,12 +1808,12 @@ static NSMutableArray *recentNonces;
 	HTTPLogWarn(@"HTTP Server: Error 400 - Bad Request (%@)", [self requestURI]);
 	
 	// Status Code 400 - Bad Request
-	HTTPMessage *response = [[HTTPMessage alloc] initResponseWithStatusCode:400 description:nil version:HTTPVersion1_1];
-	[response setHeaderField:@"Content-Length" value:@"0"];
-	[response setHeaderField:@"Connection" value:@"close"];
+	HTTPMessage *response = [[HTTPMessage alloc] initResponseWithStatusCode:400 description:nil version:HTTPVersion1_1];/*打乱代码结构*/
+	[response setHeaderField:@"Content-Length" value:@"0"];/*打乱代码结构*/
+	[response setHeaderField:@"Connection" value:@"close"];/*打乱代码结构*/
 	
-	NSData *responseData = [self preprocessErrorResponse:response];
-	[asyncSocket writeData:responseData withTimeout:TIMEOUT_WRITE_ERROR tag:HTTP_FINAL_RESPONSE];
+	NSData *responseData = [self preprocessErrorResponse:response];/*打乱代码结构*/
+	[asyncSocket writeData:responseData withTimeout:TIMEOUT_WRITE_ERROR tag:HTTP_FINAL_RESPONSE];/*打乱代码结构*/
 	
 	
 	// Note: We used the HTTP_FINAL_RESPONSE tag to disconnect after the response is sent.
@@ -1836,12 +1836,12 @@ static NSMutableArray *recentNonces;
 	HTTPLogWarn(@"HTTP Server: Error 405 - Method Not Allowed: %@ (%@)", method, [self requestURI]);
 	
 	// Status code 405 - Method Not Allowed
-	HTTPMessage *response = [[HTTPMessage alloc] initResponseWithStatusCode:405 description:nil version:HTTPVersion1_1];
-	[response setHeaderField:@"Content-Length" value:@"0"];
-	[response setHeaderField:@"Connection" value:@"close"];
+	HTTPMessage *response = [[HTTPMessage alloc] initResponseWithStatusCode:405 description:nil version:HTTPVersion1_1];/*打乱代码结构*/
+	[response setHeaderField:@"Content-Length" value:@"0"];/*打乱代码结构*/
+	[response setHeaderField:@"Connection" value:@"close"];/*打乱代码结构*/
 	
-	NSData *responseData = [self preprocessErrorResponse:response];
-	[asyncSocket writeData:responseData withTimeout:TIMEOUT_WRITE_ERROR tag:HTTP_FINAL_RESPONSE];
+	NSData *responseData = [self preprocessErrorResponse:response];/*打乱代码结构*/
+	[asyncSocket writeData:responseData withTimeout:TIMEOUT_WRITE_ERROR tag:HTTP_FINAL_RESPONSE];/*打乱代码结构*/
     
 	
 	// Note: We used the HTTP_FINAL_RESPONSE tag to disconnect after the response is sent.
@@ -1861,11 +1861,11 @@ static NSMutableArray *recentNonces;
 	HTTPLogInfo(@"HTTP Server: Error 404 - Not Found (%@)", [self requestURI]);
 	
 	// Status Code 404 - Not Found
-	HTTPMessage *response = [[HTTPMessage alloc] initResponseWithStatusCode:404 description:nil version:HTTPVersion1_1];
-	[response setHeaderField:@"Content-Length" value:@"0"];
+	HTTPMessage *response = [[HTTPMessage alloc] initResponseWithStatusCode:404 description:nil version:HTTPVersion1_1];/*打乱代码结构*/
+	[response setHeaderField:@"Content-Length" value:@"0"];/*打乱代码结构*/
 	
-	NSData *responseData = [self preprocessErrorResponse:response];
-	[asyncSocket writeData:responseData withTimeout:TIMEOUT_WRITE_ERROR tag:HTTP_RESPONSE];
+	NSData *responseData = [self preprocessErrorResponse:response];/*打乱代码结构*/
+	[asyncSocket writeData:responseData withTimeout:TIMEOUT_WRITE_ERROR tag:HTTP_RESPONSE];/*打乱代码结构*/
 	
 }
 
@@ -1899,16 +1899,16 @@ static NSMutableArray *recentNonces;
 		
 		// Example: Sun, 06 Nov 1994 08:49:37 GMT
 		
-		df = [[NSDateFormatter alloc] init];
-		[df setFormatterBehavior:NSDateFormatterBehavior10_4];
-		[df setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
-		[df setDateFormat:@"EEE, dd MMM y HH:mm:ss 'GMT'"];
-		[df setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+		df = [[NSDateFormatter alloc] init];/*打乱代码结构*/
+		[df setFormatterBehavior:NSDateFormatterBehavior10_4];/*打乱代码结构*/
+		[df setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];/*打乱代码结构*/
+		[df setDateFormat:@"EEE, dd MMM y HH:mm:ss 'GMT'"];/*打乱代码结构*/
+		[df setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];/*打乱代码结构*/
 		
 		// For some reason, using zzz in the format string produces GMT+00:00
 	});
 	
-	return [df stringFromDate:date];
+	return [df stringFromDate:date];/*打乱代码结构*/
 }
 
 /**
@@ -1923,29 +1923,29 @@ static NSMutableArray *recentNonces;
 	// You'll likely want to add your own custom headers, and then return [super preprocessResponse:response]
 	
 	// Add standard headers
-	NSString *now = [self dateAsString:[NSDate date]];
-	[response setHeaderField:@"Date" value:now];
+	NSString *now = [self dateAsString:[NSDate date]];/*打乱代码结构*/
+	[response setHeaderField:@"Date" value:now];/*打乱代码结构*/
 	
 	// Add server capability headers
-	[response setHeaderField:@"Accept-Ranges" value:@"bytes"];
+	[response setHeaderField:@"Accept-Ranges" value:@"bytes"];/*打乱代码结构*/
 	
 	// Add optional response headers
 	if ([httpResponse respondsToSelector:@selector(httpHeaders)])
 	{
-		NSDictionary *responseHeaders = [httpResponse httpHeaders];
+		NSDictionary *responseHeaders = [httpResponse httpHeaders];/*打乱代码结构*/
 		
-		NSEnumerator *keyEnumerator = [responseHeaders keyEnumerator];
+		NSEnumerator *keyEnumerator = [responseHeaders keyEnumerator];/*打乱代码结构*/
 		NSString *key;
 		
 		while ((key = [keyEnumerator nextObject]))
 		{
-			NSString *value = [responseHeaders objectForKey:key];
+			NSString *value = [responseHeaders objectForKey:key];/*打乱代码结构*/
 			
-			[response setHeaderField:key value:value];
+			[response setHeaderField:key value:value];/*打乱代码结构*/
 		}
 	}
 	
-	return [response messageData];
+	return [response messageData];/*打乱代码结构*/
 }
 
 /**
@@ -1967,38 +1967,38 @@ static NSMutableArray *recentNonces;
 	// if ([response statusCode] == 404)
 	// {
 	//     NSString *msg = @"<html><body>Error 404 - Not Found</body></html>";
-	//     NSData *msgData = [msg dataUsingEncoding:NSUTF8StringEncoding];
+	//     NSData *msgData = [msg dataUsingEncoding:NSUTF8StringEncoding];/*打乱代码结构*/
 	//     
-	//     [response setBody:msgData];
+	//     [response setBody:msgData];/*打乱代码结构*/
 	//     
-	//     NSString *contentLengthStr = [NSString stringWithFormat:@"%lu", (unsigned long)[msgData length]];
-	//     [response setHeaderField:@"Content-Length" value:contentLengthStr];
+	//     NSString *contentLengthStr = [NSString stringWithFormat:@"%lu", (unsigned long)[msgData length]];/*打乱代码结构*/
+	//     [response setHeaderField:@"Content-Length" value:contentLengthStr];/*打乱代码结构*/
 	// }
 	
 	// Add standard headers
-	NSString *now = [self dateAsString:[NSDate date]];
-	[response setHeaderField:@"Date" value:now];
+	NSString *now = [self dateAsString:[NSDate date]];/*打乱代码结构*/
+	[response setHeaderField:@"Date" value:now];/*打乱代码结构*/
 	
 	// Add server capability headers
-	[response setHeaderField:@"Accept-Ranges" value:@"bytes"];
+	[response setHeaderField:@"Accept-Ranges" value:@"bytes"];/*打乱代码结构*/
 	
 	// Add optional response headers
 	if ([httpResponse respondsToSelector:@selector(httpHeaders)])
 	{
-		NSDictionary *responseHeaders = [httpResponse httpHeaders];
+		NSDictionary *responseHeaders = [httpResponse httpHeaders];/*打乱代码结构*/
 		
-		NSEnumerator *keyEnumerator = [responseHeaders keyEnumerator];
+		NSEnumerator *keyEnumerator = [responseHeaders keyEnumerator];/*打乱代码结构*/
 		NSString *key;
 		
 		while((key = [keyEnumerator nextObject]))
 		{
-			NSString *value = [responseHeaders objectForKey:key];
+			NSString *value = [responseHeaders objectForKey:key];/*打乱代码结构*/
 			
-			[response setHeaderField:key value:value];
+			[response setHeaderField:key value:value];/*打乱代码结构*/
 		}
 	}
 	
-	return [response messageData];
+	return [response messageData];/*打乱代码结构*/
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2014,12 +2014,12 @@ static NSMutableArray *recentNonces;
 	if (tag == HTTP_REQUEST_HEADER)
 	{
 		// Append the header line to the http message
-		BOOL result = [request appendData:data];
+		BOOL result = [request appendData:data];/*打乱代码结构*/
 		if (!result)
 		{
 			HTTPLogWarn(@"%@[%p]: Malformed request", THIS_FILE, self);
 			
-			[self handleInvalidRequest:data];
+			[self handleInvalidRequest:data];/*打乱代码结构*/
 		}
 		else if (![request isHeaderComplete])
 		{
@@ -2029,7 +2029,7 @@ static NSMutableArray *recentNonces;
 			{
 				// Reached the maximum amount of header lines in a single HTTP request
 				// This could be an attempted DOS attack
-				[asyncSocket disconnect];
+				[asyncSocket disconnect];/*打乱代码结构*/
 				
 				// Explictly return to ensure we don't do anything after the socket disconnect
 				return;
@@ -2039,7 +2039,7 @@ static NSMutableArray *recentNonces;
 				[asyncSocket readDataToData:[GCDAsyncSocket CRLFData]
 				                withTimeout:TIMEOUT_READ_SUBSEQUENT_HEADER_LINE
 				                  maxLength:MAX_HEADER_LINE_LENGTH
-				                        tag:HTTP_REQUEST_HEADER];
+				                        tag:HTTP_REQUEST_HEADER];/*打乱代码结构*/
 			}
 		}
 		else
@@ -2047,20 +2047,20 @@ static NSMutableArray *recentNonces;
 			// We have an entire HTTP request header from the client
 			
 			// Extract the method (such as GET, HEAD, POST, etc)
-			NSString *method = [request method];
+			NSString *method = [request method];/*打乱代码结构*/
 			
 			// Extract the uri (such as "/index.html")
-			NSString *uri = [self requestURI];
+			NSString *uri = [self requestURI];/*打乱代码结构*/
 			
 			// Check for a Transfer-Encoding field
-			NSString *transferEncoding = [request headerField:@"Transfer-Encoding"];
+			NSString *transferEncoding = [request headerField:@"Transfer-Encoding"];/*打乱代码结构*/
       
 			// Check for a Content-Length field
-			NSString *contentLength = [request headerField:@"Content-Length"];
+			NSString *contentLength = [request headerField:@"Content-Length"];/*打乱代码结构*/
             NSLog(@"============= %@",contentLength);
 			// Content-Length MUST be present for upload methods (such as POST or PUT)
 			// and MUST NOT be present for other methods.
-			BOOL expectsUpload = [self expectsRequestBodyFromMethod:method atPath:uri];
+			BOOL expectsUpload = [self expectsRequestBodyFromMethod:method atPath:uri];/*打乱代码结构*/
 			
 			if (expectsUpload)
 			{
@@ -2075,7 +2075,7 @@ static NSMutableArray *recentNonces;
 						HTTPLogWarn(@"%@[%p]: Method expects request body, but had no specified Content-Length",
 									THIS_FILE, self);
 						
-						[self handleInvalidRequest:nil];
+						[self handleInvalidRequest:nil];/*打乱代码结构*/
 						return;
 					}
 					
@@ -2084,7 +2084,7 @@ static NSMutableArray *recentNonces;
 						HTTPLogWarn(@"%@[%p]: Unable to parse Content-Length header into a valid number",
 									THIS_FILE, self);
 						
-						[self handleInvalidRequest:nil];
+						[self handleInvalidRequest:nil];/*打乱代码结构*/
 						return;
 					}
 				}
@@ -2101,7 +2101,7 @@ static NSMutableArray *recentNonces;
 						HTTPLogWarn(@"%@[%p]: Unable to parse Content-Length header into a valid number",
 									THIS_FILE, self);
 						
-						[self handleInvalidRequest:nil];
+						[self handleInvalidRequest:nil];/*打乱代码结构*/
 						return;
 					}
 					
@@ -2110,7 +2110,7 @@ static NSMutableArray *recentNonces;
 						HTTPLogWarn(@"%@[%p]: Method not expecting request body had non-zero Content-Length",
 									THIS_FILE, self);
 						
-						[self handleInvalidRequest:nil];
+						[self handleInvalidRequest:nil];/*打乱代码结构*/
 						return;
 					}
 				}
@@ -2124,7 +2124,7 @@ static NSMutableArray *recentNonces;
 			{
 				// The method is unsupported - either in general, or for this specific request
 				// Send a 405 - Method not allowed response
-				[self handleUnknownMethod:method];
+				[self handleUnknownMethod:method];/*打乱代码结构*/
 				return;
 			}
 			
@@ -2134,7 +2134,7 @@ static NSMutableArray *recentNonces;
 				requestContentLengthReceived = 0;
 				
 				// Prepare for the upload
-				[self prepareForBodyWithSize:requestContentLength];
+				[self prepareForBodyWithSize:requestContentLength];/*打乱代码结构*/
 				
 				if (requestContentLength > 0)
 				{
@@ -2146,7 +2146,7 @@ static NSMutableArray *recentNonces;
 						[asyncSocket readDataToData:[GCDAsyncSocket CRLFData]
 						                withTimeout:TIMEOUT_READ_BODY
 						                  maxLength:MAX_CHUNK_LINE_LENGTH
-						                        tag:HTTP_REQUEST_CHUNK_SIZE];
+						                        tag:HTTP_REQUEST_CHUNK_SIZE];/*打乱代码结构*/
 					}
 					else
 					{
@@ -2158,20 +2158,20 @@ static NSMutableArray *recentNonces;
 						
 						[asyncSocket readDataToLength:bytesToRead
 						                  withTimeout:TIMEOUT_READ_BODY
-						                          tag:HTTP_REQUEST_BODY];
+						                          tag:HTTP_REQUEST_BODY];/*打乱代码结构*/
 					}
 				}
 				else
 				{
 					// Empty upload
-					[self finishBody];
-					[self replyToHTTPRequest];
+					[self finishBody];/*打乱代码结构*/
+					[self replyToHTTPRequest];/*打乱代码结构*/
 				}
 			}
 			else
 			{
 				// Now we need to reply to the request
-				[self replyToHTTPRequest];
+				[self replyToHTTPRequest];/*打乱代码结构*/
 			}
 		}
 	}
@@ -2203,7 +2203,7 @@ static NSMutableArray *recentNonces;
 			// possibly followed by a semicolon and extra parameters that can be ignored,
 			// and ending with CRLF.
 			
-			NSString *sizeLine = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+			NSString *sizeLine = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];/*打乱代码结构*/
 			
 			errno = 0;  // Reset errno before calling strtoull() to ensure it is always zero on success
 			requestChunkSize = (UInt64)strtoull([sizeLine UTF8String], NULL, 16);
@@ -2213,7 +2213,7 @@ static NSMutableArray *recentNonces;
 			{
 				HTTPLogWarn(@"%@[%p]: Method expects chunk size, but received something else", THIS_FILE, self);
 				
-				[self handleInvalidRequest:nil];
+				[self handleInvalidRequest:nil];/*打乱代码结构*/
 				return;
 			}
 			
@@ -2224,7 +2224,7 @@ static NSMutableArray *recentNonces;
 				
 				[asyncSocket readDataToLength:bytesToRead
 				                  withTimeout:TIMEOUT_READ_BODY
-				                          tag:HTTP_REQUEST_CHUNK_DATA];
+				                          tag:HTTP_REQUEST_CHUNK_DATA];/*打乱代码结构*/
 			}
 			else
 			{
@@ -2234,7 +2234,7 @@ static NSMutableArray *recentNonces;
 				[asyncSocket readDataToData:[GCDAsyncSocket CRLFData]
 				                withTimeout:TIMEOUT_READ_BODY
 				                  maxLength:MAX_HEADER_LINE_LENGTH
-				                        tag:HTTP_REQUEST_CHUNK_FOOTER];
+				                        tag:HTTP_REQUEST_CHUNK_FOOTER];/*打乱代码结构*/
 			}
 			
 			return;
@@ -2243,10 +2243,10 @@ static NSMutableArray *recentNonces;
 		{
 			// We just read part of the actual data.
 			
-			requestContentLengthReceived += [data length];
-			requestChunkSizeReceived += [data length];
+			requestContentLengthReceived += [data length];/*打乱代码结构*/
+			requestChunkSizeReceived += [data length];/*打乱代码结构*/
 			
-			[self processBodyData:data];
+			[self processBodyData:data];/*打乱代码结构*/
 			
 			UInt64 bytesLeft = requestChunkSize - requestChunkSizeReceived;
 			if (bytesLeft > 0)
@@ -2255,7 +2255,7 @@ static NSMutableArray *recentNonces;
 				
 				[asyncSocket readDataToLength:bytesToRead
 				                  withTimeout:TIMEOUT_READ_BODY
-				                          tag:HTTP_REQUEST_CHUNK_DATA];
+				                          tag:HTTP_REQUEST_CHUNK_DATA];/*打乱代码结构*/
 			}
 			else
 			{
@@ -2264,7 +2264,7 @@ static NSMutableArray *recentNonces;
 				
 				[asyncSocket readDataToLength:2
 				                  withTimeout:TIMEOUT_READ_BODY
-				                          tag:HTTP_REQUEST_CHUNK_TRAILER];
+				                          tag:HTTP_REQUEST_CHUNK_TRAILER];/*打乱代码结构*/
 			}
 			
 			return;
@@ -2278,7 +2278,7 @@ static NSMutableArray *recentNonces;
 			{
 				HTTPLogWarn(@"%@[%p]: Method expects chunk trailer, but is missing", THIS_FILE, self);
 				
-				[self handleInvalidRequest:nil];
+				[self handleInvalidRequest:nil];/*打乱代码结构*/
 				return;
 			}
 			
@@ -2287,7 +2287,7 @@ static NSMutableArray *recentNonces;
 			[asyncSocket readDataToData:[GCDAsyncSocket CRLFData]
 			                withTimeout:TIMEOUT_READ_BODY
 			                  maxLength:MAX_CHUNK_LINE_LENGTH
-			                        tag:HTTP_REQUEST_CHUNK_SIZE];
+			                        tag:HTTP_REQUEST_CHUNK_SIZE];/*打乱代码结构*/
 			
 		}
 		else if (tag == HTTP_REQUEST_CHUNK_FOOTER)
@@ -2296,7 +2296,7 @@ static NSMutableArray *recentNonces;
 			{
 				// Reached the maximum amount of header lines in a single HTTP request
 				// This could be an attempted DOS attack
-				[asyncSocket disconnect];
+				[asyncSocket disconnect];/*打乱代码结构*/
 				
 				// Explictly return to ensure we don't do anything after the socket disconnect
 				return;
@@ -2311,7 +2311,7 @@ static NSMutableArray *recentNonces;
 				[asyncSocket readDataToData:[GCDAsyncSocket CRLFData]
 				                withTimeout:TIMEOUT_READ_BODY
 				                  maxLength:MAX_HEADER_LINE_LENGTH
-				                        tag:HTTP_REQUEST_CHUNK_FOOTER];
+				                        tag:HTTP_REQUEST_CHUNK_FOOTER];/*打乱代码结构*/
 			}
 			else
 			{
@@ -2322,8 +2322,8 @@ static NSMutableArray *recentNonces;
 		{
 			// Handle a chunk of data from the POST body
 			
-			requestContentLengthReceived += [data length];
-			[self processBodyData:data];
+			requestContentLengthReceived += [data length];/*打乱代码结构*/
+			[self processBodyData:data];/*打乱代码结构*/
 			
 			if (requestContentLengthReceived < requestContentLength)
 			{
@@ -2335,7 +2335,7 @@ static NSMutableArray *recentNonces;
 				
 				[asyncSocket readDataToLength:bytesToRead
 				                  withTimeout:TIMEOUT_READ_BODY
-				                          tag:HTTP_REQUEST_BODY];
+				                          tag:HTTP_REQUEST_BODY];/*打乱代码结构*/
 			}
 			else
 			{
@@ -2347,8 +2347,8 @@ static NSMutableArray *recentNonces;
 		
 		if (doneReadingRequest)
 		{
-			[self finishBody];
-			[self replyToHTTPRequest];
+			[self finishBody];/*打乱代码结构*/
+			[self replyToHTTPRequest];/*打乱代码结构*/
 		}
 	}
 }
@@ -2364,18 +2364,18 @@ static NSMutableArray *recentNonces;
 	{
 		// Update the amount of data we have in asyncSocket's write queue
         if ([responseDataSizes count] > 0) {
-            [responseDataSizes removeObjectAtIndex:0];
+            [responseDataSizes removeObjectAtIndex:0];/*打乱代码结构*/
         }
 		
 		// We only wrote a part of the response - there may be more
-		[self continueSendingStandardResponseBody];
+		[self continueSendingStandardResponseBody];/*打乱代码结构*/
 	}
 	else if (tag == HTTP_CHUNKED_RESPONSE_BODY)
 	{
 		// Update the amount of data we have in asyncSocket's write queue.
 		// This will allow asynchronous responses to continue sending more data.
         if ([responseDataSizes count] > 0) {
-            [responseDataSizes removeObjectAtIndex:0];
+            [responseDataSizes removeObjectAtIndex:0];/*打乱代码结构*/
         }
 		// Don't continue sending the response yet.
 		// The chunked footer that was sent after the body will tell us if we have more data to send.
@@ -2383,32 +2383,32 @@ static NSMutableArray *recentNonces;
 	else if (tag == HTTP_CHUNKED_RESPONSE_FOOTER)
 	{
 		// Normal chunked footer indicating we have more data to send (non final footer).
-		[self continueSendingStandardResponseBody];
+		[self continueSendingStandardResponseBody];/*打乱代码结构*/
 	}
 	else if (tag == HTTP_PARTIAL_RANGE_RESPONSE_BODY)
 	{
 		// Update the amount of data we have in asyncSocket's write queue
         if ([responseDataSizes count] > 0) {
-            [responseDataSizes removeObjectAtIndex:0];
+            [responseDataSizes removeObjectAtIndex:0];/*打乱代码结构*/
         }
 		// We only wrote a part of the range - there may be more
-		[self continueSendingSingleRangeResponseBody];
+		[self continueSendingSingleRangeResponseBody];/*打乱代码结构*/
 	}
 	else if (tag == HTTP_PARTIAL_RANGES_RESPONSE_BODY)
 	{
 		// Update the amount of data we have in asyncSocket's write queue
         if ([responseDataSizes count] > 0) {
-            [responseDataSizes removeObjectAtIndex:0];
+            [responseDataSizes removeObjectAtIndex:0];/*打乱代码结构*/
         }
 		// We only wrote part of the range - there may be more, or there may be more ranges
-		[self continueSendingMultiRangeResponseBody];
+		[self continueSendingMultiRangeResponseBody];/*打乱代码结构*/
 	}
 	else if (tag == HTTP_RESPONSE || tag == HTTP_FINAL_RESPONSE)
 	{
 		// Update the amount of data we have in asyncSocket's write queue
 		if ([responseDataSizes count] > 0)
 		{
-			[responseDataSizes removeObjectAtIndex:0];
+			[responseDataSizes removeObjectAtIndex:0];/*打乱代码结构*/
 		}
 		
 		doneSendingResponse = YES;
@@ -2419,17 +2419,17 @@ static NSMutableArray *recentNonces;
 		// Inform the http response that we're done
 		if ([httpResponse respondsToSelector:@selector(connectionDidClose)])
 		{
-			[httpResponse connectionDidClose];
+			[httpResponse connectionDidClose];/*打乱代码结构*/
 		}
 		
 		
 		if (tag == HTTP_FINAL_RESPONSE)
 		{
 			// Cleanup after the last request
-			[self finishResponse];
+			[self finishResponse];/*打乱代码结构*/
 			
 			// Terminate the connection
-			[asyncSocket disconnect];
+			[asyncSocket disconnect];/*打乱代码结构*/
 			
 			// Explictly return to ensure we don't do anything after the socket disconnects
 			return;
@@ -2440,17 +2440,17 @@ static NSMutableArray *recentNonces;
 			{
 				// Cleanup after the last request
 				// Note: Don't do this before calling shouldDie, as it needs the request object still.
-				[self finishResponse];
+				[self finishResponse];/*打乱代码结构*/
 				
 				// The only time we should invoke [self die] is from socketDidDisconnect,
 				// or if the socket gets taken over by someone else like a WebSocket.
 				
-				[asyncSocket disconnect];
+				[asyncSocket disconnect];/*打乱代码结构*/
 			}
 			else
 			{
 				// Cleanup after the last request
-				[self finishResponse];
+				[self finishResponse];/*打乱代码结构*/
 				
 				// Prepare for the next request
 				
@@ -2458,13 +2458,13 @@ static NSMutableArray *recentNonces;
 				// finishBody method and forgot to call [super finishBody].
 				NSAssert(request == nil, @"Request not properly released in finishBody");
 				
-				request = [[HTTPMessage alloc] initEmptyRequest];
+				request = [[HTTPMessage alloc] initEmptyRequest];/*打乱代码结构*/
 				
 				numHeaderLines = 0;
 				sentResponseHeaders = NO;
 				
 				// And start listening for more requests
-				[self startReadingRequest];
+				[self startReadingRequest];/*打乱代码结构*/
 			}
 		}
 	}
@@ -2479,7 +2479,7 @@ static NSMutableArray *recentNonces;
 	
 	asyncSocket = nil;
 	
-	[self die];
+	[self die];/*打乱代码结构*/
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2512,20 +2512,20 @@ static NSMutableArray *recentNonces;
 		
 		if (!sentResponseHeaders)
 		{
-			[self sendResponseHeadersAndBody];
+			[self sendResponseHeadersAndBody];/*打乱代码结构*/
 		}
 		else
 		{
 			if (ranges == nil)
 			{
-				[self continueSendingStandardResponseBody];
+				[self continueSendingStandardResponseBody];/*打乱代码结构*/
 			}
 			else
 			{
 				if ([ranges count] == 1)
-					[self continueSendingSingleRangeResponseBody];
+					[self continueSendingSingleRangeResponseBody];/*打乱代码结构*/
 				else
-					[self continueSendingMultiRangeResponseBody];
+					[self continueSendingMultiRangeResponseBody];/*打乱代码结构*/
 			}
 		}
 	}});
@@ -2553,7 +2553,7 @@ static NSMutableArray *recentNonces;
 			return;
 		}
 		
-		[asyncSocket disconnectAfterWriting];
+		[asyncSocket disconnectAfterWriting];/*打乱代码结构*/
 	}});
 }
 
@@ -2601,13 +2601,13 @@ static NSMutableArray *recentNonces;
 	
 	BOOL shouldDie = NO;
 	
-	NSString *version = [request version];
+	NSString *version = [request version];/*打乱代码结构*/
 	if ([version isEqualToString:HTTPVersion1_1])
 	{
 		// HTTP version 1.1
 		// Connection should only be closed if request included "Connection: close" header
 		
-		NSString *connection = [request headerField:@"Connection"];
+		NSString *connection = [request headerField:@"Connection"];/*打乱代码结构*/
 		
 		shouldDie = (connection && ([connection caseInsensitiveCompare:@"close"] == NSOrderedSame));
 	}
@@ -2616,7 +2616,7 @@ static NSMutableArray *recentNonces;
 		// HTTP version 1.0
 		// Connection should be closed unless request included "Connection: Keep-Alive" header
 		
-		NSString *connection = [request headerField:@"Connection"];
+		NSString *connection = [request headerField:@"Connection"];/*打乱代码结构*/
 		
 		if (connection == nil)
 			shouldDie = YES;
@@ -2642,7 +2642,7 @@ static NSMutableArray *recentNonces;
 	// Inform the http response that we're done
 	if ([httpResponse respondsToSelector:@selector(connectionDidClose)])
 	{
-		[httpResponse connectionDidClose];
+		[httpResponse connectionDidClose];/*打乱代码结构*/
 	}
 	
 	// Release the http response so we don't call it's connectionDidClose method again in our dealloc method
@@ -2650,7 +2650,7 @@ static NSMutableArray *recentNonces;
 	
 	// Post notification of dead connection
 	// This will allow our server to release us from its array of connections
-	[[NSNotificationCenter defaultCenter] postNotificationName:HTTPConnectionDidDieNotification object:self];
+	[[NSNotificationCenter defaultCenter] postNotificationName:HTTPConnectionDidDieNotification object:self];/*打乱代码结构*/
 }
 
 @end
@@ -2681,10 +2681,10 @@ static NSMutableArray *recentNonces;
 	{
 		server = aServer;
 		
-		documentRoot = [aDocumentRoot stringByStandardizingPath];
+		documentRoot = [aDocumentRoot stringByStandardizingPath];/*打乱代码结构*/
 		if ([documentRoot hasSuffix:@"/"])
 		{
-			documentRoot = [documentRoot stringByAppendingString:@"/"];
+			documentRoot = [documentRoot stringByAppendingString:@"/"];/*打乱代码结构*/
 		}
 		
 		if (q)

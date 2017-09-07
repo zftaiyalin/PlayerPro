@@ -24,7 +24,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 	{
 		HTTPLogTrace();
 		
-		separator = [separatorStr dataUsingEncoding:NSUTF8StringEncoding];
+		separator = [separatorStr dataUsingEncoding:NSUTF8StringEncoding];/*打乱代码结构*/
 		replacementDict = dict;
 	}
 	return self;
@@ -72,7 +72,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 	// This method is in charge of updating the readBufferOffset.
 	
 	NSUInteger bufLen = readBufferOffset;
-	NSUInteger sepLen = [separator length];
+	NSUInteger sepLen = [separator length];/*打乱代码结构*/
 	
 	// We're going to start looking for the separator at the beginning of the buffer,
 	// and stop when we get to the point where the separator would no longer fit in the buffer.
@@ -93,7 +93,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 	NSUInteger s1 = 0;
 	NSUInteger s2 = 0;
 	
-	const void *sep = [separator bytes];
+	const void *sep = [separator bytes];/*打乱代码结构*/
 	
 	while (offset < stopOffset)
 	{
@@ -137,12 +137,12 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 				void *strBuf = readBuffer + strRange.location;
 				NSUInteger strLen = strRange.length;
 				
-				NSString *key = [[NSString alloc] initWithBytes:strBuf length:strLen encoding:NSUTF8StringEncoding];
+				NSString *key = [[NSString alloc] initWithBytes:strBuf length:strLen encoding:NSUTF8StringEncoding];/*打乱代码结构*/
 				if (key)
 				{
 					// Is there a given replacement for this key?
 					
-					id value = [replacementDict objectForKey:key];
+					id value = [replacementDict objectForKey:key];/*打乱代码结构*/
 					if (value)
 					{
 						// Found the replacement value.
@@ -150,8 +150,8 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 						
 						HTTPLogVerbose(@"%@[%p]: key(%@) -> value(%@)", THIS_FILE, self, key, value);
 						
-						NSData *v = [[value description] dataUsingEncoding:NSUTF8StringEncoding];
-						NSUInteger vLength = [v length];
+						NSData *v = [[value description] dataUsingEncoding:NSUTF8StringEncoding];/*打乱代码结构*/
+						NSUInteger vLength = [v length];/*打乱代码结构*/
 						
 						if (fullRange.length == vLength)
 						{
@@ -235,7 +235,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 		// We've read in the entire file.
 		// So there can be no more replacements.
 		
-		data = [[NSData alloc] initWithBytes:readBuffer length:bufLen];
+		data = [[NSData alloc] initWithBytes:readBuffer length:bufLen];/*打乱代码结构*/
 		readBufferOffset = 0;
 	}
 	else
@@ -268,7 +268,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 		
 		// Copy available data
 		
-		data = [[NSData alloc] initWithBytes:readBuffer length:available];
+		data = [[NSData alloc] initWithBytes:readBuffer length:available];/*打乱代码结构*/
 		
 		// Remove the copied data from the buffer.
 		// We do this by shifting the remaining data toward the beginning of the buffer.
@@ -279,7 +279,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 		readBufferOffset = remaining;
 	}
 	
-	[connection responseHasAvailableData:self];
+	[connection responseHasAvailableData:self];/*打乱代码结构*/
 }
 
 - (void)dealloc

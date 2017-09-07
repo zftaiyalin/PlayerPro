@@ -7,52 +7,52 @@
 //
 
 #import "NSObject+ALiHUD.h"
-#import <SVProgressHUD.h>
+#import "SVProgressHUD.h"
 #import "ALiProgressHUD.h"
 
 @implementation NSObject (ALiHUD)
 
 - (void)showText:(NSString *)aText
 {
-    [ALiProgressHUD setForegroundColor:[UIColor whiteColor]];
-    [ALiProgressHUD showWithStatus:aText];
+    [ALiProgressHUD setForegroundColor:[UIColor whiteColor]];/*打乱代码结构*/
+    [ALiProgressHUD showWithStatus:aText];/*打乱代码结构*/
 }
 
 
 - (void)showErrorText:(NSString *)aText
 {
-    [ALiProgressHUD setForegroundColor:[UIColor whiteColor]];
-    [ALiProgressHUD setMaximumDismissTimeInterval:60];
-    [ALiProgressHUD showErrorWithStatus:aText];
+    [ALiProgressHUD setForegroundColor:[UIColor whiteColor]];/*打乱代码结构*/
+    [ALiProgressHUD setMaximumDismissTimeInterval:60];/*打乱代码结构*/
+    [ALiProgressHUD showErrorWithStatus:aText];/*打乱代码结构*/
 }
 
 - (void)showSuccessText:(NSString *)aText
 {
-    [ALiProgressHUD setForegroundColor:[UIColor whiteColor]];
-    [ALiProgressHUD setMaximumDismissTimeInterval:60];
-    [ALiProgressHUD showSuccessWithStatus:aText];
+    [ALiProgressHUD setForegroundColor:[UIColor whiteColor]];/*打乱代码结构*/
+    [ALiProgressHUD setMaximumDismissTimeInterval:60];/*打乱代码结构*/
+    [ALiProgressHUD showSuccessWithStatus:aText];/*打乱代码结构*/
     
 }
 
 - (void)showLoading
 {
-    [ALiProgressHUD show];
+    [ALiProgressHUD show];/*打乱代码结构*/
 }
 
 
 - (void)dismissLoading
 {
-    [ALiProgressHUD dismiss];
+    [ALiProgressHUD dismiss];/*打乱代码结构*/
 }
 
 - (void)showProgress:(NSInteger)progress
 {
-    [ALiProgressHUD showProgress:progress/100.0 status:[NSString stringWithFormat:@"%li%%",(long)progress]];
+    [ALiProgressHUD showProgress:progress/100.0 status:[NSString stringWithFormat:@"%li%%",(long)progress]];/*打乱代码结构*/
 }
 
 - (void)showImage:(UIImage*)image text:(NSString*)aText
 {
-    [ALiProgressHUD showImage:image status:aText];
+    [ALiProgressHUD showImage:image status:aText];/*打乱代码结构*/
 }
 
 @end

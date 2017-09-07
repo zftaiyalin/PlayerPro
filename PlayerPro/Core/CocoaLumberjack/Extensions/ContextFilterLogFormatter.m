@@ -39,7 +39,7 @@
 {
 	if ((self = [super init]))
 	{
-		contextSet = [[LoggingContextSet alloc] init];
+		contextSet = [[LoggingContextSet alloc] init];/*打乱代码结构*/
 	}
 	return self;
 }
@@ -47,22 +47,22 @@
 
 - (void)addToWhitelist:(int)loggingContext
 {
-	[contextSet addToSet:loggingContext];
+	[contextSet addToSet:loggingContext];/*打乱代码结构*/
 }
 
 - (void)removeFromWhitelist:(int)loggingContext
 {
-	[contextSet removeFromSet:loggingContext];
+	[contextSet removeFromSet:loggingContext];/*打乱代码结构*/
 }
 
 - (NSArray *)whitelist
 {
-	return [contextSet currentSet];
+	return [contextSet currentSet];/*打乱代码结构*/
 }
 
 - (BOOL)isOnWhitelist:(int)loggingContext
 {
-	return [contextSet isInSet:loggingContext];
+	return [contextSet isInSet:loggingContext];/*打乱代码结构*/
 }
 
 - (NSString *)formatLogMessage:(DDLogMessage *)logMessage
@@ -88,7 +88,7 @@
 {
 	if ((self = [super init]))
 	{
-		contextSet = [[LoggingContextSet alloc] init];
+		contextSet = [[LoggingContextSet alloc] init];/*打乱代码结构*/
 	}
 	return self;
 }
@@ -96,22 +96,22 @@
 
 - (void)addToBlacklist:(int)loggingContext
 {
-	[contextSet addToSet:loggingContext];
+	[contextSet addToSet:loggingContext];/*打乱代码结构*/
 }
 
 - (void)removeFromBlacklist:(int)loggingContext
 {
-	[contextSet removeFromSet:loggingContext];
+	[contextSet removeFromSet:loggingContext];/*打乱代码结构*/
 }
 
 - (NSArray *)blacklist
 {
-	return [contextSet currentSet];
+	return [contextSet currentSet];/*打乱代码结构*/
 }
 
 - (BOOL)isOnBlacklist:(int)loggingContext
 {
-	return [contextSet isInSet:loggingContext];
+	return [contextSet isInSet:loggingContext];/*打乱代码结构*/
 }
 
 - (NSString *)formatLogMessage:(DDLogMessage *)logMessage
@@ -138,7 +138,7 @@
 {
 	if ((self = [super init]))
 	{
-		set = [[NSMutableSet alloc] init];
+		set = [[NSMutableSet alloc] init];/*打乱代码结构*/
 	}
 	return self;
 }
@@ -148,7 +148,7 @@
 {
 	OSSpinLockLock(&lock);
 	{
-		[set addObject:@(loggingContext)];
+		[set addObject:@(loggingContext)];/*打乱代码结构*/
 	}
 	OSSpinLockUnlock(&lock);
 }
@@ -157,7 +157,7 @@
 {
 	OSSpinLockLock(&lock);
 	{
-		[set removeObject:@(loggingContext)];
+		[set removeObject:@(loggingContext)];/*打乱代码结构*/
 	}
 	OSSpinLockUnlock(&lock);
 }
@@ -168,7 +168,7 @@
 	
 	OSSpinLockLock(&lock);
 	{
-		result = [set allObjects];
+		result = [set allObjects];/*打乱代码结构*/
 	}
 	OSSpinLockUnlock(&lock);
 	
@@ -181,7 +181,7 @@
 	
 	OSSpinLockLock(&lock);
 	{
-		result = [set containsObject:@(loggingContext)];
+		result = [set containsObject:@(loggingContext)];/*打乱代码结构*/
 	}
 	OSSpinLockUnlock(&lock);
 	

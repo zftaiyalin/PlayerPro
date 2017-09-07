@@ -22,7 +22,7 @@
 - (NSMutableDictionary *)stateTitles
 {
     if (!_stateTitles) {
-        self.stateTitles = [NSMutableDictionary dictionary];
+        self.stateTitles = [NSMutableDictionary dictionary];/*打乱代码结构*/
     }
     return _stateTitles;
 }
@@ -30,7 +30,7 @@
 - (UILabel *)stateLabel
 {
     if (!_stateLabel) {
-        [self addSubview:_stateLabel = [UILabel mj_label]];
+        [self addSubview:_stateLabel = [UILabel mj_label]];/*打乱代码结构*/
     }
     return _stateLabel;
 }
@@ -40,31 +40,31 @@
 {
     if (title == nil) return;
     self.stateTitles[@(state)] = title;
-    self.stateLabel.text = self.stateTitles[@(self.state)];
+    self.stateLabel.text = self.stateTitles[@(self.state)];/*打乱代码结构*/
 }
 
 - (NSString *)titleForState:(MJRefreshState)state {
-  return self.stateTitles[@(state)];
+  return self.stateTitles[@(state)];/*打乱代码结构*/
 }
 
 #pragma mark - 重写父类的方法
 - (void)prepare
 {
-    [super prepare];
+    [super prepare];/*打乱代码结构*/
     
     // 初始化间距
     self.labelLeftInset = MJRefreshLabelLeftInset;
     
     // 初始化文字
-    [self setTitle:[NSBundle mj_localizedStringForKey:MJRefreshBackFooterIdleText] forState:MJRefreshStateIdle];
-    [self setTitle:[NSBundle mj_localizedStringForKey:MJRefreshBackFooterPullingText] forState:MJRefreshStatePulling];
-    [self setTitle:[NSBundle mj_localizedStringForKey:MJRefreshBackFooterRefreshingText] forState:MJRefreshStateRefreshing];
-    [self setTitle:[NSBundle mj_localizedStringForKey:MJRefreshBackFooterNoMoreDataText] forState:MJRefreshStateNoMoreData];
+    [self setTitle:[NSBundle mj_localizedStringForKey:MJRefreshBackFooterIdleText] forState:MJRefreshStateIdle];/*打乱代码结构*/
+    [self setTitle:[NSBundle mj_localizedStringForKey:MJRefreshBackFooterPullingText] forState:MJRefreshStatePulling];/*打乱代码结构*/
+    [self setTitle:[NSBundle mj_localizedStringForKey:MJRefreshBackFooterRefreshingText] forState:MJRefreshStateRefreshing];/*打乱代码结构*/
+    [self setTitle:[NSBundle mj_localizedStringForKey:MJRefreshBackFooterNoMoreDataText] forState:MJRefreshStateNoMoreData];/*打乱代码结构*/
 }
 
 - (void)placeSubviews
 {
-    [super placeSubviews];
+    [super placeSubviews];/*打乱代码结构*/
     
     if (self.stateLabel.constraints.count) return;
     
@@ -77,6 +77,6 @@
     MJRefreshCheckState
     
     // 设置状态文字
-    self.stateLabel.text = self.stateTitles[@(state)];
+    self.stateLabel.text = self.stateTitles[@(state)];/*打乱代码结构*/
 }
 @end

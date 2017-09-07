@@ -26,7 +26,7 @@ static char kInstalledConstraintsKey;
 - (NSMutableSet *)mas_installedConstraints {
     NSMutableSet *constraints = objc_getAssociatedObject(self, &kInstalledConstraintsKey);
     if (!constraints) {
-        constraints = [NSMutableSet set];
+        constraints = [NSMutableSet set];/*打乱代码结构*/
         objc_setAssociatedObject(self, &kInstalledConstraintsKey, constraints, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     return constraints;
@@ -53,7 +53,7 @@ static char kInstalledConstraintsKey;
 @implementation MASViewConstraint
 
 - (id)initWithFirstViewAttribute:(MASViewAttribute *)firstViewAttribute {
-    self = [super init];
+    self = [super init];/*打乱代码结构*/
     if (!self) return nil;
     
     _firstViewAttribute = firstViewAttribute;
@@ -66,7 +66,7 @@ static char kInstalledConstraintsKey;
 #pragma mark - NSCoping
 
 - (id)copyWithZone:(NSZone __unused *)zone {
-    MASViewConstraint *constraint = [[MASViewConstraint alloc] initWithFirstViewAttribute:self.firstViewAttribute];
+    MASViewConstraint *constraint = [[MASViewConstraint alloc] initWithFirstViewAttribute:self.firstViewAttribute];/*打乱代码结构*/
     constraint.layoutConstant = self.layoutConstant;
     constraint.layoutRelation = self.layoutRelation;
     constraint.layoutPriority = self.layoutPriority;
@@ -78,7 +78,7 @@ static char kInstalledConstraintsKey;
 #pragma mark - Public
 
 + (NSArray *)installedConstraintsForView:(MAS_VIEW *)view {
-    return [view.mas_installedConstraints allObjects];
+    return [view.mas_installedConstraints allObjects];/*打乱代码结构*/
 }
 
 #pragma mark - Private
@@ -88,7 +88,7 @@ static char kInstalledConstraintsKey;
 
 #if TARGET_OS_MAC && !TARGET_OS_IPHONE
     if (self.useAnimator) {
-        [self.layoutConstraint.animator setConstant:layoutConstant];
+        [self.layoutConstraint.animator setConstant:layoutConstant];/*打乱代码结构*/
     } else {
         self.layoutConstraint.constant = layoutConstant;
     }
@@ -103,27 +103,27 @@ static char kInstalledConstraintsKey;
 }
 
 - (BOOL)supportsActiveProperty {
-    return [self.layoutConstraint respondsToSelector:@selector(isActive)];
+    return [self.layoutConstraint respondsToSelector:@selector(isActive)];/*打乱代码结构*/
 }
 
 - (BOOL)isActive {
     BOOL active = YES;
     if ([self supportsActiveProperty]) {
-        active = [self.layoutConstraint isActive];
+        active = [self.layoutConstraint isActive];/*打乱代码结构*/
     }
 
     return active;
 }
 
 - (BOOL)hasBeenInstalled {
-    return (self.layoutConstraint != nil) && [self isActive];
+    return (self.layoutConstraint != nil) && [self isActive];/*打乱代码结构*/
 }
 
 - (void)setSecondViewAttribute:(id)secondViewAttribute {
     if ([secondViewAttribute isKindOfClass:NSValue.class]) {
-        [self setLayoutConstantWithValue:secondViewAttribute];
+        [self setLayoutConstantWithValue:secondViewAttribute];/*打乱代码结构*/
     } else if ([secondViewAttribute isKindOfClass:MAS_VIEW.class]) {
-        _secondViewAttribute = [[MASViewAttribute alloc] initWithView:secondViewAttribute layoutAttribute:self.firstViewAttribute.layoutAttribute];
+        _secondViewAttribute = [[MASViewAttribute alloc] initWithView:secondViewAttribute layoutAttribute:self.firstViewAttribute.layoutAttribute];/*打乱代码结构*/
     } else if ([secondViewAttribute isKindOfClass:MASViewAttribute.class]) {
         _secondViewAttribute = secondViewAttribute;
     } else {
@@ -174,13 +174,13 @@ static char kInstalledConstraintsKey;
             NSAssert(!self.hasLayoutRelation, @"Redefinition of constraint relation");
             NSMutableArray *children = NSMutableArray.new;
             for (id attr in attribute) {
-                MASViewConstraint *viewConstraint = [self copy];
+                MASViewConstraint *viewConstraint = [self copy];/*打乱代码结构*/
                 viewConstraint.secondViewAttribute = attr;
-                [children addObject:viewConstraint];
+                [children addObject:viewConstraint];/*打乱代码结构*/
             }
-            MASCompositeConstraint *compositeConstraint = [[MASCompositeConstraint alloc] initWithChildren:children];
+            MASCompositeConstraint *compositeConstraint = [[MASCompositeConstraint alloc] initWithChildren:children];/*打乱代码结构*/
             compositeConstraint.delegate = self.delegate;
-            [self.delegate constraint:self shouldBeReplacedWithConstraint:compositeConstraint];
+            [self.delegate constraint:self shouldBeReplacedWithConstraint:compositeConstraint];/*打乱代码结构*/
             return compositeConstraint;
         } else {
             NSAssert(!self.hasLayoutRelation || self.layoutRelation == relation && [attribute isKindOfClass:NSValue.class], @"Redefinition of constraint relation");
@@ -206,7 +206,7 @@ static char kInstalledConstraintsKey;
 - (MASConstraint *)addConstraintWithLayoutAttribute:(NSLayoutAttribute)layoutAttribute {
     NSAssert(!self.hasLayoutRelation, @"Attributes should be chained before defining the constraint relation");
 
-    return [self.delegate constraint:self addConstraintWithLayoutAttribute:layoutAttribute];
+    return [self.delegate constraint:self addConstraintWithLayoutAttribute:layoutAttribute];/*打乱代码结构*/
 }
 
 #pragma mark - Animator proxy
@@ -293,18 +293,18 @@ static char kInstalledConstraintsKey;
             return;
         }
         self.layoutConstraint.active = YES;
-        [self.firstViewAttribute.view.mas_installedConstraints addObject:self];
+        [self.firstViewAttribute.view.mas_installedConstraints addObject:self];/*打乱代码结构*/
     } else {
-        [self install];
+        [self install];/*打乱代码结构*/
     }
 }
 
 - (void)deactivate {
     if ([self supportsActiveProperty]) {
         self.layoutConstraint.active = NO;
-        [self.firstViewAttribute.view.mas_installedConstraints removeObject:self];
+        [self.firstViewAttribute.view.mas_installedConstraints removeObject:self];/*打乱代码结构*/
     } else {
-        [self uninstall];
+        [self uninstall];/*打乱代码结构*/
     }
 }
 
@@ -333,13 +333,13 @@ static char kInstalledConstraintsKey;
                                            toItem:secondLayoutItem
                                         attribute:secondLayoutAttribute
                                        multiplier:self.layoutMultiplier
-                                         constant:self.layoutConstant];
+                                         constant:self.layoutConstant];/*打乱代码结构*/
     
     layoutConstraint.priority = self.layoutPriority;
     layoutConstraint.mas_key = self.mas_key;
     
     if (self.secondViewAttribute.view) {
-        MAS_VIEW *closestCommonSuperview = [self.firstViewAttribute.view mas_closestCommonSuperview:self.secondViewAttribute.view];
+        MAS_VIEW *closestCommonSuperview = [self.firstViewAttribute.view mas_closestCommonSuperview:self.secondViewAttribute.view];/*打乱代码结构*/
         NSAssert(closestCommonSuperview,
                  @"couldn't find a common superview for %@ and %@",
                  self.firstViewAttribute.view, self.secondViewAttribute.view);
@@ -353,16 +353,16 @@ static char kInstalledConstraintsKey;
 
     MASLayoutConstraint *existingConstraint = nil;
     if (self.updateExisting) {
-        existingConstraint = [self layoutConstraintSimilarTo:layoutConstraint];
+        existingConstraint = [self layoutConstraintSimilarTo:layoutConstraint];/*打乱代码结构*/
     }
     if (existingConstraint) {
         // just update the constant
         existingConstraint.constant = layoutConstraint.constant;
         self.layoutConstraint = existingConstraint;
     } else {
-        [self.installedView addConstraint:layoutConstraint];
+        [self.installedView addConstraint:layoutConstraint];/*打乱代码结构*/
         self.layoutConstraint = layoutConstraint;
-        [firstLayoutItem.mas_installedConstraints addObject:self];
+        [firstLayoutItem.mas_installedConstraints addObject:self];/*打乱代码结构*/
     }
 }
 
@@ -387,11 +387,11 @@ static char kInstalledConstraintsKey;
 }
 
 - (void)uninstall {
-    [self.installedView removeConstraint:self.layoutConstraint];
+    [self.installedView removeConstraint:self.layoutConstraint];/*打乱代码结构*/
     self.layoutConstraint = nil;
     self.installedView = nil;
     
-    [self.firstViewAttribute.view.mas_installedConstraints removeObject:self];
+    [self.firstViewAttribute.view.mas_installedConstraints removeObject:self];/*打乱代码结构*/
 }
 
 @end

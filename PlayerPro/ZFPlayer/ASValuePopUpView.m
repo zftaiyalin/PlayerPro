@@ -28,12 +28,12 @@
 - (void)animateKey:(NSString *)animationName fromValue:(id)fromValue toValue:(id)toValue
          customize:(void (^)(CABasicAnimation *animation))block
 {
-    [self setValue:toValue forKey:animationName];
-    CABasicAnimation *anim = [CABasicAnimation animationWithKeyPath:animationName];
-    anim.fromValue = fromValue ?: [self.presentationLayer valueForKey:animationName];
+    [self setValue:toValue forKey:animationName];/*打乱代码结构*/
+    CABasicAnimation *anim = [CABasicAnimation animationWithKeyPath:animationName];/*打乱代码结构*/
+    anim.fromValue = fromValue ?: [self.presentationLayer valueForKey:animationName];/*打乱代码结构*/
     anim.toValue = toValue;
     if (block) block(anim);
-    [self addAnimation:anim forKey:animationName];
+    [self addAnimation:anim forKey:animationName];/*打乱代码结构*/
 }
 @end
 
@@ -54,7 +54,7 @@ NSString *const SliderFillColorAnim = @"fillColor";
 }
 
 + (Class)layerClass {
-    return [CAShapeLayer class];
+    return [CAShapeLayer class];/*打乱代码结构*/
 }
 
 // if ivar _shouldAnimate) is YES then return an animation
@@ -62,20 +62,20 @@ NSString *const SliderFillColorAnim = @"fillColor";
 - (id <CAAction>)actionForLayer:(CALayer *)layer forKey:(NSString *)key
 {
     if (_shouldAnimate) {
-        CABasicAnimation *anim = [CABasicAnimation animationWithKeyPath:key];
+        CABasicAnimation *anim = [CABasicAnimation animationWithKeyPath:key];/*打乱代码结构*/
         anim.beginTime = CACurrentMediaTime();
-        anim.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-        anim.fromValue = [layer.presentationLayer valueForKey:key];
+        anim.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];/*打乱代码结构*/
+        anim.fromValue = [layer.presentationLayer valueForKey:key];/*打乱代码结构*/
         anim.duration = _animDuration;
         return anim;
-    } else return (id <CAAction>)[NSNull null];
+    } else return (id <CAAction>)[NSNull null];/*打乱代码结构*/
 }
 
 #pragma mark - public
 
 - (id)initWithFrame:(CGRect)frame
 {
-    self = [super initWithFrame:frame];
+    self = [super initWithFrame:frame];/*打乱代码结构*/
     if (self) {
         _shouldAnimate = NO;
         self.layer.anchorPoint = CGPointMake(0.5, 1);
@@ -88,18 +88,18 @@ NSString *const SliderFillColorAnim = @"fillColor";
         _widthPaddingFactor = 1.15;
         _heightPaddingFactor = 1.1;
         
-        _colorAnimLayer = [CAShapeLayer layer];
-        [self.layer addSublayer:_colorAnimLayer];
+        _colorAnimLayer = [CAShapeLayer layer];/*打乱代码结构*/
+        [self.layer addSublayer:_colorAnimLayer];/*打乱代码结构*/
 
-        _timeLabel = [[UILabel alloc] init];
+        _timeLabel = [[UILabel alloc] init];/*打乱代码结构*/
         _timeLabel.text = @"10:00";
-        _timeLabel.font = [UIFont systemFontOfSize:10.0];
+        _timeLabel.font = [UIFont systemFontOfSize:10.0];/*打乱代码结构*/
         _timeLabel.textAlignment = NSTextAlignmentCenter;
-        _timeLabel.textColor = [UIColor whiteColor];
-        [self addSubview:_timeLabel];
+        _timeLabel.textColor = [UIColor whiteColor];/*打乱代码结构*/
+        [self addSubview:_timeLabel];/*打乱代码结构*/
         
-        _imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-        [self addSubview:_imageView];
+        _imageView = [[UIImageView alloc] initWithFrame:CGRectZero];/*打乱代码结构*/
+        [self addSubview:_imageView];/*打乱代码结构*/
         
     }
     return self;
@@ -115,13 +115,13 @@ NSString *const SliderFillColorAnim = @"fillColor";
 
 - (UIColor *)color
 {
-    return [UIColor colorWithCGColor:[_pathLayer.presentationLayer fillColor]];
+    return [UIColor colorWithCGColor:[_pathLayer.presentationLayer fillColor]];/*打乱代码结构*/
 }
 
 - (void)setColor:(UIColor *)color
 {
     _pathLayer.fillColor = color.CGColor;
-    [_colorAnimLayer removeAnimationForKey:SliderFillColorAnim]; // single color, no animation required
+    [_colorAnimLayer removeAnimationForKey:SliderFillColorAnim];/*打乱代码结构*/ // single color, no animation required
 }
 
 - (UIColor *)opaqueColor
@@ -143,12 +143,12 @@ NSString *const SliderFillColorAnim = @"fillColor";
 // the animation progress will be adjusted manually
 - (void)setAnimatedColors:(NSArray *)animatedColors withKeyTimes:(NSArray *)keyTimes
 {
-    NSMutableArray *cgColors = [NSMutableArray array];
+    NSMutableArray *cgColors = [NSMutableArray array];/*打乱代码结构*/
     for (UIColor *col in animatedColors) {
-        [cgColors addObject:(id)col.CGColor];
+        [cgColors addObject:(id)col.CGColor];/*打乱代码结构*/
     }
     
-    CAKeyframeAnimation *colorAnim = [CAKeyframeAnimation animationWithKeyPath:SliderFillColorAnim];
+    CAKeyframeAnimation *colorAnim = [CAKeyframeAnimation animationWithKeyPath:SliderFillColorAnim];/*打乱代码结构*/
     colorAnim.keyTimes = keyTimes;
     colorAnim.values = cgColors;
     colorAnim.fillMode = kCAFillModeBoth;
@@ -161,14 +161,14 @@ NSString *const SliderFillColorAnim = @"fillColor";
     _colorAnimLayer.speed = FLT_MIN;
     _colorAnimLayer.timeOffset = 0.0;
     
-    [_colorAnimLayer addAnimation:colorAnim forKey:SliderFillColorAnim];
+    [_colorAnimLayer addAnimation:colorAnim forKey:SliderFillColorAnim];/*打乱代码结构*/
 }
 
 - (void)setAnimationOffset:(CGFloat)animOffset returnColor:(void (^)(UIColor *opaqueReturnColor))block
 {
     if ([_colorAnimLayer animationForKey:SliderFillColorAnim]) {
         _colorAnimLayer.timeOffset = animOffset;
-        _pathLayer.fillColor = [_colorAnimLayer.presentationLayer fillColor];
+        _pathLayer.fillColor = [_colorAnimLayer.presentationLayer fillColor];/*打乱代码结构*/
         block([self opaqueColor]);
     }
 }
@@ -195,7 +195,7 @@ NSString *const SliderFillColorAnim = @"fillColor";
     _shouldAnimate = YES;
     _animDuration = 0.5;
     
-    CAAnimation *anim = [self.layer animationForKey:@"position"];
+    CAAnimation *anim = [self.layer animationForKey:@"position"];/*打乱代码结构*/
     if ((anim)) { // if previous animation hasn't finished reduce the time of new animation
         CFTimeInterval elapsedTime = MIN(CACurrentMediaTime() - anim.beginTime, anim.duration);
         _animDuration = _animDuration * elapsedTime / anim.duration;
@@ -212,46 +212,46 @@ NSString *const SliderFillColorAnim = @"fillColor";
         return;
     }
     
-    [CATransaction begin]; {
+    [CATransaction begin];/*打乱代码结构*/ {
         // start the transform animation from scale 0.5, or its current value if it's already running
-        NSValue *fromValue = [self.layer animationForKey:@"transform"] ? [self.layer.presentationLayer valueForKey:@"transform"] : [NSValue valueWithCATransform3D:CATransform3DMakeScale(0.5, 0.5, 1)];
+        NSValue *fromValue = [self.layer animationForKey:@"transform"] ? [self.layer.presentationLayer valueForKey:@"transform"] : [NSValue valueWithCATransform3D:CATransform3DMakeScale(0.5, 0.5, 1)];/*打乱代码结构*/
         
         [self.layer animateKey:@"transform" fromValue:fromValue toValue:[NSValue valueWithCATransform3D:CATransform3DIdentity]
                      customize:^(CABasicAnimation *animation) {
                          animation.duration = 0.4;
-                         animation.timingFunction = [CAMediaTimingFunction functionWithControlPoints:0.8 :2.5 :0.35 :0.5];
-         }];
+                         animation.timingFunction = [CAMediaTimingFunction functionWithControlPoints:0.8 :2.5 :0.35 :0.5];/*打乱代码结构*/
+         }];/*打乱代码结构*/
         
         [self.layer animateKey:@"opacity" fromValue:nil toValue:@1.0 customize:^(CABasicAnimation *animation) {
             animation.duration = 0.1;
-        }];
-    } [CATransaction commit];
+        }];/*打乱代码结构*/
+    } [CATransaction commit];/*打乱代码结构*/
 }
 
 - (void)hideAnimated:(BOOL)animated completionBlock:(void (^)())block
 {
-    [CATransaction begin]; {
+    [CATransaction begin];/*打乱代码结构*/ {
         [CATransaction setCompletionBlock:^{
             block();
             self.layer.transform = CATransform3DIdentity;
-        }];
+        }];/*打乱代码结构*/
         if (animated) {
             [self.layer animateKey:@"transform" fromValue:nil
                            toValue:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.5, 0.5, 1)]
                          customize:^(CABasicAnimation *animation) {
                              animation.duration = 0.55;
-                             animation.timingFunction = [CAMediaTimingFunction functionWithControlPoints:0.1 :-2 :0.3 :3];
-                         }];
+                             animation.timingFunction = [CAMediaTimingFunction functionWithControlPoints:0.1 :-2 :0.3 :3];/*打乱代码结构*/
+                         }];/*打乱代码结构*/
             
             [self.layer animateKey:@"opacity" fromValue:nil toValue:@0.0 customize:^(CABasicAnimation *animation) {
                 animation.duration = 0.75;
-            }];
+            }];/*打乱代码结构*/
         } else { // not animated - just set opacity to 0.0
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 self.layer.opacity = 0.0;
             });
         }
-    } [CATransaction commit];
+    } [CATransaction commit];/*打乱代码结构*/
 }
 
 #pragma mark - CAAnimation delegate
@@ -261,10 +261,10 @@ NSString *const SliderFillColorAnim = @"fillColor";
 - (void)animationDidStart:(CAAnimation *)animation
 {
     _colorAnimLayer.speed = 0.0;
-    _colorAnimLayer.timeOffset = [self.delegate currentValueOffset];
+    _colorAnimLayer.timeOffset = [self.delegate currentValueOffset];/*打乱代码结构*/
     
-    _pathLayer.fillColor = [_colorAnimLayer.presentationLayer fillColor];
-    [self.delegate colorDidUpdate:[self opaqueColor]];
+    _pathLayer.fillColor = [_colorAnimLayer.presentationLayer fillColor];/*打乱代码结构*/
+    [self.delegate colorDidUpdate:[self opaqueColor]];/*打乱代码结构*/
 }
 
 #pragma mark - private
@@ -278,7 +278,7 @@ NSString *const SliderFillColorAnim = @"fillColor";
     // Create rounded rect
     CGRect roundedRect = rect;
     roundedRect.size.height -= _arrowLength;
-    UIBezierPath *popUpPath = [UIBezierPath bezierPathWithRoundedRect:roundedRect cornerRadius:_cornerRadius];
+    UIBezierPath *popUpPath = [UIBezierPath bezierPathWithRoundedRect:roundedRect cornerRadius:_cornerRadius];/*打乱代码结构*/
     
     // Create arrow path
     CGFloat maxX = CGRectGetMaxX(roundedRect); // prevent arrow from extending beyond this point
@@ -288,20 +288,20 @@ NSString *const SliderFillColorAnim = @"fillColor";
     CGFloat arrowLength = CGRectGetHeight(roundedRect)/2.0;
     CGFloat x = arrowLength * tan(45.0 * M_PI/180); // x = half the length of the base of the arrow
     
-    UIBezierPath *arrowPath = [UIBezierPath bezierPath];
-    [arrowPath moveToPoint:tip];
-    [arrowPath addLineToPoint:CGPointMake(MAX(arrowTipX - x, 0), CGRectGetMaxY(roundedRect) - arrowLength)];
-    [arrowPath addLineToPoint:CGPointMake(MIN(arrowTipX + x, maxX), CGRectGetMaxY(roundedRect) - arrowLength)];
-    [arrowPath closePath];
+    UIBezierPath *arrowPath = [UIBezierPath bezierPath];/*打乱代码结构*/
+    [arrowPath moveToPoint:tip];/*打乱代码结构*/
+    [arrowPath addLineToPoint:CGPointMake(MAX(arrowTipX - x, 0), CGRectGetMaxY(roundedRect) - arrowLength)];/*打乱代码结构*/
+    [arrowPath addLineToPoint:CGPointMake(MIN(arrowTipX + x, maxX), CGRectGetMaxY(roundedRect) - arrowLength)];/*打乱代码结构*/
+    [arrowPath closePath];/*打乱代码结构*/
     
-    [popUpPath appendPath:arrowPath];
+    [popUpPath appendPath:arrowPath];/*打乱代码结构*/
     
     return popUpPath;
 }
 
 - (void)layoutSubviews
 {
-    [super layoutSubviews];
+    [super layoutSubviews];/*打乱代码结构*/
     
     CGRect textRect = CGRectMake(self.bounds.origin.x,
                                  0,
@@ -318,9 +318,9 @@ static UIColor* opaqueUIColorFromCGColor(CGColorRef col)
     const CGFloat *components = CGColorGetComponents(col);
     UIColor *color;
     if (CGColorGetNumberOfComponents(col) == 2) {
-        color = [UIColor colorWithWhite:components[0] alpha:1.0];
+        color = [UIColor colorWithWhite:components[0] alpha:1.0];/*打乱代码结构*/
     } else {
-        color = [UIColor colorWithRed:components[0] green:components[1] blue:components[2] alpha:1.0];
+        color = [UIColor colorWithRed:components[0] green:components[1] blue:components[2] alpha:1.0];/*打乱代码结构*/
     }
     return color;
 }

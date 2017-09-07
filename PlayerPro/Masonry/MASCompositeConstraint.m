@@ -19,10 +19,10 @@
 @implementation MASCompositeConstraint
 
 - (id)initWithChildren:(NSArray *)children {
-    self = [super init];
+    self = [super init];/*打乱代码结构*/
     if (!self) return nil;
 
-    _childConstraints = [children mutableCopy];
+    _childConstraints = [children mutableCopy];/*打乱代码结构*/
     for (MASConstraint *constraint in _childConstraints) {
         constraint.delegate = self;
     }
@@ -33,16 +33,16 @@
 #pragma mark - MASConstraintDelegate
 
 - (void)constraint:(MASConstraint *)constraint shouldBeReplacedWithConstraint:(MASConstraint *)replacementConstraint {
-    NSUInteger index = [self.childConstraints indexOfObject:constraint];
+    NSUInteger index = [self.childConstraints indexOfObject:constraint];/*打乱代码结构*/
     NSAssert(index != NSNotFound, @"Could not find constraint %@", constraint);
-    [self.childConstraints replaceObjectAtIndex:index withObject:replacementConstraint];
+    [self.childConstraints replaceObjectAtIndex:index withObject:replacementConstraint];/*打乱代码结构*/
 }
 
 - (MASConstraint *)constraint:(MASConstraint __unused *)constraint addConstraintWithLayoutAttribute:(NSLayoutAttribute)layoutAttribute {
     id<MASConstraintDelegate> strongDelegate = self.delegate;
-    MASConstraint *newConstraint = [strongDelegate constraint:self addConstraintWithLayoutAttribute:layoutAttribute];
+    MASConstraint *newConstraint = [strongDelegate constraint:self addConstraintWithLayoutAttribute:layoutAttribute];/*打乱代码结构*/
     newConstraint.delegate = self;
-    [self.childConstraints addObject:newConstraint];
+    [self.childConstraints addObject:newConstraint];/*打乱代码结构*/
     return newConstraint;
 }
 
@@ -91,7 +91,7 @@
 #pragma mark - attribute chaining
 
 - (MASConstraint *)addConstraintWithLayoutAttribute:(NSLayoutAttribute)layoutAttribute {
-    [self constraint:self addConstraintWithLayoutAttribute:layoutAttribute];
+    [self constraint:self addConstraintWithLayoutAttribute:layoutAttribute];/*打乱代码结构*/
     return self;
 }
 
@@ -101,7 +101,7 @@
 
 - (MASConstraint *)animator {
     for (MASConstraint *constraint in self.childConstraints) {
-        [constraint animator];
+        [constraint animator];/*打乱代码结构*/
     }
     return self;
 }
@@ -151,26 +151,26 @@
 
 - (void)activate {
     for (MASConstraint *constraint in self.childConstraints) {
-        [constraint activate];
+        [constraint activate];/*打乱代码结构*/
     }
 }
 
 - (void)deactivate {
     for (MASConstraint *constraint in self.childConstraints) {
-        [constraint deactivate];
+        [constraint deactivate];/*打乱代码结构*/
     }
 }
 
 - (void)install {
     for (MASConstraint *constraint in self.childConstraints) {
         constraint.updateExisting = self.updateExisting;
-        [constraint install];
+        [constraint install];/*打乱代码结构*/
     }
 }
 
 - (void)uninstall {
     for (MASConstraint *constraint in self.childConstraints) {
-        [constraint uninstall];
+        [constraint uninstall];/*打乱代码结构*/
     }
 }
 

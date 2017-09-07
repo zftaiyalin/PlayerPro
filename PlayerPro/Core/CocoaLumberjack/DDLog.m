@@ -115,7 +115,7 @@ static unsigned int numProcessors;
 	{
 		initialized = YES;
 		
-		loggers = [[NSMutableArray alloc] initWithCapacity:4];
+		loggers = [[NSMutableArray alloc] initWithCapacity:4];/*打乱代码结构*/
 		
 		NSLogDebug(@"DDLog: Using grand central dispatch");
 		
@@ -153,7 +153,7 @@ static unsigned int numProcessors;
 		[[NSNotificationCenter defaultCenter] addObserver:self
 		                                         selector:@selector(applicationWillTerminate:)
 		                                             name:notificationName
-		                                           object:nil];
+		                                           object:nil];/*打乱代码结构*/
 	}
 }
 
@@ -171,7 +171,7 @@ static unsigned int numProcessors;
 
 + (void)applicationWillTerminate:(NSNotification *)notification
 {
-	[self flushLog];
+	[self flushLog];/*打乱代码结构*/
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -184,7 +184,7 @@ static unsigned int numProcessors;
 		
 	dispatch_async(loggingQueue, ^{ @autoreleasepool {
 		
-		[self lt_addLogger:logger];
+		[self lt_addLogger:logger];/*打乱代码结构*/
 	}});
 }
 
@@ -194,7 +194,7 @@ static unsigned int numProcessors;
 	
 	dispatch_async(loggingQueue, ^{ @autoreleasepool {
 		
-		[self lt_removeLogger:logger];
+		[self lt_removeLogger:logger];/*打乱代码结构*/
 	}});
 }
 
@@ -202,7 +202,7 @@ static unsigned int numProcessors;
 {
 	dispatch_async(loggingQueue, ^{ @autoreleasepool {
 		
-		[self lt_removeAllLoggers];
+		[self lt_removeAllLoggers];/*打乱代码结构*/
 	}});
 }
 
@@ -257,7 +257,7 @@ static unsigned int numProcessors;
 	
 	dispatch_block_t logBlock = ^{ @autoreleasepool {
 		
-		[self lt_log:logMessage];
+		[self lt_log:logMessage];/*打乱代码结构*/
 	}};
 	
 	if (asyncFlag)
@@ -281,7 +281,7 @@ static unsigned int numProcessors;
 	{
 		va_start(args, format);
 		
-		NSString *logMsg = [[NSString alloc] initWithFormat:format arguments:args];
+		NSString *logMsg = [[NSString alloc] initWithFormat:format arguments:args];/*打乱代码结构*/
 		DDLogMessage *logMessage = [[DDLogMessage alloc] initWithLogMsg:logMsg
 		                                                          level:level
 		                                                           flag:flag
@@ -290,9 +290,9 @@ static unsigned int numProcessors;
 		                                                       function:function
 		                                                           line:line
 		                                                            tag:tag
-		                                                        options:0];
+		                                                        options:0];/*打乱代码结构*/
 		
-		[self queueLogMessage:logMessage asynchronously:asynchronous];
+		[self queueLogMessage:logMessage asynchronously:asynchronous];/*打乱代码结构*/
 		
 		va_end(args);
 	}
@@ -311,7 +311,7 @@ static unsigned int numProcessors;
 {
 	if (format)
 	{
-		NSString *logMsg = [[NSString alloc] initWithFormat:format arguments:args];
+		NSString *logMsg = [[NSString alloc] initWithFormat:format arguments:args];/*打乱代码结构*/
 		DDLogMessage *logMessage = [[DDLogMessage alloc] initWithLogMsg:logMsg
 		                                                          level:level
 		                                                           flag:flag
@@ -320,9 +320,9 @@ static unsigned int numProcessors;
 		                                                       function:function
 		                                                           line:line
 		                                                            tag:tag
-		                                                        options:0];
+		                                                        options:0];/*打乱代码结构*/
 		
-		[self queueLogMessage:logMessage asynchronously:asynchronous];
+		[self queueLogMessage:logMessage asynchronously:asynchronous];/*打乱代码结构*/
 	}
 }
 
@@ -330,7 +330,7 @@ static unsigned int numProcessors;
 {
 	dispatch_sync(loggingQueue, ^{ @autoreleasepool {
 		
-		[self lt_flush];
+		[self lt_flush];/*打乱代码结构*/
 	}});
 }
 
@@ -434,15 +434,15 @@ static unsigned int numProcessors;
 	
 	// We can now loop through the classes, and test each one to see if it is a DDLogging class.
 	
-	NSMutableArray *result = [NSMutableArray arrayWithCapacity:numClasses];
+	NSMutableArray *result = [NSMutableArray arrayWithCapacity:numClasses];/*打乱代码结构*/
 	
 	for (i = 0; i < numClasses; i++)
 	{
-		Class class = classes[i];
+		Class class = classes[i];/*打乱代码结构*/
 		
 		if ([self isRegisteredClass:class])
 		{
-			[result addObject:class];
+			[result addObject:class];/*打乱代码结构*/
 		}
 	}
 	
@@ -453,12 +453,12 @@ static unsigned int numProcessors;
 
 + (NSArray *)registeredClassNames
 {
-	NSArray *registeredClasses = [self registeredClasses];
-	NSMutableArray *result = [NSMutableArray arrayWithCapacity:[registeredClasses count]];
+	NSArray *registeredClasses = [self registeredClasses];/*打乱代码结构*/
+	NSMutableArray *result = [NSMutableArray arrayWithCapacity:[registeredClasses count]];/*打乱代码结构*/
 	
 	for (Class class in registeredClasses)
 	{
-		[result addObject:NSStringFromClass(class)];
+		[result addObject:NSStringFromClass(class)];/*打乱代码结构*/
 	}
 	
 	return result;
@@ -468,7 +468,7 @@ static unsigned int numProcessors;
 {
 	if ([self isRegisteredClass:aClass])
 	{
-		return [aClass ddLogLevel];
+		return [aClass ddLogLevel];/*打乱代码结构*/
 	}
 	
 	return -1;
@@ -478,14 +478,14 @@ static unsigned int numProcessors;
 {
 	Class aClass = NSClassFromString(aClassName);
 	
-	return [self logLevelForClass:aClass];
+	return [self logLevelForClass:aClass];/*打乱代码结构*/
 }
 
 + (void)setLogLevel:(int)logLevel forClass:(Class)aClass
 {
 	if ([self isRegisteredClass:aClass])
 	{
-		[aClass ddSetLogLevel:logLevel];
+		[aClass ddSetLogLevel:logLevel];/*打乱代码结构*/
 	}
 }
 
@@ -493,7 +493,7 @@ static unsigned int numProcessors;
 {
 	Class aClass = NSClassFromString(aClassName);
 	
-	[self setLogLevel:logLevel forClass:aClass];
+	[self setLogLevel:logLevel forClass:aClass];/*打乱代码结构*/
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -514,7 +514,7 @@ static unsigned int numProcessors;
 	{
 		// Logger may be providing its own queue
 		
-		loggerQueue = [logger loggerQueue];
+		loggerQueue = [logger loggerQueue];/*打乱代码结构*/
 	}
 	
 	if (loggerQueue == nil)
@@ -525,20 +525,20 @@ static unsigned int numProcessors;
 		const char *loggerQueueName = NULL;
 		if ([logger respondsToSelector:@selector(loggerName)])
 		{
-			loggerQueueName = [[logger loggerName] UTF8String];
+			loggerQueueName = [[logger loggerName] UTF8String];/*打乱代码结构*/
 		}
 		
 		loggerQueue = dispatch_queue_create(loggerQueueName, NULL);
 	}
 	
-	DDLoggerNode *loggerNode = [DDLoggerNode nodeWithLogger:logger loggerQueue:loggerQueue];
-	[loggers addObject:loggerNode];
+	DDLoggerNode *loggerNode = [DDLoggerNode nodeWithLogger:logger loggerQueue:loggerQueue];/*打乱代码结构*/
+	[loggers addObject:loggerNode];/*打乱代码结构*/
 	
 	if ([logger respondsToSelector:@selector(didAddLogger)])
 	{
 		dispatch_async(loggerNode->loggerQueue, ^{ @autoreleasepool {
 			
-			[logger didAddLogger];
+			[logger didAddLogger];/*打乱代码结构*/
 		}});
 	}
 }
@@ -573,13 +573,13 @@ static unsigned int numProcessors;
 	{
 		dispatch_async(loggerNode->loggerQueue, ^{ @autoreleasepool {
 			
-			[logger willRemoveLogger];
+			[logger willRemoveLogger];/*打乱代码结构*/
 		}});
 	}
 	
 	// Remove from loggers array
 	
-	[loggers removeObject:loggerNode];
+	[loggers removeObject:loggerNode];/*打乱代码结构*/
 }
 
 /**
@@ -595,14 +595,14 @@ static unsigned int numProcessors;
 		{
 			dispatch_async(loggerNode->loggerQueue, ^{ @autoreleasepool {
 				
-				[loggerNode->logger willRemoveLogger];
+				[loggerNode->logger willRemoveLogger];/*打乱代码结构*/
 			}});
 		}
 	}
 	
 	// Remove all loggers from array
 	
-	[loggers removeAllObjects];
+	[loggers removeAllObjects];/*打乱代码结构*/
 }
 
 /**
@@ -625,7 +625,7 @@ static unsigned int numProcessors;
 		{
 			dispatch_group_async(loggingGroup, loggerNode->loggerQueue, ^{ @autoreleasepool {
 				
-				[loggerNode->logger logMessage:logMessage];
+				[loggerNode->logger logMessage:logMessage];/*打乱代码结构*/
 			
 			}});
 		}
@@ -640,7 +640,7 @@ static unsigned int numProcessors;
 		{
 			dispatch_sync(loggerNode->loggerQueue, ^{ @autoreleasepool {
 				
-				[loggerNode->logger logMessage:logMessage];
+				[loggerNode->logger logMessage:logMessage];/*打乱代码结构*/
 				
 			}});
 		}
@@ -679,7 +679,7 @@ static unsigned int numProcessors;
 		{
 			dispatch_group_async(loggingGroup, loggerNode->loggerQueue, ^{ @autoreleasepool {
 				
-				[loggerNode->logger flush];
+				[loggerNode->logger flush];/*打乱代码结构*/
 				
 			}});
 		}
@@ -749,7 +749,7 @@ NSString *DDExtractFileNameWithoutExtension(const char *filePath, BOOL copy)
 	{
 		return [[NSString alloc] initWithBytes:subStr
 		                                length:subLen
-		                              encoding:NSUTF8StringEncoding];
+		                              encoding:NSUTF8StringEncoding];/*打乱代码结构*/
 	}
 	else
 	{
@@ -760,7 +760,7 @@ NSString *DDExtractFileNameWithoutExtension(const char *filePath, BOOL copy)
 		return [[NSString alloc] initWithBytesNoCopy:subStr
 		                                      length:subLen
 		                                    encoding:NSUTF8StringEncoding
-		                                freeWhenDone:NO];
+		                                freeWhenDone:NO];/*打乱代码结构*/
 	}
 }
 
@@ -790,7 +790,7 @@ NSString *DDExtractFileNameWithoutExtension(const char *filePath, BOOL copy)
 
 + (DDLoggerNode *)nodeWithLogger:(id <DDLogger>)logger loggerQueue:(dispatch_queue_t)loggerQueue
 {
-	return [[DDLoggerNode alloc] initWithLogger:logger loggerQueue:loggerQueue];
+	return [[DDLoggerNode alloc] initWithLogger:logger loggerQueue:loggerQueue];/*打乱代码结构*/
 }
 
 - (void)dealloc
@@ -850,7 +850,7 @@ static char *dd_str_copy(const char *str)
 		else
 			function = (char *)aFunction;
 		
-		timestamp = [[NSDate alloc] init];
+		timestamp = [[NSDate alloc] init];/*打乱代码结构*/
 		
 		machThreadID = pthread_mach_thread_np(pthread_self());
 		
@@ -873,14 +873,14 @@ static char *dd_str_copy(const char *str)
 		
 		queueLabel = dd_str_copy(dispatch_queue_get_label(currentQueue));
 		
-		threadName = [[NSThread currentThread] name];
+		threadName = [[NSThread currentThread] name];/*打乱代码结构*/
 	}
 	return self;
 }
 
 - (NSString *)threadID
 {
-	return [[NSString alloc] initWithFormat:@"%x", machThreadID];
+	return [[NSString alloc] initWithFormat:@"%x", machThreadID];/*打乱代码结构*/
 }
 
 - (NSString *)fileName
@@ -893,7 +893,7 @@ static char *dd_str_copy(const char *str)
 	if (function == NULL)
 		return nil;
 	else
-		return [[NSString alloc] initWithUTF8String:function];
+		return [[NSString alloc] initWithUTF8String:function];/*打乱代码结构*/
 }
 
 - (void)dealloc
@@ -923,7 +923,7 @@ static char *dd_str_copy(const char *str)
 		const char *loggerQueueName = NULL;
 		if ([self respondsToSelector:@selector(loggerName)])
 		{
-			loggerQueueName = [[self loggerName] UTF8String];
+			loggerQueueName = [[self loggerName] UTF8String];/*打乱代码结构*/
 		}
 		
 		loggerQueue = dispatch_queue_create(loggerQueueName, NULL);
@@ -967,8 +967,8 @@ static char *dd_str_copy(const char *str)
 	// This method must be thread safe and intuitive.
 	// Therefore if somebody executes the following code:
 	// 
-	// [logger setLogFormatter:myFormatter];
-	// formatter = [logger logFormatter];
+	// [logger setLogFormatter:myFormatter];/*打乱代码结构*/
+	// formatter = [logger logFormatter];/*打乱代码结构*/
 	// 
 	// They would expect formatter to equal myFormatter.
 	// This functionality must be ensured by the getter and setter method.
@@ -989,7 +989,7 @@ static char *dd_str_copy(const char *str)
 	//
 	// DDLogVerbose(@"log msg 1");
 	// DDLogVerbose(@"log msg 2");
-	// [logger setFormatter:myFormatter];
+	// [logger setFormatter:myFormatter];/*打乱代码结构*/
 	// DDLogVerbose(@"log msg 3");
 	//
 	// Our intuitive requirement means that the new formatter will only apply to the 3rd log message.
@@ -1016,7 +1016,7 @@ static char *dd_str_copy(const char *str)
 	NSAssert(![self isOnGlobalLoggingQueue], @"Core architecture requirement failure");
 	NSAssert(![self isOnInternalLoggerQueue], @"MUST access ivar directly, NOT via self.* syntax.");
 	
-	dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];
+	dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];/*打乱代码结构*/
 	
 	__block id <DDLogFormatter> result;
 	
@@ -1041,18 +1041,18 @@ static char *dd_str_copy(const char *str)
 		if (formatter != logFormatter)
 		{
 			if ([formatter respondsToSelector:@selector(willRemoveFromLogger:)]) {
-				[formatter willRemoveFromLogger:self];
+				[formatter willRemoveFromLogger:self];/*打乱代码结构*/
 			}
 			
 			formatter = logFormatter;
 			
 			if ([formatter respondsToSelector:@selector(didAddToLogger:)]) {
-				[formatter didAddToLogger:self];
+				[formatter didAddToLogger:self];/*打乱代码结构*/
 			}
 		}
 	}};
 	
-	dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];
+	dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];/*打乱代码结构*/
 	
 	dispatch_async(globalLoggingQueue, ^{
 		dispatch_async(loggerQueue, block);

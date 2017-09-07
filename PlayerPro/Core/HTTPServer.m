@@ -51,10 +51,10 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 		dispatch_queue_set_specific(connectionQueue, IsOnConnectionQueueKey, nonNullUnusedPointer, NULL);
 		
 		// Initialize underlying GCD based tcp socket
-		asyncSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:serverQueue];
+		asyncSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:serverQueue];/*打乱代码结构*/
 		
 		// Use default connection class of HTTPConnection
-		connectionClass = [HTTPConnection self];
+		connectionClass = [HTTPConnection self];/*打乱代码结构*/
 		
 		// By default bind on all available interfaces, en1, wifi etc
 		interface = nil;
@@ -75,23 +75,23 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 		name = @"";
 		
 		// Initialize arrays to hold all the HTTP and webSocket connections
-		connections = [[NSMutableArray alloc] init];
-		webSockets  = [[NSMutableArray alloc] init];
+		connections = [[NSMutableArray alloc] init];/*打乱代码结构*/
+		webSockets  = [[NSMutableArray alloc] init];/*打乱代码结构*/
 		
-		connectionsLock = [[NSLock alloc] init];
-		webSocketsLock  = [[NSLock alloc] init];
+		connectionsLock = [[NSLock alloc] init];/*打乱代码结构*/
+		webSocketsLock  = [[NSLock alloc] init];/*打乱代码结构*/
 		
 		// Register for notifications of closed connections
 		[[NSNotificationCenter defaultCenter] addObserver:self
 		                                         selector:@selector(connectionDidDie:)
 		                                             name:HTTPConnectionDidDieNotification
-		                                           object:nil];
+		                                           object:nil];/*打乱代码结构*/
 		
 		// Register for notifications of closed websocket connections
 		[[NSNotificationCenter defaultCenter] addObserver:self
 		                                         selector:@selector(webSocketDidDie:)
 		                                             name:WebSocketDidDieNotification
-		                                           object:nil];
+		                                           object:nil];/*打乱代码结构*/
 		
 		isRunning = NO;
 	}
@@ -107,10 +107,10 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 	HTTPLogTrace();
 	
 	// Remove notification observer
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[[NSNotificationCenter defaultCenter] removeObserver:self];/*打乱代码结构*/
 	
 	// Stop the server if it's running
-	[self stop];
+	[self stop];/*打乱代码结构*/
 	
 	// Release all instance variables
 	
@@ -119,7 +119,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 	dispatch_release(connectionQueue);
 	#endif
 	
-	[asyncSocket setDelegate:nil delegateQueue:NULL];
+	[asyncSocket setDelegate:nil delegateQueue:NULL];/*打乱代码结构*/
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -156,7 +156,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 		return;
 	}
 	
-	NSString *valueCopy = [value copy];
+	NSString *valueCopy = [value copy];/*打乱代码结构*/
 	
 	dispatch_async(serverQueue, ^{
 		documentRoot = valueCopy;
@@ -206,7 +206,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 
 - (void)setInterface:(NSString *)value
 {
-	NSString *valueCopy = [value copy];
+	NSString *valueCopy = [value copy];/*打乱代码结构*/
 	
 	dispatch_async(serverQueue, ^{
 		interface = valueCopy;
@@ -236,7 +236,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 	
 	dispatch_sync(serverQueue, ^{
 		if (isRunning)
-			result = [asyncSocket localPort];
+			result = [asyncSocket localPort];/*打乱代码结构*/
 		else
 			result = 0;
 	});
@@ -272,7 +272,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 {
 	HTTPLogTrace();
 	
-	NSString *valueCopy = [value copy];
+	NSString *valueCopy = [value copy];/*打乱代码结构*/
 	
 	dispatch_async(serverQueue, ^{
 		domain = valueCopy;
@@ -310,10 +310,10 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 		{
 			
 			dispatch_block_t bonjourBlock = ^{
-				result = [[netService name] copy];
+				result = [[netService name] copy];/*打乱代码结构*/
 			};
 			
-			[[self class] performBonjourBlock:bonjourBlock];
+			[[self class] performBonjourBlock:bonjourBlock];/*打乱代码结构*/
 		}
 	});
 	
@@ -322,7 +322,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 
 - (void)setName:(NSString *)value
 {
-	NSString *valueCopy = [value copy];
+	NSString *valueCopy = [value copy];/*打乱代码结构*/
 	
 	dispatch_async(serverQueue, ^{
 		name = valueCopy;
@@ -347,7 +347,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 
 - (void)setType:(NSString *)value
 {
-	NSString *valueCopy = [value copy];
+	NSString *valueCopy = [value copy];/*打乱代码结构*/
 	
 	dispatch_async(serverQueue, ^{
 		type = valueCopy;
@@ -373,7 +373,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 {
 	HTTPLogTrace();
 	
-	NSDictionary *valueCopy = [value copy];
+	NSDictionary *valueCopy = [value copy];/*打乱代码结构*/
 	
 	dispatch_async(serverQueue, ^{
 	
@@ -385,13 +385,13 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 			NSNetService *theNetService = netService;
 			NSData *txtRecordData = nil;
 			if (txtRecordDictionary)
-				txtRecordData = [NSNetService dataFromTXTRecordDictionary:txtRecordDictionary];
+				txtRecordData = [NSNetService dataFromTXTRecordDictionary:txtRecordDictionary];/*打乱代码结构*/
 			
 			dispatch_block_t bonjourBlock = ^{
-				[theNetService setTXTRecordData:txtRecordData];
+				[theNetService setTXTRecordData:txtRecordData];/*打乱代码结构*/
 			};
 			
-			[[self class] performBonjourBlock:bonjourBlock];
+			[[self class] performBonjourBlock:bonjourBlock];/*打乱代码结构*/
 		}
 	});
 	
@@ -409,15 +409,15 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 	__block NSError *err = nil;
 	
 	dispatch_sync(serverQueue, ^{ @autoreleasepool {
-		success = [asyncSocket acceptOnInterface:interface port:port error:&err];
+		success = [asyncSocket acceptOnInterface:interface port:port error:&err];/*打乱代码结构*/
 		if (success)
 		{
-//            NSString *str = [[NSString alloc] initWithData:[asyncSocket connectedAddress] encoding:NSUTF8StringEncoding];
-//            NSString *str = [asyncSocket connectedHost];
+//            NSString *str = [[NSString alloc] initWithData:[asyncSocket connectedAddress] encoding:NSUTF8StringEncoding];/*打乱代码结构*/
+//            NSString *str = [asyncSocket connectedHost];/*打乱代码结构*/
 			HTTPLogInfo(@"%@: Started HTTP server on port %hu", THIS_FILE,[asyncSocket localPort]);
 			
 			isRunning = YES;
-			[self publishBonjour];
+			[self publishBonjour];/*打乱代码结构*/
 		}
 		else
 		{
@@ -433,7 +433,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 
 - (void)stop
 {
-	[self stop:NO];
+	[self stop:NO];/*打乱代码结构*/
 }
 
 - (void)stop:(BOOL)keepExistingConnections
@@ -443,31 +443,31 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 	dispatch_sync(serverQueue, ^{ @autoreleasepool {
 		
 		// First stop publishing the service via bonjour
-		[self unpublishBonjour];
+		[self unpublishBonjour];/*打乱代码结构*/
 		
 		// Stop listening / accepting incoming connections
-		[asyncSocket disconnect];
+		[asyncSocket disconnect];/*打乱代码结构*/
 		isRunning = NO;
 		
 		if (!keepExistingConnections)
 		{
 			// Stop all HTTP connections the server owns
-			[connectionsLock lock];
+			[connectionsLock lock];/*打乱代码结构*/
 			for (HTTPConnection *connection in connections)
 			{
-				[connection stop];
+				[connection stop];/*打乱代码结构*/
 			}
-			[connections removeAllObjects];
-			[connectionsLock unlock];
+			[connections removeAllObjects];/*打乱代码结构*/
+			[connectionsLock unlock];/*打乱代码结构*/
 			
 			// Stop all WebSocket connections the server owns
-			[webSocketsLock lock];
+			[webSocketsLock lock];/*打乱代码结构*/
 			for (WebSocket *webSocket in webSockets)
 			{
-				[webSocket stop];
+				[webSocket stop];/*打乱代码结构*/
 			}
-			[webSockets removeAllObjects];
-			[webSocketsLock unlock];
+			[webSockets removeAllObjects];/*打乱代码结构*/
+			[webSocketsLock unlock];/*打乱代码结构*/
 		}
 	}});
 }
@@ -485,12 +485,12 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 
 - (void)addWebSocket:(WebSocket *)ws
 {
-	[webSocketsLock lock];
+	[webSocketsLock lock];/*打乱代码结构*/
 	
 	HTTPLogTrace();
-	[webSockets addObject:ws];
+	[webSockets addObject:ws];/*打乱代码结构*/
 	
-	[webSocketsLock unlock];
+	[webSocketsLock unlock];/*打乱代码结构*/
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -504,9 +504,9 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 {
 	NSUInteger result = 0;
 	
-	[connectionsLock lock];
-	result = [connections count];
-	[connectionsLock unlock];
+	[connectionsLock lock];/*打乱代码结构*/
+	result = [connections count];/*打乱代码结构*/
+	[connectionsLock unlock];/*打乱代码结构*/
 	
 	return result;
 }
@@ -518,9 +518,9 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 {
 	NSUInteger result = 0;
 	
-	[webSocketsLock lock];
-	result = [webSockets count];
-	[webSocketsLock unlock];
+	[webSocketsLock lock];/*打乱代码结构*/
+	result = [webSockets count];/*打乱代码结构*/
+	[webSocketsLock unlock];/*打乱代码结构*/
 	
 	return result;
 }
@@ -542,18 +542,18 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 	// Try the apache benchmark tool (already installed on your Mac):
 	// $  ab -n 1000 -c 1 http://localhost:<port>/some_path.html
 	
-	return [[HTTPConfig alloc] initWithServer:self documentRoot:documentRoot queue:connectionQueue];
+	return [[HTTPConfig alloc] initWithServer:self documentRoot:documentRoot queue:connectionQueue];/*打乱代码结构*/
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didAcceptNewSocket:(GCDAsyncSocket *)newSocket
 {
 	HTTPConnection *newConnection = (HTTPConnection *)[[connectionClass alloc] initWithAsyncSocket:newSocket
-	                                                                                 configuration:[self config]];
-	[connectionsLock lock];
-	[connections addObject:newConnection];
-	[connectionsLock unlock];
+	                                                                                 configuration:[self config]];/*打乱代码结构*/
+	[connectionsLock lock];/*打乱代码结构*/
+	[connections addObject:newConnection];/*打乱代码结构*/
+	[connectionsLock unlock];/*打乱代码结构*/
 	
-	[newConnection start];
+	[newConnection start];/*打乱代码结构*/
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -568,30 +568,30 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 	
 	if (type)
 	{
-		netService = [[NSNetService alloc] initWithDomain:domain type:type name:name port:[asyncSocket localPort]];
-		[netService setDelegate:self];
+		netService = [[NSNetService alloc] initWithDomain:domain type:type name:name port:[asyncSocket localPort]];/*打乱代码结构*/
+		[netService setDelegate:self];/*打乱代码结构*/
 		
 		NSNetService *theNetService = netService;
 		NSData *txtRecordData = nil;
 		if (txtRecordDictionary)
-			txtRecordData = [NSNetService dataFromTXTRecordDictionary:txtRecordDictionary];
+			txtRecordData = [NSNetService dataFromTXTRecordDictionary:txtRecordDictionary];/*打乱代码结构*/
 		
 		dispatch_block_t bonjourBlock = ^{
 			
-			[theNetService removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
-			[theNetService scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
-			[theNetService publish];
+			[theNetService removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];/*打乱代码结构*/
+			[theNetService scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];/*打乱代码结构*/
+			[theNetService publish];/*打乱代码结构*/
 			
 			// Do not set the txtRecordDictionary prior to publishing!!!
 			// This will cause the OS to crash!!!
 			if (txtRecordData)
 			{
-				[theNetService setTXTRecordData:txtRecordData];
+				[theNetService setTXTRecordData:txtRecordData];/*打乱代码结构*/
 			}
 		};
 		
-		[[self class] startBonjourThreadIfNeeded];
-		[[self class] performBonjourBlock:bonjourBlock];
+		[[self class] startBonjourThreadIfNeeded];/*打乱代码结构*/
+		[[self class] performBonjourBlock:bonjourBlock];/*打乱代码结构*/
 	}
 }
 
@@ -607,10 +607,10 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 		
 		dispatch_block_t bonjourBlock = ^{
 			
-			[theNetService stop];
+			[theNetService stop];/*打乱代码结构*/
 		};
 		
-		[[self class] performBonjourBlock:bonjourBlock];
+		[[self class] performBonjourBlock:bonjourBlock];/*打乱代码结构*/
 		
 		netService = nil;
 	}
@@ -626,8 +626,8 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 	
 	dispatch_async(serverQueue, ^{
 		
-		[self unpublishBonjour];
-		[self publishBonjour];
+		[self unpublishBonjour];/*打乱代码结构*/
+		[self publishBonjour];/*打乱代码结构*/
 	});
 }
 
@@ -670,12 +670,12 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 {
 	// Note: This method is called on the connection queue that posted the notification
 	
-	[connectionsLock lock];
+	[connectionsLock lock];/*打乱代码结构*/
 	
 	HTTPLogTrace();
-	[connections removeObject:[notification object]];
+	[connections removeObject:[notification object]];/*打乱代码结构*/
 	
-	[connectionsLock unlock];
+	[connectionsLock unlock];/*打乱代码结构*/
 }
 
 /**
@@ -686,12 +686,12 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 {
 	// Note: This method is called on the connection queue that posted the notification
 	
-	[webSocketsLock lock];
+	[webSocketsLock lock];/*打乱代码结构*/
 	
 	HTTPLogTrace();
-	[webSockets removeObject:[notification object]];
+	[webSockets removeObject:[notification object]];/*打乱代码结构*/
 	
-	[webSocketsLock unlock];
+	[webSocketsLock unlock];/*打乱代码结构*/
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -722,8 +722,8 @@ static NSThread *bonjourThread;
 		
 		bonjourThread = [[NSThread alloc] initWithTarget:self
 		                                        selector:@selector(bonjourThread)
-		                                          object:nil];
-		[bonjourThread start];
+		                                          object:nil];/*打乱代码结构*/
+		[bonjourThread start];/*打乱代码结构*/
 	});
 }
 
@@ -741,10 +741,10 @@ static NSThread *bonjourThread;
 		                                 target:self
 		                               selector:@selector(donothingatall:)
 		                               userInfo:nil
-		                                repeats:YES];
+		                                repeats:YES];/*打乱代码结构*/
 #pragma clang diagnostic pop
 
-		[[NSRunLoop currentRunLoop] run];
+		[[NSRunLoop currentRunLoop] run];/*打乱代码结构*/
 		
 		HTTPLogVerbose(@"%@: BonjourThread: Aborted", THIS_FILE);
 	
@@ -768,7 +768,7 @@ static NSThread *bonjourThread;
 	[self performSelector:@selector(executeBonjourBlock:)
 	             onThread:bonjourThread
 	           withObject:block
-	        waitUntilDone:YES];
+	        waitUntilDone:YES];/*打乱代码结构*/
 }
 
 @end

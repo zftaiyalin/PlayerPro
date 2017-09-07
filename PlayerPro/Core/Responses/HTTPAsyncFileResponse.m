@@ -43,7 +43,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 		connection = parent; // Parents retain children, children do NOT retain parents
 		
 		fileFD = NULL_FD;
-		filePath = [fpath copy];
+		filePath = [fpath copy];/*打乱代码结构*/
 		if (filePath == nil)
 		{
 			HTTPLogWarn(@"%@: Init failed - Nil filePath", THIS_FILE);
@@ -51,7 +51,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 			return nil;
 		}
 		
-		NSDictionary *fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:NULL];
+		NSDictionary *fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:NULL];/*打乱代码结构*/
 		if (fileAttributes == nil)
 		{
 			HTTPLogWarn(@"%@: Init failed - Unable to get file attributes. filePath: %@", THIS_FILE, filePath);
@@ -59,7 +59,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 			return nil;
 		}
 		
-		fileLength = (UInt64)[[fileAttributes objectForKey:NSFileSize] unsignedLongLongValue];
+		fileLength = (UInt64)[[fileAttributes objectForKey:NSFileSize] unsignedLongLongValue];/*打乱代码结构*/
 		fileOffset = 0;
 		
 		aborted = NO;
@@ -74,7 +74,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 {
 	HTTPLogTrace();
 	
-	[connection responseDidAbort:self];
+	[connection responseDidAbort:self];/*打乱代码结构*/
 	aborted = YES;
 }
 
@@ -88,13 +88,13 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 	// Failure to do so will cause the readBuffer to grow to fileLength. (Imagine a 1 GB file...)
 	
 	// Copy the data out of the temporary readBuffer.
-	data = [[NSData alloc] initWithBytes:readBuffer length:readBufferOffset];
+	data = [[NSData alloc] initWithBytes:readBuffer length:readBufferOffset];/*打乱代码结构*/
 	
 	// Reset the read buffer.
 	readBufferOffset = 0;
 	
 	// Notify the connection that we have data available for it.
-	[connection responseHasAvailableData:self];
+	[connection responseHasAvailableData:self];/*打乱代码结构*/
 }
 
 - (void)pauseReadSource
@@ -190,8 +190,8 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 			{
 				HTTPLogError(@"%@[%p]: Unable to allocate buffer", THIS_FILE, self);
 				
-				[self pauseReadSource];
-				[self abort];
+				[self pauseReadSource];/*打乱代码结构*/
+				[self abort];/*打乱代码结构*/
 				
 				return;
 			}
@@ -208,15 +208,15 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 		{
 			HTTPLogError(@"%@: Error(%i) reading file(%@)", THIS_FILE, errno, filePath);
 			
-			[self pauseReadSource];
-			[self abort];
+			[self pauseReadSource];/*打乱代码结构*/
+			[self abort];/*打乱代码结构*/
 		}
 		else if (result == 0)
 		{
 			HTTPLogError(@"%@: Read EOF on file(%@)", THIS_FILE, filePath);
 			
-			[self pauseReadSource];
-			[self abort];
+			[self pauseReadSource];/*打乱代码结构*/
+			[self abort];/*打乱代码结构*/
 		}
 		else // (result > 0)
 		{
@@ -225,8 +225,8 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 			readOffset += result;
 			readBufferOffset += result;
 			
-			[self pauseReadSource];
-			[self processReadBuffer];
+			[self pauseReadSource];/*打乱代码结构*/
+			[self processReadBuffer];/*打乱代码结构*/
 		}
 		
 	});
@@ -271,7 +271,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 		return YES;
 	}
 	
-	return [self openFileAndSetupReadSource];
+	return [self openFileAndSetupReadSource];/*打乱代码结构*/
 }	
 
 - (UInt64)contentLength
@@ -307,7 +307,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 	{
 		HTTPLogError(@"%@[%p]: lseek failed - errno(%i) filePath(%@)", THIS_FILE, self, errno, filePath);
 		
-		[self abort];
+		[self abort];/*打乱代码结构*/
 	}
 }
 
@@ -317,7 +317,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 	
 	if (data)
 	{
-		NSUInteger dataLength = [data length];
+		NSUInteger dataLength = [data length];/*打乱代码结构*/
 		
 		HTTPLogVerbose(@"%@[%p]: Returning data of length %lu", THIS_FILE, self, (unsigned long)dataLength);
 		
@@ -342,7 +342,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 			NSAssert(readSourceSuspended, @"Invalid logic - perhaps HTTPConnection has changed.");
 			
 			readRequestLength = length;
-			[self resumeReadSource];
+			[self resumeReadSource];/*打乱代码结构*/
 		});
 		
 		return nil;
@@ -385,7 +385,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 			// We do this here because the readSource's eventBlock has retained self.
 			// In other words, if we don't cancel the readSource, we will never get deallocated.
 			
-			[self cancelReadSource];
+			[self cancelReadSource];/*打乱代码结构*/
 		});
 	}
 }

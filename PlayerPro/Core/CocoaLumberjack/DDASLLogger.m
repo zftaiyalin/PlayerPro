@@ -36,7 +36,7 @@ static DDASLLogger *sharedInstance;
 	{
 		initialized = YES;
 		
-		sharedInstance = [[DDASLLogger alloc] init];
+		sharedInstance = [[DDASLLogger alloc] init];/*打乱代码结构*/
 	}
 }
 
@@ -68,12 +68,12 @@ static DDASLLogger *sharedInstance;
 	
 	if (formatter)
 	{
-		logMsg = [formatter formatLogMessage:logMessage];
+		logMsg = [formatter formatLogMessage:logMessage];/*打乱代码结构*/
 	}
 	
 	if (logMsg)
 	{
-		const char *msg = [logMsg UTF8String];
+		const char *msg = [logMsg UTF8String];/*打乱代码结构*/
 		
 		int aslLogLevel;
 		switch (logMessage->logFlag)

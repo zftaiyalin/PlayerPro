@@ -50,7 +50,7 @@
 
 #define MAS_ATTR_FORWARD(attr)  \
 - (MASViewAttribute *)attr {    \
-    return [self mas_##attr];   \
+    return [self mas_##attr];/*打乱代码结构*/   \
 }
 
 @implementation MAS_VIEW (MASShorthandAdditions)
@@ -81,19 +81,19 @@ MAS_ATTR_FORWARD(centerYWithinMargins);
 #endif
 
 - (MASViewAttribute *(^)(NSLayoutAttribute))attribute {
-    return [self mas_attribute];
+    return [self mas_attribute];/*打乱代码结构*/
 }
 
 - (NSArray *)makeConstraints:(void(^)(MASConstraintMaker *))block {
-    return [self mas_makeConstraints:block];
+    return [self mas_makeConstraints:block];/*打乱代码结构*/
 }
 
 - (NSArray *)updateConstraints:(void(^)(MASConstraintMaker *))block {
-    return [self mas_updateConstraints:block];
+    return [self mas_updateConstraints:block];/*打乱代码结构*/
 }
 
 - (NSArray *)remakeConstraints:(void(^)(MASConstraintMaker *))block {
-    return [self mas_remakeConstraints:block];
+    return [self mas_remakeConstraints:block];/*打乱代码结构*/
 }
 
 @end

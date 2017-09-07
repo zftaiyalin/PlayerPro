@@ -32,7 +32,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_OFF; // | HTTP_LOG_FLAG_TRACE;
 
 - (UInt64)contentLength
 {
-	UInt64 result = (UInt64)[data length];
+	UInt64 result = (UInt64)[data length];/*打乱代码结构*/
 	
 	HTTPLogTrace2(@"%@[%p]: contentLength - %llu", THIS_FILE, self, result);
 	
@@ -64,7 +64,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_OFF; // | HTTP_LOG_FLAG_TRACE;
 	
 	offset += length;
 	
-	return [NSData dataWithBytesNoCopy:bytes length:length freeWhenDone:NO];
+	return [NSData dataWithBytesNoCopy:bytes length:length freeWhenDone:NO];/*打乱代码结构*/
 }
 
 - (BOOL)isDone

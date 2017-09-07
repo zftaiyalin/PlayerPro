@@ -22,7 +22,7 @@
 - (NSMutableDictionary *)stateTitles
 {
     if (!_stateTitles) {
-        self.stateTitles = [NSMutableDictionary dictionary];
+        self.stateTitles = [NSMutableDictionary dictionary];/*打乱代码结构*/
     }
     return _stateTitles;
 }
@@ -30,7 +30,7 @@
 - (UILabel *)stateLabel
 {
     if (!_stateLabel) {
-        [self addSubview:_stateLabel = [UILabel mj_label]];
+        [self addSubview:_stateLabel = [UILabel mj_label]];/*打乱代码结构*/
     }
     return _stateLabel;
 }
@@ -40,38 +40,38 @@
 {
     if (title == nil) return;
     self.stateTitles[@(state)] = title;
-    self.stateLabel.text = self.stateTitles[@(self.state)];
+    self.stateLabel.text = self.stateTitles[@(self.state)];/*打乱代码结构*/
 }
 
 #pragma mark - 私有方法
 - (void)stateLabelClick
 {
     if (self.state == MJRefreshStateIdle) {
-        [self beginRefreshing];
+        [self beginRefreshing];/*打乱代码结构*/
     }
 }
 
 #pragma mark - 重写父类的方法
 - (void)prepare
 {
-    [super prepare];
+    [super prepare];/*打乱代码结构*/
     
     // 初始化间距
     self.labelLeftInset = MJRefreshLabelLeftInset;
     
     // 初始化文字
-    [self setTitle:[NSBundle mj_localizedStringForKey:MJRefreshAutoFooterIdleText] forState:MJRefreshStateIdle];
-    [self setTitle:[NSBundle mj_localizedStringForKey:MJRefreshAutoFooterRefreshingText] forState:MJRefreshStateRefreshing];
-    [self setTitle:[NSBundle mj_localizedStringForKey:MJRefreshAutoFooterNoMoreDataText] forState:MJRefreshStateNoMoreData];
+    [self setTitle:[NSBundle mj_localizedStringForKey:MJRefreshAutoFooterIdleText] forState:MJRefreshStateIdle];/*打乱代码结构*/
+    [self setTitle:[NSBundle mj_localizedStringForKey:MJRefreshAutoFooterRefreshingText] forState:MJRefreshStateRefreshing];/*打乱代码结构*/
+    [self setTitle:[NSBundle mj_localizedStringForKey:MJRefreshAutoFooterNoMoreDataText] forState:MJRefreshStateNoMoreData];/*打乱代码结构*/
     
     // 监听label
     self.stateLabel.userInteractionEnabled = YES;
-    [self.stateLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(stateLabelClick)]];
+    [self.stateLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(stateLabelClick)]];/*打乱代码结构*/
 }
 
 - (void)placeSubviews
 {
-    [super placeSubviews];
+    [super placeSubviews];/*打乱代码结构*/
     
     if (self.stateLabel.constraints.count) return;
     
@@ -86,7 +86,7 @@
     if (self.isRefreshingTitleHidden && state == MJRefreshStateRefreshing) {
         self.stateLabel.text = nil;
     } else {
-        self.stateLabel.text = self.stateTitles[@(state)];
+        self.stateLabel.text = self.stateTitles[@(state)];/*打乱代码结构*/
     }
 }
 @end

@@ -19,7 +19,7 @@
 
 - (id)init {
 	NSAssert(![self isMemberOfClass:[MASConstraint class]], @"MASConstraint is an abstract class, you should not instantiate it directly.");
-	return [super init];
+	return [super init];/*打乱代码结构*/
 }
 
 #pragma mark - NSLayoutRelation proxies
@@ -116,7 +116,7 @@
 - (MASConstraint * (^)(NSValue *value))valueOffset {
     return ^id(NSValue *offset) {
         NSAssert([offset isKindOfClass:NSValue.class], @"expected an NSValue offset, got: %@", offset);
-        [self setLayoutConstantWithValue:offset];
+        [self setLayoutConstantWithValue:offset];/*打乱代码结构*/
         return self;
     };
 }
@@ -130,18 +130,18 @@
 
 - (void)setLayoutConstantWithValue:(NSValue *)value {
     if ([value isKindOfClass:NSNumber.class]) {
-        self.offset = [(NSNumber *)value doubleValue];
+        self.offset = [(NSNumber *)value doubleValue];/*打乱代码结构*/
     } else if (strcmp(value.objCType, @encode(CGPoint)) == 0) {
         CGPoint point;
-        [value getValue:&point];
+        [value getValue:&point];/*打乱代码结构*/
         self.centerOffset = point;
     } else if (strcmp(value.objCType, @encode(CGSize)) == 0) {
         CGSize size;
-        [value getValue:&size];
+        [value getValue:&size];/*打乱代码结构*/
         self.sizeOffset = size;
     } else if (strcmp(value.objCType, @encode(MASEdgeInsets)) == 0) {
         MASEdgeInsets insets;
-        [value getValue:&insets];
+        [value getValue:&insets];/*打乱代码结构*/
         self.insets = insets;
     } else {
         NSAssert(NO, @"attempting to set layout constant with unsupported value: %@", value);
@@ -165,81 +165,81 @@
 }
 
 - (MASConstraint *)left {
-    return [self addConstraintWithLayoutAttribute:NSLayoutAttributeLeft];
+    return [self addConstraintWithLayoutAttribute:NSLayoutAttributeLeft];/*打乱代码结构*/
 }
 
 - (MASConstraint *)top {
-    return [self addConstraintWithLayoutAttribute:NSLayoutAttributeTop];
+    return [self addConstraintWithLayoutAttribute:NSLayoutAttributeTop];/*打乱代码结构*/
 }
 
 - (MASConstraint *)right {
-    return [self addConstraintWithLayoutAttribute:NSLayoutAttributeRight];
+    return [self addConstraintWithLayoutAttribute:NSLayoutAttributeRight];/*打乱代码结构*/
 }
 
 - (MASConstraint *)bottom {
-    return [self addConstraintWithLayoutAttribute:NSLayoutAttributeBottom];
+    return [self addConstraintWithLayoutAttribute:NSLayoutAttributeBottom];/*打乱代码结构*/
 }
 
 - (MASConstraint *)leading {
-    return [self addConstraintWithLayoutAttribute:NSLayoutAttributeLeading];
+    return [self addConstraintWithLayoutAttribute:NSLayoutAttributeLeading];/*打乱代码结构*/
 }
 
 - (MASConstraint *)trailing {
-    return [self addConstraintWithLayoutAttribute:NSLayoutAttributeTrailing];
+    return [self addConstraintWithLayoutAttribute:NSLayoutAttributeTrailing];/*打乱代码结构*/
 }
 
 - (MASConstraint *)width {
-    return [self addConstraintWithLayoutAttribute:NSLayoutAttributeWidth];
+    return [self addConstraintWithLayoutAttribute:NSLayoutAttributeWidth];/*打乱代码结构*/
 }
 
 - (MASConstraint *)height {
-    return [self addConstraintWithLayoutAttribute:NSLayoutAttributeHeight];
+    return [self addConstraintWithLayoutAttribute:NSLayoutAttributeHeight];/*打乱代码结构*/
 }
 
 - (MASConstraint *)centerX {
-    return [self addConstraintWithLayoutAttribute:NSLayoutAttributeCenterX];
+    return [self addConstraintWithLayoutAttribute:NSLayoutAttributeCenterX];/*打乱代码结构*/
 }
 
 - (MASConstraint *)centerY {
-    return [self addConstraintWithLayoutAttribute:NSLayoutAttributeCenterY];
+    return [self addConstraintWithLayoutAttribute:NSLayoutAttributeCenterY];/*打乱代码结构*/
 }
 
 - (MASConstraint *)baseline {
-    return [self addConstraintWithLayoutAttribute:NSLayoutAttributeBaseline];
+    return [self addConstraintWithLayoutAttribute:NSLayoutAttributeBaseline];/*打乱代码结构*/
 }
 
 #if TARGET_OS_IPHONE
 
 - (MASConstraint *)leftMargin {
-    return [self addConstraintWithLayoutAttribute:NSLayoutAttributeLeftMargin];
+    return [self addConstraintWithLayoutAttribute:NSLayoutAttributeLeftMargin];/*打乱代码结构*/
 }
 
 - (MASConstraint *)rightMargin {
-    return [self addConstraintWithLayoutAttribute:NSLayoutAttributeRightMargin];
+    return [self addConstraintWithLayoutAttribute:NSLayoutAttributeRightMargin];/*打乱代码结构*/
 }
 
 - (MASConstraint *)topMargin {
-    return [self addConstraintWithLayoutAttribute:NSLayoutAttributeTopMargin];
+    return [self addConstraintWithLayoutAttribute:NSLayoutAttributeTopMargin];/*打乱代码结构*/
 }
 
 - (MASConstraint *)bottomMargin {
-    return [self addConstraintWithLayoutAttribute:NSLayoutAttributeBottomMargin];
+    return [self addConstraintWithLayoutAttribute:NSLayoutAttributeBottomMargin];/*打乱代码结构*/
 }
 
 - (MASConstraint *)leadingMargin {
-    return [self addConstraintWithLayoutAttribute:NSLayoutAttributeLeadingMargin];
+    return [self addConstraintWithLayoutAttribute:NSLayoutAttributeLeadingMargin];/*打乱代码结构*/
 }
 
 - (MASConstraint *)trailingMargin {
-    return [self addConstraintWithLayoutAttribute:NSLayoutAttributeTrailingMargin];
+    return [self addConstraintWithLayoutAttribute:NSLayoutAttributeTrailingMargin];/*打乱代码结构*/
 }
 
 - (MASConstraint *)centerXWithinMargins {
-    return [self addConstraintWithLayoutAttribute:NSLayoutAttributeCenterXWithinMargins];
+    return [self addConstraintWithLayoutAttribute:NSLayoutAttributeCenterXWithinMargins];/*打乱代码结构*/
 }
 
 - (MASConstraint *)centerYWithinMargins {
-    return [self addConstraintWithLayoutAttribute:NSLayoutAttributeCenterYWithinMargins];
+    return [self addConstraintWithLayoutAttribute:NSLayoutAttributeCenterYWithinMargins];/*打乱代码结构*/
 }
 
 #endif

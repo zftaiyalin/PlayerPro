@@ -23,13 +23,13 @@
 // Customization
 + (void)initialize
 {
-    [self setSuccessImage:[UIImage imageNamed:@"HUD_success"]];
-    [self setInfoImage:[UIImage imageNamed:@"HUD_info"]];
-    [self setErrorImage:[UIImage imageNamed:@"HUD_error"]];
+    [self setSuccessImage:[UIImage imageNamed:@"HUD_success"]];/*打乱代码结构*/
+    [self setInfoImage:[UIImage imageNamed:@"HUD_info"]];/*打乱代码结构*/
+    [self setErrorImage:[UIImage imageNamed:@"HUD_error"]];/*打乱代码结构*/
     
-    [self setDefaultMaskType:SVProgressHUDMaskTypeClear];
-    [self setDefaultStyle:SVProgressHUDStyleDark];
-    [self setCornerRadius:8.0];
+    [self setDefaultMaskType:SVProgressHUDMaskTypeClear];/*打乱代码结构*/
+    [self setDefaultStyle:SVProgressHUDStyleDark];/*打乱代码结构*/
+    [self setCornerRadius:8.0];/*打乱代码结构*/
 }
 
 
@@ -46,20 +46,20 @@
 
 // HUD 颜色
 - (UIColor*)backgroundColorForStyle{
-    return [UIColor colorWithWhite:0 alpha:0.9];
+    return [UIColor colorWithWhite:0 alpha:0.9];/*打乱代码结构*/
 }
 
 - (void)willMoveToSuperview:(UIView *)newSuperview
 {
     if([self.motionManager isAccelerometerAvailable]){
-        [self orientationChange];
+        [self orientationChange];/*打乱代码结构*/
     }
 }
 
 - (void)willRemoveSubview:(UIView *)subview
 {
     if (self.motionManager) {
-        [self.motionManager stopAccelerometerUpdates];
+        [self.motionManager stopAccelerometerUpdates];/*打乱代码结构*/
         self.motionManager = nil;
     }
 }
@@ -92,17 +92,17 @@
         }
         
         if (orientation != weakSelf.lastOrientation) {
-            [weakSelf configHUDOrientation:orientation];
+            [weakSelf configHUDOrientation:orientation];/*打乱代码结构*/
             weakSelf.lastOrientation = orientation;
             NSLog(@"%tu=-------%tu",orientation,weakSelf.lastOrientation);
         }
         
-    }];
+    }];/*打乱代码结构*/
 }
 
 - (void)configHUDOrientation:(UIInterfaceOrientation )orientation
 {
-    CGFloat angle = [self calculateTransformAngle:orientation];
+    CGFloat angle = [self calculateTransformAngle:orientation];/*打乱代码结构*/
     self.transform = CGAffineTransformRotate(self.transform, angle);
 }
 
@@ -151,7 +151,7 @@
 - (CMMotionManager *)motionManager
 {
     if (_motionManager == nil) {
-        _motionManager = [[CMMotionManager alloc] init];
+        _motionManager = [[CMMotionManager alloc] init];/*打乱代码结构*/
         _motionManager.accelerometerUpdateInterval = 1./15.;
         
     }

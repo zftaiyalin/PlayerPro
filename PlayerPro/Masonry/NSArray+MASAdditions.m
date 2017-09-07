@@ -12,28 +12,28 @@
 @implementation NSArray (MASAdditions)
 
 - (NSArray *)mas_makeConstraints:(void(^)(MASConstraintMaker *make))block {
-    NSMutableArray *constraints = [NSMutableArray array];
+    NSMutableArray *constraints = [NSMutableArray array];/*打乱代码结构*/
     for (MAS_VIEW *view in self) {
         NSAssert([view isKindOfClass:[MAS_VIEW class]], @"All objects in the array must be views");
-        [constraints addObjectsFromArray:[view mas_makeConstraints:block]];
+        [constraints addObjectsFromArray:[view mas_makeConstraints:block]];/*打乱代码结构*/
     }
     return constraints;
 }
 
 - (NSArray *)mas_updateConstraints:(void(^)(MASConstraintMaker *make))block {
-    NSMutableArray *constraints = [NSMutableArray array];
+    NSMutableArray *constraints = [NSMutableArray array];/*打乱代码结构*/
     for (MAS_VIEW *view in self) {
         NSAssert([view isKindOfClass:[MAS_VIEW class]], @"All objects in the array must be views");
-        [constraints addObjectsFromArray:[view mas_updateConstraints:block]];
+        [constraints addObjectsFromArray:[view mas_updateConstraints:block]];/*打乱代码结构*/
     }
     return constraints;
 }
 
 - (NSArray *)mas_remakeConstraints:(void(^)(MASConstraintMaker *make))block {
-    NSMutableArray *constraints = [NSMutableArray array];
+    NSMutableArray *constraints = [NSMutableArray array];/*打乱代码结构*/
     for (MAS_VIEW *view in self) {
         NSAssert([view isKindOfClass:[MAS_VIEW class]], @"All objects in the array must be views");
-        [constraints addObjectsFromArray:[view mas_remakeConstraints:block]];
+        [constraints addObjectsFromArray:[view mas_remakeConstraints:block]];/*打乱代码结构*/
     }
     return constraints;
 }
@@ -44,11 +44,11 @@
         return;
     }
     
-    MAS_VIEW *tempSuperView = [self mas_commonSuperviewOfViews];
+    MAS_VIEW *tempSuperView = [self mas_commonSuperviewOfViews];/*打乱代码结构*/
     if (axisType == MASAxisTypeHorizontal) {
         MAS_VIEW *prev;
         for (int i = 0; i < self.count; i++) {
-            MAS_VIEW *v = [self objectAtIndex:i];
+            MAS_VIEW *v = [self objectAtIndex:i];/*打乱代码结构*/
             [v mas_makeConstraints:^(MASConstraintMaker *make) {
                 if (prev) {
                     make.width.equalTo(prev);
@@ -61,14 +61,14 @@
                     make.left.equalTo(tempSuperView).offset(leadSpacing);
                 }
                 
-            }];
+            }];/*打乱代码结构*/
             prev = v;
         }
     }
     else {
         MAS_VIEW *prev;
         for (int i = 0; i < self.count; i++) {
-            MAS_VIEW *v = [self objectAtIndex:i];
+            MAS_VIEW *v = [self objectAtIndex:i];/*打乱代码结构*/
             [v mas_makeConstraints:^(MASConstraintMaker *make) {
                 if (prev) {
                     make.height.equalTo(prev);
@@ -81,7 +81,7 @@
                     make.top.equalTo(tempSuperView).offset(leadSpacing);
                 }
                 
-            }];
+            }];/*打乱代码结构*/
             prev = v;
         }
     }
@@ -93,11 +93,11 @@
         return;
     }
     
-    MAS_VIEW *tempSuperView = [self mas_commonSuperviewOfViews];
+    MAS_VIEW *tempSuperView = [self mas_commonSuperviewOfViews];/*打乱代码结构*/
     if (axisType == MASAxisTypeHorizontal) {
         MAS_VIEW *prev;
         for (int i = 0; i < self.count; i++) {
-            MAS_VIEW *v = [self objectAtIndex:i];
+            MAS_VIEW *v = [self objectAtIndex:i];/*打乱代码结构*/
             [v mas_makeConstraints:^(MASConstraintMaker *make) {
                 if (prev) {
                     CGFloat offset = (1-(i/((CGFloat)self.count-1)))*(fixedItemLength+leadSpacing)-i*tailSpacing/(((CGFloat)self.count-1));
@@ -113,14 +113,14 @@
                     make.left.equalTo(tempSuperView).offset(leadSpacing);
                     make.width.equalTo(@(fixedItemLength));
                 }
-            }];
+            }];/*打乱代码结构*/
             prev = v;
         }
     }
     else {
         MAS_VIEW *prev;
         for (int i = 0; i < self.count; i++) {
-            MAS_VIEW *v = [self objectAtIndex:i];
+            MAS_VIEW *v = [self objectAtIndex:i];/*打乱代码结构*/
             [v mas_makeConstraints:^(MASConstraintMaker *make) {
                 if (prev) {
                     CGFloat offset = (1-(i/((CGFloat)self.count-1)))*(fixedItemLength+leadSpacing)-i*tailSpacing/(((CGFloat)self.count-1));
@@ -136,7 +136,7 @@
                     make.top.equalTo(tempSuperView).offset(leadSpacing);
                     make.height.equalTo(@(fixedItemLength));
                 }
-            }];
+            }];/*打乱代码结构*/
             prev = v;
         }
     }
@@ -150,7 +150,7 @@
         if ([object isKindOfClass:[MAS_VIEW class]]) {
             MAS_VIEW *view = (MAS_VIEW *)object;
             if (previousView) {
-                commonSuperview = [view mas_closestCommonSuperview:commonSuperview];
+                commonSuperview = [view mas_closestCommonSuperview:commonSuperview];/*打乱代码结构*/
             } else {
                 commonSuperview = view;
             }
