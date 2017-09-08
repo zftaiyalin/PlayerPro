@@ -12,8 +12,9 @@
 #import "SearchViewController.h"
 #import "MineViewController.h"
 #import "WifiViewController.h"
-
-@interface AppDelegate ()
+#import "CLLockVC.h"
+#import "PassWordViewController.h"
+@interface AppDelegate ()<PassWordDelegate>
 
 @end
 
@@ -126,12 +127,29 @@
     
     self.mainVC.tabBar.translucent = NO;/*打乱代码结构*/
     
+    BOOL hasPwd = [CLLockVC hasPwd];
+    
+    if (hasPwd) {
+        PassWordViewController *vc = [[PassWordViewController alloc]init];
+        vc.delegate = self;
+        vc.isTop = YES;
+        self.window.rootViewController = vc;/*打乱代码结构*/
+        
+        [self.window makeKeyAndVisible];/*打乱代码结构*//*打乱代码结构*/
+    } else {
+        self.window.rootViewController = self.mainVC;/*打乱代码结构*/
+        
+        [self.window makeKeyAndVisible];/*打乱代码结构*//*打乱代码结构*/
+    }
     
     
+    return YES;/*打乱代码结构*/
+}
+
+-(void)passWordSuccess{
     self.window.rootViewController = self.mainVC;/*打乱代码结构*/
     
     [self.window makeKeyAndVisible];/*打乱代码结构*//*打乱代码结构*/
-    return YES;/*打乱代码结构*/
 }
 
 

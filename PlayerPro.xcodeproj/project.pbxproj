@@ -8,6 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		6B8DB1EC1F603D1100734CFD /* icon-83.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B8DB1EB1F603D1100734CFD /* icon-83.5@2x.png */; };
+		6B945AA11F62381A007DE372 /* CLLockVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B945A8A1F62381A007DE372 /* CLLockVC.m */; };
+		6B945AA21F62381A007DE372 /* CLLockVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B945A8B1F62381A007DE372 /* CLLockVC.xib */; };
+		6B945AA31F62381A007DE372 /* CALayer+Anim.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B945A8F1F62381A007DE372 /* CALayer+Anim.m */; };
+		6B945AA41F62381A007DE372 /* CoreLockConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B945A921F62381A007DE372 /* CoreLockConst.m */; };
+		6B945AA51F62381A007DE372 /* CLLockNavVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B945A951F62381A007DE372 /* CLLockNavVC.m */; };
+		6B945AA61F62381A007DE372 /* CLLockInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B945A981F62381A007DE372 /* CLLockInfoView.m */; };
+		6B945AA71F62381A007DE372 /* CLLockItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B945A9A1F62381A007DE372 /* CLLockItemView.m */; };
+		6B945AA81F62381A007DE372 /* CLLockLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B945A9C1F62381A007DE372 /* CLLockLabel.m */; };
+		6B945AA91F62381A007DE372 /* CLLockMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B945A9E1F62381A007DE372 /* CLLockMainView.m */; };
+		6B945AAA1F62381A007DE372 /* CLLockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B945AA01F62381A007DE372 /* CLLockView.m */; };
+		6B945AB21F623950007DE372 /* NSString+File.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B945AAD1F623950007DE372 /* NSString+File.m */; };
+		6B945AB31F623950007DE372 /* CoreArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B945AB01F623950007DE372 /* CoreArchive.m */; };
+		6B945AB61F6239B4007DE372 /* PassWordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B945AB51F6239B4007DE372 /* PassWordViewController.m */; };
 		6BB089961EF9504A0036882A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB089951EF9504A0036882A /* main.m */; };
 		6BB089991EF9504A0036882A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB089981EF9504A0036882A /* AppDelegate.m */; };
 		6BB0899C1EF9504A0036882A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB0899B1EF9504A0036882A /* ViewController.m */; };
@@ -144,6 +157,32 @@
 		34FB337CC5C6ACB0DD281593 /* Pods-PlayerPro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlayerPro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PlayerPro/Pods-PlayerPro.debug.xcconfig"; sourceTree = "<group>"; };
 		5996E4682B2B10BA0D472FDC /* Pods_PlayerPro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PlayerPro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B8DB1EB1F603D1100734CFD /* icon-83.5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-83.5@2x.png"; sourceTree = "<group>"; };
+		6B945A891F62381A007DE372 /* CLLockVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLLockVC.h; sourceTree = "<group>"; };
+		6B945A8A1F62381A007DE372 /* CLLockVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLLockVC.m; sourceTree = "<group>"; };
+		6B945A8B1F62381A007DE372 /* CLLockVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CLLockVC.xib; sourceTree = "<group>"; };
+		6B945A8E1F62381A007DE372 /* CALayer+Anim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+Anim.h"; sourceTree = "<group>"; };
+		6B945A8F1F62381A007DE372 /* CALayer+Anim.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+Anim.m"; sourceTree = "<group>"; };
+		6B945A911F62381A007DE372 /* CoreLockConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreLockConst.h; sourceTree = "<group>"; };
+		6B945A921F62381A007DE372 /* CoreLockConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreLockConst.m; sourceTree = "<group>"; };
+		6B945A941F62381A007DE372 /* CLLockNavVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLLockNavVC.h; sourceTree = "<group>"; };
+		6B945A951F62381A007DE372 /* CLLockNavVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLLockNavVC.m; sourceTree = "<group>"; };
+		6B945A971F62381A007DE372 /* CLLockInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLLockInfoView.h; sourceTree = "<group>"; };
+		6B945A981F62381A007DE372 /* CLLockInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLLockInfoView.m; sourceTree = "<group>"; };
+		6B945A991F62381A007DE372 /* CLLockItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLLockItemView.h; sourceTree = "<group>"; };
+		6B945A9A1F62381A007DE372 /* CLLockItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLLockItemView.m; sourceTree = "<group>"; };
+		6B945A9B1F62381A007DE372 /* CLLockLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLLockLabel.h; sourceTree = "<group>"; };
+		6B945A9C1F62381A007DE372 /* CLLockLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLLockLabel.m; sourceTree = "<group>"; };
+		6B945A9D1F62381A007DE372 /* CLLockMainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLLockMainView.h; sourceTree = "<group>"; };
+		6B945A9E1F62381A007DE372 /* CLLockMainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLLockMainView.m; sourceTree = "<group>"; };
+		6B945A9F1F62381A007DE372 /* CLLockView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLLockView.h; sourceTree = "<group>"; };
+		6B945AA01F62381A007DE372 /* CLLockView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLLockView.m; sourceTree = "<group>"; };
+		6B945AAB1F62392C007DE372 /* CoreConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreConst.h; sourceTree = "<group>"; };
+		6B945AAC1F623950007DE372 /* NSString+File.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+File.h"; sourceTree = "<group>"; };
+		6B945AAD1F623950007DE372 /* NSString+File.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+File.m"; sourceTree = "<group>"; };
+		6B945AAF1F623950007DE372 /* CoreArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreArchive.h; sourceTree = "<group>"; };
+		6B945AB01F623950007DE372 /* CoreArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreArchive.m; sourceTree = "<group>"; };
+		6B945AB41F6239B4007DE372 /* PassWordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PassWordViewController.h; sourceTree = "<group>"; };
+		6B945AB51F6239B4007DE372 /* PassWordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PassWordViewController.m; sourceTree = "<group>"; };
 		6BB089911EF9504A0036882A /* PlayerPro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlayerPro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BB089951EF9504A0036882A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6BB089971EF9504A0036882A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -406,6 +445,94 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		6B945A881F62381A007DE372 /* CoreLock */ = {
+			isa = PBXGroup;
+			children = (
+				6B945AB11F623950007DE372 /* CoreArchive */,
+				6B945AAB1F62392C007DE372 /* CoreConst.h */,
+				6B945A891F62381A007DE372 /* CLLockVC.h */,
+				6B945A8A1F62381A007DE372 /* CLLockVC.m */,
+				6B945A8B1F62381A007DE372 /* CLLockVC.xib */,
+				6B945A8C1F62381A007DE372 /* Lib */,
+			);
+			path = CoreLock;
+			sourceTree = "<group>";
+		};
+		6B945A8C1F62381A007DE372 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				6B945A8D1F62381A007DE372 /* Category */,
+				6B945A901F62381A007DE372 /* Const */,
+				6B945A931F62381A007DE372 /* Controller */,
+				6B945A961F62381A007DE372 /* View */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		6B945A8D1F62381A007DE372 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				6B945A8E1F62381A007DE372 /* CALayer+Anim.h */,
+				6B945A8F1F62381A007DE372 /* CALayer+Anim.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		6B945A901F62381A007DE372 /* Const */ = {
+			isa = PBXGroup;
+			children = (
+				6B945A911F62381A007DE372 /* CoreLockConst.h */,
+				6B945A921F62381A007DE372 /* CoreLockConst.m */,
+			);
+			path = Const;
+			sourceTree = "<group>";
+		};
+		6B945A931F62381A007DE372 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6B945A941F62381A007DE372 /* CLLockNavVC.h */,
+				6B945A951F62381A007DE372 /* CLLockNavVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		6B945A961F62381A007DE372 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6B945A971F62381A007DE372 /* CLLockInfoView.h */,
+				6B945A981F62381A007DE372 /* CLLockInfoView.m */,
+				6B945A991F62381A007DE372 /* CLLockItemView.h */,
+				6B945A9A1F62381A007DE372 /* CLLockItemView.m */,
+				6B945A9B1F62381A007DE372 /* CLLockLabel.h */,
+				6B945A9C1F62381A007DE372 /* CLLockLabel.m */,
+				6B945A9D1F62381A007DE372 /* CLLockMainView.h */,
+				6B945A9E1F62381A007DE372 /* CLLockMainView.m */,
+				6B945A9F1F62381A007DE372 /* CLLockView.h */,
+				6B945AA01F62381A007DE372 /* CLLockView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6B945AAE1F623950007DE372 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				6B945AAC1F623950007DE372 /* NSString+File.h */,
+				6B945AAD1F623950007DE372 /* NSString+File.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		6B945AB11F623950007DE372 /* CoreArchive */ = {
+			isa = PBXGroup;
+			children = (
+				6B945AAE1F623950007DE372 /* Category */,
+				6B945AAF1F623950007DE372 /* CoreArchive.h */,
+				6B945AB01F623950007DE372 /* CoreArchive.m */,
+			);
+			name = CoreArchive;
+			path = ../../../Downloads/CoreLock/CoreLock/FrameWork/CoreArchive;
+			sourceTree = "<group>";
+		};
 		6BB089881EF9504A0036882A = {
 			isa = PBXGroup;
 			children = (
@@ -431,6 +558,7 @@
 		6BB089931EF9504A0036882A /* PlayerPro */ = {
 			isa = PBXGroup;
 			children = (
+				6B945A881F62381A007DE372 /* CoreLock */,
 				6BB08AD11EF956520036882A /* ZFPlayer */,
 				6BB08ABD1EF956460036882A /* ALiHUD */,
 				6BB08A621EF9563C0036882A /* Core */,
@@ -456,6 +584,8 @@
 				6BB089E71EF954A40036882A /* DaiLuViewController.m */,
 				6BB089E31EF9549B0036882A /* MineViewController.h */,
 				6BB089E41EF9549B0036882A /* MineViewController.m */,
+				6B945AB41F6239B4007DE372 /* PassWordViewController.h */,
+				6B945AB51F6239B4007DE372 /* PassWordViewController.m */,
 				6BB0899A1EF9504A0036882A /* ViewController.h */,
 				6BB0899B1EF9504A0036882A /* ViewController.m */,
 				6BB089F31EF955F50036882A /* AppUnitl.h */,
@@ -984,6 +1114,7 @@
 				6BB08ACB1EF956460036882A /* HUD_error@3x.png in Resources */,
 				6B8DB1EC1F603D1100734CFD /* icon-83.5@2x.png in Resources */,
 				6BB08A601EF956350036882A /* index.html in Resources */,
+				6B945AA21F62381A007DE372 /* CLLockVC.xib in Resources */,
 				6BB089A41EF9504A0036882A /* LaunchScreen.storyboard in Resources */,
 				6BB08ACE1EF956460036882A /* HUD_success@2x.png in Resources */,
 				6BB08B0F1EF956520036882A /* ZFPlayer.bundle in Resources */,
@@ -1069,6 +1200,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B945AB61F6239B4007DE372 /* PassWordViewController.m in Sources */,
+				6B945AA31F62381A007DE372 /* CALayer+Anim.m in Sources */,
 				6BB089D71EF954330036882A /* AdmobModel.m in Sources */,
 				6BB08AA71EF9563C0036882A /* DDASLLogger.m in Sources */,
 				6BB08AAB1EF9563C0036882A /* ContextFilterLogFormatter.m in Sources */,
@@ -1076,11 +1209,13 @@
 				6BB08AB31EF9563C0036882A /* MultipartMessageHeader.m in Sources */,
 				6BB08A4E1EF9561E0036882A /* MJRefreshAutoGifFooter.m in Sources */,
 				6BB08A531EF9561E0036882A /* MJRefreshBackStateFooter.m in Sources */,
+				6B945AA91F62381A007DE372 /* CLLockMainView.m in Sources */,
 				6BB08A4C1EF9561E0036882A /* MJRefreshFooter.m in Sources */,
 				6BB08AA91EF9563C0036882A /* DDLog.m in Sources */,
 				6BB089DA1EF954330036882A /* VideoPlayModel.m in Sources */,
 				6BB089E51EF9549B0036882A /* MineViewController.m in Sources */,
 				6BB08B001EF956520036882A /* ASValueTrackingSlider.m in Sources */,
+				6B945AA41F62381A007DE372 /* CoreLockConst.m in Sources */,
 				6BB08AA81EF9563C0036882A /* DDFileLogger.m in Sources */,
 				6BB08A491EF9561E0036882A /* MJRefreshAutoFooter.m in Sources */,
 				6BB08ABC1EF9563C0036882A /* WebSocket.m in Sources */,
@@ -1091,6 +1226,7 @@
 				6BB08AB71EF9563C0036882A /* HTTPDataResponse.m in Sources */,
 				6BB08AAC1EF9563C0036882A /* DispatchQueueLogFormatter.m in Sources */,
 				6BB08A111EF956170036882A /* MASConstraint.m in Sources */,
+				6B945AA11F62381A007DE372 /* CLLockVC.m in Sources */,
 				6BB08A5A1EF9561E0036882A /* UIScrollView+MJExtension.m in Sources */,
 				6BB08A501EF9561E0036882A /* MJRefreshAutoStateFooter.m in Sources */,
 				6BB08A141EF956170036882A /* MASViewAttribute.m in Sources */,
@@ -1114,14 +1250,17 @@
 				6BB08AC91EF956460036882A /* ALiProgressHUD.m in Sources */,
 				6BB089E81EF954A40036882A /* DaiLuViewController.m in Sources */,
 				6BB089DB1EF954330036882A /* WechatModel.m in Sources */,
+				6B945AA51F62381A007DE372 /* CLLockNavVC.m in Sources */,
 				6BB08AA21EF9563C0036882A /* DDNumber.m in Sources */,
 				6BB08AA31EF9563C0036882A /* DDRange.m in Sources */,
+				6B945AB21F623950007DE372 /* NSString+File.m in Sources */,
 				6BB08A161EF956170036882A /* NSArray+MASAdditions.m in Sources */,
 				6BB08A171EF956170036882A /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				6BB089991EF9504A0036882A /* AppDelegate.m in Sources */,
 				6BB08AD01EF956460036882A /* NSObject+ALiHUD.m in Sources */,
 				6BB08B021EF956520036882A /* UIImageView+ZFCache.m in Sources */,
 				6BB08AAA1EF9563C0036882A /* DDTTYLogger.m in Sources */,
+				6B945AAA1F62381A007DE372 /* CLLockView.m in Sources */,
 				6BB08A521EF9561E0036882A /* MJRefreshBackNormalFooter.m in Sources */,
 				6BB08B101EF956520036882A /* ZFPlayerControlView.m in Sources */,
 				6BB089F51EF955F50036882A /* AppUnitl.m in Sources */,
@@ -1137,8 +1276,10 @@
 				6BB08B0A1EF956520036882A /* ZFCommonHelper.m in Sources */,
 				6BB08A541EF9561E0036882A /* MJRefreshGifHeader.m in Sources */,
 				6BB08AB81EF9563C0036882A /* HTTPDynamicFileResponse.m in Sources */,
+				6B945AA81F62381A007DE372 /* CLLockLabel.m in Sources */,
 				6BB08A121EF956170036882A /* MASConstraintMaker.m in Sources */,
 				6BB08A4F1EF9561E0036882A /* MJRefreshAutoNormalFooter.m in Sources */,
+				6B945AA71F62381A007DE372 /* CLLockItemView.m in Sources */,
 				6BB08A511EF9561E0036882A /* MJRefreshBackGifFooter.m in Sources */,
 				6BB08AA41EF9563C0036882A /* GCDAsyncSocket.m in Sources */,
 				6BB08AAE1EF9563C0036882A /* HTTPAuthenticationRequest.m in Sources */,
@@ -1147,11 +1288,13 @@
 				6BB089D61EF954330036882A /* AppModel.m in Sources */,
 				6BB08B0D1EF956520036882A /* ZFHttpRequest.m in Sources */,
 				6BB08AB41EF9563C0036882A /* MultipartMessageHeaderField.m in Sources */,
+				6B945AA61F62381A007DE372 /* CLLockInfoView.m in Sources */,
 				6BB089F01EF954AF0036882A /* WifiVideoTableViewCell.m in Sources */,
 				6BB08B041EF956520036882A /* UITabBarController+ZFPlayerRotation.m in Sources */,
 				6BB089F11EF954AF0036882A /* UploadViewController.m in Sources */,
 				6BB08B091EF956520036882A /* ZFBrightnessView.m in Sources */,
 				6BB08A131EF956170036882A /* MASLayoutConstraint.m in Sources */,
+				6B945AB31F623950007DE372 /* CoreArchive.m in Sources */,
 				6BB089DF1EF954810036882A /* SearchViewController.m in Sources */,
 				6BB08A561EF9561E0036882A /* MJRefreshStateHeader.m in Sources */,
 				6BB089DC1EF954330036882A /* AppLocaVideoModel.m in Sources */,

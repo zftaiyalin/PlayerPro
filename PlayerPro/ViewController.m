@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-
+#import "CLLockVC.h"
 @interface ViewController ()
 
 @end
@@ -18,7 +18,6 @@
     [super viewDidLoad];/*打乱代码结构*/
     // Do any additional setup after loading the view, typically from a nib.
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];/*打乱代码结构*/

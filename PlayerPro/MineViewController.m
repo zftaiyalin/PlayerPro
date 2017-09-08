@@ -10,6 +10,7 @@
 #import "DaiLuViewController.h"
 #import "SDImageCache.h"
 #import "NSObject+ALiHUD.h"
+#import "PassWordViewController.h"
 
 @interface MineViewController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -46,7 +47,7 @@
     
     NSString *sss = [AppUnitl getPreferredLanguage];
     
-//    zh-Hans-CN
+//    \
     
     if (![[NSUserDefaults standardUserDefaults] objectForKey:@"pinglun"] && [AppUnitl sharedManager].model.wetchat.isShow && [sss isEqualToString:[AppUnitl sharedManager].model.wetchat.laugain]) {
         UIAlertView *infoAlert = [[UIAlertView alloc] initWithTitle:[AppUnitl sharedManager].model.wetchat.alertTitle message:[AppUnitl sharedManager].model.wetchat.alertText delegate:self   cancelButtonTitle:@"取消" otherButtonTitles:@"去评论",nil];/*打乱代码结构*//*打乱代码结构*/
@@ -88,7 +89,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [[NSUserDefaults standardUserDefaults] objectForKey:@"pinglun"] ? 2:1;/*打乱代码结构*/
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"pinglun"] ? 3:2;/*打乱代码结构*/
     
     //收藏 清楚缓存 赏个好评 下载
 }
@@ -127,6 +128,17 @@
                 make.height.mas_equalTo(0.25);/*打乱代码结构*/
             }];/*打乱代码结构*//*打乱代码结构*/
             
+        }else if (indexPath.section == 1) {
+            cell.textLabel.text = @"设置手势密码";/*打乱代码结构*/
+            UIView *line = [[UIView alloc]init];/*打乱代码结构*//*打乱代码结构*/
+            line.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9"];/*打乱代码结构*//*打乱代码结构*/
+            [cell addSubview:line];/*打乱代码结构*//*打乱代码结构*/
+            
+            [line mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.and.right.and.top.equalTo(cell);/*打乱代码结构*/
+                make.height.mas_equalTo(0.25);/*打乱代码结构*/
+            }];
+            
         }else{
             
             cell.textLabel.text = @"赏个好评";/*打乱代码结构*/
@@ -141,6 +153,19 @@
             
         }
     }else{
+        if (indexPath.section == 0) {
+            cell.textLabel.text = @"设置手势密码";/*打乱代码结构*/
+            UIView *line = [[UIView alloc]init];/*打乱代码结构*//*打乱代码结构*/
+            line.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9"];/*打乱代码结构*//*打乱代码结构*/
+            [cell addSubview:line];/*打乱代码结构*//*打乱代码结构*/
+            
+            [line mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.and.right.and.top.equalTo(cell);/*打乱代码结构*/
+                make.height.mas_equalTo(0.25);/*打乱代码结构*/
+            }];
+            
+        }else{
+
         cell.textLabel.text = @"赏个好评";/*打乱代码结构*/
         UIView *line = [[UIView alloc]init];/*打乱代码结构*//*打乱代码结构*/
         line.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9"];/*打乱代码结构*//*打乱代码结构*/
@@ -150,6 +175,7 @@
             make.left.and.right.and.top.equalTo(cell);/*打乱代码结构*/
             make.height.mas_equalTo(0.25);/*打乱代码结构*/
         }];/*打乱代码结构*//*打乱代码结构*/
+        }
 
     }
     
@@ -163,11 +189,20 @@
         if (indexPath.section == 0) {
             DaiLuViewController *lu = [[DaiLuViewController alloc]init];/*打乱代码结构*//*打乱代码结构*/
             [self.navigationController pushViewController:lu animated:YES];/*打乱代码结构*//*打乱代码结构*/
+        }else if (indexPath.section == 1) {
+            PassWordViewController *lu = [[PassWordViewController alloc]init];/*打乱代码结构*//*打乱代码结构*/
+            [self.navigationController pushViewController:lu animated:YES];/*打乱代码结构*//*打乱代码结构*/
         }else{
             [self pushPinglun];/*打乱代码结构*//*打乱代码结构*/
         }
     }else{
-        [self pushPinglun];/*打乱代码结构*//*打乱代码结构*/
+        if (indexPath.section == 0) {
+            PassWordViewController *lu = [[PassWordViewController alloc]init];/*打乱代码结构*//*打乱代码结构*/
+            [self.navigationController pushViewController:lu animated:YES];/*打乱代码结构*//*打乱代码结构*/
+        }else{
+            [self pushPinglun];/*打乱代码结构*//*打乱代码结构*/
+        }
+        
     }
   
 }
