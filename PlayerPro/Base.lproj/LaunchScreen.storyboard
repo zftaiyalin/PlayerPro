@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,23 +22,49 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-83.5.png" translatesAutoresizingMaskIntoConstraints="NO" id="VRL-NR-2oH">
-                                <rect key="frame" x="146" y="292" width="83" height="83"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1505098147.png" translatesAutoresizingMaskIntoConstraints="NO" id="VRL-NR-2oH">
+                                <rect key="frame" x="56" y="539" width="88" height="88"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="88" id="HP5-XQ-Szp"/>
+                                    <constraint firstAttribute="width" constant="88" id="aG9-sB-EV7"/>
+                                </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="岛国影音" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h81-lk-g0Z">
+                                <rect key="frame" x="166" y="551" width="93.5" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="urv-Cy-jK7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您的专属私密播放器" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chf-Pg-GZT">
+                                <rect key="frame" x="166" y="593" width="156" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="QLr-6z-lf9"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.027337016806287188" green="0.044357271702652384" blue="0.056407869170984504" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="VRL-NR-2oH" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="WsK-mx-km8"/>
-                            <constraint firstItem="VRL-NR-2oH" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="iPP-mZ-SLN"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="chf-Pg-GZT" secondAttribute="bottom" constant="53" id="2x0-hz-fkA"/>
+                            <constraint firstItem="chf-Pg-GZT" firstAttribute="leading" secondItem="VRL-NR-2oH" secondAttribute="trailing" constant="22" id="3Rj-p2-hRu"/>
+                            <constraint firstItem="h81-lk-g0Z" firstAttribute="leading" secondItem="VRL-NR-2oH" secondAttribute="trailing" constant="22" id="5J0-hr-xEr"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="VRL-NR-2oH" secondAttribute="bottom" constant="40" id="7Ss-oa-yNB"/>
+                            <constraint firstItem="VRL-NR-2oH" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="40" id="Xya-KK-84x"/>
+                            <constraint firstItem="chf-Pg-GZT" firstAttribute="top" secondItem="h81-lk-g0Z" secondAttribute="bottom" constant="21" id="xCJ-Xy-fLg"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
     <resources>
-        <image name="icon-83.5.png" width="83" height="83"/>
+        <image name="1505098147.png" width="167" height="167"/>
     </resources>
 </document>

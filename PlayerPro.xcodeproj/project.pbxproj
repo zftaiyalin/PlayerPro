@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6B8DB1EC1F603D1100734CFD /* icon-83.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B8DB1EB1F603D1100734CFD /* icon-83.5@2x.png */; };
+		6B8678061F662CD500ACE6C0 /* LaunchScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B8678041F662CD500ACE6C0 /* LaunchScreenViewController.m */; };
+		6B8678071F662CD500ACE6C0 /* LaunchScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B8678051F662CD500ACE6C0 /* LaunchScreenViewController.xib */; };
+		6B8678091F66312500ACE6C0 /* 1505098147.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B8678081F66312500ACE6C0 /* 1505098147.png */; };
 		6B945AA11F62381A007DE372 /* CLLockVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B945A8A1F62381A007DE372 /* CLLockVC.m */; };
 		6B945AA21F62381A007DE372 /* CLLockVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B945A8B1F62381A007DE372 /* CLLockVC.xib */; };
 		6B945AA31F62381A007DE372 /* CALayer+Anim.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B945A8F1F62381A007DE372 /* CALayer+Anim.m */; };
@@ -156,7 +158,10 @@
 /* Begin PBXFileReference section */
 		34FB337CC5C6ACB0DD281593 /* Pods-PlayerPro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlayerPro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PlayerPro/Pods-PlayerPro.debug.xcconfig"; sourceTree = "<group>"; };
 		5996E4682B2B10BA0D472FDC /* Pods_PlayerPro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PlayerPro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6B8DB1EB1F603D1100734CFD /* icon-83.5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-83.5@2x.png"; sourceTree = "<group>"; };
+		6B8678031F662CD500ACE6C0 /* LaunchScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchScreenViewController.h; sourceTree = "<group>"; };
+		6B8678041F662CD500ACE6C0 /* LaunchScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchScreenViewController.m; sourceTree = "<group>"; };
+		6B8678051F662CD500ACE6C0 /* LaunchScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreenViewController.xib; sourceTree = "<group>"; };
+		6B8678081F66312500ACE6C0 /* 1505098147.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1505098147.png; sourceTree = "<group>"; };
 		6B945A891F62381A007DE372 /* CLLockVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLLockVC.h; sourceTree = "<group>"; };
 		6B945A8A1F62381A007DE372 /* CLLockVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLLockVC.m; sourceTree = "<group>"; };
 		6B945A8B1F62381A007DE372 /* CLLockVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CLLockVC.xib; sourceTree = "<group>"; };
@@ -594,7 +599,10 @@
 				6BB0899D1EF9504A0036882A /* Main.storyboard */,
 				6BB089A01EF9504A0036882A /* Assets.xcassets */,
 				6BB089A21EF9504A0036882A /* LaunchScreen.storyboard */,
-				6B8DB1EB1F603D1100734CFD /* icon-83.5@2x.png */,
+				6B8678031F662CD500ACE6C0 /* LaunchScreenViewController.h */,
+				6B8678041F662CD500ACE6C0 /* LaunchScreenViewController.m */,
+				6B8678081F66312500ACE6C0 /* 1505098147.png */,
+				6B8678051F662CD500ACE6C0 /* LaunchScreenViewController.xib */,
 				6BB089A51EF9504A0036882A /* Info.plist */,
 				6BB089941EF9504A0036882A /* Supporting Files */,
 			);
@@ -1112,7 +1120,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6BB08ACB1EF956460036882A /* HUD_error@3x.png in Resources */,
-				6B8DB1EC1F603D1100734CFD /* icon-83.5@2x.png in Resources */,
 				6BB08A601EF956350036882A /* index.html in Resources */,
 				6B945AA21F62381A007DE372 /* CLLockVC.xib in Resources */,
 				6BB089A41EF9504A0036882A /* LaunchScreen.storyboard in Resources */,
@@ -1128,6 +1135,8 @@
 				6BB08ACD1EF956460036882A /* HUD_info@3x.png in Resources */,
 				6BB08ACC1EF956460036882A /* HUD_info@2x.png in Resources */,
 				6BB08AA51EF9563C0036882A /* About.txt in Resources */,
+				6B8678071F662CD500ACE6C0 /* LaunchScreenViewController.xib in Resources */,
+				6B8678091F66312500ACE6C0 /* 1505098147.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1301,6 +1310,7 @@
 				6BB08A581EF9561E0036882A /* MJRefreshConst.m in Sources */,
 				6BB08B0C1EF956520036882A /* ZFFileModel.m in Sources */,
 				6BB08AB91EF9563C0036882A /* HTTPErrorResponse.m in Sources */,
+				6B8678061F662CD500ACE6C0 /* LaunchScreenViewController.m in Sources */,
 				6BB08B011EF956520036882A /* UIAlertController+ZFPlayerRotation.m in Sources */,
 				6BB08B081EF956520036882A /* MMMaterialDesignSpinner.m in Sources */,
 				6BB089D81EF954330036882A /* VideoModel.m in Sources */,
@@ -1462,7 +1472,7 @@
 				INFOPLIST_FILE = PlayerPro/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.anfeng.yeai;
+				PRODUCT_BUNDLE_IDENTIFIER = com.anfeng.simiPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1478,7 +1488,7 @@
 				INFOPLIST_FILE = PlayerPro/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.anfeng.yeai;
+				PRODUCT_BUNDLE_IDENTIFIER = com.anfeng.simiPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
